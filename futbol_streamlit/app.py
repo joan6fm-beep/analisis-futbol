@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 
-st.set_page_config(page_title='Análisis Fútbol', page_icon='⚽', layout='wide')
+st.set_page_config(page_title='Joan Fortuño · Primer Toque CF', page_icon='⚽', layout='wide')
 DATA = Path(__file__).parent / 'data'
 
 @st.cache_data
@@ -15,20 +15,38 @@ jugadores = load('jugadores_partido.csv')
 equipo = load('equipo_partido.csv')
 eventos = load('eventos.csv')
 
-st.title('⚽ Plataforma de Análisis de Fútbol')
-st.caption('V1 · BeOne / FFCV · Datos directos + métricas derivadas')
+st.markdown("""<style>
+:root {--navy:#18245b;--orange:#f04a0b;--soft:#f5f7fb;--muted:#6f7787;}
+[data-testid="stAppViewContainer"] {background:#ffffff;}
+[data-testid="stSidebar"] {background:#f4f7fa;border-right:1px solid #e5e9f0;}
+.block-container {padding-top:2.2rem;max-width:1400px;}
+h1,h2,h3 {color:var(--navy);}
+.hero-kicker{color:#7d8799;font-weight:700;font-size:1.05rem;letter-spacing:.04em;margin-bottom:-.5rem}
+.hero-title{color:var(--navy);font-size:3.2rem;font-weight:850;line-height:1.05;border-bottom:5px solid var(--orange);padding-bottom:.55rem;margin-bottom:.7rem}
+.brand-name{font-weight:850;text-align:center;color:var(--navy);font-size:1.35rem;border-top:3px solid var(--orange);padding-top:.65rem;margin-top:.4rem}
+.small-muted{color:var(--muted)}
+[data-testid="stMetric"] {background:#fff;border:1px solid #e5e9f0;border-radius:12px;padding:18px;box-shadow:0 2px 10px rgba(24,36,91,.04)}
+div[role="radiogroup"] label:has(input:checked){background:#fff0e9;border-left:4px solid var(--orange);border-radius:7px;padding-left:.45rem}
+</style>""", unsafe_allow_html=True)
+
+st.markdown('<div class="hero-kicker">PLATAFORMA DE</div><div class="hero-title">ANÁLISIS DE FÚTBOL</div>', unsafe_allow_html=True)
+st.caption('Primer Toque CF · BeOne / FFCV · Datos directos + métricas derivadas')
 
 with st.sidebar:
-    st.header('Filtros')
+    st.image(str(Path(__file__).parent / 'primer_toque_logo.png'), use_container_width=True)
+    st.markdown('<div class="brand-name">JOAN FORTUÑO</div>', unsafe_allow_html=True)
+    st.markdown('### Temporada')
+    st.selectbox('Temporada', ['2026/27'], label_visibility='collapsed')
+    st.markdown('### Partido')
     if not partidos.empty:
         labels = partidos['rival'].astype(str) + ' · ' + partidos['fecha'].astype(str)
-        choice = st.selectbox('Partido', labels)
+        choice = st.selectbox('Partido', labels, label_visibility='collapsed')
         idx = labels[labels == choice].index[0]
         partido_id = partidos.loc[idx, 'partido_id']
     else:
         partido_id = None
     st.divider()
-    page = st.radio('Módulo', ['Resumen', 'Individual', 'Colectivo', 'Rival / FFCV', 'Datos derivados'])
+    page = st.radio('Módulo', ['Resumen', 'Individual', 'Posiciones', 'Colectivo', 'Rival / FFCV', 'Datos derivados'])
 
 if partido_id is None:
     st.info('Añade el primer partido en data/partidos.csv')
@@ -73,6 +91,10 @@ elif page == 'Individual':
             metric = st.selectbox('Comparar métrica', cols)
             chart = df[['jugador',metric]].dropna().set_index('jugador')
             if not chart.empty: st.bar_chart(chart)
+
+elif page == 'Posiciones':
+    st.markdown('### Comparativa por posiciones')
+    st.info('Este módulo comparará jugadores de la misma posición cuando incorporemos los datos completos de BeOne.')
 
 elif page == 'Colectivo':
     df = equipo[equipo.partido_id == partido_id].copy()
