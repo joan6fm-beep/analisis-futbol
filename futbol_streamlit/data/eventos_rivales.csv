@@ -1,0 +1,124 @@
+jornada,equipo,minuto,tipo,jugador,detalle
+1,Bétera C.F. 'A',34,amarilla,Hugo Armiñana Santamaria,
+1,Bétera C.F. 'A',45,amarilla,Alberto Guil Sierra,
+1,Bétera C.F. 'A',53,gol_contra,Col. Salgui E.D.E. 'A',Gol encajado en J1
+1,Bétera C.F. 'A',78,gol,David Aparisi Martinez,
+1,Bétera C.F. 'A',80,roja,Hugo Armiñana Santamaria,Doble amarilla / segunda amarilla
+2,Bétera C.F. 'A',29,amarilla,Santiago Fabregat Gregorio,
+2,Bétera C.F. 'A',44,amarilla,Alberto Guil Sierra,
+2,Bétera C.F. 'A',62,gol_contra,Primer Toque C.F. 'A',Gol encajado en J2
+2,Bétera C.F. 'A',87,gol_contra,Primer Toque C.F. 'A',Gol encajado en J2
+3,Bétera C.F. 'A',8,gol,Autogol rival,Gol en propia puerta del rival; completa el 2-2 de J3
+3,Bétera C.F. 'A',43,gol_contra,Villarreal C.F. 'C',Gol encajado en J3
+3,Bétera C.F. 'A',60,gol_contra,Villarreal C.F. 'C',Gol encajado en J3
+3,Bétera C.F. 'A',75,amarilla,Alberto Javier Trenor Cerdan,
+3,Bétera C.F. 'A',88,gol,Iker Argandoña Roch,
+4,Bétera C.F. 'A',23,amarilla,David Aparisi Martinez,
+4,Bétera C.F. 'A',86,gol,Iker Argandoña Roch,
+1,C.D. Acero 'A',16,gol_contra,G.P.,Gol en propia del C.D. Acero; no se atribuye a goleador rival
+1,C.D. Acero 'A',21,gol_contra,Patacona C.F. 'B',
+1,C.D. Acero 'A',26,roja,Aaron Madrid Garcia,Roja directa
+1,C.D. Acero 'A',29,amarilla,Mario Navarro Perello,
+1,C.D. Acero 'A',83,gol_contra,Patacona C.F. 'B',
+1,C.D. Acero 'A',90,gol,Ibrahim Zahidi Harfouch,
+2,C.D. Acero 'A',22,gol,Daniel Blazquez Castillo,
+2,C.D. Acero 'A',24,gol_contra,C.F. Inter San José Valencia 'B',
+2,C.D. Acero 'A',36,amarilla,Jorge Fores Biosca,
+2,C.D. Acero 'A',44,gol_contra,C.F. Inter San José Valencia 'B',
+2,C.D. Acero 'A',47,amarilla,Mario Molina Ballester,
+2,C.D. Acero 'A',64,amarilla,Daniel Blazquez Castillo,
+2,C.D. Acero 'A',64,amarilla,Joan Salvador Moreno,
+2,C.D. Acero 'A',74,gol_contra,C.F. Inter San José Valencia 'B',
+2,C.D. Acero 'A',83,gol_contra,C.F. Inter San José Valencia 'B',
+3,C.D. Acero 'A',11,gol,Daniel Blazquez Castillo,
+3,C.D. Acero 'A',35,gol_contra,C.F. Cracks 'A',
+3,C.D. Acero 'A',52,amarilla,Daniel Blazquez Castillo,
+3,C.D. Acero 'A',54,amarilla,Elias Zamora,
+3,C.D. Acero 'A',65,amarilla,Carlos Bracho Trujillo,
+3,C.D. Acero 'A',81,gol,Alejandro Bernal Lluch,
+3,C.D. Acero 'A',83,gol_contra,C.F. Cracks 'A',
+3,C.D. Acero 'A',89,amarilla,Jorge Lopez Vila,
+3,C.D. Acero 'A',90,gol,Jorge Lopez Vila,
+4,C.D. Acero 'A',11,gol_contra,G.P.,Gol en propia del C.D. Acero; no se atribuye a goleador rival
+4,C.D. Acero 'A',17,gol_contra,C.F. Torre Levante 'A',
+4,C.D. Acero 'A',22,gol,Hector Martin Baron,
+4,C.D. Acero 'A',34,gol_contra,C.F. Torre Levante 'A',
+4,C.D. Acero 'A',36,gol,Jorge Lopez Vila,
+4,C.D. Acero 'A',47,gol_contra,C.F. Torre Levante 'A',
+4,C.D. Acero 'A',70,amarilla,Mario Navarro Perello,
+4,C.D. Acero 'A',82,amarilla,Jorge Fores Biosca,
+4,C.D. Acero 'A',85,amarilla,Hector Martin Baron,
+4,C.D. Acero 'A',89,amarilla,Carlos Bracho Trujillo,
+4,C.D. Acero 'A',90,gol,Ibrahim Zahidi Harfouch,
+4,C.D. Acero 'A',90,amarilla,Mario Molina Ballester,
+4,C.D. Acero 'A',90,gol_contra,C.F. Torre Levante 'A',
+1,Primer Toque C.F. 'A',27,gol_contra,Ath. Massamagrell C.F. 'A',Gol encajado
+2,Primer Toque C.F. 'A',49,amarilla,Toni,
+2,Primer Toque C.F. 'A',62,gol,Sebas,
+2,Primer Toque C.F. 'A',72,amarilla,Irakli,
+2,Primer Toque C.F. 'A',87,gol,Núñez,
+3,Primer Toque C.F. 'A',11,gol,Sebas,
+3,Primer Toque C.F. 'A',19,gol_contra,Manises C.F. 'A',Gol encajado
+3,Primer Toque C.F. 'A',20,amarilla,Ian,
+3,Primer Toque C.F. 'A',42,gol,Núñez,
+3,Primer Toque C.F. 'A',45,amarilla,Núñez,
+3,Primer Toque C.F. 'A',48,amarilla,Irakli,
+3,Primer Toque C.F. 'A',56,roja,Toni,Doble amarilla / segunda amarilla
+4,Primer Toque C.F. 'A',69,gol_contra,C.D.F. Canet 'A',Gol encajado
+4,Primer Toque C.F. 'A',77,amarilla,Blázquez,
+4,Primer Toque C.F. 'A',83,roja,Blázquez,Doble amarilla / segunda amarilla
+5,Primer Toque C.F. 'A',37,amarilla,Irakli,
+5,Primer Toque C.F. 'A',43,gol,Núñez,
+5,Primer Toque C.F. 'A',45,gol_contra,Alboraya U.D. 'B',Gol encajado
+5,Primer Toque C.F. 'A',50,gol_contra,Alboraya U.D. 'B',Gol encajado
+5,Primer Toque C.F. 'A',79,amarilla,Alessio,
+1,C.F. At. Burriana - Salesianos 'A',29,gol_contra,Paterna C.F. 'A',Gol encajado
+1,C.F. At. Burriana - Salesianos 'A',45,gol_contra,Paterna C.F. 'A',Gol encajado
+1,C.F. At. Burriana - Salesianos 'A',71,gol_contra,Paterna C.F. 'A',Gol encajado
+1,C.F. At. Burriana - Salesianos 'A',43,amarilla,Jorge Agustina Llopis,
+1,C.F. At. Burriana - Salesianos 'A',67,amarilla,Marcos Espada Sanchez,
+1,C.F. At. Burriana - Salesianos 'A',67,amarilla,Eduardo Aurelian Ciutacu,
+2,C.F. At. Burriana - Salesianos 'A',53,gol,Marcos Espada Sanchez,
+2,C.F. At. Burriana - Salesianos 'A',61,gol_contra,Patacona C.F. 'B',Gol encajado
+2,C.F. At. Burriana - Salesianos 'A',66,gol,David Rubert Morano,
+2,C.F. At. Burriana - Salesianos 'A',81,gol,David Rubert Morano,
+3,C.F. At. Burriana - Salesianos 'A',13,gol,Matias Erros Budassi Sellart,
+3,C.F. At. Burriana - Salesianos 'A',17,gol_contra,C.F. Inter San José Valencia 'B',Gol encajado
+3,C.F. At. Burriana - Salesianos 'A',39,gol,Matteo Morra Climent,
+3,C.F. At. Burriana - Salesianos 'A',45,gol_contra,C.F. Inter San José Valencia 'B',Gol encajado
+3,C.F. At. Burriana - Salesianos 'A',54,gol_contra,C.F. Inter San José Valencia 'B',Gol encajado
+3,C.F. At. Burriana - Salesianos 'A',60,gol_contra,C.F. Inter San José Valencia 'B',Gol encajado
+3,C.F. At. Burriana - Salesianos 'A',72,amarilla,Eduardo Aurelian Ciutacu,
+3,C.F. At. Burriana - Salesianos 'A',74,amarilla,Jorge Agustina Llopis,
+3,C.F. At. Burriana - Salesianos 'A',80,amarilla,David Rubert Morano,
+3,C.F. At. Burriana - Salesianos 'A',90,gol,David Rubert Morano,
+4,C.F. At. Burriana - Salesianos 'A',15,gol,Matias Erros Budassi Sellart,
+4,C.F. At. Burriana - Salesianos 'A',69,gol,David Rubert Morano,
+5,C.F. At. Burriana - Salesianos 'A',60,amarilla,Marcelo Albert Guinot,
+1,Villarreal C.F. 'C',9,gol,Franklin Chinedu Okolie Okolie,
+1,Villarreal C.F. 'C',50,gol,Franklin Chinedu Okolie Okolie,
+1,Villarreal C.F. 'C',83,gol,Adrian Diaz Fuentes,
+1,Villarreal C.F. 'C',90,gol,Salim Khassanov,
+1,Villarreal C.F. 'C',77,gol_contra,Rival,
+2,Villarreal C.F. 'C',57,gol,Gabriel Duarte Santacruz,
+2,Villarreal C.F. 'C',9,amarilla,Adrian Diaz Fuentes,
+2,Villarreal C.F. 'C',10,doble_amarilla,Adrian Diaz Fuentes,segunda amarilla / expulsión
+3,Villarreal C.F. 'C',43,gol,Nahuel Abadia Garcia,
+3,Villarreal C.F. 'C',60,gol,Gabriel Duarte Santacruz,
+3,Villarreal C.F. 'C',8,gol_contra,G.P. Héctor García Vaca,Gol en propia
+3,Villarreal C.F. 'C',78,gol_contra,Rival,
+3,Villarreal C.F. 'C',68,amarilla,Gabriel Duarte Santacruz,
+4,Villarreal C.F. 'C',21,gol,Gabriel Duarte Santacruz,
+4,Villarreal C.F. 'C',30,gol,Franklin Chinedu Okolie Okolie,
+4,Villarreal C.F. 'C',46,gol,Gabriel Duarte Santacruz,
+4,Villarreal C.F. 'C',48,gol,Gabriel Duarte Santacruz,
+4,Villarreal C.F. 'C',62,gol,Yago Lapuente Martin,
+4,Villarreal C.F. 'C',13,gol_contra,Rival,
+4,Villarreal C.F. 'C',67,gol_contra,Rival,
+4,Villarreal C.F. 'C',12,amarilla,Hector Garcia Vaca,
+4,Villarreal C.F. 'C',87,amarilla,Raul Estephano Varzaru Varzaru,
+5,Villarreal C.F. 'C',64,gol,Pablo Tortajada Balaguer,
+5,Villarreal C.F. 'C',71,gol,Victor Maestra Rodriguez,
+5,Villarreal C.F. 'C',89,gol,Adrian Diaz Fuentes,
+5,Villarreal C.F. 'C',12,amarilla,Pablo Tortajada Balaguer,
+5,Villarreal C.F. 'C',44,amarilla,Ian Mendez Untiveros,
