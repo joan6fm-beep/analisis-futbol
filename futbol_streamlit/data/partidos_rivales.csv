@@ -1,0 +1,13 @@
+﻿jornada,fecha,local,visitante,goles_local,goles_visitante,campo,sistema_local,sistema_visitante,estado
+1,06/09/2026,Ath. Massamagrell C.F. 'A',Primer Toque C.F. 'A',1.0,0.0,Estadio Mpal. San Lorenzo F-11 Albuixech,1-4-4-2,1-4-4-2,validado
+1,PENDIENTE,Bétera C.F. 'A',Col. Salgui E.D.E. 'A',1.0,1.0,PENDIENTE,1-4-3-3,PENDIENTE,validado
+1,06/09/2026,Patacona C.F. 'B',C.D. Acero 'A',3.0,1.0,Campo Mpal. de la Patacona F-11,1-5-4-1,1-4-4-2,validado
+2,13/09/2026,C.D. Acero 'A',C.F. Inter San José Valencia 'B',1.0,4.0,Estadio El Fornas F-11,1-4-4-2,1-4-4-2,validado
+2,12/09/2026,Primer Toque C.F. 'A',Bétera C.F. 'A',2.0,0.0,Ciudad Dptva. Chencho Campo A F-11 Castellón,1-4-4-2,1-4-3-3,validado
+3,PENDIENTE,Bétera C.F. 'A',Villarreal C.F. 'C',2.0,2.0,PENDIENTE,1-5-4-1,1-4-4-2,validado
+3,20/09/2026,C.F. Cracks 'A',C.D. Acero 'A',2.0,3.0,Instalaciones Cracks F-11 Campo 1,1-4-4-2,1-4-4-2,validado
+3,PENDIENTE,Primer Toque C.F. 'A',Manises C.F. 'A',2.0,1.0,Ciudad Dptva. Chencho Campo A F-11 Castellón,PENDIENTE,PENDIENTE,validado
+4,27/09/2026,C.D. Acero 'A',C.F. Torre Levante 'A',3.0,5.0,Estadio El Fornas F-11,1-4-4-2,1-4-4-2,validado
+4,27/09/2026,C.D.F. Canet 'A',Primer Toque C.F. 'A',1.0,0.0,Campo La Figuereta F-11 Canet Berenguer,1-4-3-3,1-5-4-1,validado
+4,PENDIENTE,Manises C.F. 'A',Bétera C.F. 'A',0.0,1.0,Polideportivo Mpal. de Manises F-11 Campo 1,1-4-3-3,1-5-3-2,validado
+5,PENDIENTE,Primer Toque C.F. 'A',Alboraya U.D. 'B',1.0,2.0,Ciudad Dptva. Chencho Campo A F-11 Castellón,PENDIENTE,PENDIENTE,validado
