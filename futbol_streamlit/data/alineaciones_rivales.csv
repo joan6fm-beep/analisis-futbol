@@ -1,0 +1,430 @@
+equipo,jornada,dorsal,jugador,rol,linea,orden
+Bétera C.F. 'A',1,13,Raul Romero Civera,POR,1,1
+Bétera C.F. 'A',1,5,Hugo Jose Morte Garcia,DEF,2,1
+Bétera C.F. 'A',1,16,Hugo Armiñana Santamaria,DEF,2,2
+Bétera C.F. 'A',1,22,David Aparisi Martinez,DEF,2,3
+Bétera C.F. 'A',1,29,Adrian Cervera Balaguer,DEF,2,4
+Bétera C.F. 'A',1,8,Guillem Vazquez Sahuquillo,MED,3,1
+Bétera C.F. 'A',1,10,Marc Bosch Campos,MED,3,2
+Bétera C.F. 'A',1,14,Alberto Guil Sierra,MED,3,3
+Bétera C.F. 'A',1,7,Santiago Gonzalez Asensi,ATA,4,1
+Bétera C.F. 'A',1,9,Iker Argandoña Roch,ATA,4,2
+Bétera C.F. 'A',1,27,Daniel Bosque Diaz,ATA,4,3
+Bétera C.F. 'A',2,13,Raul Romero Civera,POR,1,1
+Bétera C.F. 'A',2,5,Hugo Jose Morte Garcia,DEF,2,1
+Bétera C.F. 'A',2,22,David Aparisi Martinez,DEF,2,2
+Bétera C.F. 'A',2,27,Daniel Bosque Diaz,DEF,2,3
+Bétera C.F. 'A',2,29,Adrian Cervera Balaguer,DEF,2,4
+Bétera C.F. 'A',2,8,Guillem Vazquez Sahuquillo,MED,3,1
+Bétera C.F. 'A',2,10,Marc Bosch Campos,MED,3,2
+Bétera C.F. 'A',2,14,Alberto Guil Sierra,MED,3,3
+Bétera C.F. 'A',2,17,Santiago Fabregat Gregorio,ATA,4,1
+Bétera C.F. 'A',2,19,Asier Lopez Olivares,ATA,4,2
+Bétera C.F. 'A',2,21,Valentin Lopez Montesinos,ATA,4,3
+Bétera C.F. 'A',3,1,Alex,POR,1,1
+Bétera C.F. 'A',3,5,Hugo Jose Morte Garcia,DEF,2,1
+Bétera C.F. 'A',3,14,Alberto Guil Sierra,DEF,2,2
+Bétera C.F. 'A',3,16,Hugo Armiñana Santamaria,DEF,2,3
+Bétera C.F. 'A',3,22,David Aparisi Martinez,DEF,2,4
+Bétera C.F. 'A',3,29,Adrian Cervera Balaguer,DEF,2,5
+Bétera C.F. 'A',3,8,Guillem Vazquez Sahuquillo,MED,3,1
+Bétera C.F. 'A',3,17,Santiago Fabregat Gregorio,MED,3,2
+Bétera C.F. 'A',3,18,Daniel Ram Levi,MED,3,3
+Bétera C.F. 'A',3,27,Daniel Bosque Diaz,MED,3,4
+Bétera C.F. 'A',3,9,Iker Argandoña Roch,ATA,4,1
+Bétera C.F. 'A',4,13,Raul Romero Civera,POR,1,1
+Bétera C.F. 'A',4,2,Hugo Alabau Rodrigo,DEF,2,1
+Bétera C.F. 'A',4,5,Hugo Jose Morte Garcia,DEF,2,2
+Bétera C.F. 'A',4,16,Hugo Armiñana Santamaria,DEF,2,3
+Bétera C.F. 'A',4,22,David Aparisi Martinez,DEF,2,4
+Bétera C.F. 'A',4,29,Adrian Cervera Balaguer,DEF,2,5
+Bétera C.F. 'A',4,8,Guillem Vazquez Sahuquillo,MED,3,1
+Bétera C.F. 'A',4,10,Marc Bosch Campos,MED,3,2
+Bétera C.F. 'A',4,14,Alberto Guil Sierra,MED,3,3
+Bétera C.F. 'A',4,9,Iker Argandoña Roch,ATA,4,1
+Bétera C.F. 'A',4,19,Asier Lopez Olivares,ATA,4,2
+C.D. Acero 'A',1,1,Abel Martinez Vaquero,POR,1,1
+C.D. Acero 'A',1,5,Llorenç Vicent Forner,DEF,2,1
+C.D. Acero 'A',1,14,Alejandro De Haro Rodriguez,DEF,2,2
+C.D. Acero 'A',1,15,Jorge Fores Biosca,DEF,2,3
+C.D. Acero 'A',1,16,Manel Gonzalez Bonet,DEF,2,4
+C.D. Acero 'A',1,6,Mario Molina Ballester,MED,3,1
+C.D. Acero 'A',1,8,Daniel Blazquez Castillo,MED,3,2
+C.D. Acero 'A',1,17,Noah Caballero Parrizas,MED,3,3
+C.D. Acero 'A',1,21,Carlos Bracho Trujillo,MED,3,4
+C.D. Acero 'A',1,19,Jorge Lopez Vila,ATA,4,1
+C.D. Acero 'A',1,20,Mario Navarro Perello,ATA,4,2
+C.D. Acero 'A',2,13,Joan Salvador Moreno,POR,1,1
+C.D. Acero 'A',2,14,Alejandro De Haro Rodriguez,DEF,2,1
+C.D. Acero 'A',2,15,Jorge Fores Biosca,DEF,2,2
+C.D. Acero 'A',2,16,Manel Gonzalez Bonet,DEF,2,3
+C.D. Acero 'A',2,21,Carlos Bracho Trujillo,DEF,2,4
+C.D. Acero 'A',2,6,Mario Molina Ballester,MED,3,1
+C.D. Acero 'A',2,8,Daniel Blazquez Castillo,MED,3,2
+C.D. Acero 'A',2,10,Hector Martin Baron,MED,3,3
+C.D. Acero 'A',2,22,Elias Zamora,MED,3,4
+C.D. Acero 'A',2,2,Ibrahim Zahidi Harfouch,ATA,4,1
+C.D. Acero 'A',2,20,Mario Navarro Perello,ATA,4,2
+C.D. Acero 'A',3,1,Abel Martinez Vaquero,POR,1,1
+C.D. Acero 'A',3,14,Alejandro De Haro Rodriguez,DEF,2,1
+C.D. Acero 'A',3,15,Jorge Fores Biosca,DEF,2,2
+C.D. Acero 'A',3,16,Manel Gonzalez Bonet,DEF,2,3
+C.D. Acero 'A',3,23,Sebastien Bryan Blanchet,DEF,2,4
+C.D. Acero 'A',3,6,Mario Molina Ballester,MED,3,1
+C.D. Acero 'A',3,8,Daniel Blazquez Castillo,MED,3,2
+C.D. Acero 'A',3,21,Carlos Bracho Trujillo,MED,3,3
+C.D. Acero 'A',3,22,Elias Zamora,MED,3,4
+C.D. Acero 'A',3,10,Hector Martin Baron,ATA,4,1
+C.D. Acero 'A',3,19,Jorge Lopez Vila,ATA,4,2
+C.D. Acero 'A',4,13,Joan Salvador Moreno,POR,1,1
+C.D. Acero 'A',4,3,Ianis Gabriel Pesa,DEF,2,1
+C.D. Acero 'A',4,15,Jorge Fores Biosca,DEF,2,2
+C.D. Acero 'A',4,16,Manel Gonzalez Bonet,DEF,2,3
+C.D. Acero 'A',4,23,Sebastien Bryan Blanchet,DEF,2,4
+C.D. Acero 'A',4,6,Mario Molina Ballester,MED,3,1
+C.D. Acero 'A',4,8,Daniel Blazquez Castillo,MED,3,2
+C.D. Acero 'A',4,21,Carlos Bracho Trujillo,MED,3,3
+C.D. Acero 'A',4,33,Aaron Madrid Garcia,MED,3,4
+C.D. Acero 'A',4,10,Hector Martin Baron,ATA,4,1
+C.D. Acero 'A',4,19,Jorge Lopez Vila,ATA,4,2
+Primer Toque C.F. 'A',1,1,Alessio,POR,1,1
+Primer Toque C.F. 'A',1,2,Chelli,DEF,2,1
+Primer Toque C.F. 'A',1,3,Irakli,DEF,2,2
+Primer Toque C.F. 'A',1,4,Sánchez,DEF,2,3
+Primer Toque C.F. 'A',1,14,Blázquez,DEF,2,4
+Primer Toque C.F. 'A',1,21,Pedro,MED,3,1
+Primer Toque C.F. 'A',1,8,Toni,MED,3,2
+Primer Toque C.F. 'A',1,10,Bilal,MED,3,3
+Primer Toque C.F. 'A',1,30,Boyan,MED,3,4
+Primer Toque C.F. 'A',1,9,Sebas,ATA,4,1
+Primer Toque C.F. 'A',1,24,Núñez,ATA,4,2
+Primer Toque C.F. 'A',2,1,Alessio,POR,1,1
+Primer Toque C.F. 'A',2,2,Chelli,DEF,2,1
+Primer Toque C.F. 'A',2,3,Irakli,DEF,2,2
+Primer Toque C.F. 'A',2,5,Xavi,DEF,2,3
+Primer Toque C.F. 'A',2,14,Blázquez,DEF,2,4
+Primer Toque C.F. 'A',2,7,Ian,MED,3,1
+Primer Toque C.F. 'A',2,10,Bilal,MED,3,2
+Primer Toque C.F. 'A',2,19,Mois,MED,3,3
+Primer Toque C.F. 'A',2,21,Pedro,MED,3,4
+Primer Toque C.F. 'A',2,9,Sebas,ATA,4,1
+Primer Toque C.F. 'A',2,24,Núñez,ATA,4,2
+Primer Toque C.F. 'A',3,13,Jordi Mata Flor,POR,1,1
+Primer Toque C.F. 'A',3,2,Chelli,DEF,2,1
+Primer Toque C.F. 'A',3,4,Sánchez,DEF,2,2
+Primer Toque C.F. 'A',3,8,Toni,DEF,2,3
+Primer Toque C.F. 'A',3,14,Blázquez,DEF,2,4
+Primer Toque C.F. 'A',3,7,Ian,MED,3,1
+Primer Toque C.F. 'A',3,10,Bilal,MED,3,2
+Primer Toque C.F. 'A',3,16,Hamza,MED,3,3
+Primer Toque C.F. 'A',3,21,Pedro,MED,3,4
+Primer Toque C.F. 'A',3,9,Sebas,ATA,4,1
+Primer Toque C.F. 'A',3,24,Núñez,ATA,4,2
+Primer Toque C.F. 'A',4,13,Jordi Mata Flor,POR,1,1
+Primer Toque C.F. 'A',4,2,Chelli,DEF,2,1
+Primer Toque C.F. 'A',4,3,Irakli,DEF,2,2
+Primer Toque C.F. 'A',4,4,Sánchez,DEF,2,3
+Primer Toque C.F. 'A',4,5,Xavi,DEF,2,4
+Primer Toque C.F. 'A',4,14,Blázquez,DEF,2,5
+Primer Toque C.F. 'A',4,7,Ian,MED,3,1
+Primer Toque C.F. 'A',4,16,Hamza,MED,3,2
+Primer Toque C.F. 'A',4,21,Pedro,MED,3,3
+Primer Toque C.F. 'A',4,24,Núñez,MED,3,4
+Primer Toque C.F. 'A',4,19,Mois,ATA,4,1
+Primer Toque C.F. 'A',5,1,Alessio,POR,1,1
+Primer Toque C.F. 'A',5,3,Irakli,DEF,2,1
+Primer Toque C.F. 'A',5,4,Sánchez,DEF,2,2
+Primer Toque C.F. 'A',5,5,Xavi,DEF,2,3
+Primer Toque C.F. 'A',5,28,Pau,DEF,2,4
+Primer Toque C.F. 'A',5,8,Toni,MED,3,1
+Primer Toque C.F. 'A',5,9,Sebas,MED,3,2
+Primer Toque C.F. 'A',5,10,Bilal,MED,3,3
+Primer Toque C.F. 'A',5,17,Abde,MED,3,4
+Primer Toque C.F. 'A',5,19,Mois,ATA,4,1
+Primer Toque C.F. 'A',5,24,Núñez,ATA,4,2
+C.F. At. Burriana - Salesianos 'A',1,1,Wladislaw Zbrozhek,POR,1,1
+C.F. At. Burriana - Salesianos 'A',1,2,David Gil Ibañez,DEF,2,1
+C.F. At. Burriana - Salesianos 'A',1,3,Pablo Cabrera Gilabert,DEF,2,2
+C.F. At. Burriana - Salesianos 'A',1,6,Alexandre Alemany Torrat,DEF,2,3
+C.F. At. Burriana - Salesianos 'A',1,15,Eduardo Aurelian Ciutacu,DEF,2,4
+C.F. At. Burriana - Salesianos 'A',1,8,Victor Mesado Vicente,MED,3,1
+C.F. At. Burriana - Salesianos 'A',1,11,Guillem Gimenez Llopis,MED,3,2
+C.F. At. Burriana - Salesianos 'A',1,18,Dani Hernandez Ballester,MED,3,3
+C.F. At. Burriana - Salesianos 'A',1,9,Mario Casino Esteve,ATA,4,1
+C.F. At. Burriana - Salesianos 'A',1,10,Jorge Agustina Llopis,ATA,4,2
+C.F. At. Burriana - Salesianos 'A',1,22,Matteo Morra Climent,ATA,4,3
+C.F. At. Burriana - Salesianos 'A',2,13,Marc Roca Gari,POR,1,1
+C.F. At. Burriana - Salesianos 'A',2,4,Albert Viñes Cerezo,DEF,2,1
+C.F. At. Burriana - Salesianos 'A',2,6,Alexandre Alemany Torrat,DEF,2,2
+C.F. At. Burriana - Salesianos 'A',2,15,Eduardo Aurelian Ciutacu,DEF,2,3
+C.F. At. Burriana - Salesianos 'A',2,17,Alvaro Fuentes Segura,DEF,2,4
+C.F. At. Burriana - Salesianos 'A',2,2,David Gil Ibañez,MED,3,1
+C.F. At. Burriana - Salesianos 'A',2,5,Marcelo Albert Guinot,MED,3,2
+C.F. At. Burriana - Salesianos 'A',2,23,Matias Erros Budassi Sellart,MED,3,3
+C.F. At. Burriana - Salesianos 'A',2,9,Mario Casino Esteve,ATA,4,1
+C.F. At. Burriana - Salesianos 'A',2,10,Jorge Agustina Llopis,ATA,4,2
+C.F. At. Burriana - Salesianos 'A',2,19,Marcos Espada Sanchez,ATA,4,3
+C.F. At. Burriana - Salesianos 'A',3,13,Marc Roca Gari,POR,1,1
+C.F. At. Burriana - Salesianos 'A',3,6,Alexandre Alemany Torrat,DEF,2,1
+C.F. At. Burriana - Salesianos 'A',3,14,Jordi Gonzalez Lopez,DEF,2,2
+C.F. At. Burriana - Salesianos 'A',3,15,Eduardo Aurelian Ciutacu,DEF,2,3
+C.F. At. Burriana - Salesianos 'A',3,17,Alvaro Fuentes Segura,DEF,2,4
+C.F. At. Burriana - Salesianos 'A',3,2,David Gil Ibañez,MED,3,1
+C.F. At. Burriana - Salesianos 'A',3,18,Dani Hernandez Ballester,MED,3,2
+C.F. At. Burriana - Salesianos 'A',3,23,Matias Erros Budassi Sellart,MED,3,3
+C.F. At. Burriana - Salesianos 'A',3,7,David Rubert Morano,ATA,4,1
+C.F. At. Burriana - Salesianos 'A',3,9,Mario Casino Esteve,ATA,4,2
+C.F. At. Burriana - Salesianos 'A',3,22,Matteo Morra Climent,ATA,4,3
+C.F. At. Burriana - Salesianos 'A',4,1,Wladislaw Zbrozhek,POR,1,1
+C.F. At. Burriana - Salesianos 'A',4,6,Alexandre Alemany Torrat,DEF,2,1
+C.F. At. Burriana - Salesianos 'A',4,10,Jorge Agustina Llopis,DEF,2,2
+C.F. At. Burriana - Salesianos 'A',4,18,Dani Hernandez Ballester,DEF,2,3
+C.F. At. Burriana - Salesianos 'A',4,23,Matias Erros Budassi Sellart,DEF,2,4
+C.F. At. Burriana - Salesianos 'A',4,4,Albert Viñes Cerezo,MED,3,1
+C.F. At. Burriana - Salesianos 'A',4,7,David Rubert Morano,MED,3,2
+C.F. At. Burriana - Salesianos 'A',4,15,Eduardo Aurelian Ciutacu,MED,3,3
+C.F. At. Burriana - Salesianos 'A',4,3,Pablo Cabrera Gilabert,ATA,4,1
+C.F. At. Burriana - Salesianos 'A',4,16,Miguel Galera Sanz,ATA,4,2
+C.F. At. Burriana - Salesianos 'A',4,22,Matteo Morra Climent,ATA,4,3
+C.F. At. Burriana - Salesianos 'A',5,1,Wladislaw Zbrozhek,POR,1,1
+C.F. At. Burriana - Salesianos 'A',5,3,Pablo Cabrera Gilabert,DEF,2,1
+C.F. At. Burriana - Salesianos 'A',5,6,Alexandre Alemany Torrat,DEF,2,2
+C.F. At. Burriana - Salesianos 'A',5,20,Alexandru Constantin Epuraru,DEF,2,3
+C.F. At. Burriana - Salesianos 'A',5,21,Alvaro Vila Diaz,DEF,2,4
+C.F. At. Burriana - Salesianos 'A',5,4,Albert Viñes Cerezo,MED,3,1
+C.F. At. Burriana - Salesianos 'A',5,5,Marcelo Albert Guinot,MED,3,2
+C.F. At. Burriana - Salesianos 'A',5,15,Eduardo Aurelian Ciutacu,MED,3,3
+C.F. At. Burriana - Salesianos 'A',5,10,Jorge Agustina Llopis,ATA,4,1
+C.F. At. Burriana - Salesianos 'A',5,16,Miguel Galera Sanz,ATA,4,2
+C.F. At. Burriana - Salesianos 'A',5,19,Marcos Espada Sanchez,ATA,4,3
+Villarreal C.F. 'C',1,1,Daniil Didenko Rohava,POR,1,1
+Villarreal C.F. 'C',1,2,Hugo Zoroa Domingo,DEF,2,1
+Villarreal C.F. 'C',1,3,Eduardo De Haro Hernández,DEF,2,2
+Villarreal C.F. 'C',1,5,Manolo Rubert Colonques,DEF,2,3
+Villarreal C.F. 'C',1,6,Hector Garcia Vaca,DEF,2,4
+Villarreal C.F. 'C',1,10,Gabriel Duarte Santacruz,MED,3,1
+Villarreal C.F. 'C',1,18,Pablo Tortajada Balaguer,MED,3,2
+Villarreal C.F. 'C',1,19,Adrian Cantalapiedra Cocho,MED,3,3
+Villarreal C.F. 'C',1,22,Nahuel Abadia Garcia,MED,3,4
+Villarreal C.F. 'C',1,8,Darlington Oghosa Izekor Osazuwa,ATA,4,1
+Villarreal C.F. 'C',1,9,Franklin Chinedu Okolie Okolie,ATA,4,2
+Villarreal C.F. 'C',2,1,Daniil Didenko Rohava,POR,1,1
+Villarreal C.F. 'C',2,2,Hugo Zoroa Domingo,DEF,2,1
+Villarreal C.F. 'C',2,3,Adrian Gregori Villanueva,DEF,2,2
+Villarreal C.F. 'C',2,14,Ian Mendez Untiveros,DEF,2,3
+Villarreal C.F. 'C',2,27,Balla Dembele Kamissoko,DEF,2,4
+Villarreal C.F. 'C',2,8,Darlington Oghosa Izekor Osazuwa,MED,3,1
+Villarreal C.F. 'C',2,10,Gabriel Duarte Santacruz,MED,3,2
+Villarreal C.F. 'C',2,18,Pablo Tortajada Balaguer,MED,3,3
+Villarreal C.F. 'C',2,19,Adrian Cantalapiedra Cocho,MED,3,4
+Villarreal C.F. 'C',2,9,Franklin Chinedu Okolie Okolie,ATA,4,1
+Villarreal C.F. 'C',2,20,Adrian Diaz Fuentes,ATA,4,2
+Villarreal C.F. 'C',3,1,Daniil Didenko Rohava,POR,1,1
+Villarreal C.F. 'C',3,2,Hugo Zoroa Domingo,DEF,2,1
+Villarreal C.F. 'C',3,3,Adrian Gregori Villanueva,DEF,2,2
+Villarreal C.F. 'C',3,6,Hector Garcia Vaca,DEF,2,3
+Villarreal C.F. 'C',3,14,Ian Mendez Untiveros,DEF,2,4
+Villarreal C.F. 'C',3,10,Gabriel Duarte Santacruz,MED,3,1
+Villarreal C.F. 'C',3,19,Adrian Cantalapiedra Cocho,MED,3,2
+Villarreal C.F. 'C',3,21,Yago Lapuente Martin,MED,3,3
+Villarreal C.F. 'C',3,22,Nahuel Abadia Garcia,MED,3,4
+Villarreal C.F. 'C',3,8,Darlington Oghosa Izekor Osazuwa,ATA,4,1
+Villarreal C.F. 'C',3,9,Franklin Chinedu Okolie Okolie,ATA,4,2
+Villarreal C.F. 'C',4,25,Samuel Ramirez Batchuluun,POR,1,1
+Villarreal C.F. 'C',4,3,Adrian Gregori Villanueva,DEF,2,1
+Villarreal C.F. 'C',4,6,Hector Garcia Vaca,DEF,2,2
+Villarreal C.F. 'C',4,14,Ian Mendez Untiveros,DEF,2,3
+Villarreal C.F. 'C',4,15,Andres Borras Maestre,DEF,2,4
+Villarreal C.F. 'C',4,10,Gabriel Duarte Santacruz,MED,3,1
+Villarreal C.F. 'C',4,18,Pablo Tortajada Balaguer,MED,3,2
+Villarreal C.F. 'C',4,19,Adrian Cantalapiedra Cocho,MED,3,3
+Villarreal C.F. 'C',4,21,Yago Lapuente Martin,MED,3,4
+Villarreal C.F. 'C',4,9,Franklin Chinedu Okolie Okolie,ATA,4,1
+Villarreal C.F. 'C',4,20,Adrian Diaz Fuentes,ATA,4,2
+Villarreal C.F. 'C',5,25,Samuel Ramirez Batchuluun,POR,1,1
+Villarreal C.F. 'C',5,3,Adrian Gregori Villanueva,DEF,2,1
+Villarreal C.F. 'C',5,6,Hector Garcia Vaca,DEF,2,2
+Villarreal C.F. 'C',5,14,Ian Mendez Untiveros,DEF,2,3
+Villarreal C.F. 'C',5,15,Andres Borras Maestre,DEF,2,4
+Villarreal C.F. 'C',5,10,Gabriel Duarte Santacruz,MED,3,1
+Villarreal C.F. 'C',5,18,Pablo Tortajada Balaguer,MED,3,2
+Villarreal C.F. 'C',5,19,Adrian Cantalapiedra Cocho,MED,3,3
+Villarreal C.F. 'C',5,22,Nahuel Abadia Garcia,MED,3,4
+Villarreal C.F. 'C',5,9,Franklin Chinedu Okolie Okolie,ATA,4,1
+Villarreal C.F. 'C',5,20,Adrian Diaz Fuentes,ATA,4,2
+Ath. Massamagrell C.F. 'A',1,99,David Gonzalez Belert,POR,1,1
+Ath. Massamagrell C.F. 'A',1,2,Pont,DEF,2,1
+Ath. Massamagrell C.F. 'A',1,3,Quique,DEF,2,2
+Ath. Massamagrell C.F. 'A',1,5,Adrian Sanfelix Rojo,DEF,2,3
+Ath. Massamagrell C.F. 'A',1,11,Alex Marzal Martinez,DEF,2,4
+Ath. Massamagrell C.F. 'A',1,6,Manuel Tajudje Perez,MED,3,1
+Ath. Massamagrell C.F. 'A',1,14,Daniel Palanca Feito,MED,3,2
+Ath. Massamagrell C.F. 'A',1,24,Guillem Uso Alcover,MED,3,3
+Ath. Massamagrell C.F. 'A',1,26,Abdelkarim Khane Aklouche,MED,3,4
+Ath. Massamagrell C.F. 'A',1,7,Isaac Barba Silla,ATA,4,1
+Ath. Massamagrell C.F. 'A',1,8,Pau Marques Jimenez,ATA,4,2
+Ath. Massamagrell C.F. 'A',2,21,Ignacio Parreño Mir,POR,1,1
+Ath. Massamagrell C.F. 'A',2,2,Pont,DEF,2,1
+Ath. Massamagrell C.F. 'A',2,3,Quique,DEF,2,2
+Ath. Massamagrell C.F. 'A',2,5,Adrian Sanfelix Rojo,DEF,2,3
+Ath. Massamagrell C.F. 'A',2,11,Alex Marzal Martinez,DEF,2,4
+Ath. Massamagrell C.F. 'A',2,6,Manuel Tajudje Perez,MED,3,1
+Ath. Massamagrell C.F. 'A',2,14,Daniel Palanca Feito,MED,3,2
+Ath. Massamagrell C.F. 'A',2,23,Julian Hugo Oyarzun,MED,3,3
+Ath. Massamagrell C.F. 'A',2,26,Abdelkarim Khane Aklouche,MED,3,4
+Ath. Massamagrell C.F. 'A',2,7,Isaac Barba Silla,ATA,4,1
+Ath. Massamagrell C.F. 'A',2,10,Pablo Ariño Palanca,ATA,4,2
+Ath. Massamagrell C.F. 'A',3,99,David Gonzalez Belert,POR,1,1
+Ath. Massamagrell C.F. 'A',3,2,Pont,DEF,2,1
+Ath. Massamagrell C.F. 'A',3,10,Pablo Ariño Palanca,DEF,2,2
+Ath. Massamagrell C.F. 'A',3,17,Albert Carceller Barbera,DEF,2,3
+Ath. Massamagrell C.F. 'A',3,22,Francisco Garcia Cantero,DEF,2,4
+Ath. Massamagrell C.F. 'A',3,3,Quique,MED,3,1
+Ath. Massamagrell C.F. 'A',3,5,Adrian Sanfelix Rojo,MED,3,2
+Ath. Massamagrell C.F. 'A',3,11,Alex Marzal Martinez,MED,3,3
+Ath. Massamagrell C.F. 'A',3,24,Guillem Uso Alcover,MED,3,4
+Ath. Massamagrell C.F. 'A',3,8,Pau Marques Jimenez,ATA,4,1
+Ath. Massamagrell C.F. 'A',3,14,Daniel Palanca Feito,ATA,4,2
+Ath. Massamagrell C.F. 'A',4,99,David Gonzalez Belert,POR,1,1
+Ath. Massamagrell C.F. 'A',4,8,Pau Marques Jimenez,DEF,2,1
+Ath. Massamagrell C.F. 'A',4,11,Alex Marzal Martinez,DEF,2,2
+Ath. Massamagrell C.F. 'A',4,22,Francisco Garcia Cantero,DEF,2,3
+Ath. Massamagrell C.F. 'A',4,3,Quique,MED,3,1
+Ath. Massamagrell C.F. 'A',4,5,Adrian Sanfelix Rojo,MED,3,2
+Ath. Massamagrell C.F. 'A',4,9,David Barranco Peris,MED,3,3
+Ath. Massamagrell C.F. 'A',4,10,Pablo Ariño Palanca,MED,3,4
+Ath. Massamagrell C.F. 'A',4,14,Daniel Palanca Feito,MED,3,5
+Ath. Massamagrell C.F. 'A',4,2,Pont,ATA,4,1
+Ath. Massamagrell C.F. 'A',4,24,Guillem Uso Alcover,ATA,4,2
+Ath. Massamagrell C.F. 'A',5,21,Ignacio Parreño Mir,POR,1,1
+Ath. Massamagrell C.F. 'A',5,6,Manuel Tajudje Perez,DEF,2,1
+Ath. Massamagrell C.F. 'A',5,11,Alex Marzal Martinez,DEF,2,2
+Ath. Massamagrell C.F. 'A',5,14,Daniel Palanca Feito,DEF,2,3
+Ath. Massamagrell C.F. 'A',5,2,Pont,MED,3,1
+Ath. Massamagrell C.F. 'A',5,3,Quique,MED,3,2
+Ath. Massamagrell C.F. 'A',5,10,Pablo Ariño Palanca,MED,3,3
+Ath. Massamagrell C.F. 'A',5,17,Albert Carceller Barbera,MED,3,4
+Ath. Massamagrell C.F. 'A',5,22,Francisco Garcia Cantero,MED,3,5
+Ath. Massamagrell C.F. 'A',5,5,Adrian Sanfelix Rojo,ATA,4,1
+Ath. Massamagrell C.F. 'A',5,8,Pau Marques Jimenez,ATA,4,2
+C.D. Acero 'A',5,1,Abel Martinez Vaquero,POR,1,1
+C.D. Acero 'A',5,3,Ianis Gabriel Pesa,DEF,2,1
+C.D. Acero 'A',5,16,Manel Gonzalez Bonet,DEF,2,2
+C.D. Acero 'A',5,22,Oscar Manrique Martinez,DEF,2,3
+C.D. Acero 'A',5,26,Sebastien Bryan Blanchet,DEF,2,4
+C.D. Acero 'A',5,8,Daniel Blazquez Castillo,MED,3,1
+C.D. Acero 'A',5,10,Hector Martin Baron,MED,3,2
+C.D. Acero 'A',5,21,Carlos Bracho Trujillo,MED,3,3
+C.D. Acero 'A',5,33,Aaron Madrid Garcia,MED,3,4
+C.D. Acero 'A',5,9,Ibrahim Zahidi Harfouch,ATA,4,1
+C.D. Acero 'A',5,19,Jorge Lopez Vila,ATA,4,2
+C.F. Històrics de València 'A',1,41,Jorge Segovia Martinez,POR,1,1
+C.F. Històrics de València 'A',1,2,Ramos Marc De Fez,DEF,2,1
+C.F. Històrics de València 'A',1,76,Jean Carlos Fraga Mendoza,DEF,2,2
+C.F. Històrics de València 'A',1,31,Alejandro Calvo Calipierso,DEF,2,3
+C.F. Històrics de València 'A',1,21,Diego,DEF,2,4
+C.F. Històrics de València 'A',1,5,Alberto Saura Garcia,MED,3,1
+C.F. Històrics de València 'A',1,10,Marcos Gimenez Amaro,MED,3,2
+C.F. Històrics de València 'A',1,8,Diego Jose Moya Salcedo,MED,3,3
+C.F. Històrics de València 'A',1,6,Alberto Saura Garcia,ATA,4,1
+C.F. Històrics de València 'A',1,15,Javier Gimenez Llibrer,ATA,4,2
+C.F. Històrics de València 'A',1,9,Lev Tibeikin,ATA,4,3
+C.F. Històrics de València 'A',2,42,Daniel Valero Pascual,POR,1,1
+C.F. Històrics de València 'A',2,16,Jugador 16 Històrics,DEF,2,1
+C.F. Històrics de València 'A',2,5,Alberto Saura Garcia,DEF,2,2
+C.F. Històrics de València 'A',2,22,Jugador 22 Històrics,DEF,2,3
+C.F. Històrics de València 'A',2,30,Rafael Eduardo Cañar Montaño,DEF,2,4
+C.F. Històrics de València 'A',2,39,Jugador 39 Històrics,MED,3,1
+C.F. Històrics de València 'A',2,8,Diego Jose Moya Salcedo,MED,3,2
+C.F. Històrics de València 'A',2,21,Diego,MED,3,3
+C.F. Històrics de València 'A',2,11,Ezekiel Chigozie Edwin Festus,ATA,4,1
+C.F. Històrics de València 'A',2,37,Jugador 37 Històrics,ATA,4,2
+C.F. Històrics de València 'A',2,38,Aitor Fernandez Aragones,ATA,4,3
+C.F. Històrics de València 'A',3,41,Jorge Segovia Martinez,POR,1,1
+C.F. Històrics de València 'A',3,29,Ramos Marc De Fez,DEF,2,1
+C.F. Històrics de València 'A',3,21,Diego,DEF,2,2
+C.F. Històrics de València 'A',3,23,Daniel Alors Ibañez,DEF,2,3
+C.F. Històrics de València 'A',3,30,Rafael Eduardo Cañar Montaño,DEF,2,4
+C.F. Històrics de València 'A',3,38,Aitor Fernandez Aragones,MED,3,1
+C.F. Històrics de València 'A',3,14,Jean Carlos Fraga Mendoza,MED,3,2
+C.F. Històrics de València 'A',3,7,Jugador 7 Històrics,MED,3,3
+C.F. Històrics de València 'A',3,18,Jugador 18 Històrics,ATA,4,1
+C.F. Històrics de València 'A',3,12,Iker Gabriel Gavilanes Chalan,ATA,4,2
+C.F. Històrics de València 'A',3,37,Jugador 37 Històrics,ATA,4,3
+C.F. Històrics de València 'A',4,25,Portero #25 Històrics,POR,1,1
+C.F. Històrics de València 'A',4,23,Daniel Alors Ibañez,DEF,2,1
+C.F. Històrics de València 'A',4,21,Diego,DEF,2,2
+C.F. Històrics de València 'A',4,7,Jugador 7 Històrics,DEF,2,3
+C.F. Històrics de València 'A',4,14,Jean Carlos Fraga Mendoza,DEF,2,4
+C.F. Històrics de València 'A',4,12,Iker Gabriel Gavilanes Chalan,MED,3,1
+C.F. Històrics de València 'A',4,10,Marcos Gimenez Amaro,MED,3,2
+C.F. Històrics de València 'A',4,29,Ramos Marc De Fez,MED,3,3
+C.F. Històrics de València 'A',4,8,Diego Jose Moya Salcedo,ATA,4,1
+C.F. Històrics de València 'A',4,17,Daniel Nieto Valero,ATA,4,2
+C.F. Històrics de València 'A',4,4,Marc Requeni Serer,ATA,4,3
+C.F. Històrics de València 'A',5,42,Daniel Valero Pascual,POR,1,1
+C.F. Històrics de València 'A',5,10,Marcos Gimenez Amaro,DEF,2,1
+C.F. Històrics de València 'A',5,21,Diego,DEF,2,2
+C.F. Històrics de València 'A',5,23,Daniel Alors Ibañez,DEF,2,3
+C.F. Històrics de València 'A',5,15,Javier Gimenez Llibrer,DEF,2,4
+C.F. Històrics de València 'A',5,29,Ramos Marc De Fez,MED,3,1
+C.F. Històrics de València 'A',5,14,Jean Carlos Fraga Mendoza,MED,3,2
+C.F. Històrics de València 'A',5,6,Alberto Saura Garcia,MED,3,3
+C.F. Històrics de València 'A',5,9,Lev Tibeikin,ATA,4,1
+C.F. Històrics de València 'A',5,12,Iker Gabriel Gavilanes Chalan,ATA,4,2
+C.F. Històrics de València 'A',5,30,Rafael Eduardo Cañar Montaño,ATA,4,3
+Alboraya U.D. 'B',1,1,Guillem Carrascosa Alemany,POR,1,1
+Alboraya U.D. 'B',1,2,Pablo Aguilar Año,DEF,2,1
+Alboraya U.D. 'B',1,3,Sergio Cepedal Soler,DEF,2,2
+Alboraya U.D. 'B',1,4,Javier Soriano Perez,DEF,2,3
+Alboraya U.D. 'B',1,5,Marc Besalduch Lopez,DEF,2,4
+Alboraya U.D. 'B',1,6,Hugo Tarazona Mateos,MED,3,1
+Alboraya U.D. 'B',1,7,Daniel Perez Rodrigo,MED,3,2
+Alboraya U.D. 'B',1,8,Mario Villavicencio Fernández,MED,3,3
+Alboraya U.D. 'B',1,9,Luis Carlos Montilla Perez,ATA,4,1
+Alboraya U.D. 'B',1,10,Ruben Fos Miralles,ATA,4,2
+Alboraya U.D. 'B',1,11,Joel Juan Palau,ATA,4,3
+Alboraya U.D. 'B',2,1,Guillem Carrascosa Alemany,POR,1,1
+Alboraya U.D. 'B',2,2,Pablo Aguilar Año,DEF,2,1
+Alboraya U.D. 'B',2,3,Sergio Cepedal Soler,DEF,2,2
+Alboraya U.D. 'B',2,4,Javier Soriano Perez,DEF,2,3
+Alboraya U.D. 'B',2,5,Marc Besalduch Lopez,DEF,2,4
+Alboraya U.D. 'B',2,6,Hugo Tarazona Mateos,MED,3,1
+Alboraya U.D. 'B',2,7,Daniel Perez Rodrigo,MED,3,2
+Alboraya U.D. 'B',2,8,Mario Villavicencio Fernández,MED,3,3
+Alboraya U.D. 'B',2,9,Luis Carlos Montilla Perez,ATA,4,1
+Alboraya U.D. 'B',2,11,Joel Juan Palau,ATA,4,2
+Alboraya U.D. 'B',2,16,Rowan Sadekar,ATA,4,3
+Alboraya U.D. 'B',3,1,Guillem Carrascosa Alemany,POR,1,1
+Alboraya U.D. 'B',3,2,Pablo Aguilar Año,DEF,2,1
+Alboraya U.D. 'B',3,3,Sergio Cepedal Soler,DEF,2,2
+Alboraya U.D. 'B',3,4,Javier Soriano Perez,DEF,2,3
+Alboraya U.D. 'B',3,5,Marc Besalduch Lopez,DEF,2,4
+Alboraya U.D. 'B',3,6,Hugo Tarazona Mateos,MED,3,1
+Alboraya U.D. 'B',3,7,Daniel Perez Rodrigo,MED,3,2
+Alboraya U.D. 'B',3,8,Mario Villavicencio Fernández,MED,3,3
+Alboraya U.D. 'B',3,9,Luis Carlos Montilla Perez,ATA,4,1
+Alboraya U.D. 'B',3,10,Ruben Fos Miralles,ATA,4,2
+Alboraya U.D. 'B',3,11,Joel Juan Palau,ATA,4,3
+Alboraya U.D. 'B',4,1,Guillem Carrascosa Alemany,POR,1,1
+Alboraya U.D. 'B',4,3,Sergio Cepedal Soler,DEF,2,1
+Alboraya U.D. 'B',4,4,Javier Soriano Perez,DEF,2,2
+Alboraya U.D. 'B',4,5,Marc Besalduch Lopez,DEF,2,3
+Alboraya U.D. 'B',4,6,Hugo Tarazona Mateos,DEF,2,4
+Alboraya U.D. 'B',4,7,Daniel Perez Rodrigo,MED,3,1
+Alboraya U.D. 'B',4,8,Mario Villavicencio Fernández,MED,3,2
+Alboraya U.D. 'B',4,10,Ruben Fos Miralles,MED,3,3
+Alboraya U.D. 'B',4,11,Joel Juan Palau,ATA,4,1
+Alboraya U.D. 'B',4,15,David Puebla Alentado,ATA,4,2
+Alboraya U.D. 'B',4,24,Miguel Romero Guadarrama,ATA,4,3
+Alboraya U.D. 'B',5,13,Guillem Carrascosa Alemany,POR,1,1
+Alboraya U.D. 'B',5,2,Pablo Aguilar Año,DEF,2,1
+Alboraya U.D. 'B',5,3,Sergio Cepedal Soler,DEF,2,2
+Alboraya U.D. 'B',5,4,Javier Soriano Perez,DEF,2,3
+Alboraya U.D. 'B',5,5,Marc Besalduch Lopez,DEF,2,4
+Alboraya U.D. 'B',5,6,Hugo Tarazona Mateos,MED,3,1
+Alboraya U.D. 'B',5,7,Daniel Perez Rodrigo,MED,3,2
+Alboraya U.D. 'B',5,8,Mario Villavicencio Fernández,MED,3,3
+Alboraya U.D. 'B',5,9,Luis Carlos Montilla Perez,ATA,4,1
+Alboraya U.D. 'B',5,10,Ruben Fos Miralles,ATA,4,2
+Alboraya U.D. 'B',5,11,Joel Juan Palau,ATA,4,3
