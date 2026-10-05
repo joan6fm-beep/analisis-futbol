@@ -1,0 +1,81 @@
+jornada,fecha,posicion,equipo,puntos,pj,pg,pe,pp
+1,06/09/2026,1,Villarreal C.F. 'C',,1,,,
+1,06/09/2026,5,Alboraya U.D. 'B',,1,,,
+1,06/09/2026,14,C.F. Històrics de València 'A',,1,,,
+1,06/09/2026,6,Ath. Massamagrell C.F. 'A',,1,,,
+1,06/09/2026,10,C.F. Torre Levante 'A',,1,,,
+1,06/09/2026,11,Primer Toque C.F. 'A',,1,,,
+1,06/09/2026,16,C.F. At. Burriana - Salesianos 'A',,1,,,
+1,06/09/2026,13,C.F. Inter San José Valencia 'B',,1,,,
+1,06/09/2026,9,Col. Salgui E.D.E. 'A',,1,,,
+1,06/09/2026,8,Bétera C.F. 'A',,1,,,
+1,06/09/2026,2,C.F. Cracks 'A',,1,,,
+1,06/09/2026,3,Paterna C.F. 'A',,1,,,
+1,06/09/2026,7,Manises C.F. 'A',,1,,,
+1,06/09/2026,4,Patacona C.F. 'B',,1,,,
+1,06/09/2026,12,C.D. Acero 'A',,1,,,
+1,06/09/2026,15,C.D.F. Canet 'A',,1,,,
+2,13/09/2026,1,Villarreal C.F. 'C',,2,,,
+2,13/09/2026,3,Alboraya U.D. 'B',,2,,,
+2,13/09/2026,12,C.F. Històrics de València 'A',,2,,,
+2,13/09/2026,4,Ath. Massamagrell C.F. 'A',,2,,,
+2,13/09/2026,8,C.F. Torre Levante 'A',,2,,,
+2,13/09/2026,9,Primer Toque C.F. 'A',,2,,,
+2,13/09/2026,11,C.F. At. Burriana - Salesianos 'A',,2,,,
+2,13/09/2026,7,C.F. Inter San José Valencia 'B',,2,,,
+2,13/09/2026,13,Col. Salgui E.D.E. 'A',,2,,,
+2,13/09/2026,14,Bétera C.F. 'A',,2,,,
+2,13/09/2026,2,C.F. Cracks 'A',,2,,,
+2,13/09/2026,6,Paterna C.F. 'A',,2,,,
+2,13/09/2026,5,Manises C.F. 'A',,2,,,
+2,13/09/2026,10,Patacona C.F. 'B',,2,,,
+2,13/09/2026,15,C.D. Acero 'A',,2,,,
+2,13/09/2026,16,C.D.F. Canet 'A',,2,,,
+3,20/09/2026,1,Villarreal C.F. 'C',,3,,,
+3,20/09/2026,3,Alboraya U.D. 'B',,3,,,
+3,20/09/2026,6,C.F. Històrics de València 'A',,3,,,
+3,20/09/2026,2,Ath. Massamagrell C.F. 'A',,3,,,
+3,20/09/2026,10,C.F. Torre Levante 'A',,3,,,
+3,20/09/2026,5,Primer Toque C.F. 'A',,3,,,
+3,20/09/2026,12,C.F. At. Burriana - Salesianos 'A',,3,,,
+3,20/09/2026,4,C.F. Inter San José Valencia 'B',,3,,,
+3,20/09/2026,14,Col. Salgui E.D.E. 'A',,3,,,
+3,20/09/2026,15,Bétera C.F. 'A',,3,,,
+3,20/09/2026,7,C.F. Cracks 'A',,3,,,
+3,20/09/2026,8,Paterna C.F. 'A',,3,,,
+3,20/09/2026,9,Manises C.F. 'A',,3,,,
+3,20/09/2026,11,Patacona C.F. 'B',,3,,,
+3,20/09/2026,13,C.D. Acero 'A',,3,,,
+3,20/09/2026,16,C.D.F. Canet 'A',,3,,,
+4,27/09/2026,1,Villarreal C.F. 'C',,4,,,
+4,27/09/2026,2,Alboraya U.D. 'B',,4,,,
+4,27/09/2026,3,C.F. Històrics de València 'A',,4,,,
+4,27/09/2026,4,Ath. Massamagrell C.F. 'A',,4,,,
+4,27/09/2026,5,C.F. Torre Levante 'A',,4,,,
+4,27/09/2026,6,Primer Toque C.F. 'A',,4,,,
+4,27/09/2026,7,C.F. At. Burriana - Salesianos 'A',,4,,,
+4,27/09/2026,8,C.F. Inter San José Valencia 'B',,4,,,
+4,27/09/2026,9,Col. Salgui E.D.E. 'A',,4,,,
+4,27/09/2026,10,Bétera C.F. 'A',,4,,,
+4,27/09/2026,11,C.F. Cracks 'A',,4,,,
+4,27/09/2026,12,Paterna C.F. 'A',,4,,,
+4,27/09/2026,13,Manises C.F. 'A',,4,,,
+4,27/09/2026,14,Patacona C.F. 'B',,4,,,
+4,27/09/2026,15,C.D. Acero 'A',,4,,,
+4,27/09/2026,16,C.D.F. Canet 'A',,4,,,
+5,04/10/2026,1,Villarreal C.F. 'C',10.0,4,3.0,1.0,0.0
+5,04/10/2026,2,Alboraya U.D. 'B',10.0,4,3.0,1.0,0.0
+5,04/10/2026,3,C.F. Històrics de València 'A',9.0,4,3.0,0.0,1.0
+5,04/10/2026,4,Ath. Massamagrell C.F. 'A',7.0,4,2.0,1.0,1.0
+5,04/10/2026,5,C.F. Torre Levante 'A',6.0,4,2.0,0.0,2.0
+5,04/10/2026,6,Primer Toque C.F. 'A',6.0,4,2.0,0.0,2.0
+5,04/10/2026,7,C.F. At. Burriana - Salesianos 'A',7.0,5,2.0,1.0,2.0
+5,04/10/2026,8,C.F. Inter San José Valencia 'B',6.0,4,2.0,0.0,2.0
+5,04/10/2026,9,Col. Salgui E.D.E. 'A',5.0,4,1.0,2.0,1.0
+5,04/10/2026,10,Bétera C.F. 'A',5.0,4,1.0,2.0,1.0
+5,04/10/2026,11,C.F. Cracks 'A',4.0,4,1.0,1.0,2.0
+5,04/10/2026,12,Paterna C.F. 'A',4.0,4,1.0,1.0,2.0
+5,04/10/2026,13,Manises C.F. 'A',4.0,4,1.0,1.0,2.0
+5,04/10/2026,14,Patacona C.F. 'B',3.0,4,1.0,0.0,3.0
+5,04/10/2026,15,C.D. Acero 'A',3.0,4,1.0,0.0,3.0
+5,04/10/2026,16,C.D.F. Canet 'A',3.0,4,1.0,0.0,3.0
