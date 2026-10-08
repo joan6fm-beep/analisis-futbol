@@ -1,8 +1,0 @@
-V15.12.48 - MURO + CALENDARIO
-
-- Nuevos módulos debajo de Inicio: Muro y Calendario.
-- Muro: avisos por tipo, prioridad, autor y destinatarios; formulario de publicación.
-- Calendario: agenda de entrenamientos, partidos, reuniones, fisio, descanso, vídeo y otros; formulario de alta.
-- Navegación móvil ampliada y desplazable horizontalmente.
-- Preparado para permisos futuros por rol (coordinación/entrenadores vs jugadores/familias).
-- Persistencia actual de prueba mediante CSV local. Para producción multiusuario se recomienda conectar base de datos (Supabase/Firebase/Sheets) antes de usarlo como fuente definitiva.
