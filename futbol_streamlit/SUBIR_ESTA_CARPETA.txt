@@ -1,0 +1,2 @@
+SUBE ESTA CARPETA COMPLETA 'futbol_streamlit' A LA RAIZ DEL REPOSITORIO.
+La ruta final en GitHub DEBE ser: analisis-futbol/futbol_streamlit/app.py
