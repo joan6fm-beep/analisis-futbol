@@ -1,0 +1,16 @@
+V15.12.66 · SEGUIMIENTO DE FORMACIONES
+
+- Nuevo apartado "Seguimiento" justo debajo de Equipo.
+- Selector por jornada (J1-J38).
+- Cabecera automática con rival, condición y resultado cuando el partido está cargado.
+- Formación inicial y formación final independientes.
+- Formaciones disponibles: 1-4-3-3, 1-4-2-3-1, 1-4-4-2, 1-3-4-2-1, 1-3-5-2, 1-5-3-2 y 1-4-1-4-1.
+- Asignación rápida de jugadores por posición mediante selectores.
+- Campo visual que se actualiza con la formación y los jugadores colocados.
+- Botón para copiar la formación inicial como base de la final.
+- Guardado por jornada/momento en data/seguimiento_formaciones.csv.
+- J1 inicial precargada a partir de la imagen aportada por el usuario.
+- J1 final precargada solo con los jugadores visibles en la imagen; no se inventan los que no aparecen.
+- Navegación lateral y móvil actualizadas.
+
+NOTA: el arrastre libre real sobre el campo requiere un componente Streamlit personalizado. Para esta demo se usa una asignación por clic/desplegable, más robusta y compatible con Streamlit Cloud.
