@@ -1,0 +1,1 @@
+V15.12.57: para C.D. Acero el botón devuelve el PDF aprobado exacto. Aparece un mensaje verde con la versión y el nombre descargado es CD_ACERO_INFORME_APROBADO_V15_12_57.pdf. Si no ves ese mensaje, tu aplicación ejecuta código anterior: sustituye la carpeta de despliegue y reinicia Streamlit. Para el resto de rivales aún no hay garantía de identidad con el PDF del Acero.
