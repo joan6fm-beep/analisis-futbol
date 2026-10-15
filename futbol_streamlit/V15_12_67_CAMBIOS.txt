@@ -1,0 +1,7 @@
+V15.12.67
+- Seguimiento: nombres visibles y drag & drop real.
+- Arrastre desde Jugadores disponibles al campo.
+- Sustitución automática si una posición ya está ocupada.
+- Movimiento entre posiciones.
+- Guardado automático en seguimiento_formaciones.csv después de cada drop.
+- Streamlit fijado a 1.58-1.63 para compatibilidad con streamlit-dnd 0.2.0.
