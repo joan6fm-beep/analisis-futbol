@@ -1,0 +1,11 @@
+V15.12.60 · INFORMES DE RIVALES · MISMA ESTRUCTURA
+- Eliminado el texto lateral «Informe del rival seleccionado... PDF aprobado...».
+- Botón único «📄 Descargar PDF».
+- Acero: permanece el PDF de cuatro páginas revisado, sin modificación visual.
+- Todos los demás rivales: PDF de cuatro páginas con la estructura acordada:
+  1) resumen, últimos cinco resultados coloreados y con escudos, perfil y XI;
+  2) jugadores con minutos por jornada a color y goleadores;
+  3) goles por minutos, tipos de goles y tendencia de resultados;
+  4) penaltis, evolución gráfica de clasificación y enlaces de vídeo clicables.
+- La descarga de cada rival se genera con sus propios datos y escudos, sin resultados fijos.
+- Los enlaces a vídeos solo aparecen activos cuando ya constan en la aplicación.
