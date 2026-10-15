@@ -1,0 +1,1 @@
+V15.12.61: el botón Descargar PDF utiliza rival_pdf_diseno.generate para TODOS los equipos excepto C.D. Acero, que mantiene el PDF de referencia. Se ha eliminado la llamada a build_rival_pdf antiguo del botón.
