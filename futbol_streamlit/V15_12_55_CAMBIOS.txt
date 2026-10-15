@@ -1,0 +1,7 @@
+V15.12.55 — DESCARGA PDF DE RIVALES
+
+- Al pulsar «Descargar informe PDF» en C.D. Acero con los datos actuales J1-J5, se entrega EXACTAMENTE el PDF final aprobado con los cinco escudos oficiales y todos los elementos y enlaces de vídeo.
+- Los otros rivales generan informes a partir de sus propios datos, con tarjetas de últimos partidos coloreadas y escudos reales cuando están disponibles.
+- Se elimina el card de disciplina en los informes dinámicos; se conserva la información de penaltis y los gráficos.
+- Protección contra información desactualizada: si cambia cualquier dato del Acero, se crea un PDF dinámico en lugar de entregar una copia estática incorrecta.
+- La ficha interactiva de la aplicación permanece sin modificaciones funcionales.
