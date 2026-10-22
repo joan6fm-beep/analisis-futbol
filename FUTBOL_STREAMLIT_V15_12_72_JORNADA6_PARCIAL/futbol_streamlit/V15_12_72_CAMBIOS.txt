@@ -1,0 +1,13 @@
+V15.12.72 · JORNADA 6 PARCIAL
+
+- Añadidos únicamente los partidos J6 ya disputados según vídeo FFCV:
+  * Villarreal C.F. 'C' 3-2 C.F. Inter San José Valencia 'B' (17/10/2026)
+  * Col. Salgui E.D.E. 'A' 1-2 C.F. Cracks 'A' (17/10/2026)
+  * C.D. Acero 'A' 3-2 Primer Toque C.F. 'A' (17/10/2026)
+  * C.D.F. Canet 'A' 0-3 Bétera C.F. 'A' (21/10/2026)
+- No se han añadido resultados a los partidos suspendidos por el temporal.
+- Clasificación J6 parcial cargada exactamente con equipos a 5 o 6 PJ según el vídeo FFCV.
+- Añadidos enlaces J6 aportados por el usuario para Villarreal-Inter, Salgui-Cracks y Acero-Primer Toque.
+- Añadidos goleadores/minutos confirmados en el vídeo FFCV para que los gráficos de goles J6 sean coherentes.
+- Sistemas y campos J6 añadidos cuando aparecen confirmados en el vídeo FFCV.
+- No se han inventado minutos individuales ni alineaciones completas no transcritas.
