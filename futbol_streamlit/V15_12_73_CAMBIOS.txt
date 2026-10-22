@@ -1,0 +1,9 @@
+V15.12.73 · FIX ESTABLE JORNADA 6 PARCIAL
+
+- Base: V15.12.71 funcional.
+- Añadidos únicamente los 4 partidos disputados de J6.
+- Clasificación parcial J6 añadida sin alterar J1-J5.
+- Eventos J6 añadidos sin reescribir el histórico anterior.
+- Enlaces J6 añadidos para Villarreal-Inter, Salgui-Cracks y Acero-Primer Toque.
+- No se añaden partidos aplazados ni datos no confirmados.
+- Estructura interna conservada: futbol_streamlit/.
