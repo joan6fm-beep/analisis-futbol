@@ -1,1 +1,0 @@
-CORRECCIÓN: descarga del C.D. Acero siempre entrega byte por byte el PDF aprobado con escudos. Eliminado el fallback silencioso al generador anterior para Acero. Resto de equipos: generador dinámico anterior todavía, no se afirma equivalencia visual.

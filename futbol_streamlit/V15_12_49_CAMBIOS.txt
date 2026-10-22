@@ -1,7 +1,0 @@
-V15.12.49 — CALENDARIO TEMPORADA 2026/27
-
-- Calendario recurrente cargado del 03/08/2026 al 30/06/2027.
-- Lunes 17:00–19:30 · UJI.
-- Miércoles 17:00–19:00 · Chencho A2.
-- Viernes 17:00–19:00 · Chencho A2 (tomando la última corrección del usuario).
-- Añadido filtro mensual para consultar toda la temporada sin limitar a 60 eventos.
