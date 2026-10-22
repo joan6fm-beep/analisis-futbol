@@ -1,0 +1,12 @@
+V15.12.74 · JORNADA 6 PROPAGADA A TODAS LAS MÉTRICAS
+
+- Se añaden minutos y XI inicial J6 de los 8 equipos que sí disputaron partido: Villarreal, Inter San José, Salgui, Cracks, Acero, Primer Toque, Canet y Bétera.
+- Los cambios del acta J6 se traducen a minutos reales por jugador.
+- Primer Toque: Alessio suma J6 completa (90') y los 3 goles encajados del 3-2 ante Acero.
+- Se actualizan goleadores, eficacia, porteros, minutos por jornada, % titularidad, núcleo del XI y carga competitiva de forma dinámica.
+- Se añaden tarjetas/rojas visibles en las actas de J6.
+- Se corrige el autogol del Acero para que no aparezca como goleador propio.
+- Equipo 360 de Primer Toque incorpora J6 (2-3 vs Acero) sin inventar métricas avanzadas no disponibles.
+- Evolución de clasificación deja de estar limitada a J5 y ya muestra J6.
+- Fichas informativas de Inter, Salgui, Cracks y Canet actualizadas a J6.
+- Los partidos aplazados por el temporal siguen sin inventarse.

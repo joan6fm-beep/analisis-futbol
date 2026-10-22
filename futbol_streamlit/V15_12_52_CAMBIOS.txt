@@ -1,0 +1,9 @@
+V15.12.52 - PDF RIVALES
+
+- Botón "Descargar informe PDF" en la cabecera de cada rival.
+- El PDF se genera únicamente para el equipo rival seleccionado.
+- Exportación estática pensada para compartir por WhatsApp/correo con el cuerpo técnico.
+- Incluye: portada/escudo, KPIs, resultados, sistemas, posible XI, partidos, carga de jugadores, goleadores, disciplina, penaltis, distribución de goles por minuto, tipos de gol por tramo, diferencia de goles y acumulado, evolución de clasificación y enlaces de vídeo.
+- Mantiene la línea visual azul/naranja de Primer Toque.
+- Añadido reportlab a requirements.txt para generar el PDF en Streamlit Cloud.
+- Validación de datos: 0 errores (se mantienen 3 avisos históricos conocidos).

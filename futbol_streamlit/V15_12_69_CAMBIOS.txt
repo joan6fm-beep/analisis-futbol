@@ -1,0 +1,9 @@
+V15.12.69 · Seguimiento visual
+
+- Campo de fútbol verde visible con franjas de césped y líneas blancas.
+- El campo se mantiene visible aunque cambie la estructura interna de Streamlit.
+- Jugadores disponibles en tarjetas compactas.
+- En escritorio se distribuyen aproximadamente en dos filas para ocupar mucho menos espacio.
+- Diseño responsive: se adapta a tablet y móvil.
+- Se conserva drag & drop, guardado automático y limpieza de jornada/bloque.
+- Todas las jornadas siguen comenzando limpias.
