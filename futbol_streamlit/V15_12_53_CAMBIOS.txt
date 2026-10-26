@@ -1,0 +1,12 @@
+V15.12.53 - PDF de rivales fiel a la app
+
+- Rediseñado por completo el PDF descargable de cada rival.
+- Mantiene el mismo orden de lectura que la pestaña Rivales.
+- Cabecera, KPIs, resultados, formaciones, jornadas y posible XI en formato visual compacto.
+- Posible XI corregido: portero a la izquierda, ataque hacia la derecha, con dorsal/nombre/probabilidad como en la app.
+- La disciplina ya no aparece como una tabla de eventos distinta a la app: ahora usa el mismo resumen por jugador (TA / doble amarilla / roja).
+- Tabla de minutos por jornada con Total, % min, % tit, Prob. XI, goles y tarjetas.
+- Cards de Goleadores, Disciplina, Núcleo del XI, Carga competitiva y Penaltis.
+- Conversión de gol, distribución por minutos, tipos de gol, diferencia acumulada, evolución de clasificación y enlaces de vídeo.
+- Informe reducido de 8 páginas a 3 páginas en la prueba de C.D. Acero, aprovechando mucho mejor el espacio.
+- Los 16 rivales generan correctamente su PDF.

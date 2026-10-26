@@ -1,0 +1,1 @@
+V15.12.63: exportador único pdf_export_v63.py; eliminadas las dos implementaciones anteriores para evitar llamadas/importaciones cruzadas. Acero conserva PDF validado. Test de los 16 equipos incluido en la raíz.
