@@ -1,6 +1,0 @@
-V15.12.71 · Seguimiento PRO
-- Selección fiable por clic: jugador → posición.
-- Drag & drop se mantiene como atajo opcional.
-- Campo rediseñado, mayor separación táctica y mejor jerarquía visual.
-- Jugadores disponibles en tarjetas compactas de 6 por fila.
-- Selección visible y botón para quitar selección.
