@@ -1,0 +1,7 @@
+V15.12.77 — Corrección histórica de expulsiones
+
+- Acero J1: Aaron Madrid Garcia confirmado titular y expulsado en el 26'. Se corrige a 26 minutos y titular.
+- Inter San José J3: Rafael Hernandez Claramunt entra en el 50' y es expulsado en el 82': 32 minutos validados.
+- Manises J1: Izan Saiz Escobar entra en el 46' y es expulsado en el 73': 27 minutos validados.
+- El validador entiende ahora minutos de entrada confirmados para suplentes expulsados.
+- Acero J1 conserva una excepción de suma de minutos porque el XI histórico reconstruido contiene un titular adicional no identificado; no se inventa qué jugador era.
