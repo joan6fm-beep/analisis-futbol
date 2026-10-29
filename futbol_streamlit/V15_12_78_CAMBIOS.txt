@@ -1,8 +1,0 @@
-V15.12.78 · VEO J7 COMPLETO
-
-- Integrado el enlace Veo de Primer Toque–Salesianos J7.
-- Añadido tracking individual J7 por dorsal: minutos rastreados, distancia, velocidad media/máxima, sprints, carreras de alta intensidad, eventos, tiros y ocasiones.
-- Añadidos pases exitosos cuando el ranking Veo los muestra de forma explícita.
-- Equipo 360º incorpora J7: 41% posesión, 1 gol, 13 tiros, 14 ocasiones y distribución por tercios de pases/posesión.
-- Individual/Jugadores incluye J7 en comparativas, físico, minutos y fuentes de vídeo.
-- No se rellenan métricas de rival o mapas/coordenadas que el vídeo no aporta explícitamente.

@@ -1,8 +1,0 @@
-V15.12.68 - SEGUIMIENTO LIMPIO
-
-- Todas las jornadas arrancan sin alineaciones precargadas.
-- La formación también puede quedar vacía hasta que el usuario elija una.
-- Botón "Limpiar este bloque" borra por completo Inicio o Final, incluida la formación.
-- Botón "Limpiar jornada completa" borra Inicio + Final de la jornada seleccionada.
-- Se limpia también el estado de sesión de Streamlit para que no reaparezcan jugadores antiguos tras borrar.
-- Se mantiene el sistema de arrastrar y soltar y el guardado automático.

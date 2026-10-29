@@ -1,8 +1,0 @@
-V15.12.79 · VEO J7 · TODO VISIBLE
-
-- Se mantienen todos los datos individuales J7 extraídos del vídeo de Veo.
-- Nueva tabla general “Veo J7 · detalle individual completo” con minutos rastreados, km, velocidades, sprints, alta intensidad, eventos, tiros, ocasiones y pases exitosos.
-- Las fichas individuales muestran también Min. Veo y Pases exitosos en el resumen cuando el dato está disponible.
-- Pulso de jornadas ampliado a J7.
-- Etiqueta de tendencia corregida a J2·J3·J5·J7.
-- Los minutos oficiales del acta siguen separados de los minutos rastreados por Veo.

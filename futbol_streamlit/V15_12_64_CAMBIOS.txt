@@ -1,5 +1,0 @@
-V15.12.64 · Enlaces de vídeo Bétera C.F.
-Comprobados los cinco enlaces J1-J5 del Bétera en MATCH_LINKS de app.py, incluida la J2 obtenida del Primer Toque.
-El generador pdf_export_v63.py recibe MATCH_LINKS y los incorpora como botones VER PARTIDO clicables.
-Verificación automatizada: verify_betera.py comprueba los cinco destinos incrustados en el PDF resultante.
-No se alteran las estadísticas, el diseño, ni los informes de otros rivales.
