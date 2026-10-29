@@ -1,0 +1,24 @@
+V15.12.65 · REVISIÓN GLOBAL DEL ZIP
+
+BASE: FUTBOL_STREAMLIT_V15_12_64_VIDEOS_BETERA.zip
+
+COMPROBADO
+- Sintaxis: app.py, pdf_export_v63.py y validar_datos.py.
+- Datos: validar_datos.py -> 0 errores / 3 avisos históricos.
+- Clasificación J5: reconciliada con resultados (16/16 equipos).
+- PDFs dinámicos: 16/16 generan 4 páginas.
+- Vídeos: todos los enlaces conocidos en MATCH_LINKS aparecen en los PDFs dinámicos.
+- Bétera: 5/5 enlaces J1-J5 verificados.
+- Revisión visual: PDFs de Bétera y Acero renderizados página a página.
+
+AJUSTES
+- Versión visible de la app actualizada a V15.12.65.
+- Pie/caption de Rivales actualizado a V15.12.65.
+- Key del botón PDF renovada para evitar estados antiguos de Streamlit.
+- README actualizado con el estado real.
+- Eliminados __pycache__ y app.py.bak del paquete de entrega.
+
+OBSERVACIONES
+1. Acero usa un PDF fijo aprobado; los otros 15 rivales usan el generador dinámico. Es deliberado, pero es la principal diferencia arquitectónica de los informes.
+2. Muro/Calendario guardan en CSV local: no es persistencia multiusuario robusta en Streamlit Cloud.
+3. En calendario, los viernes figuran actualmente en Chencho A2. Revisar si deben ser Chencho A3.

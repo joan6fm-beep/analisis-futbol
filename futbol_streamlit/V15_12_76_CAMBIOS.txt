@@ -1,0 +1,8 @@
+V15.12.76 - Corrección minutos Primer Toque J7
+
+- Jordi: 90 minutos en J7.
+- Boyan: 64 minutos en J7.
+- Irakli: 26 minutos en J7, entrando por Boyan.
+- Eliminada la asignación errónea de Irakli como portero en la alineación de J7.
+- Se mantienen 990 minutos totales de equipo en J7.
+- Las métricas derivadas que leen minutos/alineaciones se recalculan con estos datos corregidos.
