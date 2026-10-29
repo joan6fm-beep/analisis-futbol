@@ -1,8 +1,0 @@
-V15.12.80 - Enlaces de vídeo J7 (29/10/2026)
-
-Añadidos seis encuentros J7 con enlaces Veo y el partido Manises-Acero en YouTube (2 partes).
-Disponibles en fichas de ambos rivales y exportación PDF (en PDF aparece enlace a parte 1).
-En la ficha de Manises y Acero aparecen enlaces independientes a parte 1 y parte 2.
-Sin enlace facilitado para Canet-Alboraya.
-El enlace Primer Toque-Burriana ya estaba en V15.12.79 y se conserva.
-No se modifican resultados, minutos ni estadísticas.
