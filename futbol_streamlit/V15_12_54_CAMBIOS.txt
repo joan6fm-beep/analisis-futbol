@@ -1,0 +1,7 @@
+V15.12.54 - COLORES JORNADAS EN MINUTOS
+
+- Tabla de minutos de Rivales: J1-J5 diferenciadas visualmente por color.
+- J1 azul, J2 verde, J3 naranja, J4 morado y J5 rojo.
+- La app mantiene el mapa de calor de minutos y añade identidad de columna por jornada.
+- El PDF replica la misma lógica: cabeceras por jornada + mapa de calor de minutos.
+- Probado con el informe del C.D. Acero (3 páginas).

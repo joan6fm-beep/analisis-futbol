@@ -1,0 +1,8 @@
+V15.12.82 · SALA TÉCNICA
+- Nuevo centro de inteligencia competitiva y comparador casa/fuera.
+- Análisis del primer gol basado en eventos registrados y auditoría de cobertura avanzada.
+- Laboratorio de vídeo: etiquetar fase, concepto, minuto, observación, corrección, prioridad y jugadores; filtrar, borrar y exportar CSV.
+- Plan de microciclo configurable, prioridades con etiqueta de evidencia/hipótesis.
+- Exportación de informe PDF para staff con resultados y secuencias observadas.
+- Se conserva la funcionalidad anterior y datos históricos.
+- AVISO: archivos CSV en Streamlit Cloud no persisten garantizadamente entre reinicios. Usar DB externa para despliegue multiusuario.
