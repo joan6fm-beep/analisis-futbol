@@ -1,0 +1,1 @@
+V15.12.84 — selección de equipo limpia sin menú lateral ni móvil antes de entrar. Mantiene el análisis existente, incluye producción propia por jornada y comparativas al final con medias local/visitante sobre pares de datos reales.
