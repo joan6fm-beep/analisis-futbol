@@ -4324,8 +4324,8 @@ if not scorer_goals.empty and not mm.empty:
         for frac in [0, .25, .5, .75, 1.0]:
             yy = top + plot_h * (1-frac)
             val_tick = vmax * frac
-            svg.append(f"<line x1='{left}' y1='{yy:.1f}' x2='{width-right}' y2='{yy:.1f}' stroke='#e8edf3' stroke-width='1'/>")
-            svg.append(f"<text x='{left-9}' y='{yy+4:.1f}' text-anchor='end' font-size='10' fill='#6b7c93'>{val_tick:.2f}</text>")
+            svg.append(f"<line x1='{left}' y1='{yy:.1f}' x2='{width-right}' y2='{yy:.1f}' stroke='#263247' stroke-width='1'/>")
+            svg.append(f"<text x='{left-9}' y='{yy+4:.1f}' text-anchor='end' font-size='10' fill='#B8C2D1'>{val_tick:.2f}</text>")
         for i, (_, r) in enumerate(conv.iterrows()):
             x = left + step * (i + .5)
             val = float(r["Goles / 90"])
@@ -4334,10 +4334,10 @@ if not scorer_goals.empty and not mm.empty:
             label = _safe_html(str(r["Jugador"]))
             meta = f"{int(r['goles'])} gol{'es' if int(r['goles']) != 1 else ''} · {int(r['minutos'])}'"
             svg.append(f"<rect x='{x-bar_w/2:.1f}' y='{y0:.1f}' width='{bar_w:.1f}' height='{bh:.1f}' rx='4' fill='#16a34a'/>")
-            svg.append(f"<text x='{x:.1f}' y='{max(14,y0-7):.1f}' text-anchor='middle' font-size='11' font-weight='800' fill='#0b6b2e'>{val:.2f}</text>")
-            svg.append(f"<text x='{x:.1f}' y='{top+plot_h+22:.1f}' text-anchor='middle' font-size='10' font-weight='700' fill='#102a43' transform='rotate(-28 {x:.1f} {top+plot_h+22:.1f})'>{label}</text>")
-            svg.append(f"<text x='{x:.1f}' y='{height-14:.1f}' text-anchor='middle' font-size='9' fill='#6b7c93'>{_safe_html(meta)}</text>")
-        svg.append(f"<text x='16' y='{top+plot_h/2:.1f}' transform='rotate(-90 16 {top+plot_h/2:.1f})' text-anchor='middle' font-size='11' font-weight='700' fill='#64748b'>Goles / 90</text>")
+            svg.append(f"<text x='{x:.1f}' y='{max(14,y0-7):.1f}' text-anchor='middle' font-size='11' font-weight='800' fill='#FFFFFF'>{val:.2f}</text>")
+            svg.append(f"<text x='{x:.1f}' y='{top+plot_h+22:.1f}' text-anchor='middle' font-size='10' font-weight='700' fill='#FFFFFF' transform='rotate(-28 {x:.1f} {top+plot_h+22:.1f})'>{label}</text>")
+            svg.append(f"<text x='{x:.1f}' y='{height-14:.1f}' text-anchor='middle' font-size='9' fill='#B8C2D1'>{_safe_html(meta)}</text>")
+        svg.append(f"<text x='16' y='{top+plot_h/2:.1f}' transform='rotate(-90 16 {top+plot_h/2:.1f})' text-anchor='middle' font-size='11' font-weight='700' fill='#B8C2D1'>Goles / 90</text>")
         svg.append("</svg>")
         st.markdown("".join(svg), unsafe_allow_html=True)
         st.dataframe(conv[["Jugador", "goles", "minutos", "Goles / 90", "Minutos por gol"]], width="stretch", hide_index=True)
@@ -4560,10 +4560,10 @@ else:
         if val == 0 or val in (-_lim, _lim):
             yy = _y0 - val * _yscale
             dash = "4 4" if val == 0 else "0"
-            stroke = "#b9c5d3" if val == 0 else "#e9edf2"
+            stroke = "#5A6880" if val == 0 else "#263247"
             _svg.append(f"<line x1='{_l}' y1='{yy:.1f}' x2='{_w-_r}' y2='{yy:.1f}' stroke='{stroke}' stroke-width='1' stroke-dasharray='{dash}'/>")
-            _svg.append(f"<text x='{_l-10}' y='{yy+4:.1f}' text-anchor='end' font-size='11' fill='#64748b'>{val}</text>")
-            _svg.append(f"<text x='{_w-_r+10}' y='{yy+4:.1f}' font-size='11' fill='#d69b10'>{val}</text>")
+            _svg.append(f"<text x='{_l-10}' y='{yy+4:.1f}' text-anchor='end' font-size='11' fill='#B8C2D1'>{val}</text>")
+            _svg.append(f"<text x='{_w-_r+10}' y='{yy+4:.1f}' font-size='11' fill='#F2C14E'>{val}</text>")
     _pts = []
     for i, row in enumerate(_diff_rows):
         xx = _l + _step * (i + .5)
@@ -4574,21 +4574,21 @@ else:
         color = "#4eae83" if d > 0 else ("#df627b" if d < 0 else "#94a3b8")
         _svg.append(f"<rect x='{xx-_barw/2:.1f}' y='{bar_y:.1f}' width='{_barw:.1f}' height='{bar_h:.1f}' rx='6' fill='{color}' opacity='.95'/>")
         lab_y = yy - 8 if d >= 0 else yy + 16
-        _svg.append(f"<text x='{xx:.1f}' y='{lab_y:.1f}' text-anchor='middle' font-size='12' font-weight='900' fill='#0b3766'>{d:+d}</text>")
+        _svg.append(f"<text x='{xx:.1f}' y='{lab_y:.1f}' text-anchor='middle' font-size='12' font-weight='900' fill='#FFFFFF'>{d:+d}</text>")
         cy = _y0 - row["cum"] * _yscale
         _pts.append((xx, cy, row["cum"]))
         opp = _safe_html(short_team_name(row["opp"]))
-        _svg.append(f"<text x='{xx:.1f}' y='{_h-38}' text-anchor='middle' font-size='11' font-weight='800' fill='#334155'>J{row['j']} · {opp}</text>")
-        _svg.append(f"<text x='{xx:.1f}' y='{_h-22}' text-anchor='middle' font-size='10' font-weight='800' fill='#64748b'>{row['gf']}–{row['gc']}</text>")
+        _svg.append(f"<text x='{xx:.1f}' y='{_h-38}' text-anchor='middle' font-size='11' font-weight='800' fill='#FFFFFF'>J{row['j']} · {opp}</text>")
+        _svg.append(f"<text x='{xx:.1f}' y='{_h-22}' text-anchor='middle' font-size='10' font-weight='800' fill='#B8C2D1'>{row['gf']}–{row['gc']}</text>")
     if _pts:
         points = " ".join(f"{x:.1f},{y:.1f}" for x,y,_ in _pts)
         _svg.append(f"<polyline points='{points}' fill='none' stroke='#e2a91c' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/>")
         for x,y,cval in _pts:
             _svg.append(f"<circle cx='{x:.1f}' cy='{y:.1f}' r='5.5' fill='#e2a91c' stroke='white' stroke-width='2'/>")
-            _svg.append(f"<text x='{x:.1f}' y='{y-10:.1f}' text-anchor='middle' font-size='11' font-weight='900' fill='#c88d00'>{cval:+d}</text>")
-    _svg.append(f"<text x='18' y='{_t+_ph/2:.1f}' transform='rotate(-90 18 {_t+_ph/2:.1f})' text-anchor='middle' font-size='11' font-weight='800' fill='#334155'>Diferencia</text>")
-    _svg.append(f"<text x='{_w-18}' y='{_t+_ph/2:.1f}' transform='rotate(90 {_w-18} {_t+_ph/2:.1f})' text-anchor='middle' font-size='11' font-weight='800' fill='#b77d00'>Acumulado</text>")
-    _svg.append("<g><rect x='450' y='5' width='10' height='10' rx='2' fill='#4eae83'/><text x='466' y='14' font-size='10' font-weight='800' fill='#334155'>Diferencia por partido</text><line x1='592' y1='10' x2='616' y2='10' stroke='#e2a91c' stroke-width='3'/><circle cx='604' cy='10' r='4' fill='#e2a91c' stroke='white' stroke-width='1'/><text x='622' y='14' font-size='10' font-weight='800' fill='#334155'>Acumulado temporada</text></g>")
+            _svg.append(f"<text x='{x:.1f}' y='{y-10:.1f}' text-anchor='middle' font-size='11' font-weight='900' fill='#F2C14E'>{cval:+d}</text>")
+    _svg.append(f"<text x='18' y='{_t+_ph/2:.1f}' transform='rotate(-90 18 {_t+_ph/2:.1f})' text-anchor='middle' font-size='11' font-weight='800' fill='#FFFFFF'>Diferencia</text>")
+    _svg.append(f"<text x='{_w-18}' y='{_t+_ph/2:.1f}' transform='rotate(90 {_w-18} {_t+_ph/2:.1f})' text-anchor='middle' font-size='11' font-weight='800' fill='#F2C14E'>Acumulado</text>")
+    _svg.append("<g><rect x='450' y='5' width='10' height='10' rx='2' fill='#4eae83'/><text x='466' y='14' font-size='10' font-weight='800' fill='#FFFFFF'>Diferencia por partido</text><line x1='592' y1='10' x2='616' y2='10' stroke='#e2a91c' stroke-width='3'/><circle cx='604' cy='10' r='4' fill='#e2a91c' stroke='white' stroke-width='1'/><text x='622' y='14' font-size='10' font-weight='800' fill='#FFFFFF'>Acumulado temporada</text></g>")
     _svg.append("</svg>")
     st.markdown("<div class='goal-diff-card'><div class='goal-diff-title'>Diferencia de goles y acumulado</div>" + "".join(_svg) + "</div>", unsafe_allow_html=True)
 

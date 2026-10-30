@@ -577,3 +577,68 @@ def data_table(d):
             row[f"J{int(r.jornada)} {club_short(r.rival)}"] = _fmt(r[f], unit) + ("" if a == NONE else " · " + _fmt(r[a], unit))
         out.append(row)
     return pd.DataFrame(out)
+
+
+
+TABLE_CSS = """<style>
+.mt-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface);-webkit-overflow-scrolling:touch}
+.mt{width:100%;border-collapse:collapse;min-width:640px;font-size:.78rem}
+.mt th{position:sticky;top:0;background:var(--surface-2);color:var(--muted);font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;text-align:left;padding:9px 10px;white-space:nowrap}
+.mt td{padding:8px 10px;border-top:1px solid var(--line-soft);vertical-align:middle}
+.mt td.m{color:var(--ink);font-weight:700;white-space:nowrap;position:sticky;left:0;background:var(--surface);z-index:1}
+.mt th:first-child{position:sticky;left:0;z-index:2} .mt td.m small{display:block;color:var(--muted);font-weight:500;font-size:.64rem}
+.mt tr.blk td{background:var(--surface-2);color:var(--pt);font-size:.64rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px}
+.mc{display:grid;grid-template-columns:auto 1fr;gap:3px 7px;align-items:center;min-width:120px}
+.mc b{font-size:.8rem;font-weight:800;text-align:right;min-width:34px} .mc b.pt{color:var(--pt)} .mc b.rv{color:var(--rival)}
+.mc i{display:block;height:6px;border-radius:3px;min-width:2px} .mc i.pt{background:var(--pt)} .mc i.rv{background:var(--rival)}
+.mc .na{color:var(--muted);font-size:.72rem}
+.mt-legend{display:flex;gap:14px;font-size:.7rem;color:var(--text);margin:0 0 6px}
+.mt-legend span{display:inline-flex;align-items:center;gap:5px}.mt-legend i{width:10px;height:6px;border-radius:3px;display:inline-block}
+</style>"""
+
+
+def data_table_html(d):
+    """Tabla visual: por partido, valor de Primer Toque (naranja) y del rival (azul) con minibarras a la misma escala.
+
+    La escala de cada celda es el mayor de los dos valores de esa celda. Un dato ausente se muestra como «—»
+    y no dibuja barra (nunca se trata como cero).
+    """
+    cols = [(int(r.jornada), club_short(r.rival), r) for _, r in d.iterrows()]
+    head = "<tr><th>Métrica</th>" + "".join(f"<th>J{j} · {escape(n)}</th>" for j, n, _ in cols) + "</tr>"
+    body, current = [], None
+    for lab, f, a, unit, _, block in METRICS:
+        if d[f].isna().all() and d[a].isna().all():
+            continue
+        if block != current:
+            current = block
+            body.append(f"<tr class='blk'><td colspan='{len(cols) + 1}'>{escape(block)}</td></tr>")
+        cells = []
+        for _, _, r in cols:
+            pv, rv = r[f], (r[a] if a != NONE else float("nan"))
+            vals = [v for v in (pv, rv) if pd.notna(v)]
+            top = max(vals + [0]) or 1
+            def line(v, cls):
+                if pd.isna(v):
+                    return f"<b class='{cls}'>—</b><span class='na'>sin dato</span>"
+                return f"<b class='{cls}'>{_fmt(v, unit)}</b><i class='{cls}' style='width:{100 * v / top:.0f}%'></i>"
+            inner = line(pv, "pt") + ("" if a == NONE else line(rv, "rv"))
+            cells.append(f"<td><div class='mc'>{inner}</div></td>")
+        body.append(f"<tr><td class='m'>{escape(lab)}<small>{escape(unit)}</small></td>{''.join(cells)}</tr>")
+    legend = (f"<div class='mt-legend'><span><i style='background:{PT}'></i>Primer Toque</span>"
+              f"<span><i style='background:{RIVAL}'></i>Rival</span><span>Barras a la misma escala dentro de cada celda · — = sin dato</span></div>")
+    return TABLE_CSS + legend + "<div class='mt-wrap'><table class='mt'><thead>" + head + "</thead><tbody>" + "".join(body) + "</tbody></table></div>"
+
+
+def penalty_note(d, goals):
+    """Lectura de penaltis: lanzados por cada equipo (Veo) y, cuando el marcador lo permite, si se convirtieron."""
+    out = []
+    for _, r in d.iterrows():
+        j = int(r.jornada); g = goals.get(j)
+        for side, col, idx, who in (("a favor", "penaltis_favor", 0, "Primer Toque"), ("en contra", "penaltis_contra", 1, "el rival")):
+            v = r.get(col)
+            if pd.notna(v) and v > 0:
+                conv = ""
+                if g is not None and g[idx] == 0:
+                    conv = f", no convertido{'s' if v > 1 else ''} ({who} no marcó)"
+                out.append(f"J{j}: {int(v)} penalti{'s' if v > 1 else ''} {side}{conv}")
+    return " · ".join(out)

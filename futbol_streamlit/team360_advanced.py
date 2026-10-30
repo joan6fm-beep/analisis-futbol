@@ -984,14 +984,17 @@ def render_areas(veo, goals, eff, share_all, pending_note, production_html):
             _q("¿Cuántas jugadas a balón parado generamos y concedimos?", "Córneres y faltas lanzadas de cada equipo.")
             _plot(T.fig_multiples(veo, ["Córneres", "Faltas lanzadas"], cols=2), "eq_sp_multi")
             with st.expander("Más indicadores de balón parado"):
-                _q("Saques de banda y penaltis", "Cada panel tiene su propia escala.")
+                _q("Saques de banda y penaltis", "Penaltis lanzados por cada equipo según Veo. Cada panel tiene su propia escala.")
                 _plot(T.fig_multiples(veo, ["Saques de banda", "Penaltis"], cols=2), "eq_sp_multi2")
+                _pn = T.penalty_note(veo, goals)
+                if _pn:
+                    st.caption("Penaltis: " + _pn + ".")
                 share("Balón parado", "eq_share_sp", "Reparto del balón parado")
     with st.expander("Todas las métricas, partido a partido"):
         st.markdown(T.section("Producción por jornada", "Primer Toque, partido a partido."), unsafe_allow_html=True)
         st.markdown(production_html, unsafe_allow_html=True)
         st.markdown(T.section("Todas las métricas", "Primer Toque · rival."), unsafe_allow_html=True)
-        st.dataframe(T.data_table(veo), hide_index=True, width="stretch")
+        st.markdown(T.data_table_html(veo), unsafe_allow_html=True)
         st.caption(pending_note + " Gol de Sebas en J2 (62'): dentro del área (corrección confirmada).")
 
 

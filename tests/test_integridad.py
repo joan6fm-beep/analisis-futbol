@@ -119,14 +119,26 @@ def test_equipo360():
     for area, q in expected.items():
         at = nav("Análisis por áreas", area)
         check(not at.exception and q in html_of(at) and len(at.get("plotly_chart")) >= 1, f"Área «{area}»: pregunta y gráfico principal")
-    df = at.dataframe[0].value if at.dataframe else None
-    check(df is not None and {"J2 Bétera", "J3 Manises", "J5 Alboraya", "J7 Salesianos"} <= set(df.columns),
-          "Tabla completa con columnas J2, J3, J5 y J7")
-    if df is not None:
-        pos = df[df["Métrica"].str.startswith("Posesión")].iloc[0]
-        check(pos["J2 Bétera"] == "67% · 33%" and pos["J7 Salesianos"] == "41% · 59%", "Posesión J2 67·33 y J7 41·59 en la tabla")
-        duel = df[df["Métrica"].str.startswith("Duelos")].iloc[0]
-        check(duel["J3 Manises"] == "124", "Duelos J3 = 124 (sin valor rival inventado)")
+    h = html_of(at)
+    check("<table class='mt'>" in h and all(c in h for c in ("J2 · Bétera", "J3 · Manises", "J5 · Alboraya", "J7 · Salesianos")),
+          "Tabla visual de todas las métricas con J2, J3, J5 y J7")
+    import re as _re
+    rows = {_re.sub("<[^>]+>", "", m.group(1)).strip(): m.group(2) for m in _re.finditer(r"<tr><td class='m'>(.*?)<small>.*?</small></td>(.*?)</tr>", h)}
+    pos = rows.get("Posesión", "")
+    cells = _re.findall(r"<td><div class='mc'>(.*?)</div></td>", pos)
+    check(len(cells) == 4 and "67%" in cells[0] and "33%" in cells[0] and "width:100%" in cells[0] and "width:49%" in cells[0],
+          "Posesión J2: 67 % y 33 % con barras a la misma escala (100 % y 49 %)")
+    check("41%" in cells[3] and "59%" in cells[3] and "width:69%" in cells[3], "Posesión J7: barra PT al 69 % de la del rival (41 ÷ 59)")
+    tiros = _re.findall(r"<td><div class='mc'>(.*?)</div></td>", rows.get("Tiros", ""))
+    check(len(tiros) == 4 and "sin dato" in tiros[3] and tiros[3].count("<i ") == 1, "Tiros J7: rival «sin dato», sin barra (no se trata como cero)")
+    duel = _re.findall(r"<td><div class='mc'>(.*?)</div></td>", rows.get("Duelos", ""))
+    check(len(duel) == 4 and "124" in duel[1] and "class='rv'" not in duel[1], "Duelos J3 = 124, solo barra de Primer Toque")
+    import pandas as _pd
+    _adv = _pd.read_csv(APP_DIR / "data" / "equipo_avanzado.csv")
+    check(float(_adv.loc[_adv.jornada == 2, "penaltis_contra"].iloc[0]) == 1 and float(_adv.loc[_adv.jornada == 2, "penaltis_favor"].iloc[0]) == 0,
+          "Penaltis J2: 1 en contra y 0 a favor (corrección confirmada)")
+    at_bp = nav("Análisis por áreas", "Balón parado")
+    check(any("J2: 1 penalti en contra, no convertido" in c.value for c in at_bp.caption), "Nota de penaltis: J2 1 en contra, no convertido")
     # Nivel 3 · Análisis avanzado: comparador jornada contra jornada
     at = nav("Análisis avanzado", tool="Jornada contra jornada")
     metrics = {m.label: m.value for m in at.metric}
@@ -157,6 +169,16 @@ def test_otras_vistas():
           "Rivales: evolución de la clasificación (Plotly) y botón PDF")
     at = run({"area": "juvenil", "view": "jugadores", "player": "Bilal"})
     check(not at.exception and len(at.get("plotly_chart")) >= 2, "Ficha de jugador: minutos y evolución física")
+    import pandas as _pd
+    equipos = _pd.read_csv(APP_DIR / "data" / "equipos_liga.csv", encoding="utf-8-sig")["equipo"].tolist()
+    dark = ("fill='#102a43'", "fill='#0b6b2e'", "fill='#334155'", "fill='#0b3766'")
+    bad = []
+    for team in equipos:
+        a_ = run({"area": "juvenil", "view": "rivales", "team": team})
+        hh = html_of(a_)
+        if a_.exception or any(x in hh for x in dark) or ("Conversión de gol por jugador" in hh and "fill='#FFFFFF'" not in hh):
+            bad.append(team)
+    check(not bad, f"Rivales: nombres de goleadores y textos legibles (blanco) en los {len(equipos)} equipos" + (f"; revisar {bad}" if bad else ""))
 
 
 def test_avanzado():
