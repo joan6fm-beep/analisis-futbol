@@ -1,0 +1,18 @@
+# Tema nativo de Streamlit, alineado con futbol_streamlit/ui_theme.py
+[theme]
+base = "dark"
+primaryColor = "#F5871F"
+backgroundColor = "#0A0E14"
+secondaryBackgroundColor = "#151C28"
+textColor = "#E6EBF2"
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+headingFont = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+borderColor = "#263247"
+baseRadius = "0.75rem"
+
+[theme.sidebar]
+backgroundColor = "#0C1119"
+secondaryBackgroundColor = "#151C28"
+
+[client]
+toolbarMode = "viewer"
