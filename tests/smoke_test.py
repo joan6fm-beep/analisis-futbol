@@ -4,8 +4,8 @@ Uso (desde la raíz del repositorio):
 
     python tests/smoke_test.py
 
-Prueba la portada, Infantil D, los módulos de Juvenil A y los 16 rivales
-(incluido el botón de descarga del PDF). Devuelve código 1 si alguna vista falla.
+Prueba la portada, Infantil D, los módulos de Juvenil A, los 16 rivales
+(incluido el botón de descarga del PDF) y la ficha de cada jugador. Devuelve código 1 si alguna vista falla.
 No escribe en los CSV. Ejecutar junto con futbol_streamlit/validar_datos.py
 antes de cada push.
 """
@@ -35,6 +35,10 @@ def casos():
         yield f"Juvenil A · {v}", {"area": "juvenil", "view": v}
     for t in equipos:
         yield f"Rivales · {t}", {"area": "juvenil", "view": "rivales", "team": t}
+    pl = pd.read_csv(APP.parent / "data" / "plantillas_rivales.csv")
+    pl = pl[(pl.equipo == "Primer Toque C.F. 'A'") & (pl.jugador.astype(str).str.lower() != "fran")]
+    for j in pl.jugador.drop_duplicates():
+        yield f"Jugador · {j}", {"area": "juvenil", "view": "jugadores", "player": j}
 
 
 def main():

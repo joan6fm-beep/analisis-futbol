@@ -387,3 +387,32 @@ CSS = """
 def section(title, sub="", scope=""):
     s = f"<span class='eq-scope'><i></i>{escape(scope)}</span>" if scope else ""
     return f"<div class='eq-section'><div><h3>{escape(title)}</h3><p>{escape(sub)}</p></div>{s}</div>"
+
+
+def fig_standings(evo, selected, reference="Primer Toque C.F. 'A'"):
+    """Evolución de la clasificación de los 16 equipos; destaca el seleccionado y Primer Toque como referencia."""
+    evo = evo.assign(jornada=pd.to_numeric(evo.jornada, errors="coerce"), posicion=pd.to_numeric(evo.posicion, errors="coerce")).dropna(subset=["jornada", "posicion"])
+    n = int(evo.groupby("jornada").equipo.nunique().max() or 16)
+    days = sorted(evo.jornada.astype(int).unique())
+    fig = _fig(380, margin=dict(l=12, r=12, t=40, b=12))
+    for team, g in evo.groupby("equipo"):
+        if team in (selected, reference):
+            continue
+        g = g.sort_values("jornada")
+        fig.add_scatter(x=[f"J{int(j)}" for j in g.jornada], y=g.posicion, mode="lines", showlegend=False,
+                        line=dict(color="#3A465B", width=1.2), customdata=[team] * len(g),
+                        hovertemplate="%{customdata} · %{x}: %{y}º<extra></extra>")
+    styles = [(reference, "Primer Toque", PT, "dash", 2.5)] if reference != selected else []
+    styles.append((selected, selected, PT if selected == reference else RIVAL, "solid", 4))
+    for team, label, color, dash, width in styles:
+        g = evo[evo.equipo == team].sort_values("jornada")
+        if g.empty:
+            continue
+        main = team == selected
+        fig.add_scatter(x=[f"J{int(j)}" for j in g.jornada], y=g.posicion, name=label, mode="lines+markers+text" if main else "lines+markers",
+                        line=dict(color=color, width=width, dash=dash), marker=dict(size=9 if main else 6, color=color, line=dict(color=TOKENS["surface"], width=2)),
+                        text=[f"{int(p)}º" for p in g.posicion] if main else None, textposition="top center",
+                        textfont=dict(color=TOKENS["ink"], size=12), hovertemplate=label + " · %{x}: %{y}º<extra></extra>")
+    fig.update_yaxes(autorange=False, range=[n + .6, .4], tickvals=[1, 4, 8, 12, n], ticksuffix="º", title=dict(text="Posición", font=dict(size=11, color=MUTED)))
+    fig.update_xaxes(categoryorder="array", categoryarray=[f"J{d}" for d in days], showgrid=False)
+    return fig

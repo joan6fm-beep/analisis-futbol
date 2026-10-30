@@ -22,6 +22,7 @@ except Exception:
 from pdf_export_v63 import generate as build_rival_pdf_diseno
 import ui_theme
 import team360_charts as t360
+import player_charts
 
 
 st.set_page_config(
@@ -31,6 +32,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 ui_theme.inject()
+st.markdown(t360.CSS, unsafe_allow_html=True)  # componentes de panel reutilizados en varias vistas
 
 BASE = Path(__file__).parent
 DATA = BASE / "data"
@@ -3026,7 +3028,6 @@ def render_team_360():
             unsafe_allow_html=True,
         )
 
-    st.markdown(t360.CSS, unsafe_allow_html=True)
     # Evolución de la temporada (resultados oficiales: todos los partidos).
     _ev1, _ev2 = st.columns(2, gap="medium")
     with _ev1.container(border=True):
@@ -3337,6 +3338,17 @@ def render_players():
         st.markdown("<div class='history-strip'><div><b>2026/27</b><span>Temporada activa</span></div><div class='history-arrow'>→</div><div><b>Histórico</b><span>Las próximas temporadas se añadirán sin borrar las anteriores</span></div></div>",unsafe_allow_html=True)
         # Qué hizo en cada partido: minutos, titularidad y eventos.
         all_js=sorted(set(pm.jornada.dropna().astype(int).tolist()) | set(pe.jornada.dropna().astype(int).tolist()))
+        _mrows=[]
+        for j in all_js:
+            mr=pm[pm.jornada.astype(int)==j]; er=pe[pe.jornada.astype(int)==j]
+            _mrows.append({"jornada":j,"minutos":int(pd.to_numeric(mr['minutos'],errors='coerce').fillna(0).sum()) if not mr.empty else 0,
+                           "titular":int(pd.to_numeric(mr['titular'],errors='coerce').fillna(0).max()>0) if not mr.empty else 0,
+                           "goles":int(er['tipo'].isin(['gol','penalti_gol']).sum()) if not er.empty else 0,
+                           "tarjetas":int(er['tipo'].isin(['amarilla','roja','doble_amarilla']).sum()) if not er.empty else 0})
+        if _mrows:
+            with st.container(border=True):
+                st.markdown("<div class='eq-panel-title'>Minutos por jornada</div><div class='eq-panel-sub'>Naranja = titular · azul = suplente · ⚽ gol · 🟨 tarjeta (actas oficiales).</div>",unsafe_allow_html=True)
+                st.plotly_chart(player_charts.fig_minutes(pd.DataFrame(_mrows)),width="stretch",theme=None,config=ui_theme.PLOTLY_CONFIG,key="pl_minutes")
         h=["<div class='player-table-wrap'><table class='player-table'><thead><tr><th>Partido</th><th>Min</th><th>Tit.</th><th>Gol</th><th>Tarjetas</th><th>Eventos</th></tr></thead><tbody>"]
         for j in all_js:
             mr=pm[pm.jornada.astype(int)==j]
@@ -3402,6 +3414,19 @@ def render_players():
             hi=float(pa['carreras_alta_intensidad'].sum(skipna=True)) if 'carreras_alta_intensidad' in pa else 0
             phys=[('Distancia',f"{dist:.1f} km"),('Min rastreados',f"{int(track)}"),('V. máxima',('—' if vmax<=0 else f"{vmax:.1f} km/h")),('V. media',('—' if vavg<=0 else f"{vavg:.1f} km/h")),('Sprints',f"{int(spr)}"),('Alta intensidad',f"{int(hi)}")]
             st.markdown("<div class='phys-grid'>"+''.join([f"<div class='phys-card'><div class='v'>{_safe_html(v)}</div><div class='l'>{_safe_html(k)}</div><div class='s'>J2 · J3 · J5 · J7 cuando hay datos</div></div>" for k,v in phys])+"</div>",unsafe_allow_html=True)
+            _vid=player_charts.prepare_video(adv)
+            with st.container(border=True):
+                st.markdown("<div class='eq-panel-title'>Evolución física por jornada</div><div class='eq-panel-sub'>Jugador frente a la media del equipo (solo jugadores con dato esa jornada). Sin punto = sin registro.</div>",unsafe_allow_html=True)
+                _pm=st.pills("Métrica",list(player_charts.PHYS_METRICS),default="Distancia",key="pl_phys_metric") or "Distancia"
+                _c1,_c2=st.columns([1.3,1])
+                _others=rdf[(rdf.dorsal!=dorsal)&(rdf.dorsal.isin(_vid.dorsal.astype(int)))]
+                _opts=["Sin comparar"]+[f"#{int(o.dorsal)} · {o.jugador}" for _,o in _others.iterrows()]
+                with _c2: _cmp=st.selectbox("Comparar con",_opts,key="pl_phys_cmp")
+                _cmpv=None
+                if _cmp!="Sin comparar":
+                    _o=_others.iloc[_opts.index(_cmp)-1]; _cmpv=(int(_o.dorsal),str(_o.jugador))
+                st.plotly_chart(player_charts.fig_physical(_vid,dorsal,_pm,_cmpv),width="stretch",theme=None,config=ui_theme.PLOTLY_CONFIG,key="pl_phys")
+                st.caption(player_charts.PHYS_METRICS[_pm][2]+".")
             h=["<div class='player-table-wrap'><table class='player-table'><thead><tr><th>Jornada</th><th>Distancia</th><th>Track min</th><th>V. media</th><th>V. máx</th><th>Sprints</th></tr></thead><tbody>"]
             for _,x in pa.sort_values('jornada').iterrows():
                 def fmt(col,suf='',dec=1):
@@ -4616,67 +4641,12 @@ evo = clasificacion[clasificacion.jornada.isin(_evo_days)].copy() if _evo_days e
 if evo.empty:
     st.info("Sin clasificación histórica cargada.")
 else:
-    width, height = 1100, 390
-    left, right, top, bottom = 70, 30, 28, 50
-    plot_w, plot_h = width-left-right, height-top-bottom
-
-    if len(_evo_days) == 1:
-        xmap = {_evo_days[0]: left + plot_w/2}
-    else:
-        xmap = {j: left + i * plot_w/(len(_evo_days)-1) for i, j in enumerate(_evo_days)}
-
-    y = lambda pos: top + (float(pos)-1) * plot_h/15
-    accent = (
-        "#16a34a" if seleccionado == "Bétera C.F. 'A'" else
-        "#991b1b" if seleccionado == "C.D. Acero 'A'" else
-        "#c2414b" if seleccionado == "C.F. At. Burriana - Salesianos 'A'" else
-        "#f2c400" if seleccionado == "Villarreal C.F. 'C'" else
-        "#1d63d8"
-    )
-
-    parts = [f"<svg viewBox='0 0 {width} {height}' style='width:100%;height:auto;background:var(--surface);border-radius:14px'>"]
-    for pos in [1,4,8,12,16]:
-        yy = y(pos)
-        parts.append(
-            f"<line x1='{left}' y1='{yy}' x2='{width-right}' y2='{yy}' stroke='#e5e7eb' stroke-width='1'/>"
-            f"<text x='18' y='{yy+5}' font-size='13' fill='#64748b'>{pos}º</text>"
-        )
-    for j in _evo_days:
-        xx = xmap[j]
-        parts.append(
-            f"<text x='{xx}' y='{height-16}' text-anchor='middle' font-size='14' font-weight='700' fill='#334155'>J{j}</text>"
-        )
-
-    for team, g in evo[evo.equipo != seleccionado].groupby("equipo"):
-        g = g.sort_values("jornada")
-        pts = " ".join(
-            f"{xmap[int(r.jornada)]:.1f},{y(r.posicion):.1f}"
-            for _, r in g.iterrows() if int(r.jornada) in xmap
-        )
-        if pts:
-            parts.append(f"<polyline points='{pts}' fill='none' stroke='#cbd5e1' stroke-width='1.4' opacity='0.72'/>")
-
+    accent = ui_theme.PT if seleccionado == "Primer Toque C.F. 'A'" else ui_theme.RIVAL
+    xmap = {j: j for j in _evo_days}
     sel = evo[evo.equipo == seleccionado].sort_values("jornada")
-    if not sel.empty:
-        pts = " ".join(
-            f"{xmap[int(r.jornada)]:.1f},{y(r.posicion):.1f}"
-            for _, r in sel.iterrows() if int(r.jornada) in xmap
-        )
-        parts.append(
-            f"<polyline points='{pts}' fill='none' stroke='{accent}' stroke-width='5' "
-            f"stroke-linecap='round' stroke-linejoin='round'/>"
-        )
-        for _, r in sel.iterrows():
-            if int(r.jornada) not in xmap:
-                continue
-            xx, yy = xmap[int(r.jornada)], y(r.posicion)
-            parts.append(
-                f"<circle cx='{xx}' cy='{yy}' r='6' fill='{accent}'/>"
-                f"<text x='{xx}' y='{yy-12}' text-anchor='middle' font-size='14' "
-                f"font-weight='800' fill='{accent}'>{int(r.posicion)}º</text>"
-            )
-    parts.append("</svg>")
-    st.markdown("<div class='card'>" + "".join(parts) + "</div>", unsafe_allow_html=True)
+    with st.container(border=True):
+        st.markdown("<div class='eq-panel-sub'>Azul: equipo seleccionado · naranja discontinuo: Primer Toque · gris: resto de la liga (pasa el cursor para ver el nombre).</div>", unsafe_allow_html=True)
+        st.plotly_chart(t360.fig_standings(evo, seleccionado), width="stretch", theme=None, config=ui_theme.PLOTLY_CONFIG, key="riv_standings")
 
     if not sel.empty:
         seq = " → ".join(
@@ -4689,7 +4659,7 @@ else:
             unsafe_allow_html=True,
         )
         st.markdown(
-            "<div class='note'>El equipo seleccionado aparece destacado y la evolución incluye también la J5.</div>",
+            "<div class='note'>El equipo seleccionado aparece destacado; Primer Toque sirve de referencia en todas las fichas.</div>",
             unsafe_allow_html=True,
         )
 
