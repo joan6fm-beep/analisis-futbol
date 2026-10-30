@@ -185,6 +185,7 @@ VEO_GOAL_SYNC = {
         "veo_event_min": 67,
         "video_timestamp": "87:47",
         "event_url": "https://app.veo.co/matches/20260912-juvenil-a-betera-ve022cb5/?event_type=FootballShotGoal&event=5e990f44-af76-11f1-b212-0708876e5205#/events/",
+        "zona": "Dentro del área",  # confirmado por el usuario
     },
     (2, "Núñez"): {
         "ffcv_min": 87,
@@ -1415,7 +1416,8 @@ def render_individual():
                         clip_url = event_url or link
                         goal_html += (
                             f"<div class='video-goal'>⚽ <b>{_safe_html(player)}</b><br>"
-                            f"<span>Acta FFCV: <b>{ffcv_min}'</b> · reloj Veo: <b>{_safe_html(veo_clock)}</b> · vídeo: <b>{_safe_html(video_ts)}</b></span><br>"
+                            f"<span>Acta FFCV: <b>{ffcv_min}'</b> · reloj Veo: <b>{_safe_html(veo_clock)}</b> · vídeo: <b>{_safe_html(video_ts)}</b>"
+                            + (f" · zona: <b>{_safe_html(sync['zona'])}</b>" if sync.get("zona") else "") + "</span><br>"
                             f"<a href='{_safe_html(clip_url,quote=True)}' target='_blank'>▶ {'Ver evento del gol' if event_url else 'Abrir partido en Veo'} · vídeo {_safe_html(video_ts)}</a></div>"
                         )
                     else:
