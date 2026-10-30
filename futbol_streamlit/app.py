@@ -19,10 +19,32 @@ try:
     from streamlit_dnd import dnd
 except Exception:
     dnd = None
-from pdf_export_v63 import generate as build_rival_pdf_diseno
+import importlib
+import pdf_export_v63
 import ui_theme
 import team360_charts as t360
 import player_charts
+
+
+def _reload_local_modules(*modules):
+    """Recarga los módulos propios si alguno cambió en disco desde que se importó.
+
+    Streamlit Cloud actualiza los archivos con cada push sin reiniciar el proceso:
+    app.py se vuelve a ejecutar, pero los módulos importados siguen en memoria con
+    su versión anterior (AttributeError al llamar a funciones nuevas). Se recargan
+    todos, en orden de dependencia, para que nunca convivan versiones distintas.
+    """
+    stamps = [Path(m.__file__).stat().st_mtime_ns for m in modules]
+    if any(getattr(m, "_loaded_mtime", None) != t for m, t in zip(modules, stamps)):
+        modules = tuple(importlib.reload(m) for m in modules)
+        for m, t in zip(modules, stamps):
+            m._loaded_mtime = t
+    return modules
+
+
+# Orden de dependencia: ui_theme <- team360_charts / player_charts.
+pdf_export_v63, ui_theme, t360, player_charts = _reload_local_modules(pdf_export_v63, ui_theme, t360, player_charts)
+build_rival_pdf_diseno = pdf_export_v63.generate
 
 
 st.set_page_config(

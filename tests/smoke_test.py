@@ -7,7 +7,8 @@ Uso (desde la raíz del repositorio):
 Prueba la portada, Infantil D, los módulos de Juvenil A, los 16 rivales
 (incluido el botón de descarga del PDF) y la ficha de cada jugador. Devuelve código 1 si alguna vista falla.
 No escribe en los CSV. Ejecutar junto con futbol_streamlit/validar_datos.py
-antes de cada push.
+antes de cada push. Al final ejecuta también tests/test_integridad.py
+(atributos entre módulos, módulos obsoletos en memoria y renderizado real).
 """
 import logging
 import sys
@@ -61,7 +62,11 @@ def main():
         for e in errs:
             print("      ", str(e)[:300])
     print(f"\n{total} vistas probadas, {fallos} con error")
-    return 1 if fallos else 0
+    # Además de arrancar, los componentes principales deben renderizarse bien.
+    sys.path.insert(0, str(Path(__file__).parent))
+    import test_integridad
+    print("\n== Integridad de módulos y renderizado ==")
+    return 1 if (test_integridad.main() or fallos) else 0
 
 
 if __name__ == "__main__":
