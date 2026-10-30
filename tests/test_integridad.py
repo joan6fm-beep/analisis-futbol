@@ -103,6 +103,15 @@ def test_equipo360():
           "J7 posesión: 41 %, media 57,8 %, −16,8 p.p. y lectura sencilla")
     check("Partido más disputado" in h or "Partido menos disputado" in h or "Duelos" in h, "Duelos con lectura neutra (no «mejor defensa»)")
     check(any("Pendiente de revisión" in c.value for c in at.caption), "Aviso pendiente de J7 (ocasiones 14 frente a 13)")
+    check("mr-board" in h and "Derrota 1–2" in h and "Núñez" in h and "Jorge Agustina Llopis" in h,
+          "Ficha de J7: marcador, resumen escrito y cronología con goleadores de ambos equipos")
+    check(h.count("class='h2h-row'") >= 6, "Cara a cara de J7 con al menos 6 estadísticas de ambos equipos")
+    opts = at.selectbox(key="sum_j").options
+    check(any("Media en casa" in str(o) for o in opts), f"El desplegable de partido incluye la media en casa")
+    at_m = nav(extra=lambda a: (a.selectbox(key="sum_j").set_value("media"), a.run()))
+    hm = html_of(at_m)
+    check(not at_m.exception and "Cara a cara medio" in hm and "Indicadores medios" in hm and "57,8 %" in hm,
+          "Vista «Media en casa»: cara a cara medio e indicadores medios (posesión 57,8 %)")
     # Nivel 2 · Análisis por áreas
     expected = {"Posesión y control": "¿Quién tuvo más el balón?", "Construcción y pases": "¿Cuánto pasamos y con qué acierto?",
                 "Ataque y finalización": "¿Desde dónde intentamos marcar?", "Duelos y defensa": "¿Cuánta actividad defensiva tuvimos?",

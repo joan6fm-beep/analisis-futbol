@@ -707,7 +707,7 @@ def summary_rows(veo, jornada, exclude=True):
             diff = v - m
             row["diff"] = diff
             row["pct"] = None if unit == "%" or m <= 0 else 100 * diff / m
-            small = abs(diff) < 2 if unit == "%" else (m > 0 and abs(100 * diff / m) < 5)
+            small = abs(diff) < 3 if unit == "%" else (m > 0 and abs(100 * diff / m) < 10)
             row["texto"] = "En línea con su media habitual" if small else (up_txt if diff > 0 else down_txt)
         out.append(row)
     return out
@@ -741,32 +741,184 @@ def _jornada_picker(veo, key):
     return st.selectbox("Partido", opts, index=len(opts) - 1, key=key, format_func=lambda x: veo.loc[veo.jornada == x, "etiqueta"].iloc[0])
 
 
-def render_match_summary(veo, pt_tm, goals, pending_note):
-    """Nivel 1: el partido elegido frente a la media habitual en casa."""
-    st.markdown(LEVEL_CSS, unsafe_allow_html=True)
+SUMMARY_CSS = """<style>
+.mr-board{background:linear-gradient(180deg,#141C2A,#101620);border:1px solid var(--line);box-shadow:inset 0 2px 0 var(--pt);border-radius:18px;padding:16px 18px;margin:4px 0 12px}
+.mr-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px}
+.mr-team{font-size:1.05rem;font-weight:850;color:var(--ink)} .mr-team.r{text-align:right}
+.mr-team small{display:block;font-size:.68rem;font-weight:600;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.mr-score{font-size:2.3rem;font-weight:900;color:var(--ink);letter-spacing:-.02em;text-align:center;line-height:1}
+.mr-score small{display:block;font-size:.66rem;font-weight:800;letter-spacing:.1em;margin-top:6px}
+.mr-ev{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line-soft)}
+.mr-ev div{font-size:.78rem;color:var(--text)} .mr-ev .r{text-align:right}
+.mr-ev b{color:var(--ink);font-weight:800;margin-right:4px}
+.mr-text{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--pt);border-radius:14px;padding:12px 16px;margin:0 0 12px;font-size:.88rem;line-height:1.55;color:var(--text)}
+.mr-text b{color:var(--ink)}
+.h2h{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 16px;margin:0 0 12px}
+.h2h-head{display:flex;justify-content:space-between;font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 0 8px}
+.h2h-head .pt{color:var(--pt)} .h2h-head .rv{color:var(--rival)}
+.h2h-row{display:grid;grid-template-columns:52px 1fr 150px 1fr 52px;align-items:center;gap:10px;padding:6px 0}
+.h2h-row .v{font-size:.95rem;font-weight:850;color:var(--ink)} .h2h-row .v.r{text-align:right}
+.h2h-row .lab{text-align:center;font-size:.74rem;font-weight:700;color:var(--text)}
+.h2h-row .lab small{display:block;font-size:.6rem;font-weight:500;color:var(--muted)}
+.h2h-bar{height:9px;background:var(--surface-2);border-radius:5px;display:flex;overflow:hidden}
+.h2h-bar.l{justify-content:flex-end} .h2h-bar i{display:block;height:100%;border-radius:5px}
+@media(max-width:700px){.h2h-row{grid-template-columns:40px 1fr 92px 1fr 40px;gap:6px}.mr-score{font-size:1.8rem}.mr-team{font-size:.86rem}}
+</style>"""
+
+H2H = ["Posesión", "Pases totales", "Pases completados", "Precisión de pase", "Tiros", "Ocasiones",
+       "Córneres", "Faltas lanzadas", "Faltas cometidas", "Saques de banda"]
+
+
+def h2h_html(pairs, left="Primer Toque", right="Rival", note=None):
+    """Cara a cara estilo retransmisión: cada fila reparte la barra según el peso de cada equipo."""
+    rows = [f"<div class='h2h-head'><span class='pt'>{escape(left)}</span><span class='rv'>{escape(right)}</span></div>"]
+    for lab, unit, pv, rv, n in pairs:
+        tot = pv + rv
+        lp, rp = (100 * pv / tot, 100 * rv / tot) if tot else (0, 0)
+        sub = f"<small>{escape(note.format(n=n))}</small>" if note else ""
+        rows.append(f"<div class='h2h-row'><span class='v'>{T._fmt(round(pv, 1), unit)}</span>"
+                    f"<div class='h2h-bar l'><i style='width:{lp:.0f}%;background:{PT}'></i></div>"
+                    f"<span class='lab'>{escape(lab)}{sub}</span>"
+                    f"<div class='h2h-bar'><i style='width:{rp:.0f}%;background:{RIVAL}'></i></div>"
+                    f"<span class='v r'>{T._fmt(round(rv, 1), unit)}</span></div>")
+    return "<div class='h2h'>" + "".join(rows) + "</div>"
+
+
+def _match_pairs(row):
+    out = []
+    for lab in H2H:
+        _, f, a, unit, *_ = T.METRIC_BY_LABEL[lab]
+        if pd.notna(row[f]) and pd.notna(row[a]):
+            out.append((lab, unit, float(row[f]), float(row[a]), 1))
+    return out
+
+
+def _avg_pairs(veo):
+    out = []
+    for lab in H2H:
+        _, f, a, unit, *_ = T.METRIC_BY_LABEL[lab]
+        both = veo.dropna(subset=[f, a])
+        if len(both):
+            out.append((lab, unit, both[f].mean(), both[a].mean(), len(both)))
+    return out
+
+
+def _events_html(events, jornada, rival):
+    ev = events[(events.equipo == TEAM) & (pd.to_numeric(events.jornada, errors="coerce") == jornada)].copy()
+    ev["minuto"] = pd.to_numeric(ev.minuto, errors="coerce")
+    cells = []  # cronología única: Primer Toque a la izquierda, rival a la derecha
+    for _, e in ev.sort_values("minuto").iterrows():
+        m = f"{int(e.minuto)}'" if pd.notna(e.minuto) else ""
+        if e.tipo in ("gol", "penalti_gol"):
+            cells.append(f"<div>⚽ <b>{m}</b>{escape(str(e.jugador))}{' (pen.)' if e.tipo == 'penalti_gol' else ''}</div><div class='r'></div>")
+        elif e.tipo == "gol_contra":
+            who = str(e.jugador)
+            who = "" if (who == rival or "C.F." in who or "U.D." in who) else who
+            cells.append(f"<div></div><div class='r'>{escape(who)} <b>{m}</b> ⚽</div>")
+        elif e.tipo in ("amarilla", "roja", "doble_amarilla"):
+            icon = {"amarilla": "🟨", "roja": "🟥", "doble_amarilla": "🟨🟥"}[e.tipo]
+            cells.append(f"<div>{icon} <b>{m}</b>{escape(str(e.jugador))}</div><div class='r'></div>")
+    return "<div class='mr-ev'>" + "".join(cells) + "</div>" if cells else ""
+
+
+def match_text(rows, row, result, rshort):
+    """Resumen escrito con datos reales: resultado, balón, finalización y lo más destacado frente a la media."""
+    by = {r["metrica"]: r for r in rows}
+    gf, gc = result
+    res = "Victoria" if gf > gc else ("Empate" if gf == gc else "Derrota")
+    parts = [f"<b>{res} {gf}–{gc}</b> ante {escape(rshort)}."]
+    if pd.notna(row.posesion_favor_pct) and pd.notna(row.posesion_rival_pct):
+        rel = "más balón que" if row.posesion_favor_pct > row.posesion_rival_pct else ("el mismo balón que" if row.posesion_favor_pct == row.posesion_rival_pct else "menos balón que")
+        txt = f"Primer Toque tuvo {rel} el rival ({T._fmt(row.posesion_favor_pct, '%')} frente a {T._fmt(row.posesion_rival_pct, '%')})"
+        p = by.get("Posesión")
+        if p and pd.notna(p["diff"]) and not p["texto"].startswith("En línea"):
+            txt += f", {'por encima' if p['diff'] > 0 else 'por debajo'} de su media en casa ({_es(p['media'])} %)"
+        parts.append(txt + ".")
+    if pd.notna(row.intentos_favor):
+        inside = f", {int(row.intentos_dentro_area_favor)} dentro del área" if pd.notna(row.intentos_dentro_area_favor) else ""
+        parts.append(f"Generó <b>{int(row.intentos_favor)} intentos</b>{inside}, y marcó {gf} gol{'es' if gf != 1 else ''}.")
+    scored = [r for r in rows if r["better"] is not None and pd.notna(r["diff"]) and not r["texto"].startswith("En línea")
+              and r["metrica"] not in ("Posesión",)]
+    rel = lambda r: abs(r["diff"]) / 10 if r["unidad"] == "%" else abs(r["pct"] or 0) / 100
+    ups = sorted([r for r in scored if (r["diff"] > 0) == r["better"]], key=rel, reverse=True)[:2]
+    downs = sorted([r for r in scored if (r["diff"] > 0) != r["better"]], key=rel, reverse=True)[:2]
+    fmt = lambda r: f"{r['metrica'].lower()} ({'+' if r['diff'] > 0 else '−'}{_es(abs(r['diff']))}{' p.p.' if r['unidad'] == '%' else ''})"
+    if ups:
+        parts.append("Mejor que su media en " + " y ".join(fmt(r) for r in ups) + ".")
+    if downs:
+        parts.append("Por debajo en " + " y ".join(fmt(r) for r in downs) + ".")
+    return " ".join(parts)
+
+
+def avg_cards_html(veo):
+    cards = []
+    for lab, *_ in SUMMARY:
+        _, f, _, unit, *_ = T.METRIC_BY_LABEL[lab]
+        s = veo.dropna(subset=[f])
+        if s.empty:
+            continue
+        best = s.loc[s[f].idxmax()]
+        val = _es(s[f].mean()) + (" %" if unit == "%" else "")
+        rng = f"Rango: {_es(s[f].min())}–{_es(s[f].max())}{' %' if unit == '%' else ''} · {len(s)} partidos"
+        cards.append(f"<div class='sum-card'><span class='l'>{escape(lab)}</span><span class='v'>{val}</span>"
+                     f"<span class='m'>{escape(rng)}</span><span class='i'>Máximo en J{int(best.jornada)} ({escape(T.club_short(best.rival))})</span></div>")
+    return "<div class='sum-grid'>" + "".join(cards) + "</div>"
+
+
+def render_match_summary(veo, pt_tm, goals, pending_note, events=None):
+    """Nivel 1: ficha del partido (o de la media en casa) y comparación con la media habitual."""
+    st.markdown(LEVEL_CSS + SUMMARY_CSS, unsafe_allow_html=True)
+    jors = [int(j) for j in veo.jornada]
+    opts = jors + ["media"]
+    label = lambda x: (f"Media en casa · {len(jors)} partidos ({', '.join(f'J{j}' for j in jors)})" if x == "media"
+                       else veo.loc[veo.jornada == x, "etiqueta"].iloc[0])
     c1, c2 = st.columns([1.5, 1])
     with c1:
-        j = _jornada_picker(veo, "sum_j")
+        j = st.selectbox("Partido", opts, index=len(jors) - 1, key="sum_j", format_func=label)
+    if j == "media":
+        home = pt_tm[(pt_tm.condicion == "Casa") & pt_tm.jornada.isin(jors)]
+        v, e, d = (home.res == "V").sum(), (home.res == "E").sum(), (home.res == "D").sum()
+        st.markdown(f"<div class='mr-board'><div class='mr-top'><div class='mr-team'><small>Media en casa</small>Primer Toque</div>"
+                    f"<div class='mr-score'>{_es(home.gf.mean(), 2)}–{_es(home.gc.mean(), 2)}<small>GOLES POR PARTIDO</small></div>"
+                    f"<div class='mr-team r'><small>{len(home)} partidos</small>{v}V · {e}E · {d}D</div></div></div>", unsafe_allow_html=True)
+        st.markdown("<div class='q-title'>Cara a cara medio</div><div class='q-sub'>Media por partido de cada equipo en los partidos con dato de ambos.</div>",
+                    unsafe_allow_html=True)
+        st.markdown(h2h_html(_avg_pairs(veo), "Primer Toque", "Rivales", note="n = {n}"), unsafe_allow_html=True)
+        st.markdown("<div class='q-title'>Indicadores medios</div><div class='q-sub'>Media, rango y mejor partido de Primer Toque.</div>", unsafe_allow_html=True)
+        st.markdown(avg_cards_html(veo), unsafe_allow_html=True)
+        return
     with c2:
         excl = st.toggle("Excluir este partido de la media", value=False, key="sum_excl",
                          help="Por defecto, la media incluye todos los partidos en casa con vídeo.")
     row = veo[veo.jornada == j].iloc[0]
+    rshort = T.club_short(row.rival)
     res = pt_tm[pt_tm.jornada == j]
+    rows = summary_rows(veo, j, excl)
     if len(res):
         r = res.iloc[0]
         col = {"V": POS, "E": MUTED, "D": NEG}[r.res]
-        st.markdown(f"<div class='sum-head'><span class='j'>J{j}</span><span class='t'>Primer Toque – {escape(T.club_short(row.rival))} · en casa</span>"
-                    f"<span class='s'>{r.gf}–{r.gc}</span><span class='r' style='background:{col}'>{r.res}</span></div>", unsafe_allow_html=True)
-    rows = summary_rows(veo, j, excl)
+        word = {"V": "VICTORIA", "E": "EMPATE", "D": "DERROTA"}[r.res]
+        ev = _events_html(events, j, row.rival) if events is not None else ""
+        st.markdown(f"<div class='mr-board'><div class='mr-top'><div class='mr-team'><small>J{j} · en casa</small>Primer Toque</div>"
+                    f"<div class='mr-score'>{r.gf}–{r.gc}<small style='color:{col}'>{word}</small></div>"
+                    f"<div class='mr-team r'><small>Rival</small>{escape(rshort)}</div></div>{ev}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='mr-text'>{match_text(rows, row, (int(r.gf), int(r.gc)), rshort)}</div>", unsafe_allow_html=True)
+    pairs = _match_pairs(row)
+    if pairs:
+        st.markdown("<div class='q-title'>Cara a cara</div><div class='q-sub'>Estadísticas de vídeo de los dos equipos en este partido.</div>", unsafe_allow_html=True)
+        st.markdown(h2h_html(pairs, "Primer Toque", rshort), unsafe_allow_html=True)
+    st.markdown("<div class='q-title'>Frente a su media en casa</div><div class='q-sub'>Valor del partido, media habitual, diferencia y lectura.</div>",
+                unsafe_allow_html=True)
     st.markdown(summary_cards_html(rows), unsafe_allow_html=True)
     if j == 7:
         st.caption(pending_note)
-    with st.expander("¿Cómo leer estas tarjetas?"):
+    with st.expander("¿Cómo leer este resumen?"):
         st.markdown("- **Media en casa**: media de Primer Toque en sus partidos en casa con vídeo (n = partidos); "
-                    "el interruptor permite excluir el partido elegido.\n"
+                    "el interruptor permite excluir el partido elegido. En el desplegable puedes elegir también la **media**.\n"
                     "- **p.p.** (puntos porcentuales) se usa en métricas que ya son porcentajes (posesión, precisión). "
                     "En el resto, la diferencia va en unidades y entre paréntesis en %.\n"
                     "- **Verde/rojo** solo cuando la dirección es clara; **gris** en métricas neutras (duelos) o diferencias pequeñas.\n"
+                    "- **Cara a cara**: la barra de cada fila se reparte según el peso de cada equipo en esa estadística.\n"
                     "- Con 3–4 partidos, las medias son orientativas.")
 
 

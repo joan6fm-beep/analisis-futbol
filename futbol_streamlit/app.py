@@ -3148,7 +3148,7 @@ def render_team_360():
     _eff = T.efficiency(veo, _goals)
     _pt_tm = A.team_matches(partidos_t, TEAM)
     if _view == "Resumen del partido":
-        A.render_match_summary(veo, _pt_tm, _goals, _pending_j7)
+        A.render_match_summary(veo, _pt_tm, _goals, _pending_j7, eventos_t)
     elif _view == "Análisis por áreas":
         _per_match_cols = [
             ("Posesión", "posesion_favor_pct"), ("Precisión", "precision_pase_favor_pct"), ("Intentos", "intentos_favor"),
