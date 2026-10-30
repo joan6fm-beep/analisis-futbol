@@ -3119,7 +3119,7 @@ def render_team_360():
     veo = T.prepare(avanzado_t, short_team_name)
     _home_label = ", ".join(f"J{int(j)}" for j in veo.jornada) or "sin partidos"
     st.markdown(T.section("Panel de rendimiento · estadísticas de vídeo",
-                          "Primer Toque frente a cada rival en los partidos medidos con Veo. — indica que no existe registro; nunca cuenta como cero.",
+                          "Partidos en casa medidos con Veo. — = sin registro.",
                           f"Solo partidos en casa · {_home_label}"), unsafe_allow_html=True)
     if veo.empty:
         st.info("Todavía no hay partidos en casa con estadísticas de vídeo.")
@@ -3147,9 +3147,8 @@ def render_team_360():
         if tbl.empty:
             return
         with st.container(border=True):
-            _panel(f"Cuota de cada equipo · {block}", "Media por partido sobre los partidos con dato de ambos equipos. Naranja: Primer Toque · azul: rival · línea: 50%.")
+            _panel(f"Cuota de cada equipo · {block}", "Media por partido · línea = 50%")
             _plot(T.fig_share(tbl), key)
-            st.caption(" · ".join(f"{r.metric}: {r.n} partidos ({r.jornadas})" for _, r in tbl.iterrows()))
 
     # Modos de análisis: el panel por bloques es el de siempre; los demás amplían el análisis.
     _modes = ["Panel por bloques", "Preparar partido", "Análisis del rival", "Laboratorio", "Temporadas"]
@@ -3185,7 +3184,6 @@ def render_team_360():
                 st.info("Veo todavía no ha aportado distribución por zonas.")
             else:
                 _plot(_zf, "eq_zones")
-                st.caption("Suma por tercios de la rejilla «Localización de pases» de Veo (puede sumar 98–100% por redondeo).")
         _share_block("Posesión", "eq_share_pos")
 
     with tabs[1]:
@@ -3206,20 +3204,18 @@ def render_team_360():
     with tabs[2]:
         c1, c2 = st.columns([1, 1], gap="medium")
         with c1.container(border=True):
-            _panel("Intentos de tiro: dentro y fuera del área", "Intentos de Primer Toque según Veo (incluyen los goles) y goles oficiales del partido.")
+            _panel("Intentos de tiro: dentro y fuera del área", "Intentos de Veo (incluyen los goles).")
             _f = T.fig_attempts(veo, _goals)
             if _f is None:
                 st.info("Sin registros de intentos.")
             else:
                 _plot(_f, "eq_attempts")
-            st.caption("«Tiros» (panel de Veo) no incluye los goles; «intentos» (pestaña Ataque de Veo) sí. Se muestran por separado.")
         with c2.container(border=True):
             _panel("Eficacia", "Goles oficiales ÷ tiros registrados en ese partido.")
             if _eff.empty or not (_eff.conv_pt.notna().any() or _eff.conv_rv.notna().any()):
                 st.info("No hay partidos con goles y tiros registrados a la vez.")
             else:
                 _plot(T.fig_efficiency(_eff), "eq_eff")
-                st.caption("Conversión = goles ÷ tiros × 100.")
         with st.container(border=True):
             _panel("Producción ofensiva por partido", "Cada panel tiene su propia escala.")
             _plot(T.fig_multiples(veo, ["Tiros", "Ocasiones", "Regates", "Asistencias"], cols=2), "eq_att_multi")
@@ -3240,7 +3236,7 @@ def render_team_360():
 
     with tabs[5]:
         # Producción por jornada: una tarjeta por partido medido.
-        st.markdown(T.section("Producción por jornada", f"Nuestra evolución, partido a partido. Cada cifra es un registro real. {_stats_scope}"), unsafe_allow_html=True)
+        st.markdown(T.section("Producción por jornada", "Partido a partido."), unsafe_allow_html=True)
         _per_match_cols = [
             ("Posesión", "posesion_favor_pct"), ("Precisión", "precision_pase_favor_pct"), ("Intentos", "intentos_favor"),
             ("Tiros", "tiros_favor"), ("Ocasiones", "ocasiones_favor"), ("Córneres", "corners_favor"),
@@ -3257,7 +3253,7 @@ def render_team_360():
         st.markdown("<div class='pro84-match-grid'>"+''.join(_match_cards)+"</div>",unsafe_allow_html=True)
 
         # Radiografía del juego: cuota por bloque + radar de volumen.
-        st.markdown(T.section("Radiografía del juego", "Medias por partido sobre los partidos con dato de ambos equipos. La barra muestra qué parte del total produce cada equipo."), unsafe_allow_html=True)
+        st.markdown(T.section("Radiografía del juego", "Qué parte del total produce cada equipo."), unsafe_allow_html=True)
         grupo=st.segmented_control("Bloque de análisis",T.BLOCKS,default="Ataque",key="v83_group")
         _g1, _g2 = st.columns([1.25, 1], gap="medium")
         with _g1.container(border=True):
@@ -3267,7 +3263,6 @@ def render_team_360():
                 st.info("No hay pares de datos de ambos equipos para este bloque.")
             else:
                 _plot(T.fig_share(_tbl), "eq_share")
-                st.caption(" · ".join(f"{r.metric}: {r.n} partidos ({r.jornadas})" for _, r in _tbl.iterrows()))
         with _g2.container(border=True):
             _radar_opts = ["Todos los partidos comparables"] + [f"J{int(j)}" for j in veo.jornada]
             _rsel = st.selectbox("Radar de volumen", _radar_opts, key="eq_radar_sel")
@@ -3277,11 +3272,10 @@ def render_team_360():
                 st.info("Este partido no tiene al menos tres métricas de volumen con dato de ambos equipos; el radar no sería comparable.")
             else:
                 _plot(_rfig, "eq_radar")
-                st.caption(f"Cuota de Primer Toque sobre el total de cada acción (PT ÷ (PT + rival)) en {', '.join(f'J{j}' for j in _rjs)}. "
-                           "Solo métricas de volumen con ambos valores en todos esos partidos; 50% = igualdad. No mide calidad.")
+                st.caption(f"Cuota de Primer Toque (PT ÷ total) · {', '.join(f'J{j}' for j in _rjs)} · 50% = igualdad.")
 
         # Comparador por métrica y comparación entre dos jornadas.
-        st.markdown(T.section("Comparador de rendimiento", "Cualquier métrica: Primer Toque frente al rival de cada jornada, o dos jornadas cara a cara con todas las métricas."), unsafe_allow_html=True)
+        st.markdown(T.section("Comparador de rendimiento", "Cualquier métrica, jornada a jornada o dos jornadas cara a cara."), unsafe_allow_html=True)
         _avail = [m[0] for m in T.available_metrics(veo)]
         a,b=st.columns([1.25,1],gap="medium")
         with a:
@@ -3298,7 +3292,6 @@ def render_team_360():
             with p2: jb=st.selectbox("Segunda jornada",jornadas,index=len(jornadas)-1,key="v83_jb",format_func=lambda j: veo.loc[veo.jornada==j,"etiqueta"].iloc[0])
             shown_j = [ja, jb]
             st.markdown(T.compare_two_html(veo, ja, jb), unsafe_allow_html=True)
-            st.caption("Variación de Primer Toque entre las dos jornadas: ▲ sube, ▼ baja. Verde = mejora y rojo = empeora solo en métricas con dirección clara; en volúmenes neutros (duelos, saques de banda, entradas) se muestra en gris.")
         if adv.empty:
             st.info("Aún no existen mediciones de este indicador. No se representan valores ficticios.")
         else:
@@ -3317,13 +3310,11 @@ def render_team_360():
             if shown_j:
                 x=adv.loc[adv.jornada==shown_j[0],fav].dropna(); y=adv.loc[adv.jornada==shown_j[1],fav].dropna()
                 if len(x) and len(y): st.caption(f"Primer Toque: J{shown_j[0]} → J{shown_j[1]}: {x.iloc[0]:g} → {y.iloc[0]:g} (variación {y.iloc[0]-x.iloc[0]:+g}).")
-            if against == T.NONE:
-                st.caption(f"Cobertura: {len(valid_own)} partidos con dato. Los vacíos no cuentan como cero.")
-            else:
-                st.caption(f"Cobertura: {len(valid_own)} jornadas con dato nuestro; {len(valid_rival)} con dato rival; {len(joint)} pares comparables. La media rival es la de nuestros contrincantes en los partidos registrados, no la media de toda la liga. Los vacíos no cuentan como cero.")
+            if against != T.NONE:
+                st.caption(f"{len(joint)} partidos comparables.")
 
         # Tabla completa: todas las métricas disponibles.
-        st.markdown(T.section("Todas las métricas", "Valores por partido. En las métricas comparadas: Primer Toque · rival."), unsafe_allow_html=True)
+        st.markdown(T.section("Todas las métricas", "Primer Toque · rival."), unsafe_allow_html=True)
         st.dataframe(T.data_table(veo), hide_index=True, width="stretch")
         st.caption(_pending_j7 + " Gol de Sebas en J2 (62'): marcado dentro del área (corrección confirmada).")
 

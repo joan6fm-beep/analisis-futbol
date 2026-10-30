@@ -264,7 +264,7 @@ def interpret(veo, jornada, eff_goals=None):
         return out
     cur = cur.iloc[0]
     if n < 3:
-        out.append(f"<b>Muestra pequeña</b>: la media de referencia usa {n} partido(s). Las diferencias son orientativas, no conclusiones.")
+        out.append(f"<b>Muestra pequeña</b> (n = {n}): lectura orientativa.")
     for lab in ["Posesión", "Pases completados", "Precisión de pase", "Intentos de tiro", "Intentos dentro del área",
                 "Recuperaciones", "Intercepciones", "Duelos", "Entradas / contactos"]:
         _, f, _, unit, *_ = T.METRIC_BY_LABEL[lab]
@@ -275,13 +275,13 @@ def interpret(veo, jornada, eff_goals=None):
         if unit == "%":
             if abs(diff) < 3:
                 continue
-            txt = f"{abs(diff):.0f} p.p. {'por encima' if diff > 0 else 'por debajo'} de su media ({T._fmt(cur[f], unit)} frente a {m:.0f}%, n = {len(r)})"
+            txt = f"{T._fmt(cur[f], unit)}, {abs(diff):.0f} p.p. {'por encima' if diff > 0 else 'por debajo'} de su media"
         else:
             pct = 100 * diff / m if m else 0
             if abs(pct) < 10:
                 continue
-            txt = f"{abs(pct):.0f}% {'más' if diff > 0 else 'menos'} que su media ({T._fmt(cur[f], unit)} frente a {m:.1f}, n = {len(r)})"
-        extra = " Más volumen indica un partido más disputado, no necesariamente una mejor defensa." if lab in NEUTRAL_NOTE else ""
+            txt = f"{T._fmt(cur[f], unit)}, {abs(pct):.0f}% {'más' if diff > 0 else 'menos'} que su media"
+        extra = " (partido más disputado, no necesariamente mejor defensa)" if lab in NEUTRAL_NOTE and diff > 0 else ""
         out.append(f"<b>{escape(lab)}</b>: {txt}.{extra}")
     if pd.notna(cur.get("intentos_favor")) and eff_goals is not None:
         g = eff_goals.get(int(jornada))
@@ -291,7 +291,7 @@ def interpret(veo, jornada, eff_goals=None):
     pos = veo.dropna(subset=["posesion_favor_pct"])
     if len(pos) >= 3:
         seq = " → ".join(f"J{int(j)} {v:.0f}%" for j, v in zip(pos.jornada, pos.posesion_favor_pct))
-        out.append(f"<b>Evolución de la posesión</b>: {seq}. Con {len(pos)} partidos es una tendencia orientativa.")
+        out.append(f"<b>Posesión</b>: {seq}.")
     return out
 
 
@@ -348,65 +348,103 @@ def _f(v, d=2):
     return "—" if pd.isna(v) else f"{v:.{d}f}"
 
 
+def _bullet_rows(rows, val, ref, nref, color, marker_color, stacked=False):
+    """Filas visuales: barra = valor, marca = referencia, píldora = diferencia."""
+    out = []
+    for _, r in rows.iterrows():
+        v, m = r[val], r[ref]
+        if pd.isna(v) and pd.isna(m):
+            continue
+        top = max([x for x in (v, m) if pd.notna(x) and x > 0] + [1e-9]) * 1.15
+        bar = "" if pd.isna(v) or v <= 0 else f"<i class='bl-bar' style='width:{100 * v / top:.0f}%;background:{color}'></i>"
+        mk = "" if pd.isna(m) or m < 0 else f"<i class='bl-mark' style='left:{100 * m / top:.0f}%;background:{marker_color}'></i>"
+        vtxt = "—" if pd.isna(v) else T._fmt(v, r.unidad)
+        mtxt = "sin media" if pd.isna(m) else f"media {T._fmt(round(m, 1), r.unidad)} · n {int(r[nref])}"
+        out.append(f"<div class='bl-row'><div class='bl-name'>{escape(r.metrica)}<small>{mtxt}</small></div>"
+                   f"<div class='bl-val'>{vtxt}</div><div class='bl-track'>{bar}{mk}</div>{_delta(v, m, r.unidad, r.better if val == 'a' else None)}</div>")
+    return f"<div class='bl-list{' stack' if stacked else ''}'>" + "".join(out) + "</div>"
+
+
+BL_CSS = """<style>
+.ref-chips{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 12px}
+.ref-chips span{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 11px;font-size:.74rem;color:var(--text)}
+.ref-chips i{width:9px;height:9px;border-radius:3px;display:inline-block}
+.bl-list{display:flex;flex-direction:column}
+.bl-row{display:grid;grid-template-columns:minmax(120px,1.3fr) 64px 2fr 78px;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line-soft)}
+.bl-row:last-child{border-bottom:0}
+.bl-name{font-size:.8rem;font-weight:700;color:var(--ink)} .bl-name small{display:block;font-size:.64rem;font-weight:500;color:var(--muted);margin-top:1px}
+.bl-val{font-size:1.05rem;font-weight:850;color:var(--ink);text-align:right}
+.bl-track{position:relative;height:12px;background:var(--surface-2);border-radius:6px}
+.bl-bar{position:absolute;left:0;top:0;bottom:0;border-radius:6px}
+.bl-mark{position:absolute;top:-4px;bottom:-4px;width:3px;border-radius:2px;margin-left:-1px}
+.bl-list.stack .bl-row{grid-template-columns:1fr 54px 70px}.bl-list.stack .bl-track{grid-column:1/-1;order:5}
+@media(max-width:760px){.bl-row{grid-template-columns:1fr 54px 70px}.bl-track{grid-column:1/-1;order:5}}
+</style>"""
+
+
 def render_prepare(veo, pt_tm, partidos, short_name, goals):
-    st.markdown(T.section("Preparar partido · cuatro referencias",
-                          "A: Primer Toque en la jornada · B: su media en casa · C: el rival en la jornada · D: la media del rival como visitante."),
-                unsafe_allow_html=True)
+    st.markdown(BL_CSS, unsafe_allow_html=True)
+    st.markdown(T.section("Preparar partido · cuatro referencias", "El partido elegido frente a las medias de cada equipo."), unsafe_allow_html=True)
     opts = [int(j) for j in veo.jornada]
-    c1, c2 = st.columns([1.2, 1])
+    c1, c2 = st.columns([1.4, 1])
     with c1:
         j = st.selectbox("Jornada", opts, index=len(opts) - 1, key="adv_j",
                          format_func=lambda x: veo.loc[veo.jornada == x, "etiqueta"].iloc[0])
     with c2:
-        excl = st.toggle("Excluir esta jornada de la media de Primer Toque", value=True, key="adv_excl",
-                         help="Recomendado: compara el partido con el resto de partidos en casa, no consigo mismo.")
+        excl = st.toggle("Media sin esta jornada", value=True, key="adv_excl",
+                         help="Compara el partido con el resto de partidos en casa, no consigo mismo.")
     rival = veo.loc[veo.jornada == j, "rival"].iloc[0]
     rshort = T.club_short(rival)
     rtm = team_matches(partidos, rival)
     away = rtm[rtm.condicion == "Fuera"]
-    home_pt = pt_tm[(pt_tm.condicion == "Casa") & ((pt_tm.jornada != j) if excl else True)]
-    st.markdown(
-        "<div class='adv-ref'>"
-        f"<div class='a'><b>A · Primer Toque</b><span>J{j} frente a {escape(rshort)}</span><small>Partido seleccionado</small></div>"
-        f"<div class='b'><b>B · Media PT en casa</b><span>{len(home_pt)} partidos (resultados)</span><small>Vídeo: hasta {len(veo) - (1 if excl else 0)} partidos</small></div>"
-        f"<div class='c'><b>C · {escape(rshort)}</b><span>J{j} en nuestro campo</span><small>Lo que hizo contra nosotros</small></div>"
-        f"<div class='d'><b>D · {escape(rshort)} fuera</b><span>{len(away)} partidos (resultados)</span><small>Sin estadísticas de vídeo</small></div></div>",
-        unsafe_allow_html=True)
     rows = four_refs(veo, pt_tm, rtm, j, excl)
-    groups = list(dict.fromkeys(rows.grupo))
-    shown = st.pills("Bloques de métricas", groups, selection_mode="multi", default=groups[:3], key="adv_groups") or groups
-    st.markdown(four_refs_html(rows[rows.grupo.isin(shown)], j, rshort), unsafe_allow_html=True)
-    st.markdown(f"<div class='adv-note'><b>Referencia D</b>: solo existen resultados oficiales de {escape(rshort)} fuera de casa "
-                f"({len(away)} partidos: {', '.join(f'J{x}' for x in away.jornada)}). Sus estadísticas avanzadas de vídeo fuera de casa "
-                "no están disponibles: solo tenemos el vídeo de su partido contra Primer Toque (columna C).</div>", unsafe_allow_html=True)
-    st.caption("Diferencias: ▲/▼ con valor absoluto y, debajo, la variación porcentual respecto a la referencia (no se calcula sobre porcentajes: "
-               "ahí se indica en puntos porcentuales, p.p.). Verde/rojo solo en métricas con dirección clara; en volúmenes neutros, gris.")
+    st.markdown(f"<div class='ref-chips'><span><i style='background:{PT}'></i>A · Primer Toque J{j}</span>"
+                f"<span><i style='background:{TOKENS['ink']}'></i>B · media PT en casa</span>"
+                f"<span><i style='background:{RIVAL}'></i>C · {escape(rshort)} J{j}</span>"
+                f"<span><i style='background:{TOKENS['ink']}'></i>D · media {escape(rshort)} fuera ({len(away)} partidos)</span></div>",
+                unsafe_allow_html=True)
+    groups = [g for g in dict.fromkeys(rows.grupo) if g != "Resultados oficiales"]
+    k1, k2 = st.columns([1.35, 1], gap="medium")
+    with k1.container(border=True):
+        st.markdown(f"<div class='eq-panel-title'>Primer Toque · J{j} frente a su media</div>"
+                    "<div class='eq-panel-sub'>Barra = partido · marca blanca = media</div>", unsafe_allow_html=True)
+        blocks = ["Resultados"] + [x.replace("Vídeo · ", "") for x in groups]
+        g = st.segmented_control("Bloque", blocks, default="Resultados", key="adv_block") or "Resultados"
+        sel = rows[rows.grupo == ("Resultados oficiales" if g == "Resultados" else f"Vídeo · {g}")]
+        st.markdown(_bullet_rows(sel, "a", "b", "nb", PT, TOKENS["ink"]), unsafe_allow_html=True)
+    with k2.container(border=True):
+        st.markdown(f"<div class='eq-panel-title'>{escape(rshort)} · J{j} frente a su media fuera</div>"
+                    "<div class='eq-panel-sub'>Resultados oficiales · sin vídeo del rival fuera de casa</div>", unsafe_allow_html=True)
+        st.markdown(_bullet_rows(rows[rows.grupo == "Resultados oficiales"], "c", "d", "nd", RIVAL, TOKENS["ink"], stacked=True), unsafe_allow_html=True)
+    with st.expander("Ver tabla detallada (A · B · C · D)"):
+        st.markdown(four_refs_html(rows, j, rshort), unsafe_allow_html=True)
 
-    st.markdown(T.section("Radares comparativos", NORM_TEXT), unsafe_allow_html=True)
+    st.markdown(T.section("Radares comparativos", "Índice 0–100 sobre el máximo registrado · pasa el ratón para ver el valor real."), unsafe_allow_html=True)
     r1, r2 = st.columns(2, gap="medium")
     with r1.container(border=True):
-        st.markdown(f"<div class='eq-panel-title'>Primer Toque J{j} frente a su media en casa</div>"
-                    "<div class='eq-panel-sub'>Escala de cada eje: máximo de Primer Toque en casa en esa métrica.</div>", unsafe_allow_html=True)
-        fig, tbl = radar_vs_average(veo, j, excl)
+        st.markdown(f"<div class='eq-panel-title'>J{j} frente a su media en casa</div>", unsafe_allow_html=True)
+        fig, _ = radar_vs_average(veo, j, excl)
         if fig is None:
-            st.info("No hay al menos tres métricas con dato en esta jornada y en dos partidos de referencia.")
+            st.info("Datos insuficientes para el radar.")
         else:
             _plot(fig, "adv_radar_avg")
-            st.caption("Ejes: " + " · ".join(f"{r.metrica} (máx. {T._fmt(r.maximo, '')}; media n = {r.n})" for _, r in tbl.iterrows()))
     with r2.container(border=True):
-        st.markdown(f"<div class='eq-panel-title'>Primer Toque frente a {escape(rshort)} · J{j}</div>"
-                    "<div class='eq-panel-sub'>Solo métricas que Veo ofrece de ambos equipos. Escala: máximo de ambos equipos en los partidos medidos.</div>",
-                    unsafe_allow_html=True)
-        fig, tbl = radar_vs_rival(veo, j)
-        if fig is None:
-            st.info("En esta jornada no hay al menos tres métricas con dato de ambos equipos.")
+        st.markdown(f"<div class='eq-panel-title'>Primer Toque frente a {escape(rshort)}</div>", unsafe_allow_html=True)
+        fig2, _ = radar_vs_rival(veo, j)
+        if fig2 is None:
+            st.info("Datos insuficientes para el radar.")
         else:
-            _plot(fig, "adv_radar_vs")
-            st.caption("Ejes: " + " · ".join(f"{r.metrica} (máx. {T._fmt(r.maximo, '')})" for _, r in tbl.iterrows()))
+            _plot(fig2, "adv_radar_vs")
+    with st.expander("¿Cómo se calcula?"):
+        st.markdown(f"- **Radares:** {NORM_TEXT}\n"
+                    "- **Diferencias:** ▲▼ valor absoluto y % sobre la referencia; en porcentajes, puntos porcentuales (p.p.). "
+                    "Verde/rojo solo en métricas con dirección clara.\n"
+                    "- **Muestras:** n = partidos de cada media. Del rival solo hay resultados fuera de casa ("
+                    + ", ".join(f"J{x}" for x in away.jornada) + "); su vídeo existe solo del partido contra nosotros.")
     lines = interpret(veo, j, goals)
     if lines:
-        st.markdown("<div class='eq-insights adv-insight'><div class='eq-insights-title'>Interpretación del partido</div><ul>"
-                    + "".join(f"<li>{x}</li>" for x in lines) + "</ul></div>", unsafe_allow_html=True)
+        st.markdown("<div class='eq-insights adv-insight'><div class='eq-insights-title'>Claves del partido</div><ul>"
+                    + "".join(f"<li>{x}</li>" for x in lines[:4]) + "</ul></div>", unsafe_allow_html=True)
 
 
 def fig_rival_evolution(rtm, clas, team):
@@ -430,7 +468,7 @@ def fig_rival_evolution(rtm, clas, team):
 
 
 def render_rival(veo, partidos, clas, short_name, default_rival=None):
-    st.markdown(T.section("Análisis del rival", "Resultados oficiales de toda la temporada y, si existe, el vídeo de su partido contra Primer Toque."),
+    st.markdown(T.section("Análisis del rival", "Toda su temporada en resultados oficiales."),
                 unsafe_allow_html=True)
     teams = sorted(t for t in set(partidos.local) | set(partidos.visitante) if t != TEAM)
     idx = teams.index(default_rival) if default_rival in teams else 0
@@ -447,10 +485,9 @@ def render_rival(veo, partidos, clas, short_name, default_rival=None):
                 + _kpi("Como local · pts/partido", _f(c["ppg"]), f"{c['v']}V-{c['e']}E-{c['dd']}D · GF {_f(c['gf_pg'])} · GC {_f(c['gc_pg'])}", c["n"])
                 + _kpi("Como visitante · pts/partido", _f(f["ppg"]), f"{f['v']}V-{f['e']}E-{f['dd']}D · GF {_f(f['gf_pg'])} · GC {_f(f['gc_pg'])}", f["n"])
                 + "</div>", unsafe_allow_html=True)
-    st.caption("La etiqueta n indica cuántos partidos intervienen en cada media: una media con n = 3 es mucho menos estable que una con n = 10.")
     c1, c2 = st.columns([1.3, 1], gap="medium")
     with c1.container(border=True):
-        st.markdown("<div class='eq-panel-title'>Evolución en la clasificación</div><div class='eq-panel-sub'>Color del punto: verde victoria · gris empate · rojo derrota (también en el texto al pasar el ratón).</div>", unsafe_allow_html=True)
+        st.markdown("<div class='eq-panel-title'>Evolución en la clasificación</div><div class='eq-panel-sub'>Verde victoria · gris empate · rojo derrota</div>", unsafe_allow_html=True)
         _plot(fig_rival_evolution(rtm, clas, rival), "adv_rival_evo")
     with c2.container(border=True):
         st.markdown("<div class='eq-panel-title'>Resultados de la temporada</div>", unsafe_allow_html=True)
@@ -463,13 +500,13 @@ def render_rival(veo, partidos, clas, short_name, default_rival=None):
     st.markdown(f"<div class='adv-note'><b>Contra Primer Toque</b>: {txt or 'todavía no se han enfrentado esta temporada.'}</div>", unsafe_allow_html=True)
     v = veo[veo.rival == rival]
     if v.empty:
-        st.info("No hay estadísticas de vídeo de este rival: solo se graban con Veo los partidos de Primer Toque en casa.")
+        st.caption("Sin vídeo de este rival (solo se graban nuestros partidos en casa).")
     else:
         vr = v.iloc[0]
         items = [(lab, vr[f], vr[a], unit) for lab, f, a, unit, *_ in T.METRICS if a != T.NONE and pd.notna(vr[a])]
         with st.container(border=True):
             st.markdown(f"<div class='eq-panel-title'>Estadísticas de vídeo de {escape(short_name(rival))} · J{int(vr.jornada)} en nuestro campo</div>"
-                        "<div class='eq-panel-sub'>Un solo partido: describe lo que hizo contra nosotros, no su media.</div>", unsafe_allow_html=True)
+                        "<div class='eq-panel-sub'>Un solo partido, no es su media.</div>", unsafe_allow_html=True)
             rows = [f"<div class='vs-row vs-head'><span>Métrica</span><span>Primer Toque</span><span>{escape(short_name(rival))}</span></div>"]
             for lab, pv, rvv, unit in items:
                 top = max(pv if pd.notna(pv) else 0, rvv, 1e-9)
@@ -477,7 +514,6 @@ def render_rival(veo, partidos, clas, short_name, default_rival=None):
                                       + ("" if pd.isna(v) else f"<i style='width:{100 * v / top * .7:.0f}%'></i>") + "</div>")
                 rows.append(f"<div class='vs-row'><span class='m'>{escape(lab)}</span>{bar(pv, 'pt')}{bar(rvv, 'rv')}</div>")
             st.markdown("<div class='adv-tbl'>" + "".join(rows) + "</div>", unsafe_allow_html=True)
-            st.caption("Cada fila tiene su propia escala (la barra más larga es el valor mayor de los dos).")
 
 
 def _metric_options():
@@ -485,7 +521,7 @@ def _metric_options():
 
 
 def render_lab(veo, pt_tm, seasons):
-    st.markdown(T.section("Laboratorio de comparación", "Elige una métrica y el tipo de comparación. Las opciones se adaptan a los datos que existen para esa métrica."),
+    st.markdown(T.section("Laboratorio de comparación", "Una métrica, cinco formas de compararla."),
                 unsafe_allow_html=True)
     metric = st.selectbox("Métrica", _metric_options(), key="lab_metric")
     is_result = metric in [m[0] for m in RESULT_METRICS]
@@ -569,7 +605,7 @@ def render_lab(veo, pt_tm, seasons):
 
 
 def render_seasons(seasons, short_name):
-    st.markdown(T.section("Comparador de temporadas", "Estructura preparada para varias temporadas. Solo se muestran temporadas con datos importados."),
+    st.markdown(T.section("Comparador de temporadas", "Elige una o dos temporadas."),
                 unsafe_allow_html=True)
     names = list(seasons)
     sel = st.multiselect("Temporadas", names, default=names[-2:], max_selections=2, key="adv_seasons")
@@ -608,7 +644,4 @@ def render_seasons(seasons, short_name):
         st.markdown("<div class='eq-panel-title'>Evolución del equipo</div><div class='eq-panel-sub'>Puntos acumulados jornada a jornada.</div>", unsafe_allow_html=True)
         _plot(fig, "adv_season_evo")
     if len(names) < 2:
-        st.markdown("<div class='adv-note'><b>Solo hay una temporada con datos (2026/2027).</b> Para comparar, añade otra temporada en "
-                    "<code>data/temporadas.csv</code> y copia sus CSV en <code>data/temporadas/&lt;carpeta&gt;/</code> con los mismos nombres "
-                    "(<code>partidos_rivales.csv</code>, <code>clasificacion_liga.csv</code>, <code>equipo_avanzado.csv</code>). "
-                    "Las instrucciones están en <code>data/temporadas/LEEME.md</code>.</div>", unsafe_allow_html=True)
+        st.caption("Solo hay datos de 2026/2027. La comparación se activará al importar otra temporada (ver data/temporadas/LEEME.md).")
