@@ -75,19 +75,41 @@ def test_modulo_obsoleto():
           + (f": {at.exception[0].value[:120]}" if at.exception else ""))
 
 
+def nav(view=None, area=None, tool=None, extra=None):
+    """Navega Equipo 360: vista principal → área o herramienta → interacción extra."""
+    def setup(a):
+        if view:
+            a.button_group(key="eq_view").set_value(view)
+            a.run()
+        if area:
+            a.button_group(key="area_sel").set_value(area)
+            a.run()
+        if tool:
+            a.button_group(key="adv_tool").set_value(tool)
+            a.run()
+        if extra:
+            extra(a)
+    return run({"area": "juvenil", "view": "equipo"}, setup if (view or area or tool or extra) else None)
+
+
 def test_equipo360():
-    at = run({"area": "juvenil", "view": "equipo"})
-    check(not at.exception, "Equipo 360 sin excepciones" + (f": {at.exception[0].value[:120]}" if at.exception else ""))
+    """Equipo 360: tres niveles de lectura con datos reales."""
+    # Nivel 1 · Resumen del partido (vista por defecto, J7)
+    at = nav()
+    check(not at.exception, "Resumen del partido sin excepciones" + (f": {at.exception[0].value[:120]}" if at.exception else ""))
     h = html_of(at)
-    for txt in ["1 · Resumen de rendimiento", "Panel de rendimiento", "Posesión media", "Precisión de pase",
-                "Intentos dentro del área", "Lectura rápida", "Producción por jornada", "Radiografía del juego",
-                "Comparador de rendimiento", "Todas las métricas", "Pendiente de revisión"]:
-        check(txt in h or any(txt in c.value for c in at.caption), f"Equipo 360 muestra «{txt}»")
-    check("58%" in h and "65%" in h, "Indicadores medios con valores reales (posesión 58%, precisión 65%)")
-    tabs = [t.label for t in at.tabs]
-    check(len(tabs) == 6 and tabs[0].startswith("2") and tabs[-1].startswith("7"), f"6 pestañas de bloques 2–7: {tabs}")
-    charts = at.get("plotly_chart")
-    check(len(charts) >= 15, f"Gráficos Plotly renderizados: {len(charts)} (mínimo 15)")
+    check("sum-card" in h and "Resumen del partido" in h, "Nivel 1: tarjetas de indicadores del partido")
+    check("41 %" in h and "Media en casa: 57,8 %" in h and "−16,8 p.p." in h and "Menos posesión que su media habitual" in h,
+          "J7 posesión: 41 %, media 57,8 %, −16,8 p.p. y lectura sencilla")
+    check("Partido más disputado" in h or "Partido menos disputado" in h or "Duelos" in h, "Duelos con lectura neutra (no «mejor defensa»)")
+    check(any("Pendiente de revisión" in c.value for c in at.caption), "Aviso pendiente de J7 (ocasiones 14 frente a 13)")
+    # Nivel 2 · Análisis por áreas
+    expected = {"Posesión y control": "¿Quién tuvo más el balón?", "Construcción y pases": "¿Cuánto pasamos y con qué acierto?",
+                "Ataque y finalización": "¿Desde dónde intentamos marcar?", "Duelos y defensa": "¿Cuánta actividad defensiva tuvimos?",
+                "Balón parado": "¿Cuántas jugadas a balón parado generamos y concedimos?"}
+    for area, q in expected.items():
+        at = nav("Análisis por áreas", area)
+        check(not at.exception and q in html_of(at) and len(at.get("plotly_chart")) >= 1, f"Área «{area}»: pregunta y gráfico principal")
     df = at.dataframe[0].value if at.dataframe else None
     check(df is not None and {"J2 Bétera", "J3 Manises", "J5 Alboraya", "J7 Salesianos"} <= set(df.columns),
           "Tabla completa con columnas J2, J3, J5 y J7")
@@ -96,20 +118,26 @@ def test_equipo360():
         check(pos["J2 Bétera"] == "67% · 33%" and pos["J7 Salesianos"] == "41% · 59%", "Posesión J2 67·33 y J7 41·59 en la tabla")
         duel = df[df["Métrica"].str.startswith("Duelos")].iloc[0]
         check(duel["J3 Manises"] == "124", "Duelos J3 = 124 (sin valor rival inventado)")
+    # Nivel 3 · Análisis avanzado: comparador jornada contra jornada
+    at = nav("Análisis avanzado", tool="Jornada contra jornada")
     metrics = {m.label: m.value for m in at.metric}
-    check(metrics.get("Media Primer Toque") == "57.8" and metrics.get("Media rivales") == "42.2",
-          f"Comparador por defecto (Posesión): {metrics}")
-    at1 = run({"area": "juvenil", "view": "equipo"}, lambda a: a.selectbox(key="v83_metric").set_value("Tiros"))
-    m1 = {m.label: m.value for m in at1.metric}
+    check(metrics.get("Media Primer Toque") == "57.8" and metrics.get("Media rivales") == "42.2", f"Comparador por defecto (Posesión): {metrics}")
+    at = nav("Análisis avanzado", tool="Jornada contra jornada", extra=lambda a: (a.selectbox(key="v83_metric").set_value("Tiros"), a.run()))
+    m1 = {m.label: m.value for m in at.metric}
     check(m1 == {"Media Primer Toque": "13.2", "Media rivales": "11.0", "Diferencia comparable": "+2.3"}, f"Comparador con Tiros: {m1}")
-    # Interacción: métrica propia de PT y comparación entre dos jornadas
-    def interact(a):
+    def two(a):
         a.selectbox(key="v83_metric").set_value("Duelos")
         a.radio(key="v83_view").set_value("Comparar dos jornadas")
-    at2 = run({"area": "juvenil", "view": "equipo"}, interact)
-    m2 = {m.label: m.value for m in at2.metric}
-    check(not at2.exception and m2.get("Mejor partido") == "124", f"Comparador con Duelos y dos jornadas: {m2}")
-    check("cmp-table" in html_of(at2), "Tabla de comparación entre dos jornadas renderizada")
+        a.run()
+    at = nav("Análisis avanzado", tool="Jornada contra jornada", extra=two)
+    m2 = {m.label: m.value for m in at.metric}
+    check(not at.exception and m2.get("Mejor partido") == "124", f"Comparador con Duelos y dos jornadas: {m2}")
+    check("cmp-table" in html_of(at), "Tabla de comparación entre dos jornadas renderizada")
+    # Vista Temporada: resultados, protagonistas y lectura de la temporada
+    at = nav("Temporada")
+    h = html_of(at)
+    check(not at.exception and "Pulso de la temporada" in h and "Los protagonistas" in h and "Lectura rápida" in h
+          and "58%" in h and len(at.get("plotly_chart")) >= 3, "Temporada: resultados, gráficos, protagonistas e indicadores de vídeo")
 
 
 def test_otras_vistas():
@@ -162,17 +190,20 @@ def test_avanzado():
         check(both, f"Radar J{j} frente al rival: {list(tbl.metrica)} (todas con dato de ambos)")
     check("Tiros" not in list(A.radar_vs_rival(veo, 7)[1].metrica), "Radar J7 frente al rival excluye Tiros (sin dato del rival)")
     check(list(A.load_seasons(APP_DIR / "data")) == ["2026/2027"], "Temporadas registradas: solo 2026/2027 (no se inventan otras)")
-    # Cada modo se renderiza de verdad
-    for mode, txt in [("Preparar partido", "cuatro referencias"), ("Análisis del rival", "Puntos por partido"),
-                      ("Laboratorio", "Laboratorio de comparación"), ("Temporadas", "Comparador de temporadas")]:
-        at = run({"area": "juvenil", "view": "equipo"}, lambda a: a.button_group(key="adv_mode").set_value(mode))
-        check(not at.exception and txt in html_of(at), f"Modo «{mode}» renderizado" + (f": {at.exception[0].value[:100]}" if at.exception else ""))
-    def lab(a):
-        a.button_group(key="adv_mode").set_value("Laboratorio")
+    # Cada herramienta avanzada se renderiza de verdad
+    for tool, txt in [("Partido contra media", "cuatro referencias"), ("Análisis del rival", "Puntos por partido"),
+                      ("Laboratorio", "Laboratorio de comparación"), ("Temporadas", "Comparador de temporadas"),
+                      ("Radares", "Radares de rendimiento"), ("Primer Toque contra rival", "Primer Toque contra el rival"),
+                      ("Casa PT vs rival fuera", "Media de Primer Toque en casa")]:
+        at = nav("Análisis avanzado", tool=tool)
+        check(not at.exception and txt in html_of(at), f"Herramienta «{tool}» renderizada" + (f": {at.exception[0].value[:100]}" if at.exception else ""))
     for metric, mode in [("Goles a favor", "Local frente a visitante"), ("Posesión", "Primer Toque frente al rival"),
                          ("Duelos", "Jornada frente a la media"), ("Tiros", "Jornada frente a jornada"), ("Puntos", "Temporada frente a temporada")]:
-        at = run({"area": "juvenil", "view": "equipo"}, lab)
-        at.selectbox(key="lab_metric").set_value(metric); at.button_group(key="lab_mode").set_value(mode); at.run()
+        def lab(a, metric=metric, mode=mode):
+            a.selectbox(key="lab_metric").set_value(metric)
+            a.button_group(key="lab_mode").set_value(mode)
+            a.run()
+        at = nav("Análisis avanzado", tool="Laboratorio", extra=lab)
         check(not at.exception, f"Laboratorio · {metric} · {mode}")
 
 

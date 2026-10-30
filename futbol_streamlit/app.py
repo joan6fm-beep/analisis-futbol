@@ -3021,7 +3021,6 @@ def render_team_360():
         f"<div><h2>Primer Toque · Equipo 360º</h2><p>Qué hacemos nosotros, cuándo lo hacemos y qué consiguen los rivales contra nosotros · J1–J{int(md.jornada.max())}</p></div></div></div>",
         unsafe_allow_html=True,
     )
-    st.markdown(t360.section("1 · Resumen de rendimiento", "Resultados oficiales, clasificación y protagonistas de todos los partidos (casa y fuera)."), unsafe_allow_html=True)
     st.markdown(
         "<div class='t360-kpis'>"
         f"<div class='t360-kpi'><b>{pos}</b><span>Posición</span></div>"
@@ -3033,290 +3032,140 @@ def render_team_360():
         "</div>", unsafe_allow_html=True,
     )
 
-    st.markdown("<div class='t360-section'><div class='t360-title'>📈 Pulso de la temporada</div><div class='t360-sub'>Resultado, rival y cómo crecen los puntos y la diferencia de goles jornada a jornada.</div></div>", unsafe_allow_html=True)
-    c1,c2 = st.columns([1.15,.85])
-    with c1:
-        html_rows=["<div class='t360-card'>"]
-        for _,r in md.iterrows():
-            html_rows.append(
-                f"<div class='t360-match'><div class='t360-j'>J{int(r.jornada)}</div>"
-                f"<div class='t360-opp'>{_team_logo_tag(r.rival,22)} {_safe_html(short_team_name(r.rival))}<br><span style='font-size:.68rem;color:var(--muted)'>{r.condicion} · {r.sistema}</span></div>"
-                f"<div class='t360-score'>{int(r.gf)}–{int(r.gc)}</div><div class='t360-badge t360-{r.res}'>{r.res} · {int(r.pts_acum)} pts</div></div>"
-            )
-        html_rows.append("</div>")
-        st.markdown("".join(html_rows), unsafe_allow_html=True)
-    with c2:
-        st.markdown(
-            "<div class='t360-card'><div style='font-weight:900;color:var(--ink);margin-bottom:10px'>Radiografía rápida</div>"
-            f"<div class='t360-mini'><div><b>{first_for}</b><span>Marcamos primero</span></div><div><b>{first_against}</b><span>Encajamos primero</span></div><div><b>{sin_marcar}</b><span>Partidos sin marcar</span></div></div>"
-            f"<div class='t360-mini' style='margin-top:8px'><div><b>{gf_tot/pj:.2f}</b><span>GF / partido</span></div><div><b>{gc_tot/pj:.2f}</b><span>GC / partido</span></div><div><b>{pts_tot/pj:.2f}</b><span>Pts / partido</span></div></div>"
-            f"<div class='t360-mini' style='margin-top:8px'><div><b>{yellows}</b><span>Amarillas</span></div><div><b>{reds}</b><span>Expulsiones</span></div><div><b>{porterias_cero}</b><span>Sin encajar</span></div></div></div>",
-            unsafe_allow_html=True,
-        )
+    # Vista principal: tres niveles de lectura + la temporada en resultados.
+    _views = ["Resumen del partido", "Análisis por áreas", "Análisis avanzado", "Temporada"]
+    _view = st.segmented_control("Vista", _views, default=_views[0], key="eq_view") or _views[0]
 
-    # Evolución de la temporada (resultados oficiales: todos los partidos).
-    _ev1, _ev2 = st.columns(2, gap="medium")
-    with _ev1.container(border=True):
-        st.markdown("<div class='eq-panel-title'>Puntos acumulados</div><div class='eq-panel-sub'>V = victoria · E = empate · D = derrota. Pasa el cursor para ver rival y marcador.</div>", unsafe_allow_html=True)
-        st.plotly_chart(t360.fig_points(md), width="stretch", theme=None, config=ui_theme.PLOTLY_CONFIG, key="eq_points")
-    with _ev2.container(border=True):
-        st.markdown("<div class='eq-panel-title'>Posición en la clasificación</div><div class='eq-panel-sub'>Clasificación oficial tras cada jornada (1º arriba).</div>", unsafe_allow_html=True)
-        _pos_rows = clasif_t[clasif_t["equipo"] == TEAM][["jornada", "posicion"]].apply(pd.to_numeric, errors="coerce").dropna().sort_values("jornada")
-        if _pos_rows.empty:
-            st.info("Sin clasificación cargada.")
-        else:
-            st.plotly_chart(t360.fig_position(_pos_rows, int(clasif_t.groupby("jornada").equipo.nunique().max())), width="stretch", theme=None, config=ui_theme.PLOTLY_CONFIG, key="eq_pos")
-
-    st.markdown(t360.section("Cuándo marcamos y cuándo sufrimos", "Goles por tramos de 15 minutos en todos los partidos oficiales. Naranja = marcados · azul = encajados."), unsafe_allow_html=True)
-    with st.container(border=True):
-        st.plotly_chart(t360.fig_goal_timing(timing), width="stretch", theme=None, config=ui_theme.PLOTLY_CONFIG, key="eq_timing")
-
-    # Casa / fuera y primera acción decisiva.
-    st.markdown("<div class='t360-section'><div class='t360-title'>🏠 Casa vs ✈️ fuera</div><div class='t360-sub'>Dónde estamos convirtiendo el rendimiento en puntos y dónde se nos escapan.</div></div>", unsafe_allow_html=True)
-    cc1,cc2 = st.columns(2)
-    for col,cond,icon in [(cc1,"Casa","🏠"),(cc2,"Fuera","✈️")]:
-        d=md[md.condicion==cond]
-        p=len(d); pt=int(d.pts.sum()); gff=int(d.gf.sum()); gcc=int(d.gc.sum())
-        wins=int((d.res=="V").sum())
-        with col:
-            st.markdown(f"<div class='t360-card'><div style='font-weight:950;color:var(--ink)'>{icon} {cond}</div><div class='t360-mini' style='margin-top:10px'><div><b>{pt}</b><span>Puntos</span></div><div><b>{wins}/{p}</b><span>Victorias</span></div><div><b>{gff}-{gcc}</b><span>GF-GC</span></div></div></div>",unsafe_allow_html=True)
-
-    # PANEL EDITORIAL: lideres de plantilla y comparador Veo.
-    # Datos ausentes se mantienen como ausentes (nunca se convierten en cero).
-    minpt = minutos_t[minutos_t["equipo"] == TEAM].copy()
-    minpt["minutos"] = pd.to_numeric(minpt["minutos"], errors="coerce").fillna(0)
-    minagg = (minpt.groupby("jugador", as_index=False).agg(
-        minutos=("minutos", "sum"), titularidades=("titular", "sum"),
-        partidos=("jornada", "nunique")) if not minpt.empty else
-        pd.DataFrame(columns=["jugador", "minutos", "titularidades", "partidos"]))
-    scorers = (goals_for.groupby("jugador").size().reset_index(name="goles")
-               if not goals_for.empty else pd.DataFrame(columns=["jugador", "goles"]))
-    scorers = scorers.merge(minagg[["jugador", "minutos"]], on="jugador", how="left").fillna({"minutos":0})
-    scorers = scorers.sort_values(["goles", "minutos"], ascending=[False, True])
-
-    st.markdown("<div class='t360-section'><div class='t360-title'>Los protagonistas</div><div class='t360-sub'>Dos lecturas distintas: quién transforma las ocasiones en goles y quién acumula continuidad competitiva. No son puntuaciones de calidad.</div></div>", unsafe_allow_html=True)
-    def _leader_cards(frame, value_key, suffix, sub_key=None, limit=7):
-        if frame.empty:
-            return "<div class='v83-empty'>Todavía no hay registros disponibles.</div>"
-        data=frame.head(limit)
-        maxv=max(1.,float(pd.to_numeric(data[value_key],errors='coerce').max()))
-        cards=[]
-        for i,(_,r) in enumerate(data.iterrows(),1):
-            val=float(r[value_key]); pct=100*val/maxv
-            sub=(f" · {int(r[sub_key])} titularidades" if sub_key and sub_key in r else "")
-            cards.append(f"<div class='v83-leader'><span class='v83-rank'>{i:02}</span><div class='v83-leader-body'><div class='v83-leader-head'><b>{_safe_html(str(r['jugador']))}</b><strong>{int(val)} <small>{suffix}</small></strong></div><div class='v83-track'><i style='width:{pct:.1f}%'></i></div><span class='v83-leader-sub'>{sub.lstrip(' ·')}</span></div></div>")
-        return ''.join(cards)
-    leader_a, leader_b = st.columns(2, gap="medium")
-    with leader_a:
-        st.markdown("<div class='v83-panel-title'>⚽ Finalizadores <span>goles registrados</span></div>",unsafe_allow_html=True)
-        st.markdown("<div class='v83-panel'>"+_leader_cards(scorers,"goles","goles")+"</div>",unsafe_allow_html=True)
-    with leader_b:
-        st.markdown("<div class='v83-panel-title'>⏱️ Columna vertebral <span>minutos jugados</span></div>",unsafe_allow_html=True)
-        st.markdown("<div class='v83-panel'>"+_leader_cards(minagg.sort_values("minutos",ascending=False),"minutos","min", "titularidades")+"</div>",unsafe_allow_html=True)
-
-    # ------------------------------------------------------------------ Estadísticas Veo (solo casa)
     T = t360
+    A = t360adv
     veo = T.prepare(avanzado_t, short_team_name)
+    _goals = {int(r.jornada): (int(r.gf), int(r.gc)) for _, r in md[md.condicion == "Casa"].iterrows()}
+    _pending_j7 = ("Pendiente de revisión · J7 ocasiones de Primer Toque: la app conserva 14 (mapa de ocasiones de Veo); "
+                   "el resumen de Veo muestra 13.")
+
+    if _view == "Temporada":
+        st.markdown("<div class='t360-section'><div class='t360-title'>📈 Pulso de la temporada</div><div class='t360-sub'>Resultado, rival y cómo crecen los puntos y la diferencia de goles jornada a jornada.</div></div>", unsafe_allow_html=True)
+        c1,c2 = st.columns([1.15,.85])
+        with c1:
+            html_rows=["<div class='t360-card'>"]
+            for _,r in md.iterrows():
+                html_rows.append(
+                    f"<div class='t360-match'><div class='t360-j'>J{int(r.jornada)}</div>"
+                    f"<div class='t360-opp'>{_team_logo_tag(r.rival,22)} {_safe_html(short_team_name(r.rival))}<br><span style='font-size:.68rem;color:var(--muted)'>{r.condicion} · {r.sistema}</span></div>"
+                    f"<div class='t360-score'>{int(r.gf)}–{int(r.gc)}</div><div class='t360-badge t360-{r.res}'>{r.res} · {int(r.pts_acum)} pts</div></div>"
+                )
+            html_rows.append("</div>")
+            st.markdown("".join(html_rows), unsafe_allow_html=True)
+        with c2:
+            st.markdown(
+                "<div class='t360-card'><div style='font-weight:900;color:var(--ink);margin-bottom:10px'>Radiografía rápida</div>"
+                f"<div class='t360-mini'><div><b>{first_for}</b><span>Marcamos primero</span></div><div><b>{first_against}</b><span>Encajamos primero</span></div><div><b>{sin_marcar}</b><span>Partidos sin marcar</span></div></div>"
+                f"<div class='t360-mini' style='margin-top:8px'><div><b>{gf_tot/pj:.2f}</b><span>GF / partido</span></div><div><b>{gc_tot/pj:.2f}</b><span>GC / partido</span></div><div><b>{pts_tot/pj:.2f}</b><span>Pts / partido</span></div></div>"
+                f"<div class='t360-mini' style='margin-top:8px'><div><b>{yellows}</b><span>Amarillas</span></div><div><b>{reds}</b><span>Expulsiones</span></div><div><b>{porterias_cero}</b><span>Sin encajar</span></div></div></div>",
+                unsafe_allow_html=True,
+            )
+
+        # Evolución de la temporada (resultados oficiales: todos los partidos).
+        _ev1, _ev2 = st.columns(2, gap="medium")
+        with _ev1.container(border=True):
+            st.markdown("<div class='eq-panel-title'>Puntos acumulados</div><div class='eq-panel-sub'>V = victoria · E = empate · D = derrota. Pasa el cursor para ver rival y marcador.</div>", unsafe_allow_html=True)
+            st.plotly_chart(t360.fig_points(md), width="stretch", theme=None, config=ui_theme.PLOTLY_CONFIG, key="eq_points")
+        with _ev2.container(border=True):
+            st.markdown("<div class='eq-panel-title'>Posición en la clasificación</div><div class='eq-panel-sub'>Clasificación oficial tras cada jornada (1º arriba).</div>", unsafe_allow_html=True)
+            _pos_rows = clasif_t[clasif_t["equipo"] == TEAM][["jornada", "posicion"]].apply(pd.to_numeric, errors="coerce").dropna().sort_values("jornada")
+            if _pos_rows.empty:
+                st.info("Sin clasificación cargada.")
+            else:
+                st.plotly_chart(t360.fig_position(_pos_rows, int(clasif_t.groupby("jornada").equipo.nunique().max())), width="stretch", theme=None, config=ui_theme.PLOTLY_CONFIG, key="eq_pos")
+
+        st.markdown(t360.section("Cuándo marcamos y cuándo sufrimos", "Goles por tramos de 15 minutos en todos los partidos oficiales. Naranja = marcados · azul = encajados."), unsafe_allow_html=True)
+        with st.container(border=True):
+            st.plotly_chart(t360.fig_goal_timing(timing), width="stretch", theme=None, config=ui_theme.PLOTLY_CONFIG, key="eq_timing")
+
+        # Casa / fuera y primera acción decisiva.
+        st.markdown("<div class='t360-section'><div class='t360-title'>🏠 Casa vs ✈️ fuera</div><div class='t360-sub'>Dónde estamos convirtiendo el rendimiento en puntos y dónde se nos escapan.</div></div>", unsafe_allow_html=True)
+        cc1,cc2 = st.columns(2)
+        for col,cond,icon in [(cc1,"Casa","🏠"),(cc2,"Fuera","✈️")]:
+            d=md[md.condicion==cond]
+            p=len(d); pt=int(d.pts.sum()); gff=int(d.gf.sum()); gcc=int(d.gc.sum())
+            wins=int((d.res=="V").sum())
+            with col:
+                st.markdown(f"<div class='t360-card'><div style='font-weight:950;color:var(--ink)'>{icon} {cond}</div><div class='t360-mini' style='margin-top:10px'><div><b>{pt}</b><span>Puntos</span></div><div><b>{wins}/{p}</b><span>Victorias</span></div><div><b>{gff}-{gcc}</b><span>GF-GC</span></div></div></div>",unsafe_allow_html=True)
+
+        # PANEL EDITORIAL: lideres de plantilla y comparador Veo.
+        # Datos ausentes se mantienen como ausentes (nunca se convierten en cero).
+        minpt = minutos_t[minutos_t["equipo"] == TEAM].copy()
+        minpt["minutos"] = pd.to_numeric(minpt["minutos"], errors="coerce").fillna(0)
+        minagg = (minpt.groupby("jugador", as_index=False).agg(
+            minutos=("minutos", "sum"), titularidades=("titular", "sum"),
+            partidos=("jornada", "nunique")) if not minpt.empty else
+            pd.DataFrame(columns=["jugador", "minutos", "titularidades", "partidos"]))
+        scorers = (goals_for.groupby("jugador").size().reset_index(name="goles")
+                   if not goals_for.empty else pd.DataFrame(columns=["jugador", "goles"]))
+        scorers = scorers.merge(minagg[["jugador", "minutos"]], on="jugador", how="left").fillna({"minutos":0})
+        scorers = scorers.sort_values(["goles", "minutos"], ascending=[False, True])
+
+        st.markdown("<div class='t360-section'><div class='t360-title'>Los protagonistas</div><div class='t360-sub'>Dos lecturas distintas: quién transforma las ocasiones en goles y quién acumula continuidad competitiva. No son puntuaciones de calidad.</div></div>", unsafe_allow_html=True)
+        def _leader_cards(frame, value_key, suffix, sub_key=None, limit=7):
+            if frame.empty:
+                return "<div class='v83-empty'>Todavía no hay registros disponibles.</div>"
+            data=frame.head(limit)
+            maxv=max(1.,float(pd.to_numeric(data[value_key],errors='coerce').max()))
+            cards=[]
+            for i,(_,r) in enumerate(data.iterrows(),1):
+                val=float(r[value_key]); pct=100*val/maxv
+                sub=(f" · {int(r[sub_key])} titularidades" if sub_key and sub_key in r else "")
+                cards.append(f"<div class='v83-leader'><span class='v83-rank'>{i:02}</span><div class='v83-leader-body'><div class='v83-leader-head'><b>{_safe_html(str(r['jugador']))}</b><strong>{int(val)} <small>{suffix}</small></strong></div><div class='v83-track'><i style='width:{pct:.1f}%'></i></div><span class='v83-leader-sub'>{sub.lstrip(' ·')}</span></div></div>")
+            return ''.join(cards)
+        leader_a, leader_b = st.columns(2, gap="medium")
+        with leader_a:
+            st.markdown("<div class='v83-panel-title'>⚽ Finalizadores <span>goles registrados</span></div>",unsafe_allow_html=True)
+            st.markdown("<div class='v83-panel'>"+_leader_cards(scorers,"goles","goles")+"</div>",unsafe_allow_html=True)
+        with leader_b:
+            st.markdown("<div class='v83-panel-title'>⏱️ Columna vertebral <span>minutos jugados</span></div>",unsafe_allow_html=True)
+            st.markdown("<div class='v83-panel'>"+_leader_cards(minagg.sort_values("minutos",ascending=False),"minutos","min", "titularidades")+"</div>",unsafe_allow_html=True)
+
+        if not veo.empty:
+            _share_all = T.share_table(veo, [m[0] for m in T.METRICS])
+            _eff = T.efficiency(veo, _goals)
+            st.markdown(T.section("La temporada en vídeo", "Medias de los partidos en casa medidos con Veo."), unsafe_allow_html=True)
+            st.markdown(T.kpi_tiles_html(veo), unsafe_allow_html=True)
+            _ins = T.insights(veo, _share_all, _eff)
+            if _ins:
+                st.markdown(f"<div class='eq-insights'><div class='eq-insights-title'>Lectura rápida</div><ul>{_ins}</ul></div>", unsafe_allow_html=True)
+        return
+
     _home_label = ", ".join(f"J{int(j)}" for j in veo.jornada) or "sin partidos"
-    st.markdown(T.section("Panel de rendimiento · estadísticas de vídeo",
-                          "Partidos en casa medidos con Veo. — = sin registro.",
-                          f"Solo partidos en casa · {_home_label}"), unsafe_allow_html=True)
+    _titles = {"Resumen del partido": ("Resumen del partido", "Elige un partido: cada indicador frente a la media habitual en casa."),
+               "Análisis por áreas": ("Análisis por áreas", "Una pregunta y un gráfico principal por área; el resto, en «Más indicadores»."),
+               "Análisis avanzado": ("Análisis avanzado", "Herramientas de comparación: elige una.")}
+    st.markdown(T.section(*_titles[_view], f"Partidos en casa con vídeo · {_home_label}"), unsafe_allow_html=True)
     if veo.empty:
         st.info("Todavía no hay partidos en casa con estadísticas de vídeo.")
         return
-    _goals = {int(r.jornada): (int(r.gf), int(r.gc)) for _, r in md[md.condicion == "Casa"].iterrows()}
+    st.markdown(A.CSS, unsafe_allow_html=True)
     _share_all = T.share_table(veo, [m[0] for m in T.METRICS])
     _eff = T.efficiency(veo, _goals)
-    _pending_j7 = ("Pendiente de revisión · J7 ocasiones de Primer Toque: la app conserva 14 (mapa de ocasiones de Veo); "
-                   "el resumen de Veo muestra 13. Se mantiene 14 hasta confirmar la definición.")
-    st.markdown(T.kpi_tiles_html(veo), unsafe_allow_html=True)
-    _ins = T.insights(veo, _share_all, _eff)
-    if _ins:
-        st.markdown(f"<div class='eq-insights'><div class='eq-insights-title'>Lectura rápida</div><ul>{_ins}</ul></div>", unsafe_allow_html=True)
-    st.markdown(T.trend_cards_html(veo), unsafe_allow_html=True)
-
-    def _plot(fig, key):
-        if fig is not None:
-            st.plotly_chart(fig, width="stretch", theme=None, config=ui_theme.PLOTLY_CONFIG, key=key)
-
-    def _panel(title, sub=""):
-        st.markdown(f"<div class='eq-panel-title'>{_safe_html(title)}</div><div class='eq-panel-sub'>{_safe_html(sub)}</div>", unsafe_allow_html=True)
-
-    def _share_block(block, key):
-        tbl = _share_all[_share_all.block == block]
-        if tbl.empty:
-            return
-        with st.container(border=True):
-            _panel(f"Cuota de cada equipo · {block}", "Media por partido · línea = 50%")
-            _plot(T.fig_share(tbl), key)
-
-    # Modos de análisis: el panel por bloques es el de siempre; los demás amplían el análisis.
-    _modes = ["Panel por bloques", "Preparar partido", "Análisis del rival", "Laboratorio", "Temporadas"]
-    _mode = st.pills("Modo de análisis", _modes, default=_modes[0], key="adv_mode") or _modes[0]
-    if _mode != _modes[0]:
-        A = t360adv
-        st.markdown(A.CSS, unsafe_allow_html=True)
-        _pt_tm = A.team_matches(partidos_t, TEAM)
-        if _mode == "Preparar partido":
-            A.render_prepare(veo, _pt_tm, partidos_t, short_team_name, _goals)
-        elif _mode == "Análisis del rival":
-            _sel_j = st.session_state.get("adv_j")
-            _def = veo.loc[veo.jornada == _sel_j, "rival"].iloc[0] if _sel_j in set(veo.jornada) else veo.rival.iloc[-1]
-            A.render_rival(veo, partidos_t, clasif_t, short_team_name, _def)
-        elif _mode == "Laboratorio":
-            A.render_lab(veo, _pt_tm, A.load_seasons(DATA))
-        else:
-            A.render_seasons(A.load_seasons(DATA), short_team_name)
-        return
-
-    tabs = st.tabs(["2 · Posesión", "3 · Construcción y pase", "4 · Ataque",
-                    "5 · Duelos y defensa", "6 · Balón parado", "7 · Evolución"])
-
-    with tabs[0]:
-        c1, c2 = st.columns([1, 1], gap="medium")
-        with c1.container(border=True):
-            _panel("Posesión por partido", "Porcentaje de posesión de cada equipo según Veo.")
-            _plot(T.fig_possession(veo), "eq_possession")
-        with c2.container(border=True):
-            _panel("Dónde circula el balón", "Pases completados (y posesión cuando Veo la aporta) por tercio del campo.")
-            _zf = T.fig_zones(veo)
-            if _zf is None:
-                st.info("Veo todavía no ha aportado distribución por zonas.")
-            else:
-                _plot(_zf, "eq_zones")
-        _share_block("Posesión", "eq_share_pos")
-
-    with tabs[1]:
-        with st.container(border=True):
-            _panel("Volumen y calidad del pase", "Pases totales, completados y precisión de cada equipo, partido a partido.")
-            _plot(T.fig_multiples(veo, ["Pases totales", "Pases completados", "Precisión de pase"], cols=3), "eq_pass_multi")
-        c1, c2 = st.columns([1, 1], gap="medium")
-        with c1.container(border=True):
-            _panel("Progresión: pases hacia delante", "Pases hacia delante acertados sobre intentados y porcentaje de acierto por partido.")
-            _f = T.fig_forward(veo)
-            if _f is None:
-                st.info("Sin registros de pases hacia delante.")
-            else:
-                _plot(_f, "eq_forward")
-        with c2:
-            _share_block("Pase", "eq_share_pass")
-
-    with tabs[2]:
-        c1, c2 = st.columns([1, 1], gap="medium")
-        with c1.container(border=True):
-            _panel("Intentos de tiro: dentro y fuera del área", "Intentos de Veo (incluyen los goles).")
-            _f = T.fig_attempts(veo, _goals)
-            if _f is None:
-                st.info("Sin registros de intentos.")
-            else:
-                _plot(_f, "eq_attempts")
-        with c2.container(border=True):
-            _panel("Eficacia", "Goles oficiales ÷ tiros registrados en ese partido.")
-            if _eff.empty or not (_eff.conv_pt.notna().any() or _eff.conv_rv.notna().any()):
-                st.info("No hay partidos con goles y tiros registrados a la vez.")
-            else:
-                _plot(T.fig_efficiency(_eff), "eq_eff")
-        with st.container(border=True):
-            _panel("Producción ofensiva por partido", "Cada panel tiene su propia escala.")
-            _plot(T.fig_multiples(veo, ["Tiros", "Ocasiones", "Regates", "Asistencias"], cols=2), "eq_att_multi")
-            st.caption(_pending_j7)
-        _share_block("Ataque", "eq_share_att")
-
-    with tabs[3]:
-        with st.container(border=True):
-            _panel("Duelos y acciones defensivas", "Volumen por partido. Cada panel tiene su propia escala.")
-            _plot(T.fig_multiples(veo, ["Duelos", "Entradas / contactos", "Recuperaciones", "Intercepciones", "Faltas cometidas", "Pérdidas"], cols=3), "eq_def_multi")
-        _share_block("Defensa", "eq_share_def")
-
-    with tabs[4]:
-        with st.container(border=True):
-            _panel("Balón parado", "Córneres, faltas lanzadas, saques de banda y penaltis de cada equipo.")
-            _plot(T.fig_multiples(veo, ["Córneres", "Faltas lanzadas", "Saques de banda", "Penaltis"], cols=2), "eq_sp_multi")
-        _share_block("Balón parado", "eq_share_sp")
-
-    with tabs[5]:
-        # Producción por jornada: una tarjeta por partido medido.
-        st.markdown(T.section("Producción por jornada", "Partido a partido."), unsafe_allow_html=True)
+    _pt_tm = A.team_matches(partidos_t, TEAM)
+    if _view == "Resumen del partido":
+        A.render_match_summary(veo, _pt_tm, _goals, _pending_j7)
+    elif _view == "Análisis por áreas":
         _per_match_cols = [
             ("Posesión", "posesion_favor_pct"), ("Precisión", "precision_pase_favor_pct"), ("Intentos", "intentos_favor"),
             ("Tiros", "tiros_favor"), ("Ocasiones", "ocasiones_favor"), ("Córneres", "corners_favor"),
             ("Duelos", "duelos_favor"), ("Entradas", "entradas_favor"), ("Saques banda", "saques_banda_favor")]
-        _match_cards=[]
-        for _,_r in veo.iterrows():
-            _parts=[]
-            for _label,_key in _per_match_cols:
-                _v=pd.to_numeric(_r.get(_key),errors="coerce")
-                _txt=(f"{_v:g}" + ("%" if _key.endswith("_pct") else "") if pd.notna(_v) else "—")
+        _match_cards = []
+        for _, _r in veo.iterrows():
+            _parts = []
+            for _label, _key in _per_match_cols:
+                _v = pd.to_numeric(_r.get(_key), errors="coerce")
+                _txt = (f"{_v:g}" + ("%" if _key.endswith("_pct") else "") if pd.notna(_v) else "—")
                 _parts.append(f"<div class='pro84-match-metric'><strong>{_txt}</strong><span>{_label}</span></div>")
             _gf, _gc = _goals.get(int(_r.jornada), ("", ""))
             _match_cards.append(f"<div class='pro84-match'><header><strong>J{int(_r['jornada'])}</strong><span>{_safe_html(_r.rival_corto)}</span><em>{_gf}–{_gc}</em></header><section>{''.join(_parts)}</section></div>")
-        st.markdown("<div class='pro84-match-grid'>"+''.join(_match_cards)+"</div>",unsafe_allow_html=True)
-
-        # Radiografía del juego: cuota por bloque + radar de volumen.
-        st.markdown(T.section("Radiografía del juego", "Qué parte del total produce cada equipo."), unsafe_allow_html=True)
-        grupo=st.segmented_control("Bloque de análisis",T.BLOCKS,default="Ataque",key="v83_group")
-        _g1, _g2 = st.columns([1.25, 1], gap="medium")
-        with _g1.container(border=True):
-            _tbl = _share_all[_share_all.block == (grupo or "Ataque")]
-            _panel(f"Cuota por métrica · {grupo or 'Ataque'}", "Naranja: Primer Toque · Azul: rival · Línea punteada: 50% (igualdad)")
-            if _tbl.empty:
-                st.info("No hay pares de datos de ambos equipos para este bloque.")
-            else:
-                _plot(T.fig_share(_tbl), "eq_share")
-        with _g2.container(border=True):
-            _radar_opts = ["Todos los partidos comparables"] + [f"J{int(j)}" for j in veo.jornada]
-            _rsel = st.selectbox("Radar de volumen", _radar_opts, key="eq_radar_sel")
-            _rj = None if _rsel == _radar_opts[0] else int(_rsel[1:])
-            _rfig, _raxes, _rjs = T.fig_radar(veo, _rj)
-            if _rfig is None:
-                st.info("Este partido no tiene al menos tres métricas de volumen con dato de ambos equipos; el radar no sería comparable.")
-            else:
-                _plot(_rfig, "eq_radar")
-                st.caption(f"Cuota de Primer Toque (PT ÷ total) · {', '.join(f'J{j}' for j in _rjs)} · 50% = igualdad.")
-
-        # Comparador por métrica y comparación entre dos jornadas.
-        st.markdown(T.section("Comparador de rendimiento", "Cualquier métrica, jornada a jornada o dos jornadas cara a cara."), unsafe_allow_html=True)
-        _avail = [m[0] for m in T.available_metrics(veo)]
-        a,b=st.columns([1.25,1],gap="medium")
-        with a:
-            sel=st.selectbox("Indicador", _avail, key="v83_metric")
-        with b:
-            view=st.radio("Visualización",["Jornada a jornada","Comparar dos jornadas"],horizontal=True,key="v83_view")
-        _, fav, against, _unit, _better, _ = T.METRIC_BY_LABEL[sel]
-        adv = veo.dropna(subset=[fav, against], how="all")
-        jornadas=[int(x) for x in veo.jornada]
-        shown_j = None
-        if view=="Comparar dos jornadas" and len(jornadas)>=2:
-            p1,p2=st.columns(2)
-            with p1: ja=st.selectbox("Primera jornada",jornadas,index=0,key="v83_ja",format_func=lambda j: veo.loc[veo.jornada==j,"etiqueta"].iloc[0])
-            with p2: jb=st.selectbox("Segunda jornada",jornadas,index=len(jornadas)-1,key="v83_jb",format_func=lambda j: veo.loc[veo.jornada==j,"etiqueta"].iloc[0])
-            shown_j = [ja, jb]
-            st.markdown(T.compare_two_html(veo, ja, jb), unsafe_allow_html=True)
-        if adv.empty:
-            st.info("Aún no existen mediciones de este indicador. No se representan valores ficticios.")
-        else:
-            _plot(T.fig_metric_by_match(adv, sel, shown_j), "eq_metric")
-            valid_own=adv[fav].dropna(); valid_rival=adv[against].dropna()
-            joint=adv.dropna(subset=[fav,against])
-            m1,m2,m3=st.columns(3)
-            m1.metric("Media Primer Toque",f"{valid_own.mean():.1f}" if len(valid_own) else "—",help=f"Media sobre {len(valid_own)} partidos con dato")
-            if against == T.NONE:
-                _best = adv.loc[adv[fav].idxmax()] if len(valid_own) else None
-                m2.metric("Mejor partido", f"{_best[fav]:g}" if _best is not None else "—", _best.etiqueta if _best is not None else None, delta_color="off")
-                m3.metric("Partidos con dato", f"{len(valid_own)}")
-            else:
-                m2.metric("Media rivales",f"{valid_rival.mean():.1f}" if len(valid_rival) else "—",help=f"Media sobre {len(valid_rival)} partidos con dato del rival")
-                m3.metric("Diferencia comparable",f"{(joint[fav]-joint[against]).mean():+.1f}" if len(joint) else "—",help=f"Diferencia promedio solo en {len(joint)} partidos con ambos valores")
-            if shown_j:
-                x=adv.loc[adv.jornada==shown_j[0],fav].dropna(); y=adv.loc[adv.jornada==shown_j[1],fav].dropna()
-                if len(x) and len(y): st.caption(f"Primer Toque: J{shown_j[0]} → J{shown_j[1]}: {x.iloc[0]:g} → {y.iloc[0]:g} (variación {y.iloc[0]-x.iloc[0]:+g}).")
-            if against != T.NONE:
-                st.caption(f"{len(joint)} partidos comparables.")
-
-        # Tabla completa: todas las métricas disponibles.
-        st.markdown(T.section("Todas las métricas", "Primer Toque · rival."), unsafe_allow_html=True)
-        st.dataframe(T.data_table(veo), hide_index=True, width="stretch")
-        st.caption(_pending_j7 + " Gol de Sebas en J2 (62'): marcado dentro del área (corrección confirmada).")
+        A.render_areas(veo, _goals, _eff, _share_all, _pending_j7, "<div class='pro84-match-grid'>" + "".join(_match_cards) + "</div>")
+    else:
+        A.render_advanced(veo, _pt_tm, partidos_t, clasif_t, short_team_name, _goals, _share_all, A.load_seasons(DATA))
 
 
 st.markdown("""<style>
