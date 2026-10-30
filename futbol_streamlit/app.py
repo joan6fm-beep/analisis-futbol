@@ -2998,6 +2998,7 @@ def render_team_360():
         f"<div><h2>Primer Toque · Equipo 360º</h2><p>Qué hacemos nosotros, cuándo lo hacemos y qué consiguen los rivales contra nosotros · J1–J{int(md.jornada.max())}</p></div></div></div>",
         unsafe_allow_html=True,
     )
+    st.markdown(t360.section("1 · Resumen de rendimiento", "Resultados oficiales, clasificación y protagonistas de todos los partidos (casa y fuera)."), unsafe_allow_html=True)
     st.markdown(
         "<div class='t360-kpis'>"
         f"<div class='t360-kpi'><b>{pos}</b><span>Posición</span></div>"
@@ -3094,8 +3095,8 @@ def render_team_360():
     T = t360
     veo = T.prepare(avanzado_t, short_team_name)
     _home_label = ", ".join(f"J{int(j)}" for j in veo.jornada) or "sin partidos"
-    st.markdown(T.section("Rendimiento colectivo · estadísticas de vídeo",
-                          "Primer Toque frente a cada rival en los partidos medidos. — o «sin dato» indica que no existe registro; nunca cuenta como cero.",
+    st.markdown(T.section("Panel de rendimiento · estadísticas de vídeo",
+                          "Primer Toque frente a cada rival en los partidos medidos con Veo. — indica que no existe registro; nunca cuenta como cero.",
                           f"Solo partidos en casa · {_home_label}"), unsafe_allow_html=True)
     if veo.empty:
         st.info("Todavía no hay partidos en casa con estadísticas de vídeo.")
@@ -3103,104 +3104,178 @@ def render_team_360():
     _goals = {int(r.jornada): (int(r.gf), int(r.gc)) for _, r in md[md.condicion == "Casa"].iterrows()}
     _share_all = T.share_table(veo, [m[0] for m in T.METRICS])
     _eff = T.efficiency(veo, _goals)
+    _pending_j7 = ("Pendiente de revisión · J7 ocasiones de Primer Toque: la app conserva 14 (mapa de ocasiones de Veo); "
+                   "el resumen de Veo muestra 13. Se mantiene 14 hasta confirmar la definición.")
+    st.markdown(T.kpi_tiles_html(veo), unsafe_allow_html=True)
     _ins = T.insights(veo, _share_all, _eff)
     if _ins:
         st.markdown(f"<div class='eq-insights'><div class='eq-insights-title'>Lectura rápida</div><ul>{_ins}</ul></div>", unsafe_allow_html=True)
     st.markdown(T.trend_cards_html(veo), unsafe_allow_html=True)
 
-    # Producción por jornada: una tarjeta por partido medido.
-    st.markdown(T.section("Producción por jornada", f"Nuestra evolución, partido a partido. Cada cifra es un registro real. {_stats_scope}"), unsafe_allow_html=True)
-    _per_match_cols = [
-        ("Tiros", "tiros_favor"), ("A puerta", "tiros_puerta_favor"),
-        ("Ocasiones", "ocasiones_favor"), ("Córneres", "corners_favor"),
-        ("Entradas", "entradas_favor"), ("Saques banda", "saques_banda_favor")]
-    _match_cards=[]
-    for _,_r in veo.iterrows():
-        _parts=[]
-        for _label,_key in _per_match_cols:
-            _v=pd.to_numeric(_r.get(_key),errors="coerce")
-            _txt=(f"{_v:g}" if pd.notna(_v) else "—")
-            _parts.append(f"<div class='pro84-match-metric'><strong>{_txt}</strong><span>{_label}</span></div>")
-        _gf, _gc = _goals.get(int(_r.jornada), ("", ""))
-        _match_cards.append(f"<div class='pro84-match'><header><strong>J{int(_r['jornada'])}</strong><span>{_safe_html(_r.rival_corto)}</span><em>{_gf}–{_gc}</em></header><section>{''.join(_parts)}</section></div>")
-    st.markdown("<div class='pro84-match-grid'>"+''.join(_match_cards)+"</div>",unsafe_allow_html=True)
+    def _plot(fig, key):
+        if fig is not None:
+            st.plotly_chart(fig, width="stretch", theme=None, config=ui_theme.PLOTLY_CONFIG, key=key)
 
-    # Radiografía del juego: cuota de cada equipo por métrica + radar de volumen.
-    st.markdown(T.section("Radiografía del juego", "Medias por partido sobre los partidos con dato de ambos equipos. La barra muestra qué parte del total produce cada equipo; los valores son medias reales."), unsafe_allow_html=True)
-    grupo=st.segmented_control("Bloque de análisis",["Ataque","Territorio","Contacto"],default="Ataque",key="v83_group")
-    _g1, _g2 = st.columns([1.25, 1], gap="medium")
-    with _g1.container(border=True):
-        _tbl = _share_all[_share_all.block == (grupo or "Ataque")]
-        st.markdown(f"<div class='eq-panel-title'>Cuota por métrica · {_safe_html(grupo or 'Ataque')}</div>"
-                    "<div class='eq-panel-sub'>Naranja: Primer Toque · Azul: rival · Línea punteada: 50% (igualdad)</div>", unsafe_allow_html=True)
-        if _tbl.empty:
-            st.info("No hay pares de datos para este bloque; se mostrará al incorporar las estadísticas de vídeo.")
-        else:
-            st.plotly_chart(T.fig_share(_tbl), width="stretch", theme=None, config=ui_theme.PLOTLY_CONFIG, key="eq_share")
-            st.caption(" · ".join(f"{r.metric}: {r.n} partidos ({r.jornadas})" for _, r in _tbl.iterrows()))
-    with _g2.container(border=True):
-        _radar_opts = ["Todos los partidos comparables"] + [f"J{int(j)}" for j in veo.jornada]
-        _rsel = st.selectbox("Radar de volumen", _radar_opts, key="eq_radar_sel")
-        _rj = None if _rsel == _radar_opts[0] else int(_rsel[1:])
-        _rfig, _raxes, _rjs = T.fig_radar(veo, _rj)
-        if _rfig is None:
-            st.info("Este partido no tiene al menos tres métricas de volumen con dato de ambos equipos; el radar no sería comparable.")
-        else:
-            st.plotly_chart(_rfig, width="stretch", theme=None, config=ui_theme.PLOTLY_CONFIG, key="eq_radar")
-            st.caption(f"Cuota de Primer Toque sobre el total de cada acción (PT ÷ (PT + rival)) en {', '.join(f'J{j}' for j in _rjs)}. "
-                       "Solo métricas de volumen con ambos valores en todos esos partidos; 50% = igualdad. No mide calidad.")
-    st.caption("Las recuperaciones y pérdidas solo aparecen cuando Veo ofrece esos registros. Saques de banda o córneres son volúmenes de acciones, no un mapa real de territorio.")
+    def _panel(title, sub=""):
+        st.markdown(f"<div class='eq-panel-title'>{_safe_html(title)}</div><div class='eq-panel-sub'>{_safe_html(sub)}</div>", unsafe_allow_html=True)
 
-    # Comparador por métrica y comparación entre dos jornadas.
-    st.markdown(T.section("Comparador de rendimiento", "Una métrica cada vez: Primer Toque frente al rival de cada jornada, o dos jornadas cara a cara con todas las métricas."), unsafe_allow_html=True)
-    _avail = [m[0] for m in T.available_metrics(veo)]
-    a,b=st.columns([1.25,1],gap="medium")
-    with a:
-        sel=st.selectbox("Indicador", _avail, key="v83_metric")
-    with b:
-        view=st.radio("Visualización",["Jornada a jornada","Comparar dos jornadas"],horizontal=True,key="v83_view")
-    _, fav, against, _unit, _better, _ = T.METRIC_BY_LABEL[sel]
-    adv = veo.dropna(subset=[fav, against], how="all")
-    jornadas=[int(x) for x in veo.jornada]
-    shown_j = None
-    if view=="Comparar dos jornadas" and len(jornadas)>=2:
-        p1,p2=st.columns(2)
-        with p1: ja=st.selectbox("Primera jornada",jornadas,index=0,key="v83_ja",format_func=lambda j: veo.loc[veo.jornada==j,"etiqueta"].iloc[0])
-        with p2: jb=st.selectbox("Segunda jornada",jornadas,index=len(jornadas)-1,key="v83_jb",format_func=lambda j: veo.loc[veo.jornada==j,"etiqueta"].iloc[0])
-        shown_j = [ja, jb]
-        st.markdown(T.compare_two_html(veo, ja, jb), unsafe_allow_html=True)
-        st.caption("Variación de Primer Toque entre las dos jornadas: ▲ sube, ▼ baja. Verde = mejora y rojo = empeora solo en métricas con dirección clara; en volúmenes neutros (saques de banda, entradas) se muestra en gris.")
-    if adv.empty:
-        st.info("Aún no existen mediciones de este indicador. No se representan valores ficticios.")
-    else:
-        st.plotly_chart(T.fig_metric_by_match(adv, sel, shown_j), width="stretch", theme=None, config=ui_theme.PLOTLY_CONFIG, key="eq_metric")
-        valid_own=adv[fav].dropna(); valid_rival=adv[against].dropna()
-        joint=adv.dropna(subset=[fav,against])
-        m1,m2,m3=st.columns(3)
-        m1.metric("Media Primer Toque",f"{valid_own.mean():.1f}" if len(valid_own) else "—",help=f"Media sobre {len(valid_own)} partidos con dato propio")
-        m2.metric("Media rivales",f"{valid_rival.mean():.1f}" if len(valid_rival) else "—",help=f"Media sobre {len(valid_rival)} partidos con dato rival")
-        m3.metric("Diferencia comparable",f"{(joint[fav]-joint[against]).mean():+.1f}" if len(joint) else "—",help=f"Diferencia promedio solo en {len(joint)} partidos con ambos valores")
-        if shown_j:
-            x=adv.loc[adv.jornada==shown_j[0],fav].dropna(); y=adv.loc[adv.jornada==shown_j[1],fav].dropna()
-            if len(x) and len(y): st.caption(f"Primer Toque: J{shown_j[0]} → J{shown_j[1]}: {x.iloc[0]:g} → {y.iloc[0]:g} (variación {y.iloc[0]-x.iloc[0]:+g}).")
-        st.caption(f"Cobertura: {len(valid_own)} jornadas con dato nuestro; {len(valid_rival)} con dato rival; {len(joint)} pares comparables. La media rival es la de nuestros contrincantes en los partidos registrados, no la media de toda la liga. Los vacíos no cuentan como cero.")
+    def _share_block(block, key):
+        tbl = _share_all[_share_all.block == block]
+        if tbl.empty:
+            return
+        with st.container(border=True):
+            _panel(f"Cuota de cada equipo · {block}", "Media por partido sobre los partidos con dato de ambos equipos. Naranja: Primer Toque · azul: rival · línea: 50%.")
+            _plot(T.fig_share(tbl), key)
+            st.caption(" · ".join(f"{r.metric}: {r.n} partidos ({r.jornadas})" for _, r in tbl.iterrows()))
 
-    # Eficacia y distribución territorial.
-    st.markdown(T.section("Eficacia y territorio", "Goles oficiales del resultado divididos entre los tiros registrados en ese partido."), unsafe_allow_html=True)
-    e1, e2 = st.columns([1.25, 1], gap="medium")
-    with e1.container(border=True):
-        if _eff.empty or not (_eff.conv_pt.notna().any() or _eff.conv_rv.notna().any()):
-            st.info("No hay partidos con goles y tiros registrados a la vez.")
+    tabs = st.tabs(["2 · Posesión", "3 · Construcción y pase", "4 · Ataque",
+                    "5 · Duelos y defensa", "6 · Balón parado", "7 · Evolución"])
+
+    with tabs[0]:
+        c1, c2 = st.columns([1, 1], gap="medium")
+        with c1.container(border=True):
+            _panel("Posesión por partido", "Porcentaje de posesión de cada equipo según Veo.")
+            _plot(T.fig_possession(veo), "eq_possession")
+        with c2.container(border=True):
+            _panel("Dónde circula el balón", "Pases completados (y posesión cuando Veo la aporta) por tercio del campo.")
+            _zf = T.fig_zones(veo)
+            if _zf is None:
+                st.info("Veo todavía no ha aportado distribución por zonas.")
+            else:
+                _plot(_zf, "eq_zones")
+                st.caption("Suma por tercios de la rejilla «Localización de pases» de Veo (puede sumar 98–100% por redondeo).")
+        _share_block("Posesión", "eq_share_pos")
+
+    with tabs[1]:
+        with st.container(border=True):
+            _panel("Volumen y calidad del pase", "Pases totales, completados y precisión de cada equipo, partido a partido.")
+            _plot(T.fig_multiples(veo, ["Pases totales", "Pases completados", "Precisión de pase"], cols=3), "eq_pass_multi")
+        c1, c2 = st.columns([1, 1], gap="medium")
+        with c1.container(border=True):
+            _panel("Progresión: pases hacia delante", "Acertados sobre intentados (Primer Toque). Veo no ofrece este dato del rival.")
+            _f = T.fig_forward(veo)
+            if _f is None:
+                st.info("Sin registros de pases hacia delante.")
+            else:
+                _plot(_f, "eq_forward")
+        with c2:
+            _share_block("Pase", "eq_share_pass")
+
+    with tabs[2]:
+        c1, c2 = st.columns([1, 1], gap="medium")
+        with c1.container(border=True):
+            _panel("Intentos de tiro: dentro y fuera del área", "Intentos de Primer Toque según Veo (incluyen los goles) y goles oficiales del partido.")
+            _f = T.fig_attempts(veo, _goals)
+            if _f is None:
+                st.info("Sin registros de intentos.")
+            else:
+                _plot(_f, "eq_attempts")
+            st.caption("«Tiros» (panel de Veo) no incluye los goles; «intentos» (pestaña Ataque de Veo) sí. Se muestran por separado.")
+        with c2.container(border=True):
+            _panel("Eficacia", "Goles oficiales ÷ tiros registrados en ese partido.")
+            if _eff.empty or not (_eff.conv_pt.notna().any() or _eff.conv_rv.notna().any()):
+                st.info("No hay partidos con goles y tiros registrados a la vez.")
+            else:
+                _plot(T.fig_efficiency(_eff), "eq_eff")
+                st.caption("Conversión = goles ÷ tiros × 100. Sin dato de tiros del rival no se calcula su conversión.")
+        with st.container(border=True):
+            _panel("Producción ofensiva por partido", "Cada panel tiene su propia escala.")
+            _plot(T.fig_multiples(veo, ["Tiros", "Ocasiones", "Regates", "Asistencias"], cols=2), "eq_att_multi")
+            st.caption(_pending_j7)
+        _share_block("Ataque", "eq_share_att")
+
+    with tabs[3]:
+        with st.container(border=True):
+            _panel("Duelos y acciones defensivas", "Volumen por partido. Duelos, recuperaciones e intercepciones solo de Primer Toque (Veo no los ofrece del rival).")
+            _plot(T.fig_multiples(veo, ["Duelos", "Entradas / contactos", "Recuperaciones", "Intercepciones", "Faltas cometidas", "Pérdidas"], cols=3), "eq_def_multi")
+        _share_block("Defensa", "eq_share_def")
+
+    with tabs[4]:
+        with st.container(border=True):
+            _panel("Balón parado", "Córneres, faltas lanzadas, saques de banda y penaltis de cada equipo.")
+            _plot(T.fig_multiples(veo, ["Córneres", "Faltas lanzadas", "Saques de banda", "Penaltis"], cols=2), "eq_sp_multi")
+        _share_block("Balón parado", "eq_share_sp")
+
+    with tabs[5]:
+        # Producción por jornada: una tarjeta por partido medido.
+        st.markdown(T.section("Producción por jornada", f"Nuestra evolución, partido a partido. Cada cifra es un registro real. {_stats_scope}"), unsafe_allow_html=True)
+        _per_match_cols = [
+            ("Posesión", "posesion_favor_pct"), ("Precisión", "precision_pase_favor_pct"), ("Intentos", "intentos_favor"),
+            ("Tiros", "tiros_favor"), ("Ocasiones", "ocasiones_favor"), ("Córneres", "corners_favor"),
+            ("Duelos", "duelos_favor"), ("Entradas", "entradas_favor"), ("Saques banda", "saques_banda_favor")]
+        _match_cards=[]
+        for _,_r in veo.iterrows():
+            _parts=[]
+            for _label,_key in _per_match_cols:
+                _v=pd.to_numeric(_r.get(_key),errors="coerce")
+                _txt=(f"{_v:g}" + ("%" if _key.endswith("_pct") else "") if pd.notna(_v) else "—")
+                _parts.append(f"<div class='pro84-match-metric'><strong>{_txt}</strong><span>{_label}</span></div>")
+            _gf, _gc = _goals.get(int(_r.jornada), ("", ""))
+            _match_cards.append(f"<div class='pro84-match'><header><strong>J{int(_r['jornada'])}</strong><span>{_safe_html(_r.rival_corto)}</span><em>{_gf}–{_gc}</em></header><section>{''.join(_parts)}</section></div>")
+        st.markdown("<div class='pro84-match-grid'>"+''.join(_match_cards)+"</div>",unsafe_allow_html=True)
+
+        # Radiografía del juego: cuota por bloque + radar de volumen.
+        st.markdown(T.section("Radiografía del juego", "Medias por partido sobre los partidos con dato de ambos equipos. La barra muestra qué parte del total produce cada equipo."), unsafe_allow_html=True)
+        grupo=st.segmented_control("Bloque de análisis",T.BLOCKS,default="Ataque",key="v83_group")
+        _g1, _g2 = st.columns([1.25, 1], gap="medium")
+        with _g1.container(border=True):
+            _tbl = _share_all[_share_all.block == (grupo or "Ataque")]
+            _panel(f"Cuota por métrica · {grupo or 'Ataque'}", "Naranja: Primer Toque · Azul: rival · Línea punteada: 50% (igualdad)")
+            if _tbl.empty:
+                st.info("No hay pares de datos de ambos equipos para este bloque.")
+            else:
+                _plot(T.fig_share(_tbl), "eq_share")
+                st.caption(" · ".join(f"{r.metric}: {r.n} partidos ({r.jornadas})" for _, r in _tbl.iterrows()))
+        with _g2.container(border=True):
+            _radar_opts = ["Todos los partidos comparables"] + [f"J{int(j)}" for j in veo.jornada]
+            _rsel = st.selectbox("Radar de volumen", _radar_opts, key="eq_radar_sel")
+            _rj = None if _rsel == _radar_opts[0] else int(_rsel[1:])
+            _rfig, _raxes, _rjs = T.fig_radar(veo, _rj)
+            if _rfig is None:
+                st.info("Este partido no tiene al menos tres métricas de volumen con dato de ambos equipos; el radar no sería comparable.")
+            else:
+                _plot(_rfig, "eq_radar")
+                st.caption(f"Cuota de Primer Toque sobre el total de cada acción (PT ÷ (PT + rival)) en {', '.join(f'J{j}' for j in _rjs)}. "
+                           "Solo métricas de volumen con ambos valores en todos esos partidos; 50% = igualdad. No mide calidad.")
+
+        # Comparador por métrica y comparación entre dos jornadas.
+        st.markdown(T.section("Comparador de rendimiento", "Cualquier métrica: Primer Toque frente al rival de cada jornada, o dos jornadas cara a cara con todas las métricas."), unsafe_allow_html=True)
+        _avail = [m[0] for m in T.available_metrics(veo)]
+        a,b=st.columns([1.25,1],gap="medium")
+        with a:
+            sel=st.selectbox("Indicador", _avail, key="v83_metric")
+        with b:
+            view=st.radio("Visualización",["Jornada a jornada","Comparar dos jornadas"],horizontal=True,key="v83_view")
+        _, fav, against, _unit, _better, _ = T.METRIC_BY_LABEL[sel]
+        adv = veo.dropna(subset=[fav, against], how="all")
+        jornadas=[int(x) for x in veo.jornada]
+        shown_j = None
+        if view=="Comparar dos jornadas" and len(jornadas)>=2:
+            p1,p2=st.columns(2)
+            with p1: ja=st.selectbox("Primera jornada",jornadas,index=0,key="v83_ja",format_func=lambda j: veo.loc[veo.jornada==j,"etiqueta"].iloc[0])
+            with p2: jb=st.selectbox("Segunda jornada",jornadas,index=len(jornadas)-1,key="v83_jb",format_func=lambda j: veo.loc[veo.jornada==j,"etiqueta"].iloc[0])
+            shown_j = [ja, jb]
+            st.markdown(T.compare_two_html(veo, ja, jb), unsafe_allow_html=True)
+            st.caption("Variación de Primer Toque entre las dos jornadas: ▲ sube, ▼ baja. Verde = mejora y rojo = empeora solo en métricas con dirección clara; en volúmenes neutros (duelos, saques de banda, entradas) se muestra en gris.")
+        if adv.empty:
+            st.info("Aún no existen mediciones de este indicador. No se representan valores ficticios.")
         else:
-            st.plotly_chart(T.fig_efficiency(_eff), width="stretch", theme=None, config=ui_theme.PLOTLY_CONFIG, key="eq_eff")
-            st.caption("Conversión = goles ÷ tiros × 100. Sin dato de tiros del rival no se calcula su conversión.")
-    with e2.container(border=True):
-        _zf = T.fig_zones(veo)
-        if _zf is None:
-            st.info("Veo todavía no ha aportado distribución de pases o posesión por zonas.")
-        else:
-            st.markdown("<div class='eq-panel-title'>Distribución por zonas del campo</div><div class='eq-panel-sub'>Porcentaje de pases y de posesión en cada tercio, según Veo.</div>", unsafe_allow_html=True)
-            st.plotly_chart(_zf, width="stretch", theme=None, config=ui_theme.PLOTLY_CONFIG, key="eq_zones")
+            _plot(T.fig_metric_by_match(adv, sel, shown_j), "eq_metric")
+            valid_own=adv[fav].dropna(); valid_rival=adv[against].dropna()
+            joint=adv.dropna(subset=[fav,against])
+            m1,m2,m3=st.columns(3)
+            m1.metric("Media Primer Toque",f"{valid_own.mean():.1f}" if len(valid_own) else "—",help=f"Media sobre {len(valid_own)} partidos con dato propio")
+            m2.metric("Media rivales",f"{valid_rival.mean():.1f}" if len(valid_rival) else "—",help=f"Media sobre {len(valid_rival)} partidos con dato rival")
+            m3.metric("Diferencia comparable",f"{(joint[fav]-joint[against]).mean():+.1f}" if len(joint) else "—",help=f"Diferencia promedio solo en {len(joint)} partidos con ambos valores")
+            if shown_j:
+                x=adv.loc[adv.jornada==shown_j[0],fav].dropna(); y=adv.loc[adv.jornada==shown_j[1],fav].dropna()
+                if len(x) and len(y): st.caption(f"Primer Toque: J{shown_j[0]} → J{shown_j[1]}: {x.iloc[0]:g} → {y.iloc[0]:g} (variación {y.iloc[0]-x.iloc[0]:+g}).")
+            st.caption(f"Cobertura: {len(valid_own)} jornadas con dato nuestro; {len(valid_rival)} con dato rival; {len(joint)} pares comparables. La media rival es la de nuestros contrincantes en los partidos registrados, no la media de toda la liga. Los vacíos no cuentan como cero.")
+
+        # Tabla completa: todas las métricas disponibles.
+        st.markdown(T.section("Todas las métricas", "Primer Toque · rival por partido. Una sola cifra = Veo solo ofrece el dato de Primer Toque."), unsafe_allow_html=True)
+        st.dataframe(T.data_table(veo), hide_index=True, width="stretch")
+        st.caption(_pending_j7 + " Gol de Sebas en J2 (62'): marcado dentro del área (corrección confirmada).")
 
 
 st.markdown("""<style>

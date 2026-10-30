@@ -12,22 +12,37 @@ import plotly.graph_objects as go
 from ui_theme import TOKENS, PT, RIVAL, POS, NEG, MUTED, plotly_layout
 
 # (etiqueta, columna PT, columna rival, unidad, más_es_mejor para PT, bloque)
+# Columna rival NONE = Veo solo ofrece el dato de Primer Toque.
+NONE = "__sin_dato__"
 METRICS = [
+    ("Posesión", "posesion_favor_pct", "posesion_rival_pct", "%", True, "Posesión"),
+    ("Pases totales", "pases_totales_favor", "pases_totales_contra", "pases", True, "Pase"),
+    ("Pases completados", "pases_completados_favor", "pases_completados_contra", "pases", True, "Pase"),
+    ("Precisión de pase", "precision_pase_favor_pct", "precision_pase_contra_pct", "%", True, "Pase"),
+    ("Pases hacia delante acertados", "pases_adelante_completados_favor", NONE, "pases", True, "Pase"),
+    ("Pases hacia delante intentados", "pases_adelante_intentados_favor", NONE, "pases", True, "Pase"),
     ("Tiros", "tiros_favor", "tiros_contra", "tiros", True, "Ataque"),
     ("Tiros a puerta", "tiros_puerta_favor", "tiros_puerta_contra", "tiros", True, "Ataque"),
+    ("Intentos de tiro", "intentos_favor", NONE, "intentos", True, "Ataque"),
+    ("Intentos dentro del área", "intentos_dentro_area_favor", NONE, "intentos", True, "Ataque"),
     ("Ocasiones", "ocasiones_favor", "ocasiones_contra", "ocasiones", True, "Ataque"),
-    ("Córneres", "corners_favor", "corners_contra", "córneres", True, "Ataque"),
-    ("Saques de banda", "saques_banda_favor", "saques_banda_contra", "saques", None, "Territorio"),
-    ("Recuperaciones", "recuperaciones_favor", "recuperaciones_rival", "recuperaciones", True, "Territorio"),
-    ("Pérdidas", "perdidas_favor", "perdidas_rival", "pérdidas", False, "Territorio"),
-    ("Posesión", "posesion_favor_pct", "posesion_rival_pct", "%", True, "Territorio"),
-    ("Entradas / contactos", "entradas_favor", "entradas_contra", "acciones", None, "Contacto"),
-    ("Faltas cometidas", "faltas_favor", "faltas_contra", "faltas", False, "Contacto"),
-    ("Faltas lanzadas", "faltas_lanzadas_favor", "faltas_lanzadas_contra", "faltas", True, "Contacto"),
+    ("Regates", "regates_favor", NONE, "regates", True, "Ataque"),
+    ("Asistencias", "asistencias_favor", NONE, "asistencias", True, "Ataque"),
+    ("Duelos", "duelos_favor", NONE, "duelos", None, "Defensa"),
+    ("Entradas / contactos", "entradas_favor", "entradas_contra", "acciones", None, "Defensa"),
+    ("Recuperaciones", "recuperaciones_favor", "recuperaciones_rival", "recuperaciones", True, "Defensa"),
+    ("Intercepciones", "intercepciones_favor", NONE, "intercepciones", True, "Defensa"),
+    ("Pérdidas", "perdidas_favor", "perdidas_rival", "pérdidas", False, "Defensa"),
+    ("Faltas cometidas", "faltas_favor", "faltas_contra", "faltas", False, "Defensa"),
+    ("Córneres", "corners_favor", "corners_contra", "córneres", True, "Balón parado"),
+    ("Faltas lanzadas", "faltas_lanzadas_favor", "faltas_lanzadas_contra", "faltas", True, "Balón parado"),
+    ("Saques de banda", "saques_banda_favor", "saques_banda_contra", "saques", None, "Balón parado"),
+    ("Penaltis", "penaltis_favor", "penaltis_contra", "penaltis", True, "Balón parado"),
 ]
 METRIC_BY_LABEL = {m[0]: m for m in METRICS}
+BLOCKS = ["Posesión", "Pase", "Ataque", "Defensa", "Balón parado"]
 # Métricas de volumen de juego propio: su cuota PT/(PT+rival) es comparable entre sí.
-SHARE_METRICS = ["Tiros", "Ocasiones", "Córneres", "Faltas lanzadas", "Saques de banda", "Entradas / contactos"]
+SHARE_METRICS = ["Tiros", "Ocasiones", "Córneres", "Faltas lanzadas", "Saques de banda", "Entradas / contactos", "Pases completados"]
 
 BAR = dict(barcornerradius=4, bargap=.28, bargroupgap=.12, uniformtext=dict(minsize=11, mode="show"))
 _PREFIXES = {"C.F.", "U.D.", "C.D.F.", "C.D.", "At.", "Ath.", "Col.", "E.D.E.", "Mpal.", "F.C."}
@@ -54,6 +69,7 @@ def prepare(adv, rival_short):
     d["eje"] = "J" + d["jornada"].astype(str) + "<br>" + d["rival"].map(club_short)
     for _, f, a, *_ in METRICS:
         d[f] = _num(d, f); d[a] = _num(d, a)
+    d[NONE] = float("nan")
     return d
 
 
@@ -136,13 +152,15 @@ def fig_metric_by_match(d, label, jornadas=None):
     s = d if jornadas is None else d[d.jornada.isin(jornadas)]
     fig = _fig(330, margin=dict(l=12, r=12, t=40, b=12), barmode="group", **BAR)
     for name, col, color in (("Primer Toque", f, PT), ("Rival", a, RIVAL)):
+        if col == NONE:
+            continue
         vals = s[col]
         fig.add_bar(x=s.eje, y=vals, name=name, marker_color=color,
                     text=[_fmt(v, unit) if pd.notna(v) else "" for v in vals], textposition="outside",
                     textfont=dict(color=TOKENS["text"], size=12), cliponaxis=False,
                     customdata=s.etiqueta, hovertemplate=f"<b>%{{customdata}}</b><br>{name}: %{{y}} {escape(unit)}<extra></extra>")
     for _, r in s.iterrows():
-        miss = [n for n, c in (("PT", f), ("rival", a)) if pd.isna(r[c])]
+        miss = [n for n, c in (("PT", f), ("rival", a)) if c != NONE and pd.isna(r[c])]
         if miss and len(miss) < 2:
             fig.add_annotation(x=r.eje, y=0, yref="y", text="sin<br>dato", showarrow=False, xshift=22 if miss[0] == "rival" else -22,
                                yshift=4, yanchor="bottom", font=dict(size=10, color=MUTED))
@@ -156,6 +174,8 @@ def share_table(d, labels):
     rows = []
     for lab in labels:
         _, f, a, unit, better, block = METRIC_BY_LABEL[lab]
+        if unit == "%" and lab != "Posesión":  # un porcentaje propio (p. ej. precisión) no se reparte entre equipos
+            continue
         both = d.dropna(subset=[f, a])
         if both.empty:
             continue
@@ -197,9 +217,19 @@ def fig_radar(d, jornada=None):
     """
     s = d if jornada is None else d[d.jornada == jornada]
     cols = {lab: METRIC_BY_LABEL[lab][1:3] for lab in SHARE_METRICS}
-    if not s.empty:  # partidos con al menos 3 métricas completas; ejes completos en todos ellos
-        s = s[pd.DataFrame({lab: s[list(fa)].notna().all(axis=1) for lab, fa in cols.items()}).sum(axis=1) >= 3]
-    axes = [lab for lab in SHARE_METRICS if not s.empty and s[list(cols[lab])].notna().all(axis=None)]
+    if not s.empty:  # conjunto de partidos con más ejes completos en todos ellos (a igualdad, más partidos)
+        from itertools import combinations
+        best = (0, 0, [], s.iloc[0:0])
+        idx = list(s.index)
+        for k in range(len(idx), 0, -1):
+            for combo in combinations(idx, k):
+                sub = s.loc[list(combo)]
+                ax = [lab for lab in SHARE_METRICS if sub[list(cols[lab])].notna().all(axis=None)]
+                if (len(ax), k) > best[:2]:
+                    best = (len(ax), k, ax, sub)
+        axes, s = best[2], best[3]
+    else:
+        axes = []
     if len(axes) < 3 or s.empty:
         return None, axes, []
     vals = []
@@ -208,7 +238,7 @@ def fig_radar(d, jornada=None):
         pt, rv = s[f].sum(), s[a].sum()
         vals.append(100 * pt / (pt + rv) if (pt + rv) else 50)
     theta = axes + axes[:1]
-    fig = _fig(380, margin=dict(l=84, r=84, t=40, b=30), showlegend=True)
+    fig = _fig(400, margin=dict(l=105, r=105, t=46, b=34), showlegend=True)
     fig.add_scatterpolar(r=[50] * len(theta), theta=theta, mode="lines", name="Igualdad (50%)",
                          line=dict(color=MUTED, width=1, dash="dot"), hoverinfo="skip")
     fig.add_scatterpolar(r=vals + vals[:1], theta=theta, mode="lines+markers", name="Primer Toque", fill="toself",
@@ -416,3 +446,133 @@ def fig_standings(evo, selected, reference="Primer Toque C.F. 'A'"):
     fig.update_yaxes(autorange=False, range=[n + .6, .4], tickvals=[1, 4, 8, 12, n], ticksuffix="º", title=dict(text="Posición", font=dict(size=11, color=MUTED)))
     fig.update_xaxes(categoryorder="array", categoryarray=[f"J{d}" for d in days], showgrid=False)
     return fig
+
+
+# ---------------------------------------------------------------- bloques del panel profesional
+from plotly.subplots import make_subplots
+
+
+def kpi_tiles_html(d):
+    """Indicadores medios por partido medido. Cada uno indica sobre cuántos partidos se calcula."""
+    tiles = []
+    for label, col, kind, dec in [("Posesión media", "posesion_favor_pct", "%", 0), ("Precisión de pase", "precision_pase_favor_pct", "%", 0),
+                                  ("Pases completados", "pases_completados_favor", "pases", 0), ("Intentos de tiro", "intentos_favor", "intentos", 1),
+                                  ("Duelos", "duelos_favor", "duelos", 0), ("Recuperaciones", "recuperaciones_favor", "recuperaciones", 1)]:
+        s = d[col].dropna()
+        if s.empty:
+            txt, sub = "—", "sin datos"
+        else:
+            txt = f"{s.mean():.{dec}f}" + ("%" if kind == "%" else "")
+            sub = ("" if kind == "%" else f"{kind} por partido · ") + f"media de {len(s)} partidos"
+        tiles.append(f"<div class='trend-tile'><small>{escape(label)}</small><b>{txt}</b><span>{escape(sub)}</span></div>")
+    both = d.dropna(subset=["intentos_favor", "intentos_dentro_area_favor"])
+    if len(both):
+        a, b = int(both.intentos_dentro_area_favor.sum()), int(both.intentos_favor.sum())
+        tiles.append(f"<div class='trend-tile'><small>Intentos dentro del área</small><b>{100 * a / b:.0f}%</b><span>{a} de {b} · {len(both)} partidos</span></div>")
+    fw = d.dropna(subset=["pases_adelante_completados_favor", "pases_adelante_intentados_favor"])
+    if len(fw):
+        a, b = int(fw.pases_adelante_completados_favor.sum()), int(fw.pases_adelante_intentados_favor.sum())
+        tiles.append(f"<div class='trend-tile'><small>Acierto pase hacia delante</small><b>{100 * a / b:.0f}%</b><span>{a} de {b} · {len(fw)} partidos</span></div>")
+    return "<div class='trend-row'>" + "".join(tiles) + "</div>"
+
+
+def fig_possession(d):
+    s = d.dropna(subset=["posesion_favor_pct", "posesion_rival_pct"]).iloc[::-1]
+    fig = _fig(80 + 52 * len(s), margin=dict(l=12, r=12, t=38, b=12), barmode="stack", **BAR)
+    fig.update_layout(legend_traceorder="normal")
+    for name, col, color, tc, anchor in (("Primer Toque", "posesion_favor_pct", PT, "#1A0E02", "start"),
+                                         ("Rival", "posesion_rival_pct", RIVAL, "#0A1426", "end")):
+        fig.add_bar(y=s.etiqueta, x=s[col], orientation="h", name=name, marker_color=color, text=[f"{v:.0f}%" for v in s[col]],
+                    textposition="inside", insidetextanchor=anchor, textfont=dict(color=tc, size=12),
+                    hovertemplate="%{y}<br>" + name + ": %{x:.0f}% de posesión<extra></extra>")
+    fig.add_vline(x=50, line=dict(color=TOKENS["ink"], width=1, dash="dot"))
+    fig.update_xaxes(range=[0, 100], ticksuffix="%", dtick=25, showgrid=False)
+    fig.update_yaxes(showgrid=False)
+    return fig
+
+
+def fig_attempts(d, goals):
+    """Intentos de tiro de PT por partido: dentro y fuera del área (Veo), con los goles oficiales."""
+    s = d.dropna(subset=["intentos_favor", "intentos_dentro_area_favor"])
+    if s.empty:
+        return None
+    inside = s.intentos_dentro_area_favor
+    outside = s.intentos_favor - inside
+    fig = _fig(330, margin=dict(l=12, r=12, t=40, b=12), barmode="stack", **BAR)
+    fig.update_layout(legend_traceorder="normal")
+    fig.add_bar(x=s.eje, y=inside, name="Dentro del área", marker=dict(color=PT, line=dict(color=TOKENS["surface"], width=2)),
+                text=[int(v) for v in inside], textposition="inside", textfont=dict(color="#1A0E02"),
+                customdata=s.etiqueta, hovertemplate="%{customdata}<br>Dentro del área: %{y}<extra></extra>")
+    fig.add_bar(x=s.eje, y=outside, name="Fuera del área", marker=dict(color="#8A4A12", line=dict(color=TOKENS["surface"], width=2)),
+                text=[int(v) for v in outside], textposition="inside", textfont=dict(color=TOKENS["ink"]),
+                customdata=s.etiqueta, hovertemplate="%{customdata}<br>Fuera del área: %{y}<extra></extra>")
+    labels = []
+    for t, j in zip(s.intentos_favor, s.jornada):
+        g = goals.get(int(j), (None, None))[0]
+        labels.append(f"{int(t)} intentos" + ("" if g is None else f" · {g} gol" + ("es" if g != 1 else "")))
+    fig.add_scatter(x=s.eje, y=s.intentos_favor, mode="text", text=labels, textposition="top center",
+                    textfont=dict(color=TOKENS["text"], size=11), showlegend=False, hoverinfo="skip", cliponaxis=False)
+    fig.update_yaxes(title=dict(text="Intentos de tiro", font=dict(size=11, color=MUTED)), range=[0, float(s.intentos_favor.max()) * 1.22])
+    fig.update_xaxes(showgrid=False)
+    return fig
+
+
+def fig_forward(d):
+    s = d.dropna(subset=["pases_adelante_completados_favor", "pases_adelante_intentados_favor"])
+    if s.empty:
+        return None
+    fig = _fig(310, margin=dict(l=12, r=12, t=40, b=12), barmode="overlay", **BAR)
+    fig.update_layout(legend_traceorder="normal")
+    fig.add_bar(x=s.eje, y=s.pases_adelante_intentados_favor, name="Intentados", marker_color=TOKENS["surface-3"],
+                marker_line=dict(color=PT, width=1.5), customdata=s.etiqueta, hovertemplate="%{customdata}<br>Intentados: %{y}<extra></extra>")
+    pct = 100 * s.pases_adelante_completados_favor / s.pases_adelante_intentados_favor
+    fig.add_bar(x=s.eje, y=s.pases_adelante_completados_favor, name="Acertados", marker_color=PT, width=.45,
+                text=[f"{int(v)} · {p:.0f}%" for v, p in zip(s.pases_adelante_completados_favor, pct)], textposition="outside",
+                textfont=dict(color=TOKENS["text"], size=11), cliponaxis=False,
+                customdata=list(zip(s.etiqueta, pct.round(0))), hovertemplate="%{customdata[0]}<br>Acertados: %{y} (%{customdata[1]:.0f}%)<extra></extra>")
+    fig.update_yaxes(title=dict(text="Pases hacia delante", font=dict(size=11, color=MUTED)), rangemode="tozero")
+    fig.update_xaxes(showgrid=False)
+    return fig
+
+
+def fig_multiples(d, labels, cols=2):
+    """Paneles pequeños, uno por métrica: PT en naranja y rival en azul cuando existe. Escala propia por panel."""
+    labels = [l for l in labels if d[METRIC_BY_LABEL[l][1]].notna().any() or d[METRIC_BY_LABEL[l][2]].notna().any()]
+    if not labels:
+        return None
+    rows = (len(labels) + cols - 1) // cols
+    fig = make_subplots(rows=rows, cols=cols, subplot_titles=[f"{l} ({METRIC_BY_LABEL[l][3]})" for l in labels],
+                        vertical_spacing=.2 if rows > 1 else .1, horizontal_spacing=.08)
+    fig.update_layout(**plotly_layout(height=240 * rows + 70, margin=dict(l=12, r=12, t=40, b=56), barmode="group", **BAR))
+    fig.update_layout(legend=dict(orientation="h", yanchor="top", y=-0.06 if rows > 1 else -0.14, xanchor="left", x=0))
+    seen = set()
+    for i, lab in enumerate(labels):
+        _, f, a, unit, *_ = METRIC_BY_LABEL[lab]
+        r, cc = i // cols + 1, i % cols + 1
+        top = max([v for v in list(d[f]) + ([] if a == NONE else list(d[a])) if pd.notna(v)] + [1])
+        for name, col, color in (("Primer Toque", f, PT), ("Rival", a, RIVAL)):
+            if col == NONE or d[col].isna().all():
+                continue
+            fig.add_bar(x=d.eje, y=d[col], name=name, marker_color=color, showlegend=name not in seen, legendgroup=name,
+                        text=[_fmt(v, unit) if pd.notna(v) else "" for v in d[col]], textposition="outside", cliponaxis=False,
+                        textfont=dict(color=TOKENS["text"], size=11), customdata=d.etiqueta,
+                        hovertemplate="%{customdata}<br>" + name + f" · {lab}: %{{y}} {unit}<extra></extra>", row=r, col=cc)
+            seen.add(name)
+        fig.update_yaxes(range=[0, top * 1.25], showticklabels=False, showgrid=False, row=r, col=cc)
+        fig.update_xaxes(showgrid=False, tickfont=dict(size=10, color=MUTED), row=r, col=cc)
+    for ann in fig.layout.annotations:
+        ann.font = dict(color=TOKENS["ink"], size=12)
+    return fig
+
+
+def data_table(d):
+    """Tabla completa: una fila por métrica y una columna por partido, 'PT · rival'."""
+    out = []
+    for lab, f, a, unit, _, block in METRICS:
+        if d[f].isna().all() and d[a].isna().all():
+            continue
+        row = {"Bloque": block, "Métrica": f"{lab} ({unit})"}
+        for _, r in d.iterrows():
+            row[f"J{int(r.jornada)} {club_short(r.rival)}"] = _fmt(r[f], unit) + ("" if a == NONE else " · " + _fmt(r[a], unit))
+        out.append(row)
+    return pd.DataFrame(out)
