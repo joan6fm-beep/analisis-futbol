@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Streamlit: secretos locales (nunca a GitHub)
+.streamlit/secrets.toml
+.env
+
+# Adjuntos que sube la app al Muro mientras se prueba en local
+futbol_streamlit/muro_adjuntos/
+
+# Editores y sistema
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
