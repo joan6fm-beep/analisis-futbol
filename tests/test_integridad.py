@@ -26,7 +26,8 @@ logging.getLogger("streamlit").setLevel(logging.ERROR)
 from streamlit.testing.v1 import AppTest  # noqa: E402
 
 ALIASES = {"t360": "team360_charts", "T": "team360_charts", "ui_theme": "ui_theme",
-           "player_charts": "player_charts", "pdf_export_v63": "pdf_export_v63"}
+           "player_charts": "player_charts", "pdf_export_v63": "pdf_export_v63",
+           "t360adv": "team360_advanced", "A": "team360_advanced"}
 fallos = []
 
 
@@ -121,8 +122,62 @@ def test_otras_vistas():
     check(not at.exception and len(at.get("plotly_chart")) >= 2, "Ficha de jugador: minutos y evolución física")
 
 
+def test_avanzado():
+    """Análisis avanzado: medias recalculadas desde los CSV y radares sin valores inventados."""
+    import pandas as pd
+    import team360_advanced as A
+    import team360_charts as T
+    part = pd.read_csv(APP_DIR / "data" / "partidos_rivales.csv")
+    adv = pd.read_csv(APP_DIR / "data" / "equipo_avanzado.csv")
+    veo = T.prepare(adv[adv.jornada.isin([2, 3, 5, 7])], lambda x: x)
+    pt = A.team_matches(part, A.TEAM)
+    check(len(pt) == 7 and int(pt.pts.sum()) == 6, f"Primer Toque: 7 partidos y 6 puntos ({len(pt)}, {int(pt.pts.sum())})")
+    # Media de Alboraya como visitante, calculada a mano desde el CSV
+    alb = "Alboraya U.D. 'B'"
+    raw = part[(part.visitante == alb)].dropna(subset=["goles_visitante"])
+    rows = A.four_refs(veo, pt, A.team_matches(part, alb), 5, exclude=True).set_index("metrica")
+    check(abs(rows.loc["Goles a favor", "d"] - raw.goles_visitante.mean()) < 1e-9 and rows.loc["Goles a favor", "nd"] == len(raw),
+          f"D · goles de Alboraya fuera = {raw.goles_visitante.mean():.2f} con n = {len(raw)}")
+    pos_ref = adv[adv.jornada.isin([2, 3, 7])].posesion_favor_pct.mean()
+    check(abs(rows.loc["Posesión", "b"] - pos_ref) < 1e-9 and rows.loc["Posesión", "nb"] == 3,
+          f"B · posesión media PT en casa sin J5 = {pos_ref:.2f} (n = 3)")
+    check(rows.loc["Posesión", "a"] == 70 and rows.loc["Posesión", "c"] == 30, "A/C · posesión J5 70 / 30")
+    vid = rows[rows.grupo.str.startswith("Vídeo")]
+    check(vid.d.isna().all(), "D · ninguna estadística de vídeo del rival fuera de casa (no se inventa)")
+    home_res = pt[(pt.condicion == "Casa") & (pt.jornada != 5)]
+    check(abs(rows.loc["Puntos", "b"] - home_res.pts.mean()) < 1e-9, f"B · puntos por partido en casa sin J5 = {home_res.pts.mean():.2f}")
+    # Radares: cada valor real coincide con el CSV y el índice es valor ÷ máximo × 100
+    for j in (2, 3, 5, 7):
+        fig, tbl = A.radar_vs_average(veo, j)
+        ok = True
+        for _, r in tbl.iterrows():
+            col = T.METRIC_BY_LABEL[r.metrica][1]
+            ok &= r.valor == adv.loc[adv.jornada == j, col].iloc[0] and r.maximo == adv[adv.jornada.isin([2, 3, 5, 7])][col].max()
+        if fig is not None:
+            idx = [v for tr in fig.data for v in tr.r]
+            ok &= all(0 <= v <= 100.0001 for v in idx)
+        check(ok and tbl.notna().all(axis=None), f"Radar J{j} frente a su media: {len(tbl)} ejes con datos reales e índice 0–100")
+        fig, tbl = A.radar_vs_rival(veo, j)
+        both = all(pd.notna(adv.loc[adv.jornada == j, T.METRIC_BY_LABEL[m][2]].iloc[0]) for m in tbl.metrica)
+        check(both, f"Radar J{j} frente al rival: {list(tbl.metrica)} (todas con dato de ambos)")
+    check("Tiros" not in list(A.radar_vs_rival(veo, 7)[1].metrica), "Radar J7 frente al rival excluye Tiros (sin dato del rival)")
+    check(list(A.load_seasons(APP_DIR / "data")) == ["2026/2027"], "Temporadas registradas: solo 2026/2027 (no se inventan otras)")
+    # Cada modo se renderiza de verdad
+    for mode, txt in [("Preparar partido", "cuatro referencias"), ("Análisis del rival", "Puntos por partido"),
+                      ("Laboratorio", "Laboratorio de comparación"), ("Temporadas", "Comparador de temporadas")]:
+        at = run({"area": "juvenil", "view": "equipo"}, lambda a: a.button_group(key="adv_mode").set_value(mode))
+        check(not at.exception and txt in html_of(at), f"Modo «{mode}» renderizado" + (f": {at.exception[0].value[:100]}" if at.exception else ""))
+    def lab(a):
+        a.button_group(key="adv_mode").set_value("Laboratorio")
+    for metric, mode in [("Goles a favor", "Local frente a visitante"), ("Posesión", "Primer Toque frente al rival"),
+                         ("Duelos", "Jornada frente a la media"), ("Tiros", "Jornada frente a jornada"), ("Puntos", "Temporada frente a temporada")]:
+        at = run({"area": "juvenil", "view": "equipo"}, lab)
+        at.selectbox(key="lab_metric").set_value(metric); at.button_group(key="lab_mode").set_value(mode); at.run()
+        check(not at.exception, f"Laboratorio · {metric} · {mode}")
+
+
 def main():
-    for t in (test_atributos, test_equipo360, test_otras_vistas, test_modulo_obsoleto):
+    for t in (test_atributos, test_equipo360, test_avanzado, test_otras_vistas, test_modulo_obsoleto):
         print(f"\n— {t.__doc__.splitlines()[0] if t.__doc__ else t.__name__}")
         try:
             t()

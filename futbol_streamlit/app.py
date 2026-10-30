@@ -24,6 +24,7 @@ import pdf_export_v63
 import ui_theme
 import team360_charts as t360
 import player_charts
+import team360_advanced as t360adv
 
 
 def _reload_local_modules(*modules):
@@ -42,8 +43,8 @@ def _reload_local_modules(*modules):
     return modules
 
 
-# Orden de dependencia: ui_theme <- team360_charts / player_charts.
-pdf_export_v63, ui_theme, t360, player_charts = _reload_local_modules(pdf_export_v63, ui_theme, t360, player_charts)
+# Orden de dependencia: ui_theme <- team360_charts / player_charts <- team360_advanced.
+pdf_export_v63, ui_theme, t360, player_charts, t360adv = _reload_local_modules(pdf_export_v63, ui_theme, t360, player_charts, t360adv)
 build_rival_pdf_diseno = pdf_export_v63.generate
 
 
@@ -3149,6 +3150,25 @@ def render_team_360():
             _panel(f"Cuota de cada equipo · {block}", "Media por partido sobre los partidos con dato de ambos equipos. Naranja: Primer Toque · azul: rival · línea: 50%.")
             _plot(T.fig_share(tbl), key)
             st.caption(" · ".join(f"{r.metric}: {r.n} partidos ({r.jornadas})" for _, r in tbl.iterrows()))
+
+    # Modos de análisis: el panel por bloques es el de siempre; los demás amplían el análisis.
+    _modes = ["Panel por bloques", "Preparar partido", "Análisis del rival", "Laboratorio", "Temporadas"]
+    _mode = st.pills("Modo de análisis", _modes, default=_modes[0], key="adv_mode") or _modes[0]
+    if _mode != _modes[0]:
+        A = t360adv
+        st.markdown(A.CSS, unsafe_allow_html=True)
+        _pt_tm = A.team_matches(partidos_t, TEAM)
+        if _mode == "Preparar partido":
+            A.render_prepare(veo, _pt_tm, partidos_t, short_team_name, _goals)
+        elif _mode == "Análisis del rival":
+            _sel_j = st.session_state.get("adv_j")
+            _def = veo.loc[veo.jornada == _sel_j, "rival"].iloc[0] if _sel_j in set(veo.jornada) else veo.rival.iloc[-1]
+            A.render_rival(veo, partidos_t, clasif_t, short_team_name, _def)
+        elif _mode == "Laboratorio":
+            A.render_lab(veo, _pt_tm, A.load_seasons(DATA))
+        else:
+            A.render_seasons(A.load_seasons(DATA), short_team_name)
+        return
 
     tabs = st.tabs(["2 · Posesión", "3 · Construcción y pase", "4 · Ataque",
                     "5 · Duelos y defensa", "6 · Balón parado", "7 · Evolución"])
