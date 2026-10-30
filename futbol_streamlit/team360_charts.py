@@ -160,7 +160,7 @@ def fig_metric_by_match(d, label, jornadas=None):
                     textfont=dict(color=TOKENS["text"], size=12), cliponaxis=False,
                     customdata=s.etiqueta, hovertemplate=f"<b>%{{customdata}}</b><br>{name}: %{{y}} {escape(unit)}<extra></extra>")
     for _, r in s.iterrows():
-        miss = [n for n, c in (("PT", f), ("rival", a)) if c != NONE and pd.isna(r[c])]
+        miss = ["PT"] if pd.isna(r[f]) and a != NONE and pd.notna(r[a]) else []
         if miss and len(miss) < 2:
             fig.add_annotation(x=r.eje, y=0, yref="y", text="sin<br>dato", showarrow=False, xshift=22 if miss[0] == "rival" else -22,
                                yshift=4, yanchor="bottom", font=dict(size=10, color=MUTED))
@@ -336,7 +336,7 @@ def compare_two_html(d, ja, jb):
         top = max([x for x in (va, vb, ra, rb) if pd.notna(x)] + [1])
         bar = lambda v, cls: (f"<div class='cmp-cell'><b>{_fmt(v, unit)}</b>"
                               + ("" if pd.isna(v) else f"<i class='{cls}' style='width:{100 * v / top:.0f}%'></i>") + "</div>")
-        rival_txt = f"{_fmt(ra, unit)} → {_fmt(rb, unit)}"
+        rival_txt = "" if a == NONE else f"{_fmt(ra, unit)} → {_fmt(rb, unit)}"
         body.append(f"<div class='cmp-row'><span class='cmp-metric'>{escape(lab)}<small>{escape(unit)}</small></span>"
                     f"{bar(va, 'pt')}{bar(vb, 'pt')}{_delta_html(vb - va if pd.notna(va) and pd.notna(vb) else float('nan'), better)}"
                     f"<span class='cmp-rival'>{rival_txt}</span></div>")
@@ -513,6 +513,7 @@ def fig_attempts(d, goals):
     fig.add_scatter(x=s.eje, y=s.intentos_favor, mode="text", text=labels, textposition="top center",
                     textfont=dict(color=TOKENS["text"], size=11), showlegend=False, hoverinfo="skip", cliponaxis=False)
     fig.update_yaxes(title=dict(text="Intentos de tiro", font=dict(size=11, color=MUTED)), range=[0, float(s.intentos_favor.max()) * 1.22])
+    fig.update_xaxes(range=[-0.75, len(s) - 0.25])
     fig.update_xaxes(showgrid=False)
     return fig
 

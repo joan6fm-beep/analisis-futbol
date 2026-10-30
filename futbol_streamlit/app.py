@@ -3152,7 +3152,7 @@ def render_team_360():
             _plot(T.fig_multiples(veo, ["Pases totales", "Pases completados", "Precisión de pase"], cols=3), "eq_pass_multi")
         c1, c2 = st.columns([1, 1], gap="medium")
         with c1.container(border=True):
-            _panel("Progresión: pases hacia delante", "Acertados sobre intentados (Primer Toque). Veo no ofrece este dato del rival.")
+            _panel("Progresión: pases hacia delante", "Pases hacia delante acertados sobre intentados y porcentaje de acierto por partido.")
             _f = T.fig_forward(veo)
             if _f is None:
                 st.info("Sin registros de pases hacia delante.")
@@ -3177,7 +3177,7 @@ def render_team_360():
                 st.info("No hay partidos con goles y tiros registrados a la vez.")
             else:
                 _plot(T.fig_efficiency(_eff), "eq_eff")
-                st.caption("Conversión = goles ÷ tiros × 100. Sin dato de tiros del rival no se calcula su conversión.")
+                st.caption("Conversión = goles ÷ tiros × 100.")
         with st.container(border=True):
             _panel("Producción ofensiva por partido", "Cada panel tiene su propia escala.")
             _plot(T.fig_multiples(veo, ["Tiros", "Ocasiones", "Regates", "Asistencias"], cols=2), "eq_att_multi")
@@ -3186,7 +3186,7 @@ def render_team_360():
 
     with tabs[3]:
         with st.container(border=True):
-            _panel("Duelos y acciones defensivas", "Volumen por partido. Duelos, recuperaciones e intercepciones solo de Primer Toque (Veo no los ofrece del rival).")
+            _panel("Duelos y acciones defensivas", "Volumen por partido. Cada panel tiene su propia escala.")
             _plot(T.fig_multiples(veo, ["Duelos", "Entradas / contactos", "Recuperaciones", "Intercepciones", "Faltas cometidas", "Pérdidas"], cols=3), "eq_def_multi")
         _share_block("Defensa", "eq_share_def")
 
@@ -3264,16 +3264,24 @@ def render_team_360():
             valid_own=adv[fav].dropna(); valid_rival=adv[against].dropna()
             joint=adv.dropna(subset=[fav,against])
             m1,m2,m3=st.columns(3)
-            m1.metric("Media Primer Toque",f"{valid_own.mean():.1f}" if len(valid_own) else "—",help=f"Media sobre {len(valid_own)} partidos con dato propio")
-            m2.metric("Media rivales",f"{valid_rival.mean():.1f}" if len(valid_rival) else "—",help=f"Media sobre {len(valid_rival)} partidos con dato rival")
-            m3.metric("Diferencia comparable",f"{(joint[fav]-joint[against]).mean():+.1f}" if len(joint) else "—",help=f"Diferencia promedio solo en {len(joint)} partidos con ambos valores")
+            m1.metric("Media Primer Toque",f"{valid_own.mean():.1f}" if len(valid_own) else "—",help=f"Media sobre {len(valid_own)} partidos con dato")
+            if against == T.NONE:
+                _best = adv.loc[adv[fav].idxmax()] if len(valid_own) else None
+                m2.metric("Mejor partido", f"{_best[fav]:g}" if _best is not None else "—", _best.etiqueta if _best is not None else None, delta_color="off")
+                m3.metric("Partidos con dato", f"{len(valid_own)}")
+            else:
+                m2.metric("Media rivales",f"{valid_rival.mean():.1f}" if len(valid_rival) else "—",help=f"Media sobre {len(valid_rival)} partidos con dato del rival")
+                m3.metric("Diferencia comparable",f"{(joint[fav]-joint[against]).mean():+.1f}" if len(joint) else "—",help=f"Diferencia promedio solo en {len(joint)} partidos con ambos valores")
             if shown_j:
                 x=adv.loc[adv.jornada==shown_j[0],fav].dropna(); y=adv.loc[adv.jornada==shown_j[1],fav].dropna()
                 if len(x) and len(y): st.caption(f"Primer Toque: J{shown_j[0]} → J{shown_j[1]}: {x.iloc[0]:g} → {y.iloc[0]:g} (variación {y.iloc[0]-x.iloc[0]:+g}).")
-            st.caption(f"Cobertura: {len(valid_own)} jornadas con dato nuestro; {len(valid_rival)} con dato rival; {len(joint)} pares comparables. La media rival es la de nuestros contrincantes en los partidos registrados, no la media de toda la liga. Los vacíos no cuentan como cero.")
+            if against == T.NONE:
+                st.caption(f"Cobertura: {len(valid_own)} partidos con dato. Los vacíos no cuentan como cero.")
+            else:
+                st.caption(f"Cobertura: {len(valid_own)} jornadas con dato nuestro; {len(valid_rival)} con dato rival; {len(joint)} pares comparables. La media rival es la de nuestros contrincantes en los partidos registrados, no la media de toda la liga. Los vacíos no cuentan como cero.")
 
         # Tabla completa: todas las métricas disponibles.
-        st.markdown(T.section("Todas las métricas", "Primer Toque · rival por partido. Una sola cifra = Veo solo ofrece el dato de Primer Toque."), unsafe_allow_html=True)
+        st.markdown(T.section("Todas las métricas", "Valores por partido. En las métricas comparadas: Primer Toque · rival."), unsafe_allow_html=True)
         st.dataframe(T.data_table(veo), hide_index=True, width="stretch")
         st.caption(_pending_j7 + " Gol de Sebas en J2 (62'): marcado dentro del área (corrección confirmada).")
 
