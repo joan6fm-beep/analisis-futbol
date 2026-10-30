@@ -419,9 +419,8 @@ table.goal-detail td {{padding:7px;border:1px solid #e6ebf1;text-align:center}} 
 .home-photo-link {{text-decoration:none!important;color:inherit!important;display:block}}
 .home-photo-card {{position:relative;border-radius:22px;overflow:hidden;background:#fff;border:1px solid #e5eaf1;box-shadow:0 12px 32px rgba(15,42,68,.10);transition:.18s ease}}
 .home-photo-card:hover {{transform:translateY(-3px);box-shadow:0 18px 42px rgba(15,42,68,.16)}}
-.home-photo-card img {{width:100%;height:390px;object-fit:cover;display:block;transition:.25s ease}}
-.home-photo-card:hover img {{transform:scale(1.015)}}
-.home-photo-overlay {{position:absolute;left:0;right:0;bottom:0;padding:22px 22px 20px;display:flex;align-items:flex-end;justify-content:space-between;background:linear-gradient(transparent,rgba(3,31,61,.90));color:white}}
+.home-photo-card img {{width:100%;height:auto;display:block}}
+.home-photo-overlay {{padding:16px 22px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#062d5a,#0b4b84);color:white}}
 .home-photo-title {{font-size:1.45rem;font-weight:950}}
 .home-photo-sub {{font-size:.78rem;opacity:.85;margin-top:3px}}
 .home-photo-arrow {{font-size:2rem;font-weight:900}}
@@ -571,7 +570,6 @@ table.goal-detail td {{padding:7px;border:1px solid #e6ebf1;text-align:center}} 
   .gt-top,.gt-foot,.gt-total {{font-size:.55rem}}
   .gt-cell {{min-height:31px}}
   .goal-diff-card {{padding:9px 8px}}
-  .home-photo-card img {{height:210px}}
   .pitch {{border-radius:9px}}
   .pchip {{font-size:.53rem;min-width:43px}}
   .shirt {{width:28px;height:25px;font-size:.68rem}}
@@ -2875,6 +2873,19 @@ def render_team_360():
     md["pts_acum"] = md["pts"].cumsum()
     md["dg_acum"] = md["dg"].cumsum()
 
+    # Estadísticas de vídeo: solo partidos en casa con algún dato real.
+    # De los partidos fuera no hay estadísticas: no se muestran ni cuentan en las medias.
+    # Resultados, goles y clasificación siguen usando todos los partidos.
+    _home_j = set(md.loc[md.condicion == "Casa", "jornada"].astype(int))
+    avanzado_t = avanzado_t.copy()
+    avanzado_t["jornada"] = pd.to_numeric(avanzado_t["jornada"], errors="coerce")
+    _stat_cols = [c for c in avanzado_t.columns if c not in ("jornada", "rival", "fuente_avanzada")]
+    _has_stats = avanzado_t[_stat_cols].apply(pd.to_numeric, errors="coerce").notna().any(axis=1)
+    avanzado_t = avanzado_t[avanzado_t["jornada"].isin(_home_j) & _has_stats]
+    _stats_scope = ("Solo partidos en casa con estadísticas de vídeo: "
+                    + (", ".join(f"J{int(j)}" for j in sorted(avanzado_t["jornada"])) or "ninguno todavía")
+                    + ". De los partidos fuera no hay datos.")
+
     pj = len(md); pg = int((md.res == "V").sum()); pe = int((md.res == "E").sum()); pp = int((md.res == "D").sum())
     gf_tot = int(md.gf.sum()); gc_tot = int(md.gc.sum()); pts_tot = int(md.pts.sum()); dg_tot = gf_tot-gc_tot
     porterias_cero = int((md.gc == 0).sum()); sin_marcar = int((md.gf == 0).sum())
@@ -3041,7 +3052,9 @@ def render_team_360():
         st.markdown("<div class='v83-panel'>"+_leader_cards(minagg.sort_values("minutos",ascending=False),"minutos","min", "titularidades")+"</div>",unsafe_allow_html=True)
 
     # Lectura original por partido y estadística: mantener el análisis propio, no solo el comparador.
-    st.markdown("<div class='t360-section'><div class='t360-title'>Producción por jornada</div><div class='t360-sub'>Nuestra evolución, partido a partido. Cada cifra representa un registro real; — indica que no existe dato.</div></div>",unsafe_allow_html=True)
+    st.markdown(f"<div class='t360-section'><div class='t360-title'>Producción por jornada</div><div class='t360-sub'>Nuestra evolución, partido a partido. Cada cifra representa un registro real; — indica que no existe dato. {_safe_html(_stats_scope)}</div></div>",unsafe_allow_html=True)
+    if avanzado_t.empty:
+        st.info("Todavía no hay partidos en casa con estadísticas de vídeo.")
     _per_match_cols = [
         ("Tiros", "tiros_favor"), ("A puerta", "tiros_puerta_favor"),
         ("Ocasiones", "ocasiones_favor"), ("Córneres", "corners_favor"),
@@ -3056,7 +3069,7 @@ def render_team_360():
         _match_cards.append(f"<div class='pro84-match'><header><strong>J{int(_r['jornada'])}</strong><span>{_safe_html(short_team_name(str(_r.get('rival',''))))}</span></header><section>{''.join(_parts)}</section></div>")
     st.markdown("<div class='pro84-match-grid'>"+''.join(_match_cards)+"</div>",unsafe_allow_html=True)
 
-    st.markdown("<div class='t360-section'><div class='t360-title'>Comparador de rendimiento · Veo</div><div class='t360-sub'>Una métrica cada vez. Evolución de Primer Toque frente al rival de esa jornada y frente a la media de los rivales analizados.</div></div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='t360-section'><div class='t360-title'>Comparador de rendimiento · Veo</div><div class='t360-sub'>Una métrica cada vez. Evolución de Primer Toque frente al rival de esa jornada y frente a la media de los rivales analizados. {_safe_html(_stats_scope)}</div></div>", unsafe_allow_html=True)
     import altair as alt
     metricas={
         "🎯 Tiros":("tiros_favor","tiros_contra"),
@@ -3122,7 +3135,7 @@ def render_team_360():
         st.caption(f"Cobertura: {len(valid_own)} jornadas con dato nuestro; {len(valid_rival)} con dato rival; {len(joint)} pares comparables. La media rival es la de nuestros contrincantes en los partidos registrados, no la media de toda la liga. Los vacíos no cuentan como cero.")
 
     # Fotografía comparativa de varios indicadores con el mismo criterio de pares válidos.
-    st.markdown("<div class='t360-section'><div class='t360-title'>Radiografía del juego</div><div class='t360-sub'>Promedios de las jornadas medidas. Alterna entre producción ofensiva, territorio y contacto sin tablas largas.</div></div>",unsafe_allow_html=True)
+    st.markdown("<div class='t360-section'><div class='t360-title'>Radiografía del juego</div><div class='t360-sub'>Promedios de los partidos en casa medidos. Alterna entre producción ofensiva, territorio y contacto sin tablas largas.</div></div>",unsafe_allow_html=True)
     grupo=st.segmented_control("Bloque de análisis",["Ataque","Territorio","Contacto"],default="Ataque",key="v83_group")
     groups={"Ataque":["🎯 Tiros","🥅 Tiros a puerta","⚡ Ocasiones","🚩 Córneres"],
             "Territorio":["↔️ Saques de banda","🔄 Recuperaciones","📉 Pérdidas"],
@@ -3139,38 +3152,8 @@ def render_team_360():
     else: st.info("No hay pares de datos para este bloque; se mostrará al incorporar las estadísticas de vídeo.")
     st.caption("Las recuperaciones y pérdidas solo aparecen cuando Veo ofrece esos registros. Saques de banda o córneres son volúmenes de acciones, no un mapa real de territorio.")
 
-    st.markdown("<div class='t360-section'><div class='t360-title'>Comparativas por condición y jornadas</div><div class='t360-sub'>Al final del análisis: compara jornadas, medias como local frente a los visitantes y rendimiento fuera frente a los locales. Solo se usan partidos con dato real en ambos equipos.</div></div>",unsafe_allow_html=True)
-    _conditions=md[["jornada","condicion"]].copy()
-    _conditions["jornada"]=pd.to_numeric(_conditions["jornada"],errors="coerce")
-    _agg=avanzado_t.merge(_conditions,on="jornada",how="left")
-    _choice=st.selectbox("Estadística a comparar",list(metricas),key="v84_agg_metric")
-    _f,_a=metricas[_choice]
-    for _column in [_f,_a]:
-        if _column not in _agg.columns: _agg[_column]=float('nan')
-        _agg[_column]=pd.to_numeric(_agg[_column],errors="coerce")
-    _valid=_agg.dropna(subset=[_f,_a]).copy()
-    _scope=st.segmented_control("Ámbito",["Todas","En casa","Fuera"],default="Todas",key="v84_scope")
-    if _scope=="En casa": _valid=_valid[_valid.condicion=="Casa"]
-    elif _scope=="Fuera": _valid=_valid[_valid.condicion=="Fuera"]
-    if _valid.empty:
-        st.info("No hay jornadas con datos de ambos equipos para esta selección.")
-    else:
-        _our=float(_valid[_f].mean());_their=float(_valid[_a].mean())
-        _n=len(_valid)
-        _desc={"Todas":"Nuestros partidos frente a los rivales enfrentados", "En casa":"Primer Toque local frente a los equipos visitantes", "Fuera":"Primer Toque visitante frente a los equipos locales"}[_scope]
-        _max=max(_our,_their,1)
-        st.markdown(f"<div class='pro84-duel'><header><b>{_safe_html(_desc)}</b><small>{_n} partidos comparables</small></header><div class='pro84-duel-row'><span>Primer Toque</span><div class='pro84-duel-track'><i style='width:{_our/_max*100:.1f}%;background:#ee8a20'></i></div><strong>{_our:.1f}</strong></div><div class='pro84-duel-row'><span>Rivales</span><div class='pro84-duel-track'><i style='width:{_their/_max*100:.1f}%;background:#476b8b'></i></div><strong>{_their:.1f}</strong></div></div>",unsafe_allow_html=True)
-        _plot=[]
-        for _,_r in _valid.sort_values("jornada").iterrows():
-            _plot.extend([{"Jornada":f"J{int(_r.jornada)}","Equipo":"Primer Toque","Valor":float(_r[_f])}, {"Jornada":f"J{int(_r.jornada)}","Equipo":"Rival","Valor":float(_r[_a])}])
-        _chart=(alt.Chart(pd.DataFrame(_plot)).mark_bar(cornerRadiusTopLeft=4,cornerRadiusTopRight=4)
-            .encode(x=alt.X("Jornada:N",title=None,sort=[f"J{int(x)}" for x in _valid.sort_values('jornada').jornada]),
-                    xOffset=alt.XOffset("Equipo:N",sort=["Primer Toque","Rival"]),
-                    y=alt.Y("Valor:Q",title=_choice,scale=alt.Scale(zero=True)),
-                    color=alt.Color("Equipo:N",scale=alt.Scale(domain=["Primer Toque","Rival"],range=["#ee8a20","#476b8b"]),legend=alt.Legend(title=None,orient="bottom")),
-                    tooltip=["Jornada:N","Equipo:N",alt.Tooltip("Valor:Q",format=".1f")]))
-        st.altair_chart(_chart.properties(height=285),use_container_width=True)
-        st.caption("La media visitante corresponde únicamente a quienes jugaron contra nosotros en casa, no a todos los equipos de la liga. Las jornadas sin medición comparable quedan excluidas.")
+    # Comparativas local/visitante retiradas hasta tener estadísticas de los partidos fuera.
+    # El código anterior se conserva en la etiqueta v15.12.84.
 
 
 st.markdown("""<style>
