@@ -3456,6 +3456,7 @@ with st.sidebar:
         "jugadores": "Jugadores",
         "individual": "Individual",
         "minutos": "Minutos",
+        "resultados": "Resultados",
     }
     modulo = _view_to_mod.get(_view, "Resumen liga" if _area == "juvenil" else "Inicio")
     _icons = {
@@ -3469,13 +3470,15 @@ with st.sidebar:
       "Jugadores":"<svg viewBox='0 0 24 24'><circle cx='9' cy='8' r='3'/><circle cx='17' cy='9' r='2.5'/><path d='M3 20c0-4 2.5-6 6-6s6 2 6 6'/><path d='M14 15c3.4-.4 6 1.5 6 5'/></svg>",
       "Individual":"<svg viewBox='0 0 24 24'><circle cx='12' cy='8' r='3.5'/><path d='M5 21c.3-5 2.8-8 7-8s6.7 3 7 8'/></svg>",
       "Minutos":"<svg viewBox='0 0 24 24'><circle cx='12' cy='13' r='8'/><path d='M12 9v4l3 2M9 2h6'/></svg>",
+      "Resultados":"<svg viewBox='0 0 24 24'><path d='M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z'/><path d='M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4'/></svg>",
     }
     _nav_area = "infantil" if _area == "infantil" else "juvenil"
     if _nav_area == "infantil":
-        _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Minutos','minutos'),('Seguimiento','seguimiento')]
+        _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Resultados','resultados'),('Minutos','minutos'),('Seguimiento','seguimiento')]
     else:
         _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Resumen liga','liga'),('Rivales','rivales'),('Equipo','equipo'),('Seguimiento','seguimiento'),('Individual','individual'),('Jugadores','jugadores')]
-    _nh=["<div class='side-nav-v3'>"]
+    _nh=["<a class='switch-team' href='?' target='_self'><span>⌂</span><span><b>Inicio / Cambiar equipo</b><small>Volver a la selección de equipos</small></span></a>",
+         "<div class='side-nav-v3'>"]
     for _nm,_slug in _nav_info:
         _ac=' active' if modulo==_nm else ''
         _nh.append(f"<a class='{_ac.strip()}' href='?area={_nav_area}&view={_slug}' target='_self'><span class='sni'>{_icons[_nm]}</span><span class='sn-label'>{_safe_html(_nm)}</span></a>")
@@ -3546,7 +3549,7 @@ elif modulo == "Rivales":
 
 if not _landing:
     st.markdown(
-    "<div class='topbar'><div class='title'><a class='tb-home' href='?' target='_self'>⇠ Equipos</a>"
+    "<div class='topbar'><div class='title'><a class='tb-home' href='?' target='_self'>⌂ Inicio / Cambiar equipo</a>"
     f"<span class='tb-crumb'>{'Infantil D' if _area == 'infantil' else 'Juvenil A'}</span><span class='tb-sep'>/</span>"
     f"<span class='tb-current'>{_safe_html(seleccionado if modulo == 'Rivales' and seleccionado else modulo)}</span></div>"
     "<div class='nav'><span class='tb-chip'>Temporada 2026/2027</span><span class='tb-ver'>V15.12.84</span></div></div>",
@@ -3567,8 +3570,9 @@ _mobile_nav = [
 ]
 if _nav_area == "infantil":
     _mobile_nav = [("Inicio", "inicio", "⌂", "Inicio"), ("Muro", "muro", "✦", "Muro"), ("Calendario", "calendario", "▣", "Calendario"),
-                   ("Minutos", "minutos", "◷", "Minutos"), ("Seguimiento", "seguimiento", "▤", "Seguim.")]
-_mobile_nav_html = ["<nav class='mobile-bottom-nav' aria-label='Navegación móvil'>"]
+                   ("Resultados", "resultados", "🏆", "Result."), ("Minutos", "minutos", "◷", "Minutos"), ("Seguimiento", "seguimiento", "▤", "Seguim.")]
+_mobile_nav_html = ["<nav class='mobile-bottom-nav' aria-label='Navegación móvil'>",
+                    "<a class='switch' href='?' target='_self'><span class='mn-icon'>⇄</span><span>Equipos</span></a>"]
 for _mod_name, _view_slug, _icon, _label in _mobile_nav:
     _active = " active" if modulo == _mod_name else ""
     _extra = f"&team={quote(str(seleccionado))}" if (_mod_name == "Rivales" and seleccionado) else ""
@@ -3613,6 +3617,8 @@ if _area == "infantil":
         render_calendar()
     elif modulo == "Minutos":
         infd.render_minutes()
+    elif modulo == "Resultados":
+        infd.render_results()
     elif modulo == "Seguimiento":
         render_formation_tracking()
     else:

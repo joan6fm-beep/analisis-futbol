@@ -360,8 +360,79 @@ def test_infantil_d():
     check((D / "muro.csv").exists() and (D / "calendario.csv").exists(), "Muro y Calendario del Infantil D en data/infantil_d (archivos propios)")
 
 
+def test_navegacion():
+    """Navegación entre equipos: portada en la raíz, menús separados y botón «Cambiar equipo»."""
+    import re
+    at = run({})
+    h = html_of(at)
+    home = " ".join(str(x.proto) for x in at.get("html"))
+    areas = sorted(set(re.findall(r"\?area=(juvenil|infantil)", home)))
+    check(not at.exception and "Selecciona tu equipo" in h and "pt-home-card" in home and areas == ["infantil", "juvenil"],
+          f"Raíz sin parámetros: portada con las dos tarjetas, Juvenil A e Infantil D ({areas})")
+    css = " ".join(m.value for m in at.markdown)
+    check("[data-testid=\"stSidebar\"]" in css and ".mobile-bottom-nav" in css and "display:none!important" in css,
+          "Portada sin menús de equipo visibles (barra lateral y menú móvil ocultos; no hay redirección)")
+    juv = ["inicio", "muro", "calendario", "liga", "rivales", "equipo", "seguimiento", "individual", "jugadores"]
+    inf = ["inicio", "muro", "calendario", "resultados", "minutos", "seguimiento"]
+    for area, view, expected in (("juvenil", "liga", juv), ("infantil", "inicio", inf)):
+        a = run({"area": area, "view": view})
+        hh = html_of(a)
+        side = re.search(r"<div class='side-nav-v3'>(.*?)</div>", hh, re.S)
+        got = re.findall(r"href='\?area=(\w+)&view=(\w+)'", side.group(1)) if side else []
+        check(not a.exception and [v for _, v in got] == expected and {x for x, _ in got} == {area},
+              f"Menú de {area}: solo sus apartados {expected}")
+        check("class='switch-team' href='?'" in hh and "class='tb-home' href='?'" in hh and "class='switch' href='?'" in hh,
+              f"{area}: botón «Inicio / Cambiar equipo» en barra lateral, barra superior y menú móvil (vuelve a la raíz sin parámetros)")
+
+
+def test_resultados_infantil():
+    """Resultados del Infantil D: marcadores, goleadores y asistencias confirmados."""
+    import pandas as pd
+    import infantil_d as I
+    res, ev = I.results_data()
+    b = I.balance(res)
+    r = res.set_index("jornada")
+    check(r.loc[2, "goles_favor"] == 3 and r.loc[2, "goles_contra"] == 2 and r.loc[2, "rival"] == ""
+          and r.loc[3, "rival"] == "San Lorenzo" and r.loc[3, "goles_favor"] == 2 == r.loc[3, "goles_contra"],
+          "J2 victoria 3-2 (rival pendiente) y J3 empate 2-2 ante San Lorenzo")
+    check(b == dict(pj=2, v=1, e=1, d=0, gf=5, gc=4, pts=4), f"Balance: {b}")
+    g = ev[ev.tipo == "gol"].jugador.value_counts().to_dict()
+    check(g == {"Alejandro": 2, "Fabian Castillo": 1, "Marc Capilla": 1, "Dani Lacasta": 1} and sum(g.values()) == b["gf"],
+          f"Goleadores: 5 goles = goles a favor de los resultados ({g})")
+    plantilla = set(pd.read_csv(APP_DIR / "data" / "infantil_d" / "jugadores.csv").jugador)
+    check(set(ev.jugador) <= plantilla, "Goleadores y asistentes con el nombre exacto de la plantilla del Excel")
+    check(ev[ev.tipo == "asistencia"].jugador.tolist() == ["Mauro"], "Asistencias: 1 (Mauro)")
+    check(ev.minuto.isna().all(), "Minutos de gol sin registrar: no se inventan")
+    at = run({"area": "infantil", "view": "resultados"})
+    h = html_of(at)
+    check(not at.exception and "3 – 2" in h and "2 – 2" in h and "Rival pendiente de identificar" in h and "0 de 5 goles" in h,
+          "Vista Resultados: marcadores, rival pendiente y estado de los minutos")
+    j = run({"area": "juvenil", "view": "jugadores"})
+    check("Fabian Castillo" not in html_of(j), "Los jugadores del Infantil D no aparecen en Juvenil A")
+
+
+def test_formaciones_infantil():
+    """Seguimiento del Infantil D: recuperar del CSV y guardar (con restauración del archivo)."""
+    f = APP_DIR / "data" / "infantil_d" / "seguimiento_formaciones.csv"
+    juv = APP_DIR / "data" / "seguimiento_formaciones.csv"
+    original, juv_before = f.read_bytes(), juv.read_bytes()
+    try:
+        a = run({"area": "infantil", "view": "seguimiento"}, lambda x: x.selectbox[0].set_value(1))
+        h = " ".join(str(b.label) for b in a.button) + html_of(a)
+        check(not a.exception and "Martin Ortiz" in h and "Fabian Castillo" in h, "J1 recuperada: Martin Ortiz y Fabian Castillo en el campo")
+        a.button(key="copy_start_end_1").click().run()
+        import pandas as pd
+        d = pd.read_csv(f).fillna("")
+        fin = d[(d.jornada == 1) & (d.momento == "final")].set_index("slot").jugador.to_dict()
+        ini = d[(d.jornada == 1) & (d.momento == "inicio")].set_index("slot").jugador.to_dict()
+        check(fin == ini and fin.get("DC") == "Fabian Castillo", "Guardar formación: el final de J1 se guarda en el CSV del Infantil D")
+        check(juv.read_bytes() == juv_before, "El seguimiento del Juvenil A no cambia al guardar en Infantil D")
+    finally:
+        f.write_bytes(original)
+
+
 def main():
-    for t in (test_atributos, test_datos_liga, test_infantil_d, test_equipo360, test_avanzado, test_otras_vistas, test_modulo_obsoleto):
+    for t in (test_atributos, test_navegacion, test_datos_liga, test_infantil_d, test_resultados_infantil, test_formaciones_infantil, test_equipo360, test_avanzado, test_otras_vistas, test_modulo_obsoleto):
         print(f"\n— {t.__doc__.splitlines()[0] if t.__doc__ else t.__name__}")
         try:
             t()

@@ -57,6 +57,12 @@ html, body, .stApp, [class*="css"], .stMarkdown, button, input, select, textarea
 .stApp .side-nav-v3 .sni {background:var(--surface-2)!important;color:var(--muted)!important}
 .stApp .side-nav-v3 a.active .sni {background:var(--pt)!important;color:#1A0E02!important}
 .stApp .side-label {color:var(--muted)!important}
+.stApp .switch-team {display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:10px 12px;border-radius:13px;text-decoration:none!important;
+  background:var(--pt-soft);border:1px solid rgba(245,135,31,.45);color:var(--ink)!important}
+.stApp .switch-team:hover {background:rgba(245,135,31,.24)}
+.stApp .switch-team > span:first-child {width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:var(--pt);color:#1A0E02;font-weight:900}
+.stApp .switch-team b {display:block;font-size:.82rem;color:var(--ink)} .stApp .switch-team small {display:block;font-size:.66rem;color:var(--muted)}
+.stApp .mobile-bottom-nav a.switch {color:var(--pt)!important}
 
 /* ---------- Barra superior ---------- */
 .stApp .topbar {background:var(--surface)!important;border:1px solid var(--line)!important;box-shadow:none!important;border-radius:14px!important;padding:12px 18px!important}

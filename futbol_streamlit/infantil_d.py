@@ -324,3 +324,120 @@ def tracking_matches():
 def roster_names():
     jug = data()[0]
     return jug.jugador.astype(str).tolist()
+
+
+# ---------------------------------------------------------------- resultados, goles y asistencias
+RES_CSS = """<style>
+.res-card{display:grid;grid-template-columns:52px 1fr auto auto;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 16px;margin-bottom:8px}
+.res-card .j{background:var(--surface-3);color:var(--ink);font-weight:800;border-radius:10px;text-align:center;padding:8px 0}
+.res-card .r{color:var(--ink);font-weight:800;font-size:.95rem} .res-card .r small{display:block;color:var(--muted);font-weight:500;font-size:.72rem;margin-top:2px}
+.res-card .s{font-size:1.6rem;font-weight:900;color:var(--ink);letter-spacing:-.02em;min-width:70px;text-align:center}
+.res-card .s.pend{font-size:.8rem;font-weight:700;color:var(--muted)}
+.res-pill2{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:900;font-size:.8rem;color:#0A0E14}
+.rk{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:6px 16px}
+.rk-row{display:grid;grid-template-columns:28px 1fr 2fr 40px;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line-soft)}
+.rk-row:last-child{border-bottom:0}
+.rk-row .p{color:var(--muted);font-weight:800;font-size:.8rem}.rk-row .n{color:var(--ink);font-weight:700;font-size:.88rem}
+.rk-row .b{height:10px;background:var(--surface-2);border-radius:5px;overflow:hidden}.rk-row .b i{display:block;height:100%;border-radius:5px}
+.rk-row .v{text-align:right;font-weight:900;font-size:1.05rem;color:var(--ink)}
+.min-status{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:14px;padding:12px 16px;font-size:.84rem;color:var(--text);margin:4px 0 12px}
+.min-status b{color:var(--ink)}
+@media(max-width:700px){.res-card{grid-template-columns:44px 1fr auto}.res-card .res-pill2{display:none}}
+</style>"""
+
+
+@st.cache_data(show_spinner=False)
+def _load_results(stamp):
+    res = pd.read_csv(DIR / "resultados.csv").fillna({"rival": "", "notas": "", "fuente": ""})
+    ev = pd.read_csv(DIR / "eventos.csv")
+    ev["minuto"] = pd.to_numeric(ev["minuto"], errors="coerce")
+    ev["jornada"] = pd.to_numeric(ev["jornada"], errors="coerce")
+    return res, ev
+
+
+def results_data():
+    return _load_results(_stamp())
+
+
+def balance(res):
+    r = res.dropna(subset=["goles_favor", "goles_contra"])
+    v = int((r.goles_favor > r.goles_contra).sum()); e = int((r.goles_favor == r.goles_contra).sum()); d = len(r) - v - e
+    return dict(pj=len(r), v=v, e=e, d=d, gf=int(r.goles_favor.sum()), gc=int(r.goles_contra.sum()), pts=3 * v + e)
+
+
+def _ranking_html(series, color):
+    if series.empty:
+        return "<div class='rk'><div class='rk-row'><span></span><span class='n'>Sin registros</span></div></div>"
+    top = series.max()
+    rows = [f"<div class='rk-row'><span class='p'>{i}</span><span class='n'>{escape(str(n))}</span>"
+            f"<span class='b'><i style='width:{100 * v / top:.0f}%;background:{color}'></i></span><span class='v'>{int(v)}</span></div>"
+            for i, (n, v) in enumerate(series.items(), 1)]
+    return f"<div class='rk'>{''.join(rows)}</div>"
+
+
+TRAMOS = [(0, 10), (10, 20), (20, 35), (35, 45), (45, 55), (55, 70)]
+
+
+def _tramo(m):
+    for a, b in TRAMOS:
+        if a < m <= b or (m == 0 and a == 0):
+            return f"{a}–{b}'"
+    return "70'+"
+
+
+def render_results():
+    st.markdown(CSS + RES_CSS, unsafe_allow_html=True)
+    res, ev = results_data()
+    b = balance(res)
+    st.markdown("<div class='q-title' style='font-size:1.25rem'>Resultados · Infantil D</div>"
+                "<div class='q-sub'>Solo resultados y goles confirmados. Lo pendiente se indica sin inventar datos.</div>", unsafe_allow_html=True)
+    st.markdown("<div class='inf-kpis'>" + _kpi("Partidos con resultado", b["pj"], f"de {len(res)} jornadas registradas")
+                + _kpi("Balance", f"{b['v']}V · {b['e']}E · {b['d']}D", f"{b['pts']} puntos")
+                + _kpi("Goles", f"{b['gf']} – {b['gc']}", "a favor – en contra")
+                + _kpi("Diferencia", f"{b['gf'] - b['gc']:+d}", "goles") + "</div>", unsafe_allow_html=True)
+    cards = []
+    for r in res.sort_values("jornada").itertuples():
+        rival = r.rival or "Rival pendiente de identificar"
+        if pd.notna(r.goles_favor) and pd.notna(r.goles_contra):
+            gf, gc = int(r.goles_favor), int(r.goles_contra)
+            res_l = "V" if gf > gc else ("E" if gf == gc else "D")
+            col = {"V": TOKENS["pos"], "E": MUTED, "D": TOKENS["neg"]}[res_l]
+            score, pill = f"<span class='s'>{gf} – {gc}</span>", f"<span class='res-pill2' style='background:{col}'>{res_l}</span>"
+        else:
+            score, pill = "<span class='s pend'>Resultado pendiente</span>", "<span></span>"
+        sub = escape(r.notas or r.fuente)
+        cards.append(f"<div class='res-card'><span class='j'>J{int(r.jornada)}</span><span class='r'>Infantil D – {escape(rival)}<small>{sub}</small></span>{score}{pill}</div>")
+    st.markdown("".join(cards), unsafe_allow_html=True)
+
+    goals, assists = ev[ev.tipo == "gol"], ev[ev.tipo == "asistencia"]
+    c1, c2 = st.columns(2, gap="medium")
+    with c1:
+        st.markdown(f"<div class='q-title'>⚽ Goleadores · {len(goals)} goles</div><div class='q-sub'>Ranking acumulado de la temporada.</div>", unsafe_allow_html=True)
+        st.markdown(_ranking_html(goals.jugador.value_counts(), PT), unsafe_allow_html=True)
+    with c2:
+        st.markdown(f"<div class='q-title'>🅰️ Asistencias · {len(assists)}</div><div class='q-sub'>Ranking acumulado de la temporada.</div>", unsafe_allow_html=True)
+        st.markdown(_ranking_html(assists.jugador.value_counts(), RIVAL), unsafe_allow_html=True)
+
+    st.markdown("<div class='q-title' style='margin-top:16px'>Goles y asistencias por minuto</div>"
+                "<div class='q-sub'>Tramos de un partido de 70' (dos partes de 35').</div>", unsafe_allow_html=True)
+    known_g, known_a, known_j = int(goals.minuto.notna().sum()), int(assists.minuto.notna().sum()), int(goals.jornada.notna().sum())
+    pending = ("Ni las hojas del Excel ni los datos confirmados indican el minuto ni la jornada de cada gol: se mostrarán aquí cuando se registren."
+               if known_g < len(goals) else "")
+    st.markdown(f"<div class='min-status'><b>Minuto registrado:</b> {known_g} de {len(goals)} goles · {known_a} de {len(assists)} asistencias. "
+                f"<b>Jornada registrada:</b> {known_j} de {len(goals)} goles. {pending}</div>", unsafe_allow_html=True)
+    if known_g:
+        order = [f"{a}–{b}'" for a, b in TRAMOS] + ["70'+"]
+        cnt = goals.dropna(subset=["minuto"]).minuto.map(_tramo).value_counts().reindex(order, fill_value=0)
+        f = go.Figure(); f.update_layout(**plotly_layout(height=260, margin=dict(l=12, r=12, t=20, b=12), showlegend=False, barcornerradius=4))
+        f.add_bar(x=cnt.index, y=cnt.values, marker_color=PT, text=cnt.values, textposition="outside", cliponaxis=False)
+        f.update_yaxes(showgrid=False, showticklabels=False); f.update_xaxes(showgrid=False)
+        _plot(f, "infd_goal_tramos")
+    with st.container(border=True):
+        st.markdown("<div class='q-title'>Goles por jornada</div><div class='q-sub'>Marcadores confirmados: a favor (naranja) y en contra (azul).</div>", unsafe_allow_html=True)
+        r = res.dropna(subset=["goles_favor"]).sort_values("jornada")
+        f = go.Figure(); f.update_layout(**plotly_layout(height=240, margin=dict(l=12, r=12, t=30, b=12), barmode="group", barcornerradius=4, bargap=.35))
+        lab = [f"J{int(j)} · {rv or 'rival pendiente'}" for j, rv in zip(r.jornada, r.rival)]
+        f.add_bar(x=lab, y=r.goles_favor, name="A favor", marker_color=PT, text=r.goles_favor.astype(int), textposition="outside", cliponaxis=False)
+        f.add_bar(x=lab, y=r.goles_contra, name="En contra", marker_color=RIVAL, text=r.goles_contra.astype(int), textposition="outside", cliponaxis=False)
+        f.update_yaxes(showgrid=False, showticklabels=False, rangemode="tozero"); f.update_xaxes(showgrid=False)
+        _plot(f, "infd_goals_j")

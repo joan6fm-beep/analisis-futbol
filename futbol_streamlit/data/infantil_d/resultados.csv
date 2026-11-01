@@ -1,0 +1,4 @@
+jornada,rival,goles_favor,goles_contra,estado,fuente,notas
+1,Fomento Castellón,,,resultado pendiente,Excel (hoja J1),Cabecera de la hoja: «FOMENTO CASTELLON X-X INFANTIL D»; marcador sin registrar
+2,,3,2,confirmado,Confirmado por el usuario,La cabecera de la hoja J2 («CD RODA C - 1 INFANTIL B - 1») no coincide con el 3-2: no se usa como rival
+3,San Lorenzo,2,2,confirmado,Confirmado por el usuario,

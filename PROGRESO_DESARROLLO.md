@@ -11,7 +11,11 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
 - Rivales y Resumen de liga con J8 parcial (4 de 8 partidos, clasificación provisional);
   porteros con atribución de goles por minutos.
 - **Infantil D** (bloque completo, noviembre 2026):
-  - Navegación propia: Inicio · Muro · Calendario · Minutos · Seguimiento.
+  - Navegación propia: Inicio · Muro · Calendario · Resultados · Minutos · Seguimiento.
+  - Resultados (data/infantil_d/resultados.csv y eventos.csv, mantenidos a mano): J2 3-2 (rival pendiente),
+    J3 2-2 San Lorenzo; 5 goles y 1 asistencia confirmados, sin jornada ni minuto.
+- Navegación: la URL raíz muestra siempre la portada; botón «Inicio / Cambiar equipo» en barra lateral,
+  barra superior y menú móvil.
   - Datos en `futbol_streamlit/data/infantil_d/`, importados del Excel con
     `tools/importar_infantil_d.py` (ver `data/infantil_d/LEEME.md`).
   - Minutos: tabla con la estructura del Excel, tabla interactiva, 3 gráficos y comparador.
@@ -22,6 +26,7 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
 - J8 Juvenil A: faltan los 4 partidos del domingo 1/11.
 - J7 Juvenil A: ocasiones 14 frente a 13; zonas de pase 8/82/10 frente a 41/48/11.
 - Paterna J5: «Oscar Rubio Montoro» duplicado (dorsales 7 y 8).
+- Infantil D: rival de J2; marcador de J1 (Fomento Castellón); jornada y minuto de cada gol y de la asistencia.
 - Infantil D (Excel):
   - J2 inicio: «SEBAS» no está en la plantilla (casilla I16, delantero centro). Puesto vacío.
   - J1 tiene fecha 17/10/2026 y J2 03/10/2026 (orden cronológico invertido).

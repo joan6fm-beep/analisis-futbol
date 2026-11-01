@@ -9,6 +9,8 @@ Independientes del Juvenil A. Fuente: Excel «SEGUIMIENTO INFANTIL D 2ª REGIONA
 | `partidos.csv` | cabecera de cada hoja de jornada y estado de la formación | importador |
 | `formaciones_excel.csv` | jugadores colocados en el campo de cada hoja, con la celda de origen | importador |
 | `seguimiento_formaciones.csv` | formaciones del apartado Seguimiento | importador (solo si no existe) y la app |
+| `resultados.csv` | resultado por jornada (vacío = pendiente) y su fuente | a mano |
+| `eventos.csv` | goles y asistencias: jornada y minuto vacíos si no se conocen | a mano |
 | `muro.csv`, `muro_adjuntos/` | publicaciones del Muro del Infantil D | la app |
 | `calendario.csv` | eventos del Calendario del Infantil D | la app |
 
