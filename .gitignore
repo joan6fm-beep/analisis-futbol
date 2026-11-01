@@ -13,6 +13,7 @@ env/
 
 # Adjuntos que sube la app al Muro mientras se prueba en local
 futbol_streamlit/muro_adjuntos/
+futbol_streamlit/data/infantil_d/muro_adjuntos/
 
 # Editores y sistema
 .vscode/

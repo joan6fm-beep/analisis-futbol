@@ -1,0 +1,45 @@
+jornada,momento,formacion,slot,jugador
+1,inicio,1-4-3-3,POR,Martin Ortiz
+1,inicio,1-4-3-3,DFC-I,Oliver Ayala
+1,inicio,1-4-3-3,DFC-D,Dani Lacasta
+1,inicio,1-4-3-3,LI,Marc Albesa
+1,inicio,1-4-3-3,LD,Elian Cheta
+1,inicio,1-4-3-3,MC,Nico Becerra
+1,inicio,1-4-3-3,MC-I,Alejandro
+1,inicio,1-4-3-3,MC-D,Mauro
+1,inicio,1-4-3-3,EI,Iker Castillo
+1,inicio,1-4-3-3,ED,Alex Bonet
+1,inicio,1-4-3-3,DC,Fabian Castillo
+1,final,1-4-3-3,POR,Martin Ortiz
+1,final,1-4-3-3,DFC-I,Oliver Ayala
+1,final,1-4-3-3,DFC-D,Nico Becerra
+1,final,1-4-3-3,LI,Sergi Cobos
+1,final,1-4-3-3,LD,Dani Lacasta
+1,final,1-4-3-3,MC,Alejandro
+1,final,1-4-3-3,MC-I,Ander
+1,final,1-4-3-3,MC-D,Diego
+1,final,1-4-3-3,EI,Marc Capilla
+1,final,1-4-3-3,ED,Raul Montoro
+1,final,1-4-3-3,DC,Fabian Castillo
+2,inicio,1-3-4-2-1,POR,Alex Martinez
+2,inicio,1-3-4-2-1,DFC-I,Nico Becerra
+2,inicio,1-3-4-2-1,DFC,Oliver Ayala
+2,inicio,1-3-4-2-1,DFC-D,Dani Lacasta
+2,inicio,1-3-4-2-1,MC-I,Alejandro
+2,inicio,1-3-4-2-1,MC-D,Ander
+2,inicio,1-3-4-2-1,CAI,Sergi Cobos
+2,inicio,1-3-4-2-1,CAD,Diego
+2,inicio,1-3-4-2-1,MP-I,Marc Capilla
+2,inicio,1-3-4-2-1,MP-D,Raul Montoro
+2,inicio,1-3-4-2-1,DC,
+2,final,1-3-4-2-1,POR,Alex Martinez
+2,final,1-3-4-2-1,DFC-I,Thiago
+2,final,1-3-4-2-1,DFC,Oliver Ayala
+2,final,1-3-4-2-1,DFC-D,Marc Albesa
+2,final,1-3-4-2-1,MC-I,Alejandro
+2,final,1-3-4-2-1,MC-D,Nico Becerra
+2,final,1-3-4-2-1,CAI,Diego
+2,final,1-3-4-2-1,CAD,Sergi Cobos
+2,final,1-3-4-2-1,MP-I,Mauro
+2,final,1-3-4-2-1,MP-D,Alex Bonet
+2,final,1-3-4-2-1,DC,Iker Castillo

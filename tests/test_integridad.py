@@ -27,7 +27,7 @@ from streamlit.testing.v1 import AppTest  # noqa: E402
 
 ALIASES = {"t360": "team360_charts", "T": "team360_charts", "ui_theme": "ui_theme",
            "player_charts": "player_charts", "pdf_export_v63": "pdf_export_v63",
-           "t360adv": "team360_advanced", "A": "team360_advanced"}
+           "t360adv": "team360_advanced", "A": "team360_advanced", "infd": "infantil_d"}
 fallos = []
 
 
@@ -313,8 +313,55 @@ def test_datos_liga():
     check(not lost, "No se ha perdido ninguna fila de la versión base v15.12.84" + (f": {lost}" if lost else ""))
 
 
+def test_infantil_d():
+    """Infantil D: minutos del Excel, formaciones, vistas y datos independientes del Juvenil A."""
+    import hashlib
+    import pandas as pd
+    import infantil_d as I
+    D = APP_DIR / "data" / "infantil_d"
+    wide = pd.read_csv(D / "minutos.csv", dtype=str).fillna("")
+    check(len(wide) == 19 and list(wide.columns[2:]) == [f"J{i}" for i in range(1, 15)], f"Minutos: 19 jugadores y columnas J1–J14 como en el Excel ({len(wide)})")
+    num = wide.iloc[:, 2:].replace("-", "0").apply(pd.to_numeric, errors="coerce")
+    played = [c for c in num.columns if num[c].notna().any()]
+    check(played == ["J1", "J2", "J3"] and all(int(num[c].sum()) == 770 for c in played),
+          f"Jornadas con minutos {played}: cada una suma 770 (11 × 70'), igual que la fila TOTAL del Excel")
+    tot = dict(zip(wide.jugador, num.sum(axis=1).astype(int)))
+    expected = {"Alex Martinez": 140, "Alejandro": 210, "Oliver Ayala": 210, "Nico Becerra": 210, "Elian Cheta": 15, "Ali Oulad": 0, "Thiago": 65}
+    check(all(tot[k] == v for k, v in expected.items()), "Totales por jugador iguales a la columna TOTAL (=SUMA) del Excel")
+    jug, w2, part, form, long, jcols = I.data()
+    th = long[(long.jugador == "Thiago") & (long.jornada.isin([1, 4]))].set_index("jornada")
+    check(th.loc[1, "no_jugo"] and th.loc[1, "minutos"] == 0 and pd.isna(th.loc[4, "minutos"]),
+          "«-» = no participó (0 explícito) y celda vacía = sin dato (no se convierte en 0)")
+    ok = form[form.estado == "ok"].groupby(["jornada", "momento"]).size().to_dict()
+    check(ok == {(1, "final"): 11, (1, "inicio"): 11, (2, "final"): 11, (2, "inicio"): 10},
+          f"Formaciones del Excel: J1 11+11, J2 10+11 jugadores identificados ({ok})")
+    pend = form[form.estado != "ok"]
+    check(len(pend) == 1 and pend.texto_excel.iloc[0] == "SEBAS", "«SEBAS» (J2 inicio) queda pendiente: no figura en la plantilla")
+    seg = pd.read_csv(D / "seguimiento_formaciones.csv").fillna("")
+    sp = seg[(seg.jornada == 2) & (seg.momento == "inicio") & (seg.slot == "DC")]
+    j1 = seg[(seg.jornada == 1) & (seg.momento == "inicio")].set_index("slot").jugador.to_dict()
+    check(len(sp) == 1 and sp.jugador.iloc[0] == "" and j1.get("POR") == "Martin Ortiz" and j1.get("DC") == "Fabian Castillo",
+          "Seguimiento precargado del Excel: J1 inicio (POR Martin Ortiz, DC Fabian Castillo) y J2 DC vacío")
+    check(set(part.estado_formacion) == {"completa", "parcial", "pendiente"} and "JORNADA 3" in part.loc[part.jornada == 4, "notas"].iloc[0],
+          "Estado de las jornadas: J1 completa, J2 parcial, J3–J4 pendientes (J4 con título «JORNADA 3»)")
+    # Vistas y aislamiento de datos
+    base = APP_DIR
+    juv = [base / "muro.csv", base / "calendario.csv", APP_DIR / "data" / "seguimiento_formaciones.csv"]
+    before = {f: hashlib.md5(f.read_bytes()).hexdigest() for f in juv if f.exists()}
+    for view, txt in [("inicio", "Infantil D"), ("minutos", "Minutos · Infantil D"), ("seguimiento", "INFANTIL D"), ("muro", ""), ("calendario", "")]:
+        at = run({"area": "infantil", "view": view})
+        h = html_of(at)
+        check(not at.exception and (txt in h if txt else True), f"Infantil D · {view} renderizado" + (f": {at.exception[0].value[:100]}" if at.exception else ""))
+        if view == "minutos":
+            check(len(at.get("plotly_chart")) >= 4 and h.count("<td class='n'>") == 20, "Minutos: tabla del Excel (19 jugadores + TOTAL) y 4 gráficos")
+            check("Resumen liga" not in h, "Navegación de Infantil D sin apartados del Juvenil A")
+    after = {f: hashlib.md5(f.read_bytes()).hexdigest() for f in juv if f.exists()}
+    check(before == after, "Muro, Calendario y Seguimiento del Juvenil A intactos tras usar Infantil D")
+    check((D / "muro.csv").exists() and (D / "calendario.csv").exists(), "Muro y Calendario del Infantil D en data/infantil_d (archivos propios)")
+
+
 def main():
-    for t in (test_atributos, test_datos_liga, test_equipo360, test_avanzado, test_otras_vistas, test_modulo_obsoleto):
+    for t in (test_atributos, test_datos_liga, test_infantil_d, test_equipo360, test_avanzado, test_otras_vistas, test_modulo_obsoleto):
         print(f"\n— {t.__doc__.splitlines()[0] if t.__doc__ else t.__name__}")
         try:
             t()

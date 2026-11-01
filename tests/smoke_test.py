@@ -32,6 +32,8 @@ def casos():
                           encoding="utf-8-sig")["equipo"].tolist()
     yield "Portada (selección de equipo)", {}
     yield "Infantil D", {"area": "infantil"}
+    for v in ["inicio", "muro", "calendario", "minutos", "seguimiento"]:
+        yield f"Infantil D · {v}", {"area": "infantil", "view": v}
     for v in VISTAS_JUVENIL:
         yield f"Juvenil A · {v}", {"area": "juvenil", "view": v}
     for t in equipos:

@@ -1,0 +1,5 @@
+jornada,fecha,partido_excel,sistema_inicio,sistema_final,jugadores_inicio,jugadores_final,estado_formacion,notas
+1,17/10/2026,FOMENTO CASTELLON X-X INFANTIL D,1-4-3-3,1-4-3-3,11,11,completa,
+2,03/10/2026,CD RODA C - 1 INFANTIL B - 1,1-3-4-2-1,1-3-4-2-1,10,11,parcial,
+3,,,1-3-4-2-1,1-3-4-2-1,0,0,pendiente,solo figura el sistema; jugadores sin colocar en el Excel
+4,,,1-3-4-2-1,1-3-4-2-1,0,0,pendiente,el título de la hoja dice «JORNADA 3»; solo figura el sistema; jugadores sin colocar en el Excel

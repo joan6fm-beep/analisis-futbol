@@ -25,6 +25,7 @@ import ui_theme
 import team360_charts as t360
 import player_charts
 import team360_advanced as t360adv
+import infantil_d as infd
 
 
 def _reload_local_modules(*modules):
@@ -44,7 +45,7 @@ def _reload_local_modules(*modules):
 
 
 # Orden de dependencia: ui_theme <- team360_charts / player_charts <- team360_advanced.
-pdf_export_v63, ui_theme, t360, player_charts, t360adv = _reload_local_modules(pdf_export_v63, ui_theme, t360, player_charts, t360adv)
+pdf_export_v63, ui_theme, t360, player_charts, t360adv, infd = _reload_local_modules(pdf_export_v63, ui_theme, t360, player_charts, t360adv, infd)
 build_rival_pdf_diseno = pdf_export_v63.generate
 
 
@@ -1509,9 +1510,20 @@ def _image_data_uri(path):
     return f"data:image/{mime};base64," + base64.b64encode(path.read_bytes()).decode()
 
 
+# Almacén de datos por equipo: Juvenil A conserva sus rutas originales; Infantil D usa data/infantil_d/.
+TEAM_STORES = {
+    "juvenil": dict(label="JUVENIL A", team="Juvenil A", wall=BASE / "muro.csv", cal=BASE / "calendario.csv",
+                    attach=BASE / "muro_adjuntos", tracking=DATA / "seguimiento_formaciones.csv", calendar_edit=False),
+    "infantil": dict(label="INFANTIL D", team="Infantil D", wall=DATA / "infantil_d" / "muro.csv", cal=DATA / "infantil_d" / "calendario.csv",
+                     attach=DATA / "infantil_d" / "muro_adjuntos", tracking=DATA / "infantil_d" / "seguimiento_formaciones.csv", calendar_edit=True),
+}
+ACTIVE_STORE = TEAM_STORES["juvenil"]
+
+
 def _ensure_comms_files():
-    wall_path = BASE / "muro.csv"
-    cal_path = BASE / "calendario.csv"
+    wall_path = ACTIVE_STORE["wall"]
+    cal_path = ACTIVE_STORE["cal"]
+    wall_path.parent.mkdir(parents=True, exist_ok=True)
     if not wall_path.exists():
         pd.DataFrame(columns=["id","fecha","hora","tipo","titulo","mensaje","autor","destinatarios","prioridad"]).to_csv(wall_path,index=False)
     if not cal_path.exists():
@@ -1531,8 +1543,8 @@ def _append_csv_row(path, row):
 
 def render_wall():
     wall_path, _ = _ensure_comms_files()
-    attach_dir = BASE / "muro_adjuntos"
-    attach_dir.mkdir(exist_ok=True)
+    attach_dir = ACTIVE_STORE["attach"]
+    attach_dir.mkdir(parents=True, exist_ok=True)
     st.markdown("""
     <style>
     .wall-hero{background:linear-gradient(135deg,#071b33,#0b365f);color:#fff;border-radius:20px;padding:18px 20px;margin:2px 0 12px;box-shadow:0 10px 28px rgba(5,28,52,.18)}
@@ -1784,7 +1796,7 @@ def render_calendar():
             with b:
                 hfin=st.time_input("Hora fin")
                 lugar=st.text_input("Lugar")
-                equipo=st.selectbox("Grupo",["Juvenil A","Todo el club","Porteros","Defensas","Mediocentros","Delanteros"])
+                equipo=st.selectbox("Grupo",[ACTIVE_STORE["team"],"Todo el club","Porteros","Defensas","Mediocentros","Delanteros"])
             titulo=st.text_input("Título del evento")
             descripcion=st.text_area("Descripción / indicaciones",height=90)
             ok=st.form_submit_button("Añadir al calendario",use_container_width=True)
@@ -1796,6 +1808,8 @@ def render_calendar():
                 st.rerun()
             else:
                 st.error("No se pudo guardar el evento.")
+    if ACTIVE_STORE.get("calendar_edit"):
+        infd.render_calendar_editor(cal_path)
 
 HOME_CSS = """
 <style>
@@ -2404,7 +2418,7 @@ FORMATION_TEMPLATES = {
 
 
 def _tracking_path():
-    return DATA / "seguimiento_formaciones.csv"
+    return ACTIVE_STORE["tracking"]
 
 
 def _load_tracking():
@@ -2802,18 +2816,32 @@ def _assignment_editor(jornada, momento, title, roster):
 def render_formation_tracking():
     st.markdown("""
     <div class='tracking-hero'>
-      <div><div class='tracking-kicker'>PRIMER TOQUE · JUVENIL A</div><div class='tracking-title'>Seguimiento de formación</div>
+      <div><div class='tracking-kicker'>PRIMER TOQUE · __TEAM__</div><div class='tracking-title'>Seguimiento de formación</div>
       <div class='tracking-sub'>Equipo que inicia y equipo que termina cada jornada · rápido, visual y guardado por partido.</div></div>
-    </div>""", unsafe_allow_html=True)
+    </div>""".replace("__TEAM__", ACTIVE_STORE["label"]), unsafe_allow_html=True)
 
-    matches = load_csv("equipo_primer_toque.csv")
-    roster_df = load_csv("jugadores_perfil.csv")
-    roster = roster_df["jugador"].dropna().astype(str).tolist() if not roster_df.empty and "jugador" in roster_df.columns else []
+    if ACTIVE_STORE is TEAM_STORES["infantil"]:
+        matches = infd.tracking_matches()
+        roster = infd.roster_names()
+        _notes = infd.tracking_notes()
+        st.caption("Formaciones de J1 y J2 importadas de las hojas del Excel; puedes editarlas y se guardan solo para el Infantil D.")
+        if _notes:
+            with st.expander(f"Datos del Excel pendientes de revisar ({len(_notes)})"):
+                st.markdown("\n".join(f"- {_safe_html(n)}" for n in _notes))
+    else:
+        matches = load_csv("equipo_primer_toque.csv")
+        roster_df = load_csv("jugadores_perfil.csv")
+        roster = roster_df["jugador"].dropna().astype(str).tolist() if not roster_df.empty and "jugador" in roster_df.columns else []
     jornadas = list(range(1, 39))
     if not matches.empty and "jornada" in matches.columns:
         max_loaded = int(pd.to_numeric(matches["jornada"], errors="coerce").dropna().max())
     else:
         max_loaded = 1
+    if ACTIVE_STORE is TEAM_STORES["infantil"]:
+        _saved = _load_tracking()
+        _filled = _saved[_saved["jugador"].fillna("").astype(str).str.strip() != ""] if not _saved.empty else _saved
+        if not _filled.empty:
+            max_loaded = int(pd.to_numeric(_filled["jornada"], errors="coerce").max())
     c1, c2 = st.columns([1,3])
     with c1:
         jornada = st.selectbox("Jornada", jornadas, index=max(0, min(max_loaded,38)-1), format_func=lambda x:f"Jornada {x}")
@@ -2822,7 +2850,7 @@ def render_formation_tracking():
         if not row.empty:
             r=row.iloc[0]
             gf = int(r.gf) if pd.notna(r.gf) else "-"; gc = int(r.gc) if pd.notna(r.gc) else "-"
-            st.markdown(f"<div class='tracking-match'><b>J{jornada}</b><span>{_safe_html(r.get('condicion',''))}</span><strong>{_safe_html(r.get('rival',''))}</strong><em>{gf}-{gc}</em></div>", unsafe_allow_html=True)
+            st.markdown(f"<div class='tracking-match'><b>J{jornada}</b><span>{_safe_html(r.get('condicion',''))}</span><strong>{_safe_html(r.get('rival',''))}</strong>" + (f"<em>{gf}-{gc}</em>" if gf != "-" else "") + "</div>", unsafe_allow_html=True)
         else:
             st.markdown(f"<div class='tracking-match'><b>J{jornada}</b><strong>Partido pendiente de cargar</strong></div>", unsafe_allow_html=True)
 
@@ -3381,6 +3409,10 @@ if _landing:
       .home-photo-card{border-radius:22px!important;overflow:hidden!important}
     </style>""",unsafe_allow_html=True)
 
+try:
+    _area_pre = str(st.query_params.get("area", "")).lower().strip()
+except Exception:
+    _area_pre = ""
 with st.sidebar:
     _pt_logo_uri = _image_data_uri(BASE / "primer_toque_logo.png")
     st.markdown(
@@ -3390,7 +3422,7 @@ with st.sidebar:
             <div class='brand-kicker'>Análisis de rendimiento</div>
             <div class='brand-main'>PRIMER TOQUE C.F.</div>
             <div class='brand-sub'>Temporada <b>2026/2027</b></div>
-            <div class='brand-chip'>JUVENIL A</div>
+            <div class='brand-chip'>{'INFANTIL D' if _area_pre == 'infantil' else 'JUVENIL A'}</div>
         </div>
         </div>""",
         unsafe_allow_html=True,
@@ -3423,6 +3455,7 @@ with st.sidebar:
         "seguimiento": "Seguimiento",
         "jugadores": "Jugadores",
         "individual": "Individual",
+        "minutos": "Minutos",
     }
     modulo = _view_to_mod.get(_view, "Resumen liga" if _area == "juvenil" else "Inicio")
     _icons = {
@@ -3435,12 +3468,17 @@ with st.sidebar:
       "Seguimiento":"<svg viewBox='0 0 24 24'><rect x='3' y='4' width='18' height='16' rx='2'/><path d='M12 4v16M3 12h18'/><circle cx='12' cy='12' r='2.5'/></svg>",
       "Jugadores":"<svg viewBox='0 0 24 24'><circle cx='9' cy='8' r='3'/><circle cx='17' cy='9' r='2.5'/><path d='M3 20c0-4 2.5-6 6-6s6 2 6 6'/><path d='M14 15c3.4-.4 6 1.5 6 5'/></svg>",
       "Individual":"<svg viewBox='0 0 24 24'><circle cx='12' cy='8' r='3.5'/><path d='M5 21c.3-5 2.8-8 7-8s6.7 3 7 8'/></svg>",
+      "Minutos":"<svg viewBox='0 0 24 24'><circle cx='12' cy='13' r='8'/><path d='M12 9v4l3 2M9 2h6'/></svg>",
     }
-    _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Resumen liga','liga'),('Rivales','rivales'),('Equipo','equipo'),('Seguimiento','seguimiento'),('Individual','individual'),('Jugadores','jugadores')]
+    _nav_area = "infantil" if _area == "infantil" else "juvenil"
+    if _nav_area == "infantil":
+        _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Minutos','minutos'),('Seguimiento','seguimiento')]
+    else:
+        _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Resumen liga','liga'),('Rivales','rivales'),('Equipo','equipo'),('Seguimiento','seguimiento'),('Individual','individual'),('Jugadores','jugadores')]
     _nh=["<div class='side-nav-v3'>"]
     for _nm,_slug in _nav_info:
         _ac=' active' if modulo==_nm else ''
-        _nh.append(f"<a class='{_ac.strip()}' href='?area=juvenil&view={_slug}' target='_self'><span class='sni'>{_icons[_nm]}</span><span class='sn-label'>{_safe_html(_nm)}</span></a>")
+        _nh.append(f"<a class='{_ac.strip()}' href='?area={_nav_area}&view={_slug}' target='_self'><span class='sni'>{_icons[_nm]}</span><span class='sn-label'>{_safe_html(_nm)}</span></a>")
     _nh.append('</div>')
     st.markdown(''.join(_nh),unsafe_allow_html=True)
 
@@ -3527,12 +3565,15 @@ _mobile_nav = [
     ("Individual", "individual", "◎", "Individual"),
     ("Jugadores", "jugadores", "♟", "Jugadores"),
 ]
+if _nav_area == "infantil":
+    _mobile_nav = [("Inicio", "inicio", "⌂", "Inicio"), ("Muro", "muro", "✦", "Muro"), ("Calendario", "calendario", "▣", "Calendario"),
+                   ("Minutos", "minutos", "◷", "Minutos"), ("Seguimiento", "seguimiento", "▤", "Seguim.")]
 _mobile_nav_html = ["<nav class='mobile-bottom-nav' aria-label='Navegación móvil'>"]
 for _mod_name, _view_slug, _icon, _label in _mobile_nav:
     _active = " active" if modulo == _mod_name else ""
     _extra = f"&team={quote(str(seleccionado))}" if (_mod_name == "Rivales" and seleccionado) else ""
     _mobile_nav_html.append(
-        f"<a class='{_active.strip()}' href='?area=juvenil&view={_view_slug}{_extra}' target='_self'>"
+        f"<a class='{_active.strip()}' href='?area={_nav_area}&view={_view_slug}{_extra}' target='_self'>"
         f"<span class='mn-icon'>{_icon}</span><span>{_label}</span></a>"
     )
 _mobile_nav_html.append("</nav>")
@@ -3565,7 +3606,17 @@ if modulo == "Rivales" and seleccionado:
         st.markdown("".join(_chips), unsafe_allow_html=True)
 
 if _area == "infantil":
-    render_infantil()
+    ACTIVE_STORE = TEAM_STORES["infantil"]
+    if modulo == "Muro":
+        render_wall()
+    elif modulo == "Calendario":
+        render_calendar()
+    elif modulo == "Minutos":
+        infd.render_minutes()
+    elif modulo == "Seguimiento":
+        render_formation_tracking()
+    else:
+        infd.render_home(_image_data_uri(str(BASE / "infantil_d_portada.jpeg")))
     st.stop()
 elif modulo == "Inicio":
     render_home()

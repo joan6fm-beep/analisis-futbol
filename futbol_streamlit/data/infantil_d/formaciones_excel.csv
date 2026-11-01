@@ -1,0 +1,45 @@
+jornada,momento,sistema,celda,texto_excel,jugador,puesto,estado
+1,inicio,1-4-3-3,I4,MARTIN,Martin Ortiz,POR,ok
+1,inicio,1-4-3-3,H6,OLIVER,Oliver Ayala,DFC-I,ok
+1,inicio,1-4-3-3,J6,DANI,Dani Lacasta,DFC-D,ok
+1,inicio,1-4-3-3,F7,ALBESA,Marc Albesa,LI,ok
+1,inicio,1-4-3-3,L7,ELIAN,Elian Cheta,LD,ok
+1,inicio,1-4-3-3,I9,NICO,Nico Becerra,MC,ok
+1,inicio,1-4-3-3,H12,ALEJANDRO,Alejandro,MC-I,ok
+1,inicio,1-4-3-3,J12,MAURO,Mauro,MC-D,ok
+1,inicio,1-4-3-3,F14,IKER,Iker Castillo,EI,ok
+1,inicio,1-4-3-3,L14,BONET,Alex Bonet,ED,ok
+1,inicio,1-4-3-3,I16,FABI,Fabian Castillo,DC,ok
+1,final,1-4-3-3,I22,MARTIN,Martin Ortiz,POR,ok
+1,final,1-4-3-3,H24,OLIVER,Oliver Ayala,DFC-I,ok
+1,final,1-4-3-3,J24,NICO,Nico Becerra,DFC-D,ok
+1,final,1-4-3-3,F25,SERGI,Sergi Cobos,LI,ok
+1,final,1-4-3-3,L25,DANI,Dani Lacasta,LD,ok
+1,final,1-4-3-3,I27,ALE,Alejandro,MC,ok
+1,final,1-4-3-3,H30,ANDER,Ander,MC-I,ok
+1,final,1-4-3-3,J30,DIEGO,Diego,MC-D,ok
+1,final,1-4-3-3,F32,MARC CAPILLA,Marc Capilla,EI,ok
+1,final,1-4-3-3,L32,RAUL,Raul Montoro,ED,ok
+1,final,1-4-3-3,I34,FABI,Fabian Castillo,DC,ok
+2,inicio,1-3-4-2-1,I4,ALEX,Alex Martinez,POR,ok
+2,inicio,1-3-4-2-1,G7,NICO,Nico Becerra,DFC-I,ok
+2,inicio,1-3-4-2-1,I7,OLIVER,Oliver Ayala,DFC,ok
+2,inicio,1-3-4-2-1,K7,DANI,Dani Lacasta,DFC-D,ok
+2,inicio,1-3-4-2-1,H11,ALE,Alejandro,MC-I,ok
+2,inicio,1-3-4-2-1,J11,ANDER,Ander,MC-D,ok
+2,inicio,1-3-4-2-1,F12,SERGI,Sergi Cobos,CAI,ok
+2,inicio,1-3-4-2-1,L12,DIEGO,Diego,CAD,ok
+2,inicio,1-3-4-2-1,H14,MARC CAPILLA,Marc Capilla,MP-I,ok
+2,inicio,1-3-4-2-1,J14,RAUL,Raul Montoro,MP-D,ok
+2,inicio,1-3-4-2-1,I16,SEBAS,,DC,jugador no identificado en la plantilla
+2,final,1-3-4-2-1,I22,ALEX,Alex Martinez,POR,ok
+2,final,1-3-4-2-1,G25,THIAGO,Thiago,DFC-I,ok
+2,final,1-3-4-2-1,I25,OLIVER,Oliver Ayala,DFC,ok
+2,final,1-3-4-2-1,K25,ALBESA,Marc Albesa,DFC-D,ok
+2,final,1-3-4-2-1,H29,ALEJANDRO,Alejandro,MC-I,ok
+2,final,1-3-4-2-1,J29,NICO,Nico Becerra,MC-D,ok
+2,final,1-3-4-2-1,F30,DIEGO,Diego,CAI,ok
+2,final,1-3-4-2-1,L30,SERGI,Sergi Cobos,CAD,ok
+2,final,1-3-4-2-1,H32,MAURO,Mauro,MP-I,ok
+2,final,1-3-4-2-1,J32,BONET,Alex Bonet,MP-D,ok
+2,final,1-3-4-2-1,I34,IKER,Iker Castillo,DC,ok
