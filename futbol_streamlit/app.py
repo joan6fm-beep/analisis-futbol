@@ -2001,6 +2001,10 @@ def render_league_summary():
         return
 
     partidos_cargados = len(valid)
+    _played, _expected, _missing = t360adv.jornada_status(partidos, jmax)
+    if _played < _expected:
+        st.warning(f"Clasificación provisional de J{jmax}: {_played} de {_expected} partidos con resultado oficial. "
+                   f"Pendientes de jugar o de cargar: {', '.join(clean_name(x).rstrip('.') for x in _missing)}.")
     goles_totales = int(valid["goles_local"].sum() + valid["goles_visitante"].sum()) if partidos_cargados else 0
     goles_partido = goles_totales / partidos_cargados if partidos_cargados else 0.0
     amarillas = int(ev["tipo"].isin(["amarilla","doble_amarilla"]).sum()) if not ev.empty else 0
@@ -2233,61 +2237,16 @@ def render_league_summary():
         else:
             st.info("No hay goleadores con minutos registrados para este filtro.")
 
-    # 3) Porteros: goles encajados durante sus minutos reales/reconstruidos.
-    keeper_rows = []
-    if not ali_scope.empty and not min_scope.empty:
-        keeper_names = ali_scope[ali_scope.get("rol", pd.Series(dtype=object)).astype(str).eq("POR")][["equipo", "jornada", "jugador"]].drop_duplicates()
-        # El rol de portero se cruza por jornada: si un jugador actúa de emergencia en portería
-        # solo cuentan como minutos de portero los de esa jornada, no sus minutos como jugador de campo.
-        kmins = min_scope.merge(keeper_names.assign(es_portero=1), on=["equipo", "jornada", "jugador"], how="inner")
-        if not kmins.empty:
-            # Asignamos cada gol encajado al portero que estaba sobre el campo según titularidad y minutos.
-            gc_events = ev[ev["tipo"].astype(str).isin(["gol_contra", "penalti_contra_gol"])].copy()
-            conceded = {}
-            for _, ge in gc_events.iterrows():
-                try:
-                    gj = int(float(ge.jornada)); gm = int(float(ge.minuto)); gt = str(ge.equipo)
-                except Exception:
-                    continue
-                cand = kmins[(kmins["equipo"].astype(str) == gt) & (pd.to_numeric(kmins["jornada"], errors="coerce") == gj) & (kmins["minutos"] > 0)].copy()
-                on_pitch = []
-                for _, kr in cand.iterrows():
-                    km = float(kr.minutos); starter = int(float(kr.titular)) == 1
-                    start = 0.0 if starter else max(0.0, 90.0-km)
-                    end = min(90.0, km) if starter else 90.0
-                    if start < gm <= end or (gm == 0 and start == 0):
-                        on_pitch.append(str(kr.jugador))
-                if len(on_pitch) == 1:
-                    key = (gt, on_pitch[0])
-                    conceded[key] = conceded.get(key, 0) + 1
-
-            kg = kmins.groupby(["equipo", "jugador"], as_index=False)["minutos"].sum()
-            kg = kg[kg["minutos"] > 0].copy()
-            kg["gc"] = [conceded.get((str(r.equipo), str(r.jugador)), 0) for _, r in kg.iterrows()]
-            kg["min_gc"] = kg.apply(lambda r: (float(r.minutos)/int(r.gc)) if int(r.gc) > 0 else float("inf"), axis=1)
-            kg["gc90"] = kg["gc"] * 90.0 / kg["minutos"]
-            kg = kg.sort_values(["gc90", "minutos", "gc", "jugador"], ascending=[True, False, True, True]).reset_index(drop=True)
-            for pos, r in kg.iterrows():
-                min_gc_txt = "—" if int(r.gc) == 0 else f"{float(r.min_gc):.1f}"
-                keeper_rows.append(
-                    "<tr>"
-                    f"<td class='pos-col rank-pos'><b>{pos+1}</b></td>"
-                    f"<td class='team-col rank-player'><b>{_safe_html(str(r.jugador))}</b></td>"
-                    f"<td class='team-col rank-team'>{_team_logo_tag(str(r.equipo),24)}<span>{_safe_html(clean_name(str(r.equipo)))}</span></td>"
-                    f"<td class='stat-num rank-min'>{int(round(float(r.minutos)))}</td>"
-                    f"<td class='stat-num rank-goals'><b>{int(r.gc)}</b></td>"
-                    f"<td class='stat-num rank-rate'>{min_gc_txt}</td>"
-                    f"<td class='stat-num rank-rate'><b>{float(r.gc90):.2f}</b></td>"
-                    "</tr>"
-                )
-
+    # 3) Porteros: cada gol encajado se atribuye al portero que estaba en el campo (minutos y cambios).
+    _kt, _kpend = t360adv.keeper_stats(min_scope, ali_scope, ev)
     st.markdown("<div class='league-subrank-title'>🧤 Porteros · goles encajados por minutos jugados</div>", unsafe_allow_html=True)
-    if keeper_rows:
-        st.markdown(
-            "<div class='goal-time-note'>GC/90 más bajo = mejor registro. La tabla muestra unas 20 filas y permite desplazarse dentro para ver todos los porteros.</div>"
-            "<div class='ranking-scroll'><table class='heat league-table premium-table performance-table'>"
-            "<thead><tr><th class='rank-pos'>Pos.</th><th class='team-col rank-player'>Portero</th><th class='team-col rank-team'>Equipo</th><th class='rank-min'>Min</th><th class='rank-goals'>GC</th><th class='rank-rate'>Min/GC</th><th class='rank-rate'>GC/90</th></tr></thead>"
-            "<tbody>" + "".join(keeper_rows) + "</tbody></table></div>", unsafe_allow_html=True)
+    if not _kt.empty:
+        st.markdown("<div class='goal-time-note'>GC/90 más bajo = mejor registro. PJ = partidos con minutos · Tit. = titularidades · "
+                    "0 = partidos completos sin encajar. Desliza dentro de la tabla para ver todos.</div>"
+                    + t360adv.keeper_table_html(_kt, _kpend, logo=_team_logo_tag, clean=clean_name), unsafe_allow_html=True)
+        _pn = t360adv.pending_note(_kpend, clean_name)
+        if _pn:
+            st.caption(_pn)
     else:
         st.info("No hay minutaje de porteros suficiente para este filtro.")
 
@@ -3805,7 +3764,7 @@ forms = team_formations(seleccionado)
 logo_path = _team_logo_path(seleccionado)
 
 st.markdown(
-    f"""<div class='team-head'>{image_html(logo_path)}<div><div class='team-name'>{_safe_html(seleccionado)}</div><div class='team-sub'>Lliga Comunitat Juvenil · Nord · Temporada 2026/2027</div><span class='badge'>{'ANÁLISIS REAL · HASTA J7' if seleccionado in ["Primer Toque C.F. 'A'", "C.F. At. Burriana - Salesianos 'A'", "Villarreal C.F. 'C'", "Alboraya U.D. 'B'", "C.F. Històrics de València 'A'", "C.F. Torre Levante 'A'", "Ath. Massamagrell C.F. 'A'", "C.F. Inter San José Valencia 'B'", "Col. Salgui E.D.E. 'A'", "C.F. Cracks 'A'", "Paterna C.F. 'A'", "Manises C.F. 'A'", "Patacona C.F. 'B'", "C.D.F. Canet 'A'", "Bétera C.F. 'A'", "C.D. Acero 'A'"] else 'PERFIL PREPARADO · DATOS PENDIENTES'}</span></div></div>""",
+    f"""<div class='team-head'>{image_html(logo_path)}<div><div class='team-name'>{_safe_html(seleccionado)}</div><div class='team-sub'>Lliga Comunitat Juvenil · Nord · Temporada 2026/2027</div><span class='badge'>{('ANÁLISIS REAL · HASTA J' + str(int(pd.to_numeric(minutos.loc[minutos.equipo == seleccionado, 'jornada'], errors='coerce').max()))) if seleccionado in ["Primer Toque C.F. 'A'", "C.F. At. Burriana - Salesianos 'A'", "Villarreal C.F. 'C'", "Alboraya U.D. 'B'", "C.F. Històrics de València 'A'", "C.F. Torre Levante 'A'", "Ath. Massamagrell C.F. 'A'", "C.F. Inter San José Valencia 'B'", "Col. Salgui E.D.E. 'A'", "C.F. Cracks 'A'", "Paterna C.F. 'A'", "Manises C.F. 'A'", "Patacona C.F. 'B'", "C.D.F. Canet 'A'", "Bétera C.F. 'A'", "C.D. Acero 'A'"] else 'PERFIL PREPARADO · DATOS PENDIENTES'}</span></div></div>""",
     unsafe_allow_html=True,
 )
 
@@ -3835,12 +3794,13 @@ except Exception as _pdf_exc:
     st.error(f"No se ha podido preparar el PDF de este rival: {_pdf_exc}")
 
 
+st.markdown(t360adv.team_summary_html(partidos, eventos, clasificacion, seleccionado, short_team_name), unsafe_allow_html=True)
+
 if seleccionado == "C.F. Inter San José Valencia 'B'":
     st.markdown(
         """<div class='card' style='margin:8px 0 12px'>
-        <div class='section-title'>San José · actas hasta J7 actualizadas</div>
-        <div class='note'><b>Balance:</b> 7 PJ · 3 V · 0 E · 4 D · 13 GF · 17 GC · 9 puntos · 8º.
-        <br><b>Datos cargados:</b> plantilla y dorsales utilizados · XI inicial de las jornadas disponibles · sistemas · minutos · cambios reconstruidos por minutaje · goles · tarjetas · expulsiones y goles encajados.
+        <div class='section-title'>San José · notas de transcripción de las actas J1–J7</div>
+        <div class='note'><b>Datos cargados:</b> plantilla y dorsales utilizados · XI inicial de las jornadas disponibles · sistemas · minutos · cambios reconstruidos por minutaje · goles · tarjetas · expulsiones y goles encajados.
         <br><b>Máximos goleadores:</b> Erik Da Silva Canobbio (4) · Alejandro Vidal Castillo (3).
         <br><b>Fuente:</b> actas FFCV mostradas en el vídeo aportado por el usuario. Los datos de esta ficha se han transcrito jornada a jornada sin completar información no visible en las actas.</div>
         </div>""",
@@ -3851,9 +3811,8 @@ if seleccionado == "C.F. Inter San José Valencia 'B'":
 if seleccionado == "Col. Salgui E.D.E. 'A'":
     st.markdown(
         """<div class='card' style='margin:8px 0 12px'>
-        <div class='section-title'>Colegio Salgui · actas hasta J7 actualizadas</div>
-        <div class='note'><b>Balance:</b> 7 PJ · 2 V · 2 E · 3 D · 10 GF · 9 GC · 8 puntos · 10º.
-        <br><b>Datos cargados:</b> plantilla y dorsales utilizados · XI inicial de las jornadas disponibles · convocatorias · sistemas · minutos · cambios reconstruidos por minutaje · goles · tarjetas y goles encajados.
+        <div class='section-title'>Colegio Salgui · notas de transcripción de las actas J1–J7</div>
+        <div class='note'><b>Datos cargados:</b> plantilla y dorsales utilizados · XI inicial de las jornadas disponibles · convocatorias · sistemas · minutos · cambios reconstruidos por minutaje · goles · tarjetas y goles encajados.
         <br><b>Máximo goleador:</b> Jorge Blanco Martinez (3). El 2.º gol de J5 fue un gol en propia de Pablo Siñuela Lara y no se atribuye a un jugador del Salgui.
         <br><b>Fuente:</b> actas FFCV mostradas en el vídeo aportado por el usuario. Datos transcritos jornada a jornada sin completar información no visible.</div>
         </div>""",
@@ -3864,9 +3823,8 @@ if seleccionado == "Col. Salgui E.D.E. 'A'":
 if seleccionado == "C.F. Cracks 'A'":
     st.markdown(
         """<div class='card' style='margin:8px 0 12px'>
-        <div class='section-title'>Cracks · actas hasta J7 actualizadas</div>
-        <div class='note'><b>Balance:</b> 7 PJ · 2 V · 1 E · 4 D · 9 GF · 14 GC · 7 puntos · 13º.
-        <br><b>Datos cargados:</b> plantilla y dorsales utilizados · XI inicial de las jornadas disponibles · convocatorias · sistema 1-4-4-2 en las jornadas cargadas · minutos · cambios reconstruidos por acta · goles · tarjetas · expulsión y goles encajados.
+        <div class='section-title'>Cracks · notas de transcripción de las actas J1–J7</div>
+        <div class='note'><b>Datos cargados:</b> plantilla y dorsales utilizados · XI inicial de las jornadas disponibles · convocatorias · sistema 1-4-4-2 en las jornadas cargadas · minutos · cambios reconstruidos por acta · goles · tarjetas · expulsión y goles encajados.
         <br><b>Máximos goleadores:</b> Angel Chulia Izquierdo (2) y Daniel Saez Barber (2).
         <br><b>Incidencias:</b> Angel Chulia Izquierdo fue expulsado en J3. El cuarto gol encajado en J5 fue en propia puerta de Jorge Benavent Cervera.
         <br><b>Fuente:</b> actas FFCV mostradas en el vídeo aportado por el usuario.</div>
@@ -3878,9 +3836,8 @@ if seleccionado == "C.F. Cracks 'A'":
 if seleccionado == "Paterna C.F. 'A'":
     st.markdown(
         """<div class='card' style='margin:8px 0 12px'>
-        <div class='section-title'>Paterna · actas disponibles hasta J7</div>
-        <div class='note'><b>Balance:</b> 6 PJ · 2 V · 2 E · 2 D · 13 GF · 10 GC · 8 puntos · 9º.
-        <br><b>Datos cargados:</b> XI inicial de las 6 jornadas disputadas · dorsales usados · sistemas · minutos reconstruidos desde los cambios del acta · goles · tarjetas · goles encajados.
+        <div class='section-title'>Paterna · notas de transcripción de las actas J1–J7</div>
+        <div class='note'><b>Datos cargados:</b> XI inicial de las 6 jornadas disputadas · dorsales usados · sistemas · minutos reconstruidos desde los cambios del acta · goles · tarjetas · goles encajados.
         <br><b>Máximo goleador:</b> Oscar Rubio Montoro (4). Samuel Ebitu Igwe Erhabor suma 3 y Ayomide Oluwapelumi Oguns Alabebe, 2.
         <br><b>Sistemas:</b> J1 1-3-5-2; J2-J5 1-5-4-1.
         <br><b>Fuente:</b> actas FFCV mostradas en el vídeo aportado por el usuario.</div>
@@ -3892,9 +3849,8 @@ if seleccionado == "Paterna C.F. 'A'":
 if seleccionado == "Manises C.F. 'A'":
     st.markdown(
         """<div class='card' style='margin:8px 0 12px'>
-        <div class='section-title'>Manises · actas disponibles hasta J7</div>
-        <div class='note'><b>Balance:</b> 6 PJ · 2 V · 1 E · 3 D · 8 GF · 10 GC · 7 puntos · 12º.
-        <br><b>Datos cargados:</b> XI inicial de las 6 jornadas disputadas · dorsales utilizados · convocatorias · sistema 1-4-3-3 en las cinco jornadas · minutos reconstruidos desde los cambios del acta · goles · tarjetas · expulsiones y goles encajados.
+        <div class='section-title'>Manises · notas de transcripción de las actas J1–J7</div>
+        <div class='note'><b>Datos cargados:</b> XI inicial de las 6 jornadas disputadas · dorsales utilizados · convocatorias · sistema 1-4-3-3 en las cinco jornadas · minutos reconstruidos desde los cambios del acta · goles · tarjetas · expulsiones y goles encajados.
         <br><b>Goleadores:</b> Hugo Albiach Serrano (2); también han marcado Alvaro Mateo Canovas, Martin Rodriguez De Guzman, Hugo Pastor Femenia, David Lopez Garcia, Javier Sevillano Aparicio y Jaime Treviño Perez.
         <br><b>Incidencias:</b> Izan Saiz Escobar fue expulsado en J1; Hugo Albiach Serrano fue expulsado en J4 y marcó en propia puerta en J2.
         <br><b>Fuente:</b> actas FFCV mostradas en el vídeo aportado por el usuario.</div>
@@ -3906,9 +3862,8 @@ if seleccionado == "Manises C.F. 'A'":
 if seleccionado == "Patacona C.F. 'B'":
     st.markdown(
         """<div class='card' style='margin:8px 0 12px'>
-        <div class='section-title'>Patacona · actas disponibles hasta J7</div>
-        <div class='note'><b>Balance:</b> 6 PJ · 1 V · 0 E · 5 D · 5 GF · 14 GC · 3 puntos · 15º.
-        <br><b>Datos cargados:</b> XI inicial de las 6 jornadas disputadas · convocatorias/minutajes · dorsales utilizados · sistema 1-5-4-1 en las jornadas cargadas · cambios reconstruidos desde el acta · goles · tarjetas · expulsiones y goles encajados.
+        <div class='section-title'>Patacona · notas de transcripción de las actas J1–J7</div>
+        <div class='note'><b>Datos cargados:</b> XI inicial de las 6 jornadas disputadas · convocatorias/minutajes · dorsales utilizados · sistema 1-5-4-1 en las jornadas cargadas · cambios reconstruidos desde el acta · goles · tarjetas · expulsiones y goles encajados.
         <br><b>Goleadores:</b> Miron Saliakhov (1), Rayan Bououd Mazouz (1), Mario Garcia Fernando (1) y Julio Casero Girona (1), más 1 autogol rival en J1.
         <br><b>Incidencias:</b> Daniel Cano Navarro fue expulsado en J1. Lucas Ferrandis Paredes vio amarilla en J3 y J5; Antonio Gallur Valencia, en J4.
         <br><b>Fuente:</b> actas FFCV mostradas en el vídeo aportado por el usuario.</div>
@@ -3921,9 +3876,8 @@ if seleccionado == "Patacona C.F. 'B'":
 if seleccionado == "C.D.F. Canet 'A'":
     st.markdown(
         """<div class='card' style='margin:8px 0 12px'>
-        <div class='section-title'>Canet · actas hasta J7 actualizadas</div>
-        <div class='note'><b>Balance:</b> 7 PJ · 1 V · 0 E · 6 D · 2 GF · 15 GC · 3 puntos · 16º.
-        <br><b>Datos cargados:</b> XI inicial de las 7 jornadas · convocatorias y minutajes · dorsales utilizados · sistemas · cambios reconstruidos desde el acta · goles · tarjetas · expulsiones y goles encajados.
+        <div class='section-title'>Canet · notas de transcripción de las actas J1–J7</div>
+        <div class='note'><b>Datos cargados:</b> XI inicial de las 7 jornadas · convocatorias y minutajes · dorsales utilizados · sistemas · cambios reconstruidos desde el acta · goles · tarjetas · expulsiones y goles encajados.
         <br><b>Goleadores:</b> Xavi Salvador Granell (1) y Alejandro David Julia Zalvez (1).
         <br><b>Sistemas:</b> J1 1-4-4-2; J2-J7 1-4-3-3.
         <br><b>Incidencias:</b> Eric Romero Campos fue expulsado por doble amarilla en J4 y Pau Bernet Sanchez vio roja en el 90' de esa misma jornada.
@@ -3985,9 +3939,13 @@ ev_scope = eventos[(eventos.equipo == seleccionado) & (eventos.jornada.isin(scop
 # ---------------- KPIs ----------------
 stand = clasificacion[clasificacion.equipo == seleccionado].sort_values("jornada").tail(1)
 pos, pts = "—", "—"
+_stand_j, _stand_f, _stand_prov = "—", "", False
 if not stand.empty:
     pos = f"{int(stand.iloc[0].posicion)}º"
     pts = str(int(stand.iloc[0].puntos))
+    _stand_j, _stand_f = int(stand.iloc[0].jornada), str(stand.iloc[0].fecha)
+    _sp, _se, _ = t360adv.jornada_status(partidos, _stand_j)
+    _stand_prov = _sp < _se
 
 scores = []
 for _, r in part.sort_values("jornada").iterrows():
@@ -4017,7 +3975,7 @@ kpis = [
     (GF if known_scores else "—", "Goles a favor", f"{len(scope_js)} jornadas" if scope_js else "Sin jornadas"),
     (GC if known_scores else "—", "Goles en contra", f"{len(scope_js)} jornadas" if scope_js else "Sin jornadas"),
     (main_form, "Sistema más usado", f"{main_pct:.0f}% ({int(vc.iloc[0]) if len(vc) else 0}/{len(forms_scope)})"),
-    (pos, "Clasificación J5", f"{pts} puntos · 04/10/2026"),
+    (pos, f"Clasificación J{_stand_j}" + (" · provisional" if _stand_prov else ""), f"{pts} puntos · {_stand_f}"),
 ]
 for c, (v, l, s) in zip(cols, kpis):
     c.markdown(f"<div class='card kpi'><div class='v'>{v}</div><div class='l'>{l}</div><div class='s'>{s}</div></div>", unsafe_allow_html=True)
@@ -4294,6 +4252,15 @@ with d4:
     else:
         pen_html = "<div class='note'>Sin penaltis a favor registrados en este filtro</div>"
     st.markdown(f"<div style='height:10px'></div><div class='card'><div class='section-title'>Penaltis</div><div class='mini-list'>{pen_html}</div></div>", unsafe_allow_html=True)
+
+# ---------------- Porteros del rival ----------------
+_rkt, _rkp = t360adv.keeper_stats(mm, al_scope, ev_scope)
+if not _rkt.empty:
+    st.markdown("<div style='height:10px'></div><div class='section-title'>Porteros · goles encajados con cada portero en el campo</div>", unsafe_allow_html=True)
+    st.markdown(t360adv.keeper_table_html(_rkt, _rkp, team_col=False), unsafe_allow_html=True)
+    _rpn = t360adv.pending_note(_rkp, clean_name)
+    if _rpn:
+        st.caption(_rpn)
 
 # ---------------- Conversión de gol por jugador ----------------
 st.markdown("<div style='height:10px'></div><div class='section-title'>Conversión de gol por jugador</div>", unsafe_allow_html=True)
@@ -4648,4 +4615,4 @@ if ambito == "Total" and jornada_sel == "Total":
         )
     st.markdown("<div class='match-links-grid'>" + "".join(_cards) + "</div>", unsafe_allow_html=True)
 
-st.caption("V15.12.79 · J7 Veo completo: colectivo + detalle individual integrado.")
+st.caption("Datos de liga hasta J8 (31/10/2026) · estadísticas Veo de J2, J3, J5 y J7.")

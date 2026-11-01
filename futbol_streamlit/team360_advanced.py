@@ -1137,3 +1137,117 @@ def render_advanced(veo, pt_tm, partidos, clas, short_name, goals, share_all, se
         render_lab(veo, pt_tm, seasons)
     else:
         render_seasons(seasons, short_name)
+
+
+# ================================================================ PORTEROS (Liga y Rivales)
+def keeper_stats(minutos, alineaciones, eventos, jmax=None):
+    """Estadística de porteros con atribución de cada gol al portero que estaba en el campo.
+
+    - Portero = jugador con rol POR en la alineación titular de esa jornada.
+    - Un gol se atribuye si exactamente un portero estaba en el campo en ese minuto
+      (titular: minutos 0..m; suplente: 90-m..90). Si no se puede determinar
+      (p. ej. el titular ya había salido y el sustituto no consta), queda pendiente.
+    Devuelve (tabla, pendientes).
+    """
+    num = lambda s: pd.to_numeric(s, errors="coerce")
+    m, a, e = minutos.copy(), alineaciones.copy(), eventos.copy()
+    if jmax is not None:
+        m, a, e = m[num(m.jornada) <= jmax], a[num(a.jornada) <= jmax], e[num(e.jornada) <= jmax]
+    keepers = a[a.rol.astype(str).eq("POR")][["equipo", "jornada", "jugador"]].drop_duplicates()
+    km = m.merge(keepers, on=["equipo", "jornada", "jugador"], how="inner")
+    km["minutos"] = num(km.minutos).fillna(0); km["titular"] = num(km.titular).fillna(0)
+    km = km[km.minutos > 0]
+    # Portero suplente: entra justo cuando sale el portero titular y es portero (POR) en otra jornada del equipo.
+    mm = m.assign(minutos=num(m.minutos).fillna(0), titular=num(m.titular).fillna(0))
+    gk_any = set(zip(keepers.equipo, keepers.jugador))
+    extra = []
+    for k in km[(km.titular == 1) & (km.minutos < 90)].itertuples():
+        subs = mm[(mm.equipo == k.equipo) & (num(mm.jornada) == num(pd.Series([k.jornada])).iloc[0]) & (mm.titular == 0) & (mm.minutos > 0)]
+        hit = subs[(90 - subs.minutos == k.minutos) & subs.jugador.map(lambda j: (k.equipo, j) in gk_any)]
+        if len(hit) == 1:
+            extra.append(hit.iloc[0][["equipo", "jornada", "jugador", "minutos", "titular"]].to_dict())
+    if extra:
+        km = pd.concat([km, pd.DataFrame(extra)], ignore_index=True)
+    gc_ev = e[e.tipo.astype(str).isin(["gol_contra", "penalti_contra_gol"])]
+    conceded, pending = {}, []
+    for _, g in gc_ev.iterrows():
+        try:
+            gj, gm = int(float(g.jornada)), int(float(g.minuto))
+        except (TypeError, ValueError):
+            pending.append(dict(equipo=g.equipo, jornada=g.jornada, minuto=g.minuto, motivo="minuto desconocido")); continue
+        cand = km[(km.equipo == g.equipo) & (num(km.jornada) == gj)]
+        on = []
+        for _, k in cand.iterrows():
+            start, end = (0.0, min(90.0, k.minutos)) if k.titular == 1 else (max(0.0, 90.0 - k.minutos), 90.0)
+            if start < gm <= end or (gm == 0 and start == 0) or (gm > 90 and end >= 90):
+                on.append(k.jugador)
+        if len(on) == 1:
+            conceded[(g.equipo, gj, on[0])] = conceded.get((g.equipo, gj, on[0]), 0) + 1
+        else:
+            pending.append(dict(equipo=g.equipo, jornada=gj, minuto=gm,
+                                motivo="portero en el campo no identificado" if not on else "varios porteros posibles"))
+    km["gc"] = [conceded.get((r.equipo, int(float(r.jornada)), r.jugador), 0) for r in km.itertuples()]
+    km["cero"] = ((km.minutos >= 90) & (km.gc == 0)).astype(int)
+    t = km.groupby(["equipo", "jugador"], as_index=False).agg(pj=("jornada", "nunique"), titularidades=("titular", "sum"),
+                                                               minutos=("minutos", "sum"), gc=("gc", "sum"), cero=("cero", "sum"))
+    t["gc90"] = t.gc * 90.0 / t.minutos
+    t = t.sort_values(["gc90", "minutos", "gc", "jugador"], ascending=[True, False, True, True]).reset_index(drop=True)
+    return t, pd.DataFrame(pending)
+
+
+
+def jornada_status(partidos, jornada):
+    """Partidos con resultado en una jornada frente a los esperados (equipos ÷ 2)."""
+    p = partidos[pd.to_numeric(partidos.jornada, errors="coerce") == jornada]
+    teams = set(partidos.local) | set(partidos.visitante)
+    played = p.dropna(subset=["goles_local", "goles_visitante"])
+    missing = sorted(teams - set(played.local) - set(played.visitante))
+    return len(played), len(teams) // 2, missing
+
+
+def keeper_table_html(t, pending, team_col=True, logo=None, clean=lambda s: s):
+    rows = []
+    for i, r in t.iterrows():
+        team = (f"<td class='team-col rank-team'>{logo(str(r.equipo), 24) if logo else ''}<span>{escape(clean(str(r.equipo)))}</span></td>"
+                if team_col else "")
+        rows.append(f"<tr><td class='pos-col rank-pos'><b>{i + 1}</b></td><td class='team-col rank-player'><b>{escape(str(r.jugador))}</b></td>{team}"
+                    f"<td class='stat-num rank-goals'>{int(r.pj)}</td><td class='stat-num rank-goals'>{int(r.titularidades)}</td>"
+                    f"<td class='stat-num rank-min'>{int(r.minutos)}</td><td class='stat-num rank-goals'><b>{int(r.gc)}</b></td>"
+                    f"<td class='stat-num rank-rate'><b>{r.gc90:.2f}</b></td><td class='stat-num rank-goals'>{int(r.cero)}</td></tr>")
+    head = ("<thead><tr><th class='rank-pos'>Pos.</th><th class='team-col rank-player'>Portero</th>"
+            + ("<th class='team-col rank-team'>Equipo</th>" if team_col else "")
+            + "<th class='rank-goals'>PJ</th><th class='rank-goals'>Tit.</th><th class='rank-min'>Min</th><th class='rank-goals'>GC</th>"
+              "<th class='rank-rate'>GC/90</th><th class='rank-goals'>0</th></tr></thead>")
+    return ("<div class='ranking-scroll'><table class='heat league-table premium-table performance-table'>" + head
+            + "<tbody>" + "".join(rows) + "</tbody></table></div>")
+
+
+def pending_note(pending, clean=lambda s: s):
+    if pending is None or pending.empty:
+        return ""
+    items = " · ".join(f"{clean(str(r.equipo))} J{r.jornada} {r.minuto}'" for r in pending.itertuples())
+    return f"Goles encajados pendientes de atribuir a un portero ({len(pending)}): {items}. No se suman a ningún portero."
+
+
+def team_summary_html(partidos, eventos, clas, team, short):
+    """Ficha actualizada del rival con resultados oficiales (sustituye a los textos fijos «hasta J7»)."""
+    tm = team_matches(partidos, team)
+    if tm.empty:
+        return ""
+    sp = split_summary(tm)
+    t, h, a = sp["Total"], sp["Casa"], sp["Fuera"]
+    last_j = int(tm.jornada.max())
+    st_row = clas[clas.equipo == team].sort_values("jornada").tail(1)
+    pos = f"{int(st_row.posicion.iloc[0])}º tras J{int(st_row.jornada.iloc[0])}" if len(st_row) else "—"
+    ev = eventos[(eventos.equipo == team) & eventos.tipo.isin(["gol", "penalti_gol"])]
+    ev = ev[~ev.jugador.isin(["Autogol rival", "G.P."])]
+    top = ev.jugador.value_counts().head(3)
+    tops = " · ".join(f"{escape(str(n))} ({v})" for n, v in top.items()) or "sin goles registrados"
+    cards = eventos[(eventos.equipo == team)]
+    am = int(cards.tipo.eq("amarilla").sum()); rj = int(cards.tipo.isin(["roja", "doble_amarilla"]).sum())
+    last = tm.iloc[-1]
+    return (f"<div class='card' style='margin:8px 0 12px'><div class='section-title'>{escape(short(team))} · temporada hasta J{last_j}</div>"
+            f"<div class='note'><b>Balance:</b> {t['n']} PJ · {t['v']} V · {t['e']} E · {t['dd']} D · {t['gf']} GF · {t['gc']} GC · {t['pts']} puntos · {pos}."
+            f"<br><b>Casa:</b> {h['v']}V-{h['e']}E-{h['dd']}D ({h['n']} PJ) · <b>Fuera:</b> {a['v']}V-{a['e']}E-{a['dd']}D ({a['n']} PJ)."
+            f"<br><b>Último partido:</b> J{last_j} {'en casa' if last.condicion == 'Casa' else 'fuera'} ante {escape(short(last.rival))}: {last.gf}–{last.gc}."
+            f"<br><b>Máximos goleadores:</b> {tops}.<br><b>Disciplina:</b> {am} amarillas · {rj} expulsiones.</div></div>")

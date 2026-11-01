@@ -190,7 +190,9 @@ def test_avanzado():
     adv = pd.read_csv(APP_DIR / "data" / "equipo_avanzado.csv")
     veo = T.prepare(adv[adv.jornada.isin([2, 3, 5, 7])], lambda x: x)
     pt = A.team_matches(part, A.TEAM)
-    check(len(pt) == 7 and int(pt.pts.sum()) == 6, f"Primer Toque: 7 partidos y 6 puntos ({len(pt)}, {int(pt.pts.sum())})")
+    _ptp = part.dropna(subset=["goles_local"])
+    _ptp = _ptp[(_ptp.local == A.TEAM) | (_ptp.visitante == A.TEAM)]
+    check(len(pt) == len(_ptp), f"Primer Toque: {len(pt)} partidos con resultado oficial ({int(pt.pts.sum())} puntos)")
     # Media de Alboraya como visitante, calculada a mano desde el CSV
     alb = "Alboraya U.D. 'B'"
     raw = part[(part.visitante == alb)].dropna(subset=["goles_visitante"])
@@ -238,8 +240,81 @@ def test_avanzado():
         check(not at.exception, f"Laboratorio · {metric} · {mode}")
 
 
+def test_datos_liga():
+    """Datos de liga: sin duplicados, minutos coherentes, porteros, clasificación y nada perdido."""
+    import subprocess, io
+    import pandas as pd
+    import team360_advanced as A
+    D = APP_DIR / "data"
+    part = pd.read_csv(D / "partidos_rivales.csv"); ev = pd.read_csv(D / "eventos_rivales.csv")
+    mn = pd.read_csv(D / "minutos_rivales.csv"); al = pd.read_csv(D / "alineaciones_rivales.csv"); cl = pd.read_csv(D / "clasificacion_liga.csv")
+    # Sin duplicados
+    check(not part.duplicated(["jornada", "local", "visitante"]).any(), "Partidos sin duplicar")
+    check(not ev.duplicated(["jornada", "equipo", "minuto", "tipo", "jugador"]).any(), "Eventos (goles y tarjetas) sin duplicar")
+    _dup = mn[mn.duplicated(["equipo", "jornada", "jugador"], keep=False)]
+    check(not (_dup.jornada == 8).any(), "Minutos J8: un registro por jugador")
+    _old = sorted({f"{r.equipo} J{r.jornada} {r.jugador}" for r in _dup.itertuples() if r.jornada != 8})
+    check(_old == ["Paterna C.F. 'A' J5 Oscar Rubio Montoro"], f"Duplicado histórico conocido (pendiente de revisar, no se modifica): {_old}")
+    # Goles coherentes con el resultado, en cada partido y por cada lado
+    bad = []
+    for r in part.dropna(subset=["goles_local"]).itertuples():
+        for team, gf, gc in ((r.local, r.goles_local, r.goles_visitante), (r.visitante, r.goles_visitante, r.goles_local)):
+            e = ev[(ev.jornada == r.jornada) & (ev.equipo == team)]
+            nf = e.tipo.isin(["gol", "penalti_gol"]).sum(); nc = e.tipo.isin(["gol_contra", "penalti_contra_gol"]).sum()
+            if (nf or nc) and (nf != gf or nc != gc):
+                bad.append(f"J{r.jornada} {team} {nf}-{nc} vs {int(gf)}-{int(gc)}")
+    j8 = [b for b in bad if b.startswith("J8")]
+    check(not j8, "J8: goles de cada equipo coinciden con el resultado" + (f": {j8}" if j8 else ""))
+    # Minutos J8: 11 titulares y 990 menos los minutos perdidos por expulsión
+    m8 = mn[mn.jornada == 8]
+    tit_ok = (m8.groupby("equipo").titular.sum() == 11).all()
+    check(len(m8) and tit_ok and (m8.minutos.between(0, 90)).all(), "J8: 11 titulares por equipo y minutos entre 0 y 90")
+    # Porteros: cada gol encajado atribuido a un portero o marcado como pendiente (nunca perdido)
+    t, pend = A.keeper_stats(mn, al, ev)
+    tot = int(ev.tipo.isin(["gol_contra", "penalti_contra_gol"]).sum())
+    check(int(t.gc.sum()) + len(pend) == tot, f"Porteros: {int(t.gc.sum())} goles atribuidos + {len(pend)} pendientes = {tot} encajados")
+    jordi = t[(t.equipo == A.TEAM) & (t.jugador == "Jordi")]
+    _j8 = ev[(ev.jornada == 8) & (ev.equipo == A.TEAM) & ev.tipo.eq("gol_contra")]
+    t7, _ = A.keeper_stats(mn, al, ev, jmax=7)
+    j7 = t7[(t7.equipo == A.TEAM) & (t7.jugador == "Jordi")]
+    check(len(jordi) == 1 and len(j7) == 1 and int(jordi.pj.iloc[0]) == int(j7.pj.iloc[0]) + 1
+          and int(jordi.gc.iloc[0]) == int(j7.gc.iloc[0]) + len(_j8) == 7,
+          f"Jordi: J8 suma 1 partido y {len(_j8)} goles encajados (total {jordi[['pj', 'gc']].values.tolist()})")
+    # Clasificación = resultados oficiales en todas las jornadas con puntos registrados
+    p = part.dropna(subset=["goles_local"]); mism = []
+    for j in sorted(cl.dropna(subset=["puntos"]).jornada.unique()):
+        for r in cl[(cl.jornada == j)].dropna(subset=["puntos"]).itertuples():
+            d = p[(p.jornada <= j) & ((p.local == r.equipo) | (p.visitante == r.equipo))]
+            w = (((d.local == r.equipo) & (d.goles_local > d.goles_visitante)) | ((d.visitante == r.equipo) & (d.goles_visitante > d.goles_local))).sum()
+            e = (d.goles_local == d.goles_visitante).sum()
+            if 3 * w + e != r.puntos or len(d) != r.pj:
+                mism.append(f"J{j} {r.equipo}")
+    check(not mism, "Clasificación coincide con los resultados en todas las jornadas" + (f": {mism[:4]}" if mism else ""))
+    played, expected, missing = A.jornada_status(part, 8)
+    check(played == 4 and expected == 8 and len(missing) == 8, f"J8 provisional: {played}/{expected} partidos; pendientes {len(missing)} equipos")
+    check(set(part[part.jornada == 8].local) | set(part[part.jornada == 8].visitante) == set(m8.equipo),
+          "J8: solo hay minutos de los 8 equipos que han jugado (no se inventan partidos)")
+    # Rankings actualizados con J8
+    sc = ev[ev.tipo.isin(["gol", "penalti_gol"])].groupby(["equipo", "jugador"]).size()
+    check(sc.get(("C.D. Acero 'A'", "Aaron Madrid Garcia"), 0) >= 2 and sc.get((A.TEAM, "Ian"), 0) >= 1, "Goleadores de J8 incorporados al ranking")
+    # Nada perdido: todas las filas de la versión base siguen presentes
+    root = APP_DIR.parent
+    lost = []
+    for f in ("partidos_rivales", "minutos_rivales", "eventos_rivales", "alineaciones_rivales", "clasificacion_liga", "plantillas_rivales"):
+        try:
+            old = subprocess.run(["git", "show", f"v15.12.84:futbol_streamlit/data/{f}.csv"], cwd=root, capture_output=True, check=True).stdout
+        except Exception:
+            continue
+        o = pd.read_csv(io.BytesIO(old)).astype(str); n = pd.read_csv(D / f"{f}.csv").astype(str)
+        o = o[[c for c in o.columns if c in n.columns]]
+        miss = len(o.merge(n[o.columns].drop_duplicates(), how="left", indicator=True).query("_merge == 'left_only'"))
+        if miss:
+            lost.append(f"{f}: {miss}")
+    check(not lost, "No se ha perdido ninguna fila de la versión base v15.12.84" + (f": {lost}" if lost else ""))
+
+
 def main():
-    for t in (test_atributos, test_equipo360, test_avanzado, test_otras_vistas, test_modulo_obsoleto):
+    for t in (test_atributos, test_datos_liga, test_equipo360, test_avanzado, test_otras_vistas, test_modulo_obsoleto):
         print(f"\n— {t.__doc__.splitlines()[0] if t.__doc__ else t.__name__}")
         try:
             t()

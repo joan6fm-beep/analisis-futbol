@@ -561,3 +561,49 @@ jornada,equipo,minuto,tipo,jugador,detalle
 7,Villarreal C.F. 'C',29,gol_contra,Alvaro Selva De Les,J7 · gol encajado ante C.F. Cracks 'A' · FFCV
 7,Villarreal C.F. 'C',41,gol,Gael Palomar Medina,J7 · gol ante C.F. Cracks 'A' · FFCV
 7,Villarreal C.F. 'C',64,gol,Adrian Cantalapiedra Cocho,J7 · gol ante C.F. Cracks 'A' · FFCV
+8,Primer Toque C.F. 'A',14,amarilla,Boyan,J8 · amarilla · FFCV
+8,Primer Toque C.F. 'A',32,gol,Sebas,J8 · gol ante C.F. Històrics de València 'A' · FFCV
+8,C.F. Històrics de València 'A',32,gol_contra,Sebas,J8 · gol encajado ante Primer Toque C.F. 'A' · FFCV
+8,Primer Toque C.F. 'A',49,gol,Ian,J8 · gol ante C.F. Històrics de València 'A' · FFCV
+8,C.F. Històrics de València 'A',49,gol_contra,Ian,J8 · gol encajado ante Primer Toque C.F. 'A' · FFCV
+8,Primer Toque C.F. 'A',69,amarilla,Toni,J8 · amarilla · FFCV
+8,Primer Toque C.F. 'A',90,amarilla,Pedro,J8 · amarilla · FFCV
+8,C.F. Històrics de València 'A',10,gol,EZEKIEL CHIGOZIE EDWIN FESTUS,J8 · gol ante Primer Toque C.F. 'A' · FFCV
+8,Primer Toque C.F. 'A',10,gol_contra,EZEKIEL CHIGOZIE EDWIN FESTUS,J8 · gol encajado ante C.F. Històrics de València 'A' · FFCV
+8,C.F. Històrics de València 'A',42,gol,DIEGO JOSE MOYA SALCEDO,J8 · gol ante Primer Toque C.F. 'A' · FFCV
+8,Primer Toque C.F. 'A',42,gol_contra,DIEGO JOSE MOYA SALCEDO,J8 · gol encajado ante C.F. Històrics de València 'A' · FFCV
+8,C.F. Històrics de València 'A',72,gol,DANIEL NIETO VALERO,J8 · gol ante Primer Toque C.F. 'A' · FFCV
+8,Primer Toque C.F. 'A',72,gol_contra,DANIEL NIETO VALERO,J8 · gol encajado ante C.F. Històrics de València 'A' · FFCV
+8,C.F. Històrics de València 'A',74,amarilla,DANIEL NIETO VALERO,J8 · amarilla · FFCV
+8,C.F. Històrics de València 'A',90,amarilla,JEAN CARLOS FRAGA MENDOZA,J8 · amarilla · FFCV
+8,C.F. Històrics de València 'A',90,roja,ALBERTO SAURA GARCIA,J8 · roja directa · FFCV
+8,Col. Salgui E.D.E. 'A',13,amarilla,Álvaro Vela Ferrer,J8 · amarilla · FFCV
+8,Col. Salgui E.D.E. 'A',41,gol,Hugo Perez Palacios,J8 · gol ante Ath. Massamagrell C.F. 'A' · FFCV
+8,Ath. Massamagrell C.F. 'A',41,gol_contra,Hugo Perez Palacios,J8 · gol encajado ante Col. Salgui E.D.E. 'A' · FFCV
+8,Col. Salgui E.D.E. 'A',66,gol,Álvaro Llinares Barata,J8 · gol ante Ath. Massamagrell C.F. 'A' · FFCV
+8,Ath. Massamagrell C.F. 'A',66,gol_contra,Álvaro Llinares Barata,J8 · gol encajado ante Col. Salgui E.D.E. 'A' · FFCV
+8,Col. Salgui E.D.E. 'A',79,amarilla,Hugo Perez Palacios,J8 · amarilla · FFCV
+8,Col. Salgui E.D.E. 'A',90,amarilla,Pau Pujada Celda,J8 · amarilla · FFCV
+8,Ath. Massamagrell C.F. 'A',26,amarilla,Guillem Uso Alcover,J8 · amarilla · FFCV
+8,Ath. Massamagrell C.F. 'A',30,amarilla,Isaac Barba Silla,J8 · amarilla · FFCV
+8,Ath. Massamagrell C.F. 'A',84,amarilla,Quique,J8 · amarilla · FFCV
+8,Ath. Massamagrell C.F. 'A',84,amarilla,Francisco Garcia Cantero,J8 · amarilla · FFCV
+8,Ath. Massamagrell C.F. 'A',87,amarilla,Santiago Peco Ortiz,J8 · amarilla · FFCV
+8,C.D. Acero 'A',32,amarilla,Mario Navarro Perello,J8 · amarilla · FFCV
+8,C.D. Acero 'A',39,gol,Aaron Madrid Garcia,J8 · gol ante C.D.F. Canet 'A' · FFCV
+8,C.D.F. Canet 'A',39,gol_contra,Aaron Madrid Garcia,J8 · gol encajado ante C.D. Acero 'A' · FFCV
+8,C.D. Acero 'A',41,gol,Aaron Madrid Garcia,J8 · gol ante C.D.F. Canet 'A' · FFCV
+8,C.D.F. Canet 'A',41,gol_contra,Aaron Madrid Garcia,J8 · gol encajado ante C.D. Acero 'A' · FFCV
+8,C.D. Acero 'A',47,amarilla,Jorge Lopez Vila,J8 · amarilla · FFCV
+8,C.D. Acero 'A',79,amarilla,Llorenç Vicent Forner,J8 · amarilla · FFCV
+8,C.D. Acero 'A',90,amarilla,Oscar Manrique Martinez,J8 · amarilla · FFCV
+8,C.D.F. Canet 'A',17,amarilla,Lucas Escobedo De Los Santos,J8 · amarilla · FFCV
+8,C.D.F. Canet 'A',42,doble_amarilla,Lucas Escobedo De Los Santos,J8 · segunda amarilla / expulsión · FFCV
+8,C.D.F. Canet 'A',45,amarilla,Pau Bernet Sanchez,J8 · amarilla · FFCV
+8,C.D.F. Canet 'A',61,gol,Eric Romero Campos,J8 · gol ante C.D. Acero 'A' · FFCV
+8,C.D. Acero 'A',61,gol_contra,Eric Romero Campos,J8 · gol encajado ante C.D.F. Canet 'A' · FFCV
+8,Paterna C.F. 'A',62,gol,Jose Leroi Fernandez Guillem,J8 · gol ante C.F. Cracks 'A' · FFCV
+8,C.F. Cracks 'A',62,gol_contra,Jose Leroi Fernandez Guillem,J8 · gol encajado ante Paterna C.F. 'A' · FFCV
+8,Paterna C.F. 'A',84,amarilla,Gonzalo Herrero Adrados,J8 · amarilla · FFCV
+8,C.F. Cracks 'A',19,amarilla,Sebastian Ioan Varga Bacaran,J8 · amarilla · FFCV
+8,C.F. Cracks 'A',63,amarilla,Nikolas Elijah Hiler,J8 · amarilla · FFCV
