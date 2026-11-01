@@ -1,0 +1,64 @@
+jornada,fecha,hora,local,visitante,goles_local,goles_visitante,campo,sistema_local,sistema_visitante,estado
+1,,,Celtic Elche C.F. 'A',C.F. Torre Levante 'A',0,0,"Ciudad Dptva. Elche Campo 6 José Ant. Morante ""Lico"" F-11",1-4-3-3,1-4-3-3,acta
+1,,,Elda Unión Cableworld C.F. 'A',C.F. Fundació VCF 'A',0,3,Campo de Futbol Fernando Tomas F-11 Campo 3,1-4-4-2,1-4-4-2,acta
+1,05/09/2026,09:00,Levante U.D. 'A',C.F. Inter San José Valencia 'A',0,0,Ciudad Dptva. del Levante U.D. F-11 Campo 4,1-4-4-2,1-3-5-2,acta
+1,05/09/2026,10:30,Kelme C.F. 'A',Patacona C.F. 'A',0,1,Polideportivo Mpal. Altabix Enrique Cervera F-11,1-4-4-2,1-4-4-2,acta
+1,05/09/2026,10:50,Villarreal C.F. 'A',C.D. Roda 'A',6,1,Ciudad Dptva. José Manuel Llaneza F-11 Vila-real Campo 5,1-4-4-2,1-4-3-3,acta
+1,05/09/2026,11:15,S.C.D. Intangco 'A',Primer Toque C.F. 'A',1,2,Ciudad Dptva. Elche Campo 5 Palmeral D'Elx F-11,1-4-3-3,1-5-4-1,acta
+1,05/09/2026,13:00,C.F. La Nucía 'A',C.D. Castellón 'A',2,5,Ciutat Esptva. Camilo Cano F-11 La Nucia Anexo,1-4-3-3,1-4-4-2,acta
+1,06/09/2026,18:30,C.F. Benidorm 'A',Elche C.F. 'A',0,3,Inst. Dptvas. Antonio Lopez Benidorm F-11 Campo 2,1-4-4-2,1-4-3-3,acta
+1,09/09/2026,,Valencia C.F. 'A',Alboraya U.D. 'A',5,0,Ciudad Dptva. Valencia CF F-11 Campo 3,1-4-3-3,1-5-4-1,acta
+2,12/09/2026,,C.F. Torre Levante 'A',Kelme C.F. 'A',0,0,Campo Torre Levante-Orriols F-11,1-4-3-3,1-4-4-2,acta
+2,12/09/2026,09:00,Patacona C.F. 'A',Levante U.D. 'A',0,3,Campo Mpal. de la Patacona F-11,1-4-4-2,1-4-4-2,acta
+2,12/09/2026,10:30,C.F. Inter San José Valencia 'A',Villarreal C.F. 'A',0,3,Campo de Fútbol Mpal. de Beniferri F-11,1-3-5-2,1-4-4-2,acta
+2,12/09/2026,11:00,C.F. Fundació VCF 'A',Valencia C.F. 'A',1,8,Ciudad Dptva. Valencia CF F-11 Campo 4,1-4-4-2,1-4-3-3,acta
+2,12/09/2026,12:45,C.D. Castellón 'A',Elda Unión Cableworld C.F. 'A',3,1,Campos Gaeta Huguet Castellón F-11 Campo B,1-3-5-2,1-4-4-2,acta
+2,12/09/2026,13:00,Elche C.F. 'A',C.F. La Nucía 'A',2,1,Polideportivo Mpal. Altabix Enrique Cervera F-11,1-4-3-3,1-4-3-3,acta
+2,12/09/2026,18:00,C.D. Roda 'A',S.C.D. Intangco 'A',4,1,Ciudad Dptva. José Manuel Llaneza F-11 Vila-real Campo 5,1-4-3-3,1-4-3-3,acta
+2,13/09/2026,,Alboraya U.D. 'A',Celtic Elche C.F. 'A',1,2,Estadio Mpal. Fran... Alboraya F-11,1-5-4-1,1-4-3-3,acta
+2,13/09/2026,17:15,Primer Toque C.F. 'A',C.F. Benidorm 'A',3,0,Ciudad Dptva. Chencho C-F-11 Castellón,1-5-4-1,1-5-4-1,acta
+3,,,C.F. La Nucía 'A',Primer Toque C.F. 'A',1,2,Ciutat Esptva. Camilo Cano F-11 La Nucia Anexo,1-4-3-3,1-5-4-1,acta
+3,,,Kelme C.F. 'A',Alboraya U.D. 'A',1,1,Polideportivo Mpal. Altabix Enrique Cervera F-11,1-4-4-2,1-3-5-2,acta
+3,,,Villarreal C.F. 'A',S.C.D. Intangco 'A',5,0,Ciudad Dptva. José Manuel Llaneza F-11 Vila-real Campo 5,1-4-3-3,1-4-3-3,acta
+3,19/09/2026,,C.F. Inter San José Valencia 'A',Patacona C.F. 'A',0,0,Campo de Fútbol Mpal. de Beniferri F-11,1-3-5-2,1-4-4-2,acta
+3,19/09/2026,,Levante U.D. 'A',C.F. Torre Levante 'A',2,0,Ciudad Dptva. del Levante U.D. F-11 Campo 4,1-4-4-2,1-5-4-1,acta
+3,19/09/2026,09:00,Elda Unión Cableworld C.F. 'A',Elche C.F. 'A',0,8,Campo de Futbol Fernando Tomas F-11 Campo 3,1-4-4-2,1-4-3-3,acta
+3,19/09/2026,10:00,Valencia C.F. 'A',C.D. Castellón 'A',6,2,Ciudad Dptva. Valencia CF F-11 Campo 4,1-4-3-3,1-3-5-2,acta
+3,19/09/2026,12:15,C.F. Benidorm 'A',C.D. Roda 'A',1,3,Inst. Dptvas. Antonio Lopez Benidorm F-11 Campo 2,1-3-5-2,1-4-3-3,acta
+3,23/09/2026,18:45,Celtic Elche C.F. 'A',C.F. Fundació VCF 'A',0,2,Polideportivo Mpal. Altabix Enrique Cervera F-11,1-4-3-3,1-4-4-2,acta
+4,25/09/2026,20:15,C.F. Torre Levante 'A',C.F. Inter San José Valencia 'A',1,1,Campo Torre Levante-Orriols F-11,1-5-4-1,1-4-4-2,acta
+4,26/09/2026,,Alboraya U.D. 'A',Levante U.D. 'A',0,3,Estadio Mpal. Fran... Alboraya F-11,1-3-5-2,1-4-4-2,acta
+4,26/09/2026,10:45,Elche C.F. 'A',Valencia C.F. 'A',1,4,Polideportivo Mpal. Altabix Enrique Cervera F-11,1-4-3-3,1-4-3-3,acta
+4,26/09/2026,12:00,C.D. Castellón 'A',Celtic Elche C.F. 'A',1,3,Campos Gaeta Huguet Castellón F-11 Campo B,1-3-5-2,1-4-3-3,acta
+4,26/09/2026,17:15,Primer Toque C.F. 'A',Elda Unión Cableworld C.F. 'A',3,1,Ciudad Dptva. Chencho C-F-11 Castellón,1-5-4-1,1-4-4-2,acta
+4,26/09/2026,17:45,C.D. Roda 'A',C.F. La Nucía 'A',3,2,Ciudad Dptva. José Manuel Llaneza F-11 Vila-real Campo 5,1-4-3-3,1-4-3-3,acta
+4,26/09/2026,19:00,S.C.D. Intangco 'A',C.F. Benidorm 'A',3,1,Ciudad Dptva. Elche Campo 5 Palmeral D'Elx F-11,1-4-3-3,1-5-4-1,acta
+4,27/09/2026,11:00,C.F. Fundació VCF 'A',Kelme C.F. 'A',5,1,Ciudad Dptva. Valencia CF F-11 Campo 4,1-4-4-2,1-4-4-2,acta
+4,27/09/2026,11:00,Patacona C.F. 'A',Villarreal C.F. 'A',0,8,Campo Mpal. de la Patacona F-11,1-4-4-2,1-4-3-3,acta
+5,03/10/2026,09:00,C.F. Inter San José Valencia 'A',Alboraya U.D. 'A',1,2,Campo de Fútbol Mpal. de Beniferri F-11,1-4-4-2,1-4-3-3,acta
+5,03/10/2026,11:00,Kelme C.F. 'A',C.D. Castellón 'A',1,0,Polideportivo Mpal. Altabix Enrique Cervera F-11,1-4-3-3,1-3-5-2,acta
+5,03/10/2026,12:15,Valencia C.F. 'A',Primer Toque C.F. 'A',8,1,Ciudad Dptva. Valencia CF F-11 Campo 4,1-4-3-3,1-5-4-1,acta
+5,03/10/2026,12:45,Elda Unión Cableworld C.F. 'A',C.D. Roda 'A',2,0,Campo de Futbol Fernando Tomas F-11 Campo 3,1-4-4-2,1-4-3-3,acta
+5,03/10/2026,12:45,Villarreal C.F. 'A',C.F. Benidorm 'A',7,0,Ciudad Dptva. José Manuel Llaneza F-11 Vila-real Campo 5,1-4-3-3,1-5-4-1,acta
+5,03/10/2026,13:05,Celtic Elche C.F. 'A',Elche C.F. 'A',0,0,"Ciudad Dptva. Elche Campo 6 José Ant. Morante ""Lico"" F-11",1-4-3-3,1-4-3-3,acta
+5,03/10/2026,18:30,C.F. La Nucía 'A',S.C.D. Intangco 'A',5,1,Ciutat Esptva. Camilo Cano F-11 La Nucia Anexo,1-4-3-3,1-4-3-3,acta
+5,04/10/2026,09:00,Patacona C.F. 'A',C.F. Torre Levante 'A',3,0,Campo Mpal. de la Patacona F-11,1-4-4-2,1-5-4-1,acta
+5,04/10/2026,09:45,Levante U.D. 'A',C.F. Fundació VCF 'A',1,3,Ciudad Dptva. del Levante U.D. F-11 Campo 4,1-4-4-2,1-4-4-2,acta
+6,08/10/2026,19:00,C.D. Roda 'A',Valencia C.F. 'A',0,0,Ciudad Dptva. José Manuel Llaneza F-11 Vila-real Campo 5,1-4-3-3,1-4-3-3,acta
+6,09/10/2026,,C.F. Fundació VCF 'A',C.F. Inter San José Valencia 'A',1,6,Ciudad Dptva. Valencia CF F-11 Campo 1,1-4-4-2,1-4-4-2,acta
+6,09/10/2026,12:30,Primer Toque C.F. 'A',Celtic Elche C.F. 'A',2,3,Ciudad Dptva. Chencho Campo A F-11 Castellón,1-5-4-1,1-4-3-3,acta
+6,10/10/2026,11:00,C.F. Benidorm 'A',C.F. La Nucía 'A',1,1,Inst. Dptvas. Antonio Lopez Benidorm F-11 Campo 2,1-5-4-1,1-4-3-3,acta
+6,10/10/2026,11:15,S.C.D. Intangco 'A',Elda Unión Cableworld C.F. 'A',0,2,Ciudad Dptva. Elche Campo 5 Palmeral D'Elx F-11,1-4-3-3,1-4-4-2,acta
+6,10/10/2026,11:35,Alboraya U.D. 'A',Patacona C.F. 'A',1,1,Estadio Mpal. Fran... Alboraya F-11,1-4-3-3,1-4-4-2,acta
+6,10/10/2026,12:45,Elche C.F. 'A',Kelme C.F. 'A',6,0,Polideportivo Mpal. Altabix Enrique Cervera F-11,1-4-3-3,1-4-3-3,acta
+6,10/10/2026,13:10,C.D. Castellón 'A',Levante U.D. 'A',3,1,Campos Gaeta Huguet Castellón F-11 Campo B,1-3-5-2,1-4-4-2,acta
+6,20/10/2026,20:15,C.F. Torre Levante 'A',Villarreal C.F. 'A',0,5,Campo Torre Levante-Orriols F-11,1-3-5-2,1-4-4-2,acta
+7,17/10/2026,10:45,Patacona C.F. 'A',C.F. Fundació VCF 'A',2,2,Campo Mpal. de la Patacona F-11,1-4-4-2,1-4-4-2,acta
+7,17/10/2026,11:00,Valencia C.F. 'A',S.C.D. Intangco 'A',7,0,Ciudad Dptva. Valencia CF F-11 Campo 4,1-4-3-3,1-4-3-3,acta
+7,17/10/2026,11:03,Kelme C.F. 'A',Primer Toque C.F. 'A',1,1,Polideportivo Mpal. Altabix Enrique Cervera F-11,1-4-4-2,1-5-4-1,acta
+7,17/10/2026,11:45,C.F. Inter San José Valencia 'A',C.D. Castellón 'A',3,5,Campo de Fútbol Mpal. de Beniferri F-11,1-4-4-2,1-3-5-2,acta
+7,17/10/2026,17:45,Elda Unión Cableworld C.F. 'A',C.F. Benidorm 'A',3,1,Campo de Futbol Fernando Tomas F-11 Campo 3,1-4-4-2,1-5-4-1,acta
+7,17/10/2026,17:49,Levante U.D. 'A',Elche C.F. 'A',2,3,Ciudad Dptva. del Levante U.D. F-11 Campo 4,1-4-3-3,1-4-3-3,acta
+7,17/10/2026,18:15,C.F. Torre Levante 'A',Alboraya U.D. 'A',4,0,Campo Torre Levante-Orriols F-11,1-4-3-3,1-4-3-3,acta
+7,27/10/2026,19:45,Villarreal C.F. 'A',C.F. La Nucía 'A',6,0,Ciudad Dptva. José Manuel Llaneza F-11 Vila-real Campo 5,1-4-4-2,1-4-3-3,acta
+8,24/10/2026,10:30,C.D. Castellón 'A',Patacona C.F. 'A',3,1,Campos Gaeta Huguet Castellón F-11 Campo B,1-3-5-2,1-4-4-2,acta

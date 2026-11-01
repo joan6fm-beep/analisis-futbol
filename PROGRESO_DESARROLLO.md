@@ -22,7 +22,16 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
   - Seguimiento: el mismo editor de formaciones que Juvenil A, con J1 y J2 precargadas del Excel.
   - Muro y Calendario propios (archivos separados); el calendario del Infantil D permite editar y eliminar eventos.
 
+- **Cadete A** (Lliga Autonòmica Cadet, noviembre 2026):
+  - Portada con tres equipos; navegación propia: Inicio · Resumen liga · Rivales · Estadísticas · Calendario · Muro.
+  - 63 actas FFCV transcritas de la grabación del usuario (J1–J7 completas salvo Celtic–Roda; J8: 1 de 9)
+    en `data/cadete_a/fuente/actas.txt`; `tools/importar_cadete_a.py` genera los CSV.
+  - Cálculos en `league_core.py`, parametrizados por duración (`teams.py`: Juvenil 90', Cadete 80', Infantil 70').
+  - Muro, calendario y adjuntos propios en `data/cadete_a/`.
+
 ## Pendiente / datos a revisar
+- Cadete A: J7 Celtic Elche–Roda (10/11) y resto de J8; asistencias no registradas en actas;
+  dos «C. Garcia» en Alboraya (tarjetas y cambios sin atribuir); fechas/horas no visibles en algunas actas.
 - J8 Juvenil A: faltan los 4 partidos del domingo 1/11.
 - J7 Juvenil A: ocasiones 14 frente a 13; zonas de pase 8/82/10 frente a 41/48/11.
 - Paterna J5: «Oscar Rubio Montoro» duplicado (dorsales 7 y 8).

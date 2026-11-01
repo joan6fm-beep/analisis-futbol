@@ -26,6 +26,7 @@ import team360_charts as t360
 import player_charts
 import team360_advanced as t360adv
 import infantil_d as infd
+import cadete_a as cad
 
 
 def _reload_local_modules(*modules):
@@ -45,7 +46,7 @@ def _reload_local_modules(*modules):
 
 
 # Orden de dependencia: ui_theme <- team360_charts / player_charts <- team360_advanced.
-pdf_export_v63, ui_theme, t360, player_charts, t360adv, infd = _reload_local_modules(pdf_export_v63, ui_theme, t360, player_charts, t360adv, infd)
+pdf_export_v63, ui_theme, t360, player_charts, t360adv, infd, cad = _reload_local_modules(pdf_export_v63, ui_theme, t360, player_charts, t360adv, infd, cad)
 build_rival_pdf_diseno = pdf_export_v63.generate
 
 
@@ -1516,6 +1517,8 @@ TEAM_STORES = {
                     attach=BASE / "muro_adjuntos", tracking=DATA / "seguimiento_formaciones.csv", calendar_edit=False),
     "infantil": dict(label="INFANTIL D", team="Infantil D", wall=DATA / "infantil_d" / "muro.csv", cal=DATA / "infantil_d" / "calendario.csv",
                      attach=DATA / "infantil_d" / "muro_adjuntos", tracking=DATA / "infantil_d" / "seguimiento_formaciones.csv", calendar_edit=True),
+    "cadete": dict(label="CADETE A", team="Cadete A", wall=DATA / "cadete_a" / "muro.csv", cal=DATA / "cadete_a" / "calendario.csv",
+                   attach=DATA / "cadete_a" / "muro_adjuntos", tracking=DATA / "cadete_a" / "seguimiento_formaciones.csv", calendar_edit=True),
 }
 ACTIVE_STORE = TEAM_STORES["juvenil"]
 
@@ -1820,7 +1823,7 @@ HOME_CSS = """
 .pt-home-eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--pt)}
 .pt-home-title{font-size:2.6rem;font-weight:900;letter-spacing:-.035em;line-height:1.02;color:var(--ink);margin:6px 0 6px}
 .pt-home-sub{font-size:.95rem;color:var(--muted)}
-.pt-home-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.pt-home-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .pt-home-card{display:block;text-decoration:none!important;color:inherit!important;border-radius:22px;overflow:hidden;background:var(--surface);border:1px solid var(--line);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
 .pt-home-card:hover{transform:translateY(-4px);border-color:rgba(245,135,31,.6);box-shadow:0 22px 50px rgba(0,0,0,.45)}
 .pt-home-media{position:relative;aspect-ratio:1290/832;overflow:hidden;background:#0D131C}
@@ -1843,6 +1846,7 @@ def render_home():
     cards = [
         ("Juvenil A", BASE/"juvenil_a_portada.jpeg", "juvenil", "Entrar al análisis del Juvenil A", "Análisis de rendimiento", ""),
         ("Infantil D", BASE/"infantil_d_portada.jpeg", "infantil", "Entrar al espacio del Infantil D", "Espacio del equipo", " secondary"),
+        ("Cadete A", BASE/"cadete_a_portada.jpeg", "cadete", "Entrar al análisis del Cadete A", "Análisis de liga", ""),
     ]
     html_cards = []
     for title, img, area, subtitle, tag, variant in cards:
@@ -3422,7 +3426,7 @@ with st.sidebar:
             <div class='brand-kicker'>Análisis de rendimiento</div>
             <div class='brand-main'>PRIMER TOQUE C.F.</div>
             <div class='brand-sub'>Temporada <b>2026/2027</b></div>
-            <div class='brand-chip'>{'INFANTIL D' if _area_pre == 'infantil' else 'JUVENIL A'}</div>
+            <div class='brand-chip'>{ {'infantil': 'INFANTIL D', 'cadete': 'CADETE A'}.get(_area_pre, 'JUVENIL A') }</div>
         </div>
         </div>""",
         unsafe_allow_html=True,
@@ -3457,6 +3461,7 @@ with st.sidebar:
         "individual": "Individual",
         "minutos": "Minutos",
         "resultados": "Resultados",
+        "estadisticas": "Estadísticas",
     }
     modulo = _view_to_mod.get(_view, "Resumen liga" if _area == "juvenil" else "Inicio")
     _icons = {
@@ -3470,10 +3475,13 @@ with st.sidebar:
       "Jugadores":"<svg viewBox='0 0 24 24'><circle cx='9' cy='8' r='3'/><circle cx='17' cy='9' r='2.5'/><path d='M3 20c0-4 2.5-6 6-6s6 2 6 6'/><path d='M14 15c3.4-.4 6 1.5 6 5'/></svg>",
       "Individual":"<svg viewBox='0 0 24 24'><circle cx='12' cy='8' r='3.5'/><path d='M5 21c.3-5 2.8-8 7-8s6.7 3 7 8'/></svg>",
       "Minutos":"<svg viewBox='0 0 24 24'><circle cx='12' cy='13' r='8'/><path d='M12 9v4l3 2M9 2h6'/></svg>",
+      "Estadísticas":"<svg viewBox='0 0 24 24'><path d='M4 19V9M10 19V5M16 19v-6M22 19H2'/><circle cx='16' cy='9' r='2'/></svg>",
       "Resultados":"<svg viewBox='0 0 24 24'><path d='M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z'/><path d='M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4'/></svg>",
     }
-    _nav_area = "infantil" if _area == "infantil" else "juvenil"
-    if _nav_area == "infantil":
+    _nav_area = _area if _area in ("infantil", "cadete") else "juvenil"
+    if _nav_area == "cadete":
+        _nav_info=[('Inicio','inicio'),('Resumen liga','liga'),('Rivales','rivales'),('Estadísticas','estadisticas'),('Calendario','calendario'),('Muro','muro')]
+    elif _nav_area == "infantil":
         _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Resultados','resultados'),('Minutos','minutos'),('Seguimiento','seguimiento')]
     else:
         _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Resumen liga','liga'),('Rivales','rivales'),('Equipo','equipo'),('Seguimiento','seguimiento'),('Individual','individual'),('Jugadores','jugadores')]
@@ -3486,7 +3494,7 @@ with st.sidebar:
     st.markdown(''.join(_nh),unsafe_allow_html=True)
 
     seleccionado = None
-    if modulo == "Rivales":
+    if modulo == "Rivales" and _nav_area == "juvenil":
         equipos = load_csv("equipos_liga.csv")
         st.markdown("<div class='side-label'>Rivales · 16 equipos</div>", unsafe_allow_html=True)
         lista = equipos.sort_values("orden")["equipo"].tolist() if not equipos.empty else []
@@ -3528,7 +3536,9 @@ with st.sidebar:
 # Resumen: solo clasificación, partidos y eventos.
 # Individual: solo sus tablas necesarias.
 # Rivales: solo al entrar en Rivales se cargan las seis tablas del análisis.
-if modulo == "Resumen liga":
+if _nav_area != "juvenil":
+    pass  # Infantil D y Cadete A cargan sus propios datos en su módulo
+elif modulo == "Resumen liga":
     partidos = load_csv("partidos_rivales.csv")
     eventos = load_csv("eventos_rivales.csv")
     clasificacion = load_csv("clasificacion_liga.csv")
@@ -3550,7 +3560,7 @@ elif modulo == "Rivales":
 if not _landing:
     st.markdown(
     "<div class='topbar'><div class='title'><a class='tb-home' href='?' target='_self'>⌂ Inicio / Cambiar equipo</a>"
-    f"<span class='tb-crumb'>{'Infantil D' if _area == 'infantil' else 'Juvenil A'}</span><span class='tb-sep'>/</span>"
+    f"<span class='tb-crumb'>{ {'infantil': 'Infantil D', 'cadete': 'Cadete A'}.get(_area, 'Juvenil A') }</span><span class='tb-sep'>/</span>"
     f"<span class='tb-current'>{_safe_html(seleccionado if modulo == 'Rivales' and seleccionado else modulo)}</span></div>"
     "<div class='nav'><span class='tb-chip'>Temporada 2026/2027</span><span class='tb-ver'>V15.12.84</span></div></div>",
     unsafe_allow_html=True,
@@ -3568,7 +3578,10 @@ _mobile_nav = [
     ("Individual", "individual", "◎", "Individual"),
     ("Jugadores", "jugadores", "♟", "Jugadores"),
 ]
-if _nav_area == "infantil":
+if _nav_area == "cadete":
+    _mobile_nav = [("Inicio", "inicio", "⌂", "Inicio"), ("Resumen liga", "liga", "▦", "Liga"), ("Rivales", "rivales", "◈", "Rivales"),
+                   ("Estadísticas", "estadisticas", "◷", "Estad."), ("Calendario", "calendario", "▣", "Calendario"), ("Muro", "muro", "✦", "Muro")]
+elif _nav_area == "infantil":
     _mobile_nav = [("Inicio", "inicio", "⌂", "Inicio"), ("Muro", "muro", "✦", "Muro"), ("Calendario", "calendario", "▣", "Calendario"),
                    ("Resultados", "resultados", "🏆", "Result."), ("Minutos", "minutos", "◷", "Minutos"), ("Seguimiento", "seguimiento", "▤", "Seguim.")]
 _mobile_nav_html = ["<nav class='mobile-bottom-nav' aria-label='Navegación móvil'>",
@@ -3593,7 +3606,7 @@ if modulo == "Inicio" and not _landing:
         unsafe_allow_html=True,
     )
 
-if modulo == "Rivales" and seleccionado:
+if modulo == "Rivales" and seleccionado and _nav_area == "juvenil":
     _equipos_mobile = load_csv("equipos_liga.csv")
     if not _equipos_mobile.empty:
         _chips = ["<div class='mobile-rival-strip' aria-label='Selector rápido de rival'>"]
@@ -3609,6 +3622,21 @@ if modulo == "Rivales" and seleccionado:
         _chips.append("</div>")
         st.markdown("".join(_chips), unsafe_allow_html=True)
 
+if _area == "cadete":
+    ACTIVE_STORE = TEAM_STORES["cadete"]
+    if modulo == "Muro":
+        render_wall()
+    elif modulo == "Calendario":
+        render_calendar()
+    elif modulo == "Resumen liga":
+        cad.render_league()
+    elif modulo == "Rivales":
+        cad.render_rivals()
+    elif modulo == "Estadísticas":
+        cad.render_stats()
+    else:
+        cad.render_home(_image_data_uri(str(BASE / "cadete_a_portada.jpeg")))
+    st.stop()
 if _area == "infantil":
     ACTIVE_STORE = TEAM_STORES["infantil"]
     if modulo == "Muro":

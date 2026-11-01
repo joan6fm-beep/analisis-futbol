@@ -27,7 +27,7 @@ from streamlit.testing.v1 import AppTest  # noqa: E402
 
 ALIASES = {"t360": "team360_charts", "T": "team360_charts", "ui_theme": "ui_theme",
            "player_charts": "player_charts", "pdf_export_v63": "pdf_export_v63",
-           "t360adv": "team360_advanced", "A": "team360_advanced", "infd": "infantil_d"}
+           "t360adv": "team360_advanced", "A": "team360_advanced", "infd": "infantil_d", "cad": "cadete_a"}
 fallos = []
 
 
@@ -366,15 +366,16 @@ def test_navegacion():
     at = run({})
     h = html_of(at)
     home = " ".join(str(x.proto) for x in at.get("html"))
-    areas = sorted(set(re.findall(r"\?area=(juvenil|infantil)", home)))
-    check(not at.exception and "Selecciona tu equipo" in h and "pt-home-card" in home and areas == ["infantil", "juvenil"],
-          f"Raíz sin parámetros: portada con las dos tarjetas, Juvenil A e Infantil D ({areas})")
+    areas = sorted(set(re.findall(r"\?area=(juvenil|infantil|cadete)", home)))
+    check(not at.exception and "Selecciona tu equipo" in h and "pt-home-card" in home and areas == ["cadete", "infantil", "juvenil"],
+          f"Raíz sin parámetros: portada con las tres tarjetas, Juvenil A, Infantil D y Cadete A ({areas})")
     css = " ".join(m.value for m in at.markdown)
     check("[data-testid=\"stSidebar\"]" in css and ".mobile-bottom-nav" in css and "display:none!important" in css,
           "Portada sin menús de equipo visibles (barra lateral y menú móvil ocultos; no hay redirección)")
     juv = ["inicio", "muro", "calendario", "liga", "rivales", "equipo", "seguimiento", "individual", "jugadores"]
     inf = ["inicio", "muro", "calendario", "resultados", "minutos", "seguimiento"]
-    for area, view, expected in (("juvenil", "liga", juv), ("infantil", "inicio", inf)):
+    cad = ["inicio", "liga", "rivales", "estadisticas", "calendario", "muro"]
+    for area, view, expected in (("juvenil", "liga", juv), ("infantil", "inicio", inf), ("cadete", "inicio", cad)):
         a = run({"area": area, "view": view})
         hh = html_of(a)
         side = re.search(r"<div class='side-nav-v3'>(.*?)</div>", hh, re.S)
@@ -431,8 +432,84 @@ def test_formaciones_infantil():
         f.write_bytes(original)
 
 
+def test_cadete_a():
+    """Cadete A: 80 minutos, clasificación, goleadores, porteros, tramos, rivales y datos independientes."""
+    import re
+    import pandas as pd
+    import cadete_a as C
+    import league_core as lc
+    from teams import TEAMS
+    part, al, ev, mins, av = C.data()
+    T = C.TEAM
+    check(C.MM == 80 and TEAMS["cadete"]["match_minutes"] == 80 and TEAMS["juvenil"]["match_minutes"] == 90
+          and TEAMS["infantil"]["match_minutes"] == 70, "Duración por equipo: Cadete A 80', Juvenil A 90', Infantil D 70'")
+    at = run({})
+    home = " ".join(str(x.proto) for x in at.get("html"))
+    check(len(re.findall(r"img class=[^ ]*photo", home)) == 3 and "object-fit:contain" in home and "OneDrive" not in home,
+          "Portada: tres fotografías completas (object-fit: contain) incrustadas desde el repositorio")
+    check((APP_DIR / "cadete_a_portada.jpeg").exists(), "Foto del Cadete A en los recursos estáticos del proyecto")
+    bad = []
+    for r in part.itertuples():
+        e = ev[(ev.jornada == r.jornada) & ev.equipo.isin([r.local, r.visitante])]
+        gl = sum(lc.goal_side(x, r.local) == "favor" for _, x in e.iterrows())
+        gv = sum(lc.goal_side(x, r.visitante) == "favor" for _, x in e.iterrows())
+        if (gl, gv) != (r.goles_local, r.goles_visitante):
+            bad.append(f"J{r.jornada} {r.local}")
+    check(not bad and len(part) == 63, f"63 actas: cada marcador coincide con los goles del acta {bad[:3]}")
+    p7 = part[part.jornada <= 7]
+    tab = lc.standings(p7, C.teams_list(part))
+    exp_pts = sum(3 if a != b else 2 for a, b in zip(p7.goles_local, p7.goles_visitante))
+    check(tab.pts.sum() == exp_pts and tab.gf.sum() == tab.gc.sum() and (tab.pg + tab.pe + tab.pp == tab.pj).all(),
+          "Clasificación: puntos, goles y partidos cuadran con los resultados")
+    pt = tab[tab.equipo == T].iloc[0]
+    got = (pt.pj, pt.pg, pt.pe, pt.pp, pt.gf, pt.gc, pt.pts)
+    check(got == (7, 4, 1, 2, 14, 15, 13), f"Primer Toque hasta J7: 7 PJ, 4-1-2, 14-15, 13 pts {got}")
+    m = mins.dropna(subset=["minutos"])
+    check(m.minutos.max() == 80 and (m.minutos >= 0).all(), "Minutos por partido entre 0 y 80 (nunca 90)")
+    tot = m.groupby(["equipo", "jornada"]).minutos.sum()
+    check((tot <= 11 * 80).all(), "Ningún equipo suma más de 11 × 80 minutos en un partido")
+    pa = lc.participation(mins, T, 80, 7)
+    r = pa[pa.jugador == "Pere Tomas Ribes"].iloc[0]
+    check(r.minutos == 560 and round(r.pct) == 100, "Participación: 7 partidos completos = 560' = 100 % sobre 80'")
+    toy = pd.DataFrame([dict(equipo="X", jornada=1, dorsal=1, jugador="A", minutos=40, titular=1)])
+    check(round(lc.participation(toy, "X", 80, 1).pct.iat[0]) == 50, "40 minutos de 80 = 50 %")
+    g, w = lc.goalkeepers(al, mins, ev, part, T, 80)
+    check(int(g.encajados.sum()) == 15 and not w
+          and all(abs(x.encajados / x.minutos * 80 - x.encajados_por_partido_reglamentario) < 1e-9 for x in g.itertuples()),
+          "Porteros del Cadete A: 15 encajados atribuidos; GC por 80' = encajados ÷ minutos × 80")
+    g2, w2 = lc.goalkeepers(al, mins, ev, part, "C.D. Castellón 'A'", 80)
+    check(int(g2.encajados.sum()) == 16 and any("sin portero atribuible" in x for x in w2),
+          "Castellón J3: dos porteros en el campo → 2 goles sin atribuir (no se inventa)")
+    labels = [b[2] for b in lc.minute_bins(80)]
+    gb = lc.goals_by_bin(ev, T, 80)
+    check(labels[0] == "1–10" and labels[-1] == "71–80" and len(labels) == 8 and gb.a_favor.sum() == 14
+          and gb.en_contra.sum() == 15 and lc.bin_label(83, 80) == "71–80+",
+          "Tramos 1–10 … 71–80 (sin 81–90); el añadido cuenta en 71–80 conservando el minuto")
+    sc = lc.scorers(ev, mins)
+    check(not sc.duplicated(["equipo", "jugador"]).any() and sc.goles.sum() == int(ev.tipo.isin(lc.GOAL_TYPES_FOR).sum()),
+          "Goleadores: una fila por jugador y equipo; propia puerta por separado")
+    errs = []
+    full = lc.standings(part, C.teams_list(part)).set_index("equipo")
+    for t in C.teams_list(part):
+        tm = lc.team_matches(part, t)
+        if (tm.gf.sum(), tm.gc.sum(), tm.puntos.sum()) != (full.loc[t].gf, full.loc[t].gc, full.loc[t].pts):
+            errs.append(t)
+    check(not errs and len(full) == 18, f"18 equipos: ficha de cada rival coherente con la clasificación {errs}")
+    src = (APP_DIR / "app.py").read_text(encoding="utf-8")
+    check('DATA / "cadete_a" / "muro.csv"' in src and 'DATA / "cadete_a" / "calendario.csv"' in src
+          and 'DATA / "cadete_a" / "muro_adjuntos"' in src, "Muro, calendario y adjuntos propios del Cadete A (data/cadete_a/)")
+    for v in ("inicio", "liga", "rivales", "estadisticas", "calendario", "muro"):
+        a = run({"area": "cadete", "view": v})
+        hh = html_of(a)
+        check(not a.exception and "CADETE A" in hh, f"Cadete A · {v}: sin errores y con su propia cabecera")
+    a = run({"area": "cadete", "view": "liga"})
+    hh = html_of(a)
+    check("Resumen de liga · Cadete A" in hh and "PARTIDOS DE 80'" in hh and "/90" not in hh,
+          "Resumen de liga del Cadete A en unidades de 80' (sin métricas /90)")
+
+
 def main():
-    for t in (test_atributos, test_navegacion, test_datos_liga, test_infantil_d, test_resultados_infantil, test_formaciones_infantil, test_equipo360, test_avanzado, test_otras_vistas, test_modulo_obsoleto):
+    for t in (test_atributos, test_navegacion, test_cadete_a, test_datos_liga, test_infantil_d, test_resultados_infantil, test_formaciones_infantil, test_equipo360, test_avanzado, test_otras_vistas, test_modulo_obsoleto):
         print(f"\n— {t.__doc__.splitlines()[0] if t.__doc__ else t.__name__}")
         try:
             t()

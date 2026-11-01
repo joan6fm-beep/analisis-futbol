@@ -1,0 +1,3677 @@
+# Actas de la Lliga Autonòmica Cadet (Grup Únic) 2026/2027 · Cadete A
+# Fuente: grabación de pantalla de la app de la FFCV aportada por el usuario
+#         (DATOS VEO/CADETE A/WhatsApp Video 2026-11-01 at 19.19.56.mp4). Transcripción manual verificada.
+#
+# Formato (una línea por dato; el importador tools/importar_cadete_a.py genera los CSV):
+#   PARTIDO J<n> | dd/mm/aaaa hh:mm | local | visitante | gl-gv | campo | sistema_local | sistema_visitante
+#   L|V <ROL> <dorsal> <nombre completo>     ROL: POR DEF MED DEL (titulares) · SUP · SUPPOR (portero suplente)
+#   EV L|V <min> cambio <entra abreviado> > <sale abreviado>
+#   EV L|V <min> gol|penalti|propia|amarilla|segunda_amarilla|roja <jugador abreviado>
+#   SIN_ACTA   (el acta no estaba disponible en la grabación: solo resultado)
+#   NOTA <texto>
+# Los nombres abreviados de la cronología («A. Castellanos») se resuelven contra la alineación del mismo equipo.
+# `propia`: gol en propia puerta; L/V indica el equipo del jugador que lo marca (suma al rival).
+
+PARTIDO J1 | 05/09/2026 09:00 | Levante U.D. 'A' | C.F. Inter San José Valencia 'A' | 0-0 | Ciudad Dptva. del Levante U.D. F-11 Campo 4 | 1-4-4-2 | 1-3-5-2
+L POR 30 Hector Noel Clair Perez
+L DEF 2 Steven Chiemela Igbojionu Ajuzie
+L DEF 15 Ivan Rodriguez Paris
+L DEF 16 Diego Moyano Ribera
+L DEF 28 Unai Saez Vallejo
+L MED 8 Marco Nevot Cervera
+L MED 11 Alejandro Arnau Franco
+L MED 20 Manuel Matamoros Nuñez
+L MED 22 Aaron Aroba Santos
+L DEL 9 Ivan Galan Redko
+L DEL 27 Daniel Calvente De Jesús
+L SUP 4 Diego Miranda Rodriguez
+L SUP 7 Esteban Ferrer Sanchez
+L SUPPOR 13 Daniel Pedrajas Abril
+L SUP 14 Alvaro Castellanos Anaya
+L SUP 17 Aythami Rodriguez Suárez
+L SUP 18 Alejandro Flores Inclan
+L SUP 21 Alejandro Miro Andrés
+V POR 1 Santiago Pinedo Nobile
+V DEF 2 Daniel Molina Viñes
+V DEF 5 Xavi Torrijos Navarro
+V DEF 15 Enrique Lurbe De Vicente
+V MED 4 Adrián Civera Gallach
+V MED 6 Pablo Lopez Almarcha
+V MED 12 David Javaloyes Marco
+V MED 21 Bruno Aguilar Baya
+V MED 23 Rafael Alejandro Beltrán Valencia
+V DEL 14 Marc Miralles Serrano
+V DEL 16 Wilter Job Sanchez Rodriguez
+V SUP 7 Lucas Amoros Tello
+V SUP 9 Luis Lopez Rosa
+V SUP 11 Victor Serrano Talamantes
+V SUPPOR 13 Juan Jose Gil Calisalvo
+V SUP 18 Juan Diego De La Fuente Wila
+V SUP 19 Gonzalo Mascarell Marti
+V SUP 20 Carlos Sierra Arnal
+EV L 41 cambio E. Ferrer > I. Galan
+EV L 41 cambio A. Miró > A. Aroba
+EV L 59 cambio A. Flores > A. Arnau
+EV L 67 cambio A. Rodriguez > D. Calvente
+EV L 74 cambio A. Castellanos > S. Chiemela
+EV L 74 cambio D. Miranda > M. Matamoros
+EV V 51 cambio V. Serrano > W. Job
+EV V 51 cambio G. Mascarell > B. Aguilar
+EV V 65 cambio L. Amoros > D. Javaloyes
+EV V 65 cambio J. Diego > A. Civera
+EV V 74 cambio L. Lopez > M. Miralles
+EV V 74 cambio C. Sierra > E. Lurbe
+
+PARTIDO J1 | 05/09/2026 10:30 | Kelme C.F. 'A' | Patacona C.F. 'A' | 0-1 | Polideportivo Mpal. Altabix Enrique Cervera F-11 | 1-4-4-2 | 1-4-4-2
+L POR 25 Mario Parodi Caceres
+L DEF 4 David Navarro Cerdá
+L DEF 5 Pedro Carreño Noguera
+L DEF 12 Pablo Soler Lumbreras
+L DEF 22 Angel Belmonte Risueño
+L MED 2 Edgar Ramirez Chulia
+L MED 7 Mario Navarro Terol
+L MED 10 Jonathan Felix Martinez
+L MED 19 Luca Giuseppe Annunziata Tomas
+L DEL 21 Diego Molina Rojo
+L DEL 30 Gonzalo Celdran Garre
+L SUP 3 Hector Saez Anton
+L SUP 8 Pablo Sanchez Ortega
+L SUP 9 Joel Clos Arjona
+L SUP 11 Ruben Castello Perez
+L SUPPOR 13 Bosko Martic
+L SUP 14 Miguel Molina Martinez
+L SUP 17 Jayden Lucas Williams
+V POR 1 Marc Rodriguez Badia
+V DEF 2 Angel Navarro Michelena
+V DEF 3 Victor Blanco Lorente
+V DEF 4 Pau Carrasco Cantero
+V DEF 18 Carlos Gomez Pallardo
+V MED 5 Nicolas Gomis Dominguez
+V MED 8 Diego Borrajo De Orozco Maldonado
+V MED 10 Eric Pacha Hernandez
+V MED 19 Yosin Yusupov
+V DEL 7 Izan Vicente Alos
+V DEL 27 Roberto Nicolas Stirbu Moldovan
+V SUP 12 Cristian Cuco Moscardo
+V SUPPOR 13 Raul Toboso Nicolau
+V SUP 14 Rafa Montes Garcia
+V SUP 17 Daniel Nuñez Najera
+V SUP 20 Marc Joan Gomez Oscar
+V SUP 24 Luis Andreu Valor
+V SUP 29 Marco Alpuente Blazquez
+EV L 33 cambio P. Sanchez > E. Ramirez
+EV L 41 cambio J. Clos > D. Molina
+EV L 41 cambio J. Lucas > M. Navarro
+EV L 54 cambio R. Castello > L. Giuseppe
+EV L 67 cambio H. Saez > J. Felix
+EV L 67 cambio M. Molina > D. Navarro
+EV V 6 gol Y. Yusupov
+EV V 41 cambio R. Montes > R. Nicolas
+EV V 53 cambio M. Joan > N. Gomis
+EV V 53 cambio L. Andreu > I. Vicente
+EV V 59 amarilla A. Navarro
+EV V 61 cambio C. Cuco > A. Navarro
+EV V 67 cambio D. Nuñez > E. Pacha
+EV V 67 cambio M. Alpuente > Y. Yusupov
+
+PARTIDO J1 | | Elda Unión Cableworld C.F. 'A' | C.F. Fundació VCF 'A' | 0-3 | Campo de Futbol Fernando Tomas F-11 Campo 3 | 1-4-4-2 | 1-4-4-2
+L POR 22 Agustín Lozano Herrera
+L DEF 6 Pablo Alarcon Vera
+L DEF 14 Daniel Gil Garcia
+L DEF 16 Luca Mateo Daza
+L DEF 17 Pablo Barrantes Mira
+L MED 7 Angel Rodriguez Palao
+L MED 8 Diego Leiva Ucles
+L MED 12 Sergio Simon Iñigo
+L MED 15 Alejandro Ponsoda Vallcanera
+L DEL 20 Javier Terol Almiñana
+L DEL 23 Aitor Tomas Benitez
+L SUP 2 Iker Bañon Aracil
+L SUP 3 David Penalva Alfonso
+L SUP 9 Marc Navarro Pla
+L SUP 11 Fidel Gonzalez Palmer
+L SUP 18 Miguel Hoyos Tarraga
+L SUP 19 Alberto Canto Vegara
+L SUPPOR 80 Marc Lozano Tomas
+V POR 1 Diego Llorens Segovia
+V DEF 2 Jorge Calomarde Gomez
+V DEF 3 Hugo Salas Mauri
+V DEF 4 Enzo Pacha Torres
+V DEF 5 Liam Videla Corbalan
+V MED 6 Jean Pool Cardona Rivas
+V MED 7 Zakaria Idrissa Toure
+V MED 8 Sergio Revert Arribas
+V MED 11 Gabidolla Orazaly
+V DEL 9 Francesco Martin Moschella Compostela
+V DEL 10 Lucas Serra Blasco
+V SUP 12 Joaquin Cano De Jose
+V SUPPOR 13 Vicente Fores Ferrer
+V SUP 14 Sergio Rodriguez Garcia
+V SUP 15 Aritz Gandia Mira
+V SUP 16 Timur Kuzmin
+V SUP 17 Albert Ortega Fontanet
+V SUP 18 Enrique Antonio Blanquer Muñoz
+EV L 34 cambio D. Penalva > J. Terol
+EV L 41 cambio M. Hoyos > D. Leiva
+EV L 51 cambio I. Bañon > A. Tomas
+EV L 51 cambio M. Navarro > L. Mateo
+EV L 55 amarilla M. Hoyos
+EV L 63 cambio A. Canto > P. Alarcon
+EV L 63 cambio F. Gonzalez > P. Barrantes
+EV V 20 gol S. Revert
+EV V 30 gol Z. Idrissa
+EV V 36 gol Z. Idrissa
+EV V 60 cambio S. Rodriguez > S. Revert
+EV V 60 cambio E. Antonio > E. Pacha
+EV V 67 cambio A. Ortega > Z. Idrissa
+EV V 67 cambio T. Kuzmin > L. Serra
+EV V 72 cambio J. Cano > J. Calomarde
+EV V 72 cambio A. Gandia > H. Salas
+
+PARTIDO J1 | 05/09/2026 10:50 | Villarreal C.F. 'A' | C.D. Roda 'A' | 6-1 | Ciudad Dptva. José Manuel Llaneza F-11 Vila-real Campo 5 | 1-4-4-2 | 1-4-3-3
+L POR 1 Leo Rico Albert
+L DEF 4 Izan Muñoz Garcia
+L DEF 15 Guillermo Cuartero Calavia
+L DEF 20 Marc Ascoz Gil
+L DEF 21 Daniel Vizuete Marti
+L MED 6 Victor Pardo Pastor
+L MED 7 Aaron Ruiz Sanchez
+L MED 11 Pablo Lopez Argüello
+L MED 16 Ruben Herrera Gonzalez
+L DEL 18 Alvaro Tarraso Perez
+L DEL 22 Josue Caballero Cerdeña
+L SUP 2 Balla Dembele Kamissoko
+L SUP 3 Eduardo De Haro Hernández
+L SUP 8 Mario Pinazo Trujillo
+L SUP 9 Victor Maestra Rodriguez
+L SUP 10 Alejandro Garcia Carcelen
+L SUP 17 Jaume Mas Salom
+L SUPPOR 25 Luca Reina Ruiz
+V POR 1 Ezequiel Francisco Valverde Lorenzo
+V DEF 2 Mario Granell Calafell
+V DEF 3 Omar Rami El Marouni
+V DEF 4 Aaron Torralbo Charki
+V DEF 5 Ahmed Ben Ali Laghmich El Haad
+V MED 6 Collins Baidoo Yeboah
+V MED 8 Ferran Fortuny Albert
+V MED 10 Sergi Alcover Alvarez
+V DEL 7 Guillermo Mora Lorca
+V DEL 9 Marti Carreras Collado
+V DEL 11 David Eghosa Idahosa Ojeile
+V SUP 12 Daniel Cortes Pacheco
+V SUPPOR 13 Alvaro Muñoz Garcia
+V SUP 14 Banouhoum Coulibaly Coulibaly
+V SUP 15 Javier Martinez Gonzalez
+V SUP 16 Alex Cantalapiedra Cocho
+V SUP 17 Iker Delgado Castellanos
+V SUP 18 Alejandro Buedo Rubio
+EV V 32 propia A. Torralbo
+EV L 39 amarilla G. Cuartero
+EV L 41 gol E. De
+EV L 41 cambio E. De > G. Cuartero
+EV L 41 cambio M. Pinazo > J. Caballero
+EV L 45 amarilla A. Tarraso
+EV V 49 cambio I. Delgado > S. Alcover
+EV L 51 cambio J. Mas > R. Herrera
+EV L 51 cambio A. Garcia > V. Pardo
+EV L 51 cambio V. Maestra > A. Tarraso
+EV L 59 amarilla M. Ascoz
+EV L 60 gol P. Lopez
+EV V 61 cambio B. Coulibaly > G. Mora
+EV V 61 cambio A. Cantalapiedra > D. Eghosa
+EV L 61 gol J. Mas
+EV V 61 cambio J. Martinez > A. Ben
+EV L 61 cambio B. Dembele > M. Ascoz
+EV L 68 gol A. Ruiz
+EV V 70 cambio A. Buedo > M. Carreras
+EV V 78 gol J. Martinez
+EV L 79 gol V. Maestra
+
+PARTIDO J1 | 05/09/2026 11:15 | S.C.D. Intangco 'A' | Primer Toque C.F. 'A' | 1-2 | Ciudad Dptva. Elche Campo 5 Palmeral D'Elx F-11 | 1-4-3-3 | 1-5-4-1
+L POR 1 Izan Sanchez Cofrade
+L DEF 3 Hugo Cobeño German
+L DEF 5 Eric Galvez Buitrago
+L DEF 12 David Garcia Escudero
+L DEF 21 Diego Cotarelo Alvarez
+L MED 6 Gonzalo Ruiz Pagan
+L MED 8 Lucas Andres Pico
+L MED 11 Oscar Moral Sanchez
+L DEL 7 Martin Perez Llopis
+L DEL 10 Fran Moya Romero
+L DEL 19 Juan Gil Iborra
+L SUP 4 Martin Limorte Riquelme
+L SUP 9 Iker Milan Giménez
+L SUPPOR 13 Daniel Sanchez Cano
+L SUP 14 Adam Parres Rahim
+L SUP 17 Hector Amoros Fernandez
+L SUP 20 Sergio Gadea Atencia
+L SUP 30 Hector Perez Duran
+V POR 1 Marc Menezo Perez
+V DEF 2 Yasser Taoussi
+V DEF 5 Javier Lafuente Perez
+V DEF 12 Jose David Barreda Galiana
+V DEF 14 Pere Tomas Ribes
+V DEF 18 Pol Pablo Vericat
+V MED 6 Vicent Roda Barbera
+V MED 8 Gerard Planell Vidal
+V MED 11 Ayoub Ammou El Hafydy
+V MED 17 Marcos Santamaria Albert
+V DEL 9 Mohammed Ousrout Khannouss
+V SUP 3 Marc Ventura Climent
+V SUP 7 Marc Rojano Rubio
+V SUP 10 Diego Sanchez Alvaro
+V SUP 15 Dario Picher Aguilella
+V SUPPOR 25 Pau Enrique Fuster
+V SUP 29 Hugo Carrasquer Orenga
+NOTA P. Tomas (75'): icono de gol de penalti.
+EV L 7 amarilla E. Galvez
+EV V 12 amarilla Y. Taoussi
+EV L 24 amarilla D. Garcia
+EV L 26 gol L. Andres
+EV V 41 cambio D. Sanchez > J. Lafuente
+EV V 41 cambio D. Picher > M. Santamaria
+EV L 47 cambio H. Perez > M. Perez
+EV L 47 cambio S. Gadea > D. Garcia
+EV V 51 cambio M. Rojano > A. Ammou
+EV V 55 cambio M. Ventura > M. Ousrout
+EV L 56 cambio I. Milan > O. Moral
+EV L 56 cambio A. Parres > L. Andres
+EV V 63 cambio H. Carrasquer > Y. Taoussi
+EV V 65 amarilla P. Pablo
+EV L 67 cambio H. Amoros > J. Gil
+EV L 67 cambio M. Limorte > D. Cotarelo
+EV V 70 gol M. Ventura
+EV V 75 penalti P. Tomas
+
+PARTIDO J1 | 05/09/2026 13:00 | C.F. La Nucía 'A' | C.D. Castellón 'A' | 2-5 | Ciutat Esptva. Camilo Cano F-11 La Nucia Anexo | 1-4-3-3 | 1-4-4-2
+L POR 1 David Zahonero Cantizano
+L DEF 2 Pere Terol Orozco
+L DEF 6 Gonzalo Beltran Gomez
+L DEF 15 Francesc Climent Ciscar
+L DEF 22 Xavi Martinez Mañez
+L MED 16 Noel Matias Bartolome
+L MED 17 Victor Perez Sepulveda
+L MED 24 Vicente Marcos Martinez
+L DEL 7 Dario Barreto Redondo
+L DEL 9 Toni Garcia Segura
+L DEL 21 Sergi Holguin Diaz
+L SUP 3 Ignacio Lozano Cortes
+L SUP 4 Mihai Nicusor Titiriga
+L SUP 5 Thiago Benjamin Malvezzi Quiroga
+L SUP 10 Joaquin Rodriguez Muñoz
+L SUP 11 Vicent Signes Mas
+L SUPPOR 13 Roberto James Peñalver Simm
+L SUP 27 Pablo Gallo Carmona
+V POR 1 Hugo Peris Escrig
+V DEF 2 Eric Peris Escrig
+V DEF 3 Andreu Viciedo Rodrigo
+V DEF 4 Marc Cervera Calpe
+V DEF 21 Otto Planagumà Bagan
+V MED 8 Joel Rodriguez Paris
+V MED 10 Diego Vicente Herrero
+V MED 11 Max Franciszek Bednorz
+V MED 19 Bruno Fernandez Garrido
+V DEL 9 Antonio Ramos Gomez
+V DEL 20 Nianake Diarra
+V SUP 5 Marc Marza Gasulla
+V SUP 6 Asier Sanchez Langa
+V SUP 12 Jorge Vidal Tarazona
+V SUPPOR 13 Aitor Rivera Leal
+V SUP 15 Yulen Acosta Zalvez
+V SUP 17 Ander Elordi Pastor
+V SUP 18 Gonzalo Tabares Saborit
+EV V 2 gol D. Vicente
+EV V 12 gol M. Cervera
+EV L 15 gol S. Holguin
+EV V 24 amarilla B. Fernandez
+EV V 25 gol N. Diarra
+EV V 39 gol A. Ramos
+EV L 41 cambio T. Benjamin > G. Beltran
+EV L 41 cambio I. Lozano > F. Climent
+EV L 41 cambio V. Signes > X. Martinez
+EV L 53 amarilla T. Benjamin
+EV V 53 cambio Y. Acosta > D. Vicente
+EV V 53 cambio G. Tabares > B. Fernandez
+EV V 53 cambio A. Sanchez > A. Viciedo
+EV L 55 cambio P. Gallo > D. Barreto
+EV L 55 cambio J. Rodriguez > T. Garcia
+EV V 59 gol N. Diarra
+EV V 63 amarilla J. Rodriguez
+EV V 63 cambio A. Elordi > A. Ramos
+EV V 63 cambio M. Marza > N. Diarra
+EV L 65 cambio M. Nicusor > V. Perez
+EV V 67 amarilla G. Tabares
+EV V 67 amarilla Y. Acosta
+EV V 73 cambio J. Vidal > E. Peris
+EV L 80 penalti P. Gallo
+EV V 81 amarilla O. Planagumà
+
+PARTIDO J1 | | Celtic Elche C.F. 'A' | C.F. Torre Levante 'A' | 0-0 | Ciudad Dptva. Elche Campo 6 José Ant. Morante "Lico" F-11 | 1-4-3-3 | 1-4-3-3
+L POR 13 Jorge Martinez Munar
+L DEF 2 Carmelo Santacruz Beneite
+L DEF 3 Aitor Lopez Canto
+L DEF 4 Isaac Patiño Hernandez
+L DEF 5 Sergio Martinez Castellano
+L MED 6 Rubén Pérez Andreu
+L MED 11 Iker Ramallo Lloret
+L MED 20 Oleksii Umansky
+L DEL 7 Alvaro Torrano Martinez
+L DEL 9 Aleix Nieto Almagro
+L DEL 22 Julian Chudzik
+L SUPPOR 1 Thiago Canepa Pellicer
+L SUP 8 Nacho Sirvent Guillen
+L SUP 10 Oriol Asensio Verdu
+L SUP 12 Gonzalo Lopez Lozano
+L SUP 14 Cayetano Ramon Moreno
+L SUP 18 Pedro Garcia Girona
+L SUP 19 Ahmed Rida Tariki Kharbouch
+V POR 1 Illia Miroshnychenko Stepanov
+V DEF 3 Jacob Regalado Pechuan
+V DEF 4 Guillermo Romeo Albors
+V DEF 5 Victor Gimenez Mesado
+V DEF 18 Samuel Temina Gaviria
+V MED 6 Miguel Sanz Pedro
+V MED 8 Farouk Aouane Qatfaoui
+V MED 19 Marc Marti Olaya
+V DEL 7 Ximo Nieto-Guerrero Cuesta
+V DEL 11 Jorge Monteagudo Navarro
+V DEL 17 Mihail Kevin Balta
+V SUP 9 Oke Carrasco Calvillo
+V SUP 10 Alejandro Bonfiglio Fuentes
+V SUP 12 Jorge Caro Toral
+V SUPPOR 13 Asier Vega Lozano
+V SUP 14 Jose Contelles Zarzo
+V SUP 15 Nicolas Calderon Gutierrez
+V SUP 16 Javier Villaescusa Mas
+NOTA Amarilla del 80' a «A. Manuel»: primer entrenador del Celtic Elche (Alexandre Manuel G.), no es jugador.
+EV L 36 amarilla O. Umansky
+EV L 41 cambio G. Lopez > C. Santacruz
+EV L 41 cambio A. Rida > J. Chudzik
+EV L 50 cambio N. Sirvent > I. Ramallo
+EV L 50 cambio O. Asensio > O. Umansky
+EV V 51 cambio J. Contelles > M. Marti
+EV V 51 cambio J. Caro > M. Sanz
+EV V 51 cambio A. Bonfiglio > X. Nieto-Guerrero
+EV V 55 amarilla J. Caro
+EV V 56 cambio O. Carrasco > M. Kevin
+EV V 56 cambio J. Villaescusa > J. Monteagudo
+EV L 58 cambio C. Ramon > A. Nieto
+EV L 59 amarilla G. Lopez
+EV V 63 amarilla V. Gimenez
+EV V 64 cambio N. Calderon > G. Romeo
+EV L 70 cambio P. Garcia > I. Patiño
+EV V 76 amarilla F. Aouane
+EV L 80 segunda_amarilla G. Lopez
+EV L 80 amarilla S. Martinez
+EV L 80 amarilla_tecnico A. Manuel
+
+PARTIDO J1 | 06/09/2026 18:30 | C.F. Benidorm 'A' | Elche C.F. 'A' | 0-3 | Inst. Dptvas. Antonio Lopez Benidorm F-11 Campo 2 | 1-4-4-2 | 1-4-3-3
+L POR 1 Manuel Irles Castaños
+L DEF 2 Neizan Garcia Esquinas
+L DEF 3 Neymar Omar Salazar Calva
+L DEF 4 Hugo Causera Mena
+L DEF 5 Xavi Martinez Torres
+L MED 6 Guillermo Sempere Catala
+L MED 7 Manel Perez Marquez
+L MED 8 Cristian Garcia Dominguez
+L MED 10 Carlos Ramis Gonzalez
+L DEL 9 Iker Perles Quintero
+L DEL 11 Simone Molinelli
+L SUP 12 Daniel Iranzo Casañ
+L SUPPOR 13 Alexis Cita Adan
+L SUP 14 Juan David Carrasco Gonzalez
+L SUP 15 Nathael Aracil Calderon
+L SUP 16 Oleksandr Parobok
+L SUP 17 Aaron Guessas Pia
+V POR 1 Pablo Fernandez Sposaro
+V DEF 8 Marc Sempere Anton
+V DEF 11 Pablo Cañizares Ruiz
+V DEF 16 Iker Pico Tenza
+V DEF 21 Alex Perea Ferma
+V MED 4 Samuel Navarro Gomez
+V MED 5 Marc Verdú Masiá
+V MED 9 Adrian Sanchez Amat
+V DEL 2 Hector Barcelo Soler
+V DEL 7 Andreu Perez Berbegal
+V DEL 12 David Giner Martinez
+V SUP 6 Jorge Clemente Rodriguez
+V SUP 10 Alejandro De Juan Garcia
+V SUPPOR 13 Sergio Parra Garcia
+V SUP 14 Adrian Valero Salmeron
+V SUP 17 Derek Enrique Martinez Recuerda
+V SUP 19 Velasco
+V SUP 20 Mario Galvez Montaño
+NOTA Amarilla del 65' a «D. Piñero»: cuerpo técnico del Elche (Daniel Piñero Moreno), no es jugador.
+EV V 2 gol P. Cañizares
+EV V 37 gol A. Sanchez
+EV L 41 cambio A. Guessas > C. Ramis
+EV V 56 cambio M. Galvez > M. Sempere
+EV V 56 cambio J. Clemente > A. Perez
+EV L 57 cambio O. Parobok > S. Molinelli
+EV V 65 amarilla_tecnico D. Piñero
+EV V 66 cambio D. Enrique > P. Cañizares
+EV L 70 cambio D. Iranzo > C. Garcia
+EV L 70 cambio J. David > N. Garcia
+EV V 72 gol M. Verdú
+EV V 72 cambio Velasco > I. Pico
+EV V 72 cambio A. De > A. Sanchez
+EV L 75 cambio N. Aracil > N. Omar
+
+PARTIDO J1 | 09/09/2026 | Valencia C.F. 'A' | Alboraya U.D. 'A' | 5-0 | Ciudad Dptva. Valencia CF F-11 Campo 3 | 1-4-3-3 | 1-5-4-1
+L POR 1 Mateo Berbis Martinez
+L DEF 2 Hugo Sanz Lopez
+L DEF 3 Aitor Garrigues Asensio
+L DEF 4 Eric Alaña Barragan
+L DEF 5 Iker Frias Barrajon
+L MED 6 Pablo Jimenez Luque
+L MED 8 Marc Carranza Hernandez
+L MED 10 Alfonso Calderon Trillo-Figueroa
+L DEL 7 Iker Albero Ruiz
+L DEL 9 Dario Alonso Garcia
+L DEL 11 Ricardo Perez Ruiz
+L SUP 12 Alejandro Gargoles Jimenez
+L SUPPOR 13 Hugo Alvarez Soria
+L SUP 14 Mamadou Dansokho Diakhaby
+L SUP 15 Miguel Angel Prieto Serer
+L SUP 16 Andreu Gimeno Alacreu
+L SUP 17 Diego Ferri Molina
+L SUP 18 Abel Yumdjo Taguiawa Massoko
+V POR 1 Diego Boso Brunet
+V DEF 2 Ruben Alonso Camin
+V DEF 3 Xavi Verdu Planells
+V DEF 4 Antonio Hölderl Raimundo
+V DEF 5 Nicolas Morillas Ubach
+V DEF 6 Roberto Company Castellano
+V MED 7 Cayetano Garcia Soriano
+V MED 8 Joel Patiño Martinez
+V MED 10 Cayetano Garcia Villar
+V MED 11 Arnau Ribera Rangel
+V DEL 9 Carlos Diaz Guevara
+V SUP 12 Hugo Villaescusa Cabrera
+V SUPPOR 13 Hugo Iturbide Andres
+V SUP 14 Leo Morales Oliva
+V SUP 15 Carles Garcia Guerrero
+V SUP 16 Gonzalo Escorihuela Prieto
+V SUP 17 Jorge De Jaime Blasco
+V SUP 18 Matias Sanchez Diaz
+NOTA Alboraya tiene dos titulares «C. Garcia» (Cayetano Garcia Soriano nº7 y Cayetano Garcia Villar nº10): las amarillas de 42' y 50' y las salidas de 56' y 67' no se pueden atribuir a uno concreto.
+NOTA Roja del 40' a «A. Torrecilla»: cuerpo técnico del Alboraya (Alvaro Torrecilla Gar...), no es jugador.
+NOTA Hora no visible en la grabación; fecha según la lista de resultados (miércoles 9 septiembre 2026).
+EV L 19 gol D. Alonso
+EV L 20 gol D. Alonso
+EV L 38 gol A. Calderon
+EV V 40 roja_tecnico A. Torrecilla
+EV V 41 cambio G. Escorihuela > A. Ribera
+EV V 41 cambio H. Villaescusa > C. Diaz
+EV V 42 amarilla C. Garcia
+EV V 44 amarilla N. Morillas
+EV V 45 amarilla H. Villaescusa
+EV L 46 amarilla I. Albero
+EV L 47 cambio D. Ferri > I. Albero
+EV L 47 cambio A. Gargoles > H. Sanz
+EV V 50 amarilla C. Garcia
+EV V 52 roja R. Company
+EV L 53 cambio A. Gimeno > E. Alaña
+EV L 53 cambio M. Dansokho > M. Carranza
+EV L 54 gol D. Alonso
+EV L 56 cambio M. Angel > D. Alonso
+EV L 56 cambio A. Yumdjo > A. Garrigues
+EV V 56 cambio L. Morales > R. Alonso
+EV V 56 cambio M. Sanchez > C. Garcia
+EV L 59 gol R. Perez
+EV L 60 amarilla A. Gimeno
+EV V 67 cambio J. De > J. Patiño
+EV V 67 cambio C. Garcia > C. Garcia
+
+PARTIDO J2 | 12/09/2026 09:00 | Patacona C.F. 'A' | Levante U.D. 'A' | 0-3 | Campo Mpal. de la Patacona F-11 | 1-4-4-2 | 1-4-4-2
+L POR 1 Marc Rodriguez Badia
+L DEF 2 Angel Navarro Michelena
+L DEF 3 Victor Blanco Lorente
+L DEF 4 Pau Carrasco Cantero
+L DEF 24 Luis Andreu Valor
+L MED 7 Izan Vicente Alos
+L MED 8 Diego Borrajo De Orozco Maldonado
+L MED 10 Eric Pacha Hernández
+L MED 17 Daniel Nuñez Najera
+L DEL 14 Rafa Montes Garcia
+L DEL 19 Yosin Yusupov
+L SUP 5 Nicolas Gomis Dominguez
+L SUP 6 Hugo Machi Olcina
+L SUP 9 Nicolas Diaz Lorenzo
+L SUPPOR 13 Raul Toboso Nicolau
+L SUP 16 Lluis Mateu I Martin
+L SUP 18 Carlos Gomez Pallardo
+L SUP 20 Marc Joan Gomez Oscar
+V POR 25 Hector Noel Clair Perez
+V DEF 2 Steven Chiemela Igbojionu Ajuzie
+V DEF 5 Unai Saez Vallejo
+V DEF 15 Ivan Rodriguez Paris
+V DEF 16 Diego Moyano Ribera
+V MED 8 Marco Nevot Cervera
+V MED 18 Alejandro Flores Inclan
+V MED 20 Manuel Matamoros Nuñez
+V MED 27 Daniel Calvente De Jesús
+V DEL 7 Esteban Ferrer Sánchez
+V DEL 11 Alejandro Arnau Franco
+V SUP 3 Alejandro Lujan Forment
+V SUP 4 Diego Miranda Rodriguez
+V SUP 6 Lucas Alcala Cardoso
+V SUP 9 Ivan Galan Redko
+V SUPPOR 13 Daniel Pedrajas Abril
+V SUP 17 Aythami Rodriguez Suárez
+V SUP 22 Aaron Aroba Santos
+NOTA Amarilla del 47' a «P. Ruiz»: primer entrenador del Patacona (Pedro Ruiz Ferrer), no es jugador.
+NOTA Cambios de portero: Patacona 64' (R. Toboso por M. Rodriguez); Levante 68' (sale el portero H. Noel por I. Galan y entra el portero D. Pedrajas por E. Ferrer).
+EV V 3 gol S. Chiemela
+EV V 39 gol A. Flores
+EV L 41 cambio N. Diaz > D. Nuñez
+EV L 41 cambio C. Gomez > I. Vicente
+EV L 47 amarilla_tecnico P. Ruiz
+EV V 52 gol A. Arnau
+EV L 52 cambio H. Machi > R. Montes
+EV L 52 cambio M. Joan > L. Andreu
+EV V 52 cambio A. Rodriguez > M. Matamoros
+EV V 52 cambio L. Alcala > D. Calvente
+EV L 58 cambio N. Gomis > E. Pacha
+EV V 61 cambio D. Miranda > U. Saez
+EV V 61 cambio A. Lujan > A. Arnau
+EV V 61 cambio A. Aroba > S. Chiemela
+EV L 64 cambio R. Toboso > M. Rodriguez
+EV L 64 cambio L. Mateu > Y. Yusupov
+EV V 68 cambio I. Galan > H. Noel
+EV V 68 cambio D. Pedrajas > E. Ferrer
+
+PARTIDO J2 | 12/09/2026 10:30 | C.F. Inter San José Valencia 'A' | Villarreal C.F. 'A' | 0-3 | Campo de Fútbol Mpal. de Beniferri F-11 | 1-3-5-2 | 1-4-4-2
+L POR 13 Juan Jose Gil Calisalvo
+L DEF 3 Marc Gómez Casinos
+L DEF 5 Xavi Torrijos Navarro
+L DEF 15 Enrique Lurbe De Vicente
+L MED 6 Pablo Lopez Almarcha
+L MED 8 Anton Cristian Terties Ardelean
+L MED 12 David Javaloyes Marco
+L MED 18 Juan Diego De La Fuente Wila
+L MED 21 Bruno Aguilar Baya
+L DEL 10 Carles Guanter Sanchez
+L DEL 19 Gonzalo Mascarell Marti
+L SUPPOR 1 Santiago Pinedo Nóbile
+L SUP 7 Lucas Amoros Tello
+L SUP 11 Victor Serrano Talamantes
+L SUP 14 Marc Miralles Serrano
+L SUP 22 Hugo Tarraso Perez
+L SUP 23 Rafael Alejandro Beltrán Valencia
+L SUP 26 Alejandro Miró Andrés
+V POR 1 Leo Rico Albert
+V DEF 3 Eduardo De Haro Hernández
+V DEF 4 Izan Muñoz Garcia
+V DEF 20 Marc Ascoz Gil
+V DEF 21 Daniel Vizuete Marti
+V MED 7 Aaron Ruiz Sanchez
+V MED 10 Alejandro Garcia Carcelen
+V MED 16 Ruben Herrera Gonzalez
+V MED 17 Jaume Mas Salom
+V DEL 9 Victor Maestra Rodriguez
+V DEL 18 Alvaro Tarraso Perez
+V SUP 5 Eric Rodriguez Casas
+V SUP 6 Victor Pardo Pastor
+V SUP 8 Mario Pinazo Trujillo
+V SUP 14 Iker Vicent Segarra
+V SUP 15 Guillermo Cuartero Calavia
+V SUP 23 Arturo Martinez Azorin
+V SUPPOR 25 Luca Reina Ruiz
+EV V 20 gol A. Tarraso
+EV L 41 cambio V. Serrano > P. Lopez
+EV L 41 cambio R. Alejandro > G. Mascarell
+EV L 41 cambio M. Miralles > B. Aguilar
+EV L 50 cambio A. Miró > C. Guanter
+EV V 54 gol V. Maestra
+EV L 55 cambio L. Amoros > D. Javaloyes
+EV L 55 cambio H. Tarraso > A. Cristian
+EV V 56 cambio I. Vicent > V. Maestra
+EV V 56 cambio A. Martinez > J. Mas
+EV V 67 cambio M. Pinazo > A. Garcia
+EV V 72 gol A. Martinez
+EV V 73 cambio V. Pardo > E. De
+EV V 73 cambio G. Cuartero > I. Muñoz
+EV V 73 cambio E. Rodriguez > R. Herrera
+
+PARTIDO J2 | 12/09/2026 11:00 | C.F. Fundació VCF 'A' | Valencia C.F. 'A' | 1-8 | Ciudad Dptva. Valencia CF F-11 Campo 4 | 1-4-4-2 | 1-4-3-3
+L POR 1 Vicente Fores Ferrer
+L DEF 2 Jorge Calomarde Gomez
+L DEF 3 Hugo Salas Mauri
+L DEF 4 Enzo Pacha Torres
+L DEF 5 Liam Videla Corbalan
+L MED 6 Jean Pool Cardona Rivas
+L MED 7 Enrique Antonio Blanquer Muñoz
+L MED 8 Sergio Revert Arribas
+L MED 11 Zakaria Idrissa Toure
+L DEL 9 Francesco Martin Moschella Compostela
+L DEL 10 Sergio Rodriguez Garcia
+L SUP 12 Aritz Gandia Mira
+L SUPPOR 13 Diego Llorens Segovia
+L SUP 14 Timur Kuzmin
+L SUP 15 Albert Ortega Fontanet
+L SUP 16 Lucas Serra Blasco
+L SUP 17 Axel Daniel Mosquera Barona
+L SUP 18 Ferran Mut Gilabert
+V POR 1 Hugo Alvarez Soria
+V DEF 2 Hugo Sanz Lopez
+V DEF 3 Aitor Garrigues Asensio
+V DEF 4 Yulian Mosquera Ibarguen
+V DEF 5 Iker Frias Barrajon
+V MED 6 Diego Ferri Molina
+V MED 8 Marc Carranza Hernandez
+V MED 10 Alfonso Calderon Trillo-Figueroa
+V DEL 7 Iker Albero Ruiz
+V DEL 9 Dario Alonso Garcia
+V DEL 11 Ricardo Perez Ruiz
+V SUP 12 Mamadou Dansokho Diakhaby
+V SUPPOR 13 Mateo Berbis Martinez
+V SUP 14 Eric Alaña Barragan
+V SUP 15 Miguel Angel Prieto Serer
+V SUP 16 Andreu Gimeno Alacreu
+V SUP 17 Alejandro Angulo Ramón
+V SUP 18 Abel Yumdjo Taguiawa Massoko
+EV L 10 gol J. Pool
+EV V 29 gol D. Alonso
+EV V 31 cambio M. Dansokho > I. Albero
+EV V 34 gol H. Sanz
+EV V 39 gol H. Sanz
+EV V 40 cambio A. Yumdjo > R. Perez
+EV V 45 gol D. Alonso
+EV L 45 cambio T. Kuzmin > E. Antonio
+EV L 45 cambio L. Serra > S. Revert
+EV L 45 cambio A. Daniel > S. Rodriguez
+EV V 54 cambio E. Alaña > A. Garrigues
+EV V 54 cambio M. Angel > M. Carranza
+EV V 56 gol H. Sanz
+EV L 58 cambio A. Gandia > E. Pacha
+EV L 60 cambio A. Ortega > Z. Idrissa
+EV L 60 cambio F. Mut > J. Pool
+EV V 60 cambio A. Angulo > Y. Mosquera
+EV V 60 cambio A. Gimeno > D. Ferri
+EV V 67 gol A. Angulo
+EV V 73 gol H. Sanz
+EV V 78 gol D. Alonso
+
+PARTIDO J2 | 12/09/2026 12:45 | C.D. Castellón 'A' | Elda Unión Cableworld C.F. 'A' | 3-1 | Campos Gaeta Huguet Castellón F-11 Campo B | 1-3-5-2 | 1-4-4-2
+L POR 13 Aitor Rivera Leal
+L DEF 2 Eric Peris Escrig
+L DEF 4 Marc Cervera Calpe
+L DEF 21 Otto Planagumà Bagan
+L MED 3 Andreu Viciedo Rodrigo
+L MED 8 Joel Rodriguez Paris
+L MED 10 Diego Vicente Herrero
+L MED 11 Max Franciszek Bednorz
+L MED 19 Bruno Fernandez Garrido
+L DEL 9 Antonio Ramos Gomez
+L DEL 20 Nianake Diarra
+L SUPPOR 1 Anthony Paraschiv Mora
+L SUP 5 Marc Marza Gasulla
+L SUP 6 Asier Sanchez Langa
+L SUP 7 Daniel Santacruz Santacruz
+L SUP 12 Jorge Vidal Tarazona
+L SUP 15 Yulen Acosta Zalvez
+L SUP 18 Gonzalo Tabares Saborit
+V POR 22 Agustín Lozano Herrera
+V DEF 6 Pablo Alarcon Vera
+V DEF 14 Daniel Gil Garcia
+V DEF 16 Luca Mateo Daza
+V DEF 17 Pablo Barrantes Mira
+V MED 5 Victor Ibáñez Garcia
+V MED 11 Adrian Sanchez Cano
+V MED 15 Alejandro Ponsoda Vallcanera
+V MED 18 Miguel Hoyos Tarraga
+V DEL 7 Angel Rodriguez Palao
+V DEL 20 Javier Terol Almiñana
+V SUP 2 Iker Bañon Aracil
+V SUP 4 Miguel Sempere Blasco
+V SUP 8 Diego Leiva Ucles
+V SUP 9 Marc Navarro Pla
+V SUP 12 Sergio Simon Iñigo
+V SUP 23 Aitor Tomas Benitez
+V SUPPOR 80 Marc Lozano Tomas
+NOTA «D. Gil» (79', lado local) e «I. Molina» (53' y 79') son del cuerpo técnico del Castellón (Daniel Gil Langa, Ian Molina Alguacil); el «D. Gil» del 69' (visitante) es el jugador Daniel Gil Garcia.
+EV L 8 amarilla M. Franciszek
+EV L 12 gol M. Franciszek
+EV L 14 amarilla N. Diarra
+EV L 20 gol N. Diarra
+EV V 37 amarilla P. Alarcon
+EV L 42 amarilla A. Ramos
+EV L 45 amarilla M. Cervera
+EV V 49 cambio M. Navarro > P. Alarcon
+EV V 49 cambio D. Leiva > A. Sanchez
+EV L 51 cambio G. Tabares > D. Vicente
+EV L 51 cambio M. Marza > B. Fernandez
+EV L 53 amarilla_tecnico I. Molina
+EV V 57 amarilla L. Mateo
+EV L 58 gol J. Rodriguez
+EV V 60 cambio I. Bañon > A. Ponsoda
+EV V 60 cambio A. Tomas > L. Mateo
+EV L 66 cambio J. Vidal > M. Franciszek
+EV L 66 cambio D. Santacruz > O. Planagumà
+EV V 67 gol A. Tomas
+EV V 68 cambio M. Sempere > J. Terol
+EV V 68 cambio S. Simon > M. Hoyos
+EV V 69 amarilla D. Gil
+EV L 70 cambio A. Sanchez > E. Peris
+EV L 70 cambio Y. Acosta > J. Rodriguez
+EV L 76 amarilla M. Marza
+EV L 79 segunda_amarilla A. Ramos
+EV L 79 roja_tecnico I. Molina
+EV L 79 amarilla_tecnico D. Gil
+
+PARTIDO J2 | 12/09/2026 13:00 | Elche C.F. 'A' | C.F. La Nucía 'A' | 2-1 | Polideportivo Mpal. Altabix Enrique Cervera F-11 | 1-4-3-3 | 1-4-3-3
+L POR 1 Pablo Fernandez Sposaro
+L DEF 4 Samuel Navarro Gomez
+L DEF 10 Alejandro De Juan Garcia
+L DEF 15 Marc Verdú Masiá
+L DEF 19 Velasco
+L MED 8 Marc Sempere Anton
+L MED 11 Pablo Cañizares Ruiz
+L MED 16 Iker Pico Tenza
+L DEL 12 David Giner Martinez
+L DEL 18 Adrian Sanchez Amat
+L DEL 21 Alex Perea Ferma
+L SUP 2 Neizan Parra Gonzalez
+L SUP 3 Hector Barcelo Soler
+L SUPPOR 13 Sergio Parra Garcia
+L SUP 14 Adrian Valero Salmeron
+L SUP 17 Derek Enrique Martinez Recuerda
+L SUP 20 Mario Galvez Montaño
+L SUP 23 Andreu Perez Berbegal
+V POR 1 David Zahonero Cantizano
+V DEF 2 Pere Terol Orozco
+V DEF 5 Thiago Benjamin Malvezzi Quiroga
+V DEF 15 Francesc Climent Ciscar
+V DEF 16 Noel Matias Bartolome
+V MED 8 Daniel Abraham Goudsmit
+V MED 20 Daniel Sanchez Andreu
+V MED 24 Vicente Marcos Martinez
+V DEL 7 Dario Barreto Redondo
+V DEL 11 Vicent Signes Mas
+V DEL 21 Sergi Holguin Diaz
+V SUP 3 Ignacio Lozano Cortes
+V SUP 4 Mihai Nicusor Titiriga
+V SUP 9 Toni Garcia Segura
+V SUP 10 Joaquin Rodriguez Muñoz
+V SUPPOR 13 Roberto James Peñalver Simm
+V SUP 22 Xavi Martinez Mañez
+V SUP 27 Pablo Gallo Carmona
+NOTA Amarilla del 72' a «D. Nadal»: cuerpo técnico de La Nucía (Damian Nadal Sierra), no es jugador.
+EV L 13 gol P. Cañizares
+EV V 41 cambio T. Garcia > V. Signes
+EV V 41 cambio P. Gallo > D. Sanchez
+EV V 43 cambio I. Lozano > F. Climent
+EV L 47 cambio H. Barcelo > Velasco
+EV L 47 cambio D. Enrique > A. Sanchez
+EV V 47 gol T. Garcia
+EV L 50 cambio A. Perez > A. De
+EV V 50 cambio J. Rodriguez > D. Barreto
+EV L 63 gol P. Cañizares
+EV V 64 amarilla N. Matias
+EV L 66 amarilla S. Navarro
+EV V 67 cambio X. Martinez > P. Terol
+EV V 67 cambio M. Nicusor > T. Benjamin
+EV V 72 amarilla_tecnico D. Nadal
+EV V 73 amarilla D. Abraham
+EV L 80 amarilla D. Enrique
+EV L 80 cambio M. Galvez > A. Perea
+EV L 80 cambio N. Parra > I. Pico
+
+PARTIDO J2 | 13/09/2026 17:15 | Primer Toque C.F. 'A' | C.F. Benidorm 'A' | 3-0 | Ciudad Dptva. Chencho C-F-11 Castellón | 1-5-4-1 | 1-5-4-1
+L POR 25 Pau Enrique Fuster
+L DEF 2 Yasser Taoussi
+L DEF 5 Javier Lafuente Perez
+L DEF 12 Jose David Barreda Galiana
+L DEF 14 Pere Tomas Ribes
+L DEF 29 Hugo Carrasquer Orenga
+L MED 6 Gerard Planell Vidal
+L MED 10 Diego Sanchez Alvaro
+L MED 15 Dario Picher Aguilella
+L MED 18 Pol Pablo Vericat
+L DEL 7 Marc Rojano Rubio
+L SUPPOR 1 Marc Menezo Perez
+L SUP 3 Marc Ventura Climent
+L SUP 4 Hernan Sanchez Pascual
+L SUP 9 Mohammed Ousrout Khannouss
+L SUP 11 Ayoub Ammou El Hafydy
+L SUP 17 Marcos Santamaria Albert
+L SUP 24 Javier Sanchez Martinez
+V POR 13 Alexis Cita Adan
+V DEF 2 Neizan Garcia Esquinas
+V DEF 3 Neymar Omar Salazar Calva
+V DEF 4 Oleksandr Parobok
+V DEF 5 Xavi Martinez Torres
+V DEF 6 Raul Poquet Matulic
+V MED 7 Aaron Guessas Pia
+V MED 8 Cristian Garcia Dominguez
+V MED 10 Carlos Ramis Gonzalez
+V MED 11 Nathael Aracil Calderon
+V DEL 9 Iker Perles Quintero
+V SUPPOR 1 Manuel Irles Castaños
+V SUP 12 Daniel Iranzo Casañ
+V SUP 14 Juan David Carrasco Gonzalez
+V SUP 15 Simone Molinelli
+NOTA Campo leído parcialmente en la grabación («Ciudad Dptva. Chen... C-F-11 Castellón»).
+EV L 12 gol J. David
+EV L 24 amarilla M. Rojano
+EV V 40 amarilla C. Garcia
+EV L 42 amarilla J. David
+EV V 48 cambio S. Molinelli > O. Parobok
+EV L 50 cambio A. Ammou > D. Picher
+EV L 53 gol A. Ammou
+EV L 55 cambio M. Ousrout > M. Rojano
+EV L 55 cambio M. Ventura > Y. Taoussi
+EV V 58 cambio J. David > N. Omar
+EV V 65 cambio D. Iranzo > C. Garcia
+EV L 68 cambio M. Santamaria > J. David
+EV L 68 cambio J. Sanchez > H. Carrasquer
+EV L 71 roja J. Sanchez
+EV L 80 gol P. Tomas
+
+PARTIDO J2 | 12/09/2026 18:00 | C.D. Roda 'A' | S.C.D. Intangco 'A' | 4-1 | Ciudad Dptva. José Manuel Llaneza F-11 Vila-real Campo 5 | 1-4-3-3 | 1-4-3-3
+L POR 1 Ezequiel Francisco Valverde Lorenzo
+L DEF 2 Ahmed Ben Ali Laghmich El Haad
+L DEF 3 Daniel Cortes Pacheco
+L DEF 5 Mario Granell Calafell
+L DEF 21 Omar Rami El Marouni
+L MED 8 Ferran Fortuny Albert
+L MED 10 Sergi Alcover Alvarez
+L MED 11 Miguel Ángel Tena Saco De Larriva
+L DEL 7 Javier Martinez Gonzalez
+L DEL 9 Marti Carreras Collado
+L DEL 19 David Eghosa Idahosa Ojeile
+L SUP 6 Moustapha Sanghare Traore
+L SUP 12 Banouhoum Coulibaly Coulibaly
+L SUPPOR 13 Marc Franch Julia
+L SUP 15 Collins Baidoo Yeboah
+L SUP 18 Brian Kwame Bada Gonzalez
+L SUP 22 Ivan Gonzalez Artiles
+L SUP 23 Iker Delgado Castellanos
+V POR 13 Daniel Sanchez Cano
+V DEF 3 Hugo Cobeño German
+V DEF 5 Eric Galvez Buitrago
+V DEF 17 Hector Amoros Fernandez
+V DEF 21 Diego Cotarelo Alvarez
+V MED 8 Lucas Andres Pico
+V MED 11 Oscar Moral Sanchez
+V MED 14 Adam Parres Rahim
+V DEL 6 Gonzalo Ruiz Pagan
+V DEL 7 Martin Perez Llopis
+V DEL 19 Juan Gil Iborra
+V SUPPOR 1 Izan Sanchez Cofrade
+V SUP 4 Martin Limorte Riquelme
+V SUP 9 Iker Milan Giménez
+V SUP 10 Fran Moya Romero
+V SUP 16 Jorge Chamorro Sanchez
+V SUP 18 Luca Eric Goian
+V SUP 30 Hector Perez Duran
+EV V 12 amarilla H. Cobeño
+EV L 17 gol M. Ángel
+EV L 36 amarilla M. Carreras
+EV L 39 amarilla D. Cortes
+EV V 39 amarilla E. Galvez
+EV L 41 gol M. Carreras
+EV V 53 cambio M. Limorte > H. Cobeño
+EV V 53 cambio J. Chamorro > O. Moral
+EV V 53 cambio F. Moya > G. Ruiz
+EV L 57 gol S. Alcover
+EV L 58 cambio C. Baidoo > M. Ángel
+EV V 58 cambio L. Eric > J. Gil
+EV V 58 cambio H. Perez > H. Amoros
+EV V 61 gol H. Perez
+EV L 63 amarilla F. Fortuny
+EV L 66 cambio I. Delgado > F. Fortuny
+EV L 66 cambio M. Sanghare > D. Eghosa
+EV V 69 cambio I. Milan > A. Parres
+EV V 69 amarilla M. Perez
+EV L 71 penalti J. Martinez
+EV L 73 cambio B. Kwame > M. Carreras
+EV L 73 cambio I. Gonzalez > J. Martinez
+
+PARTIDO J2 | 12/09/2026 | C.F. Torre Levante 'A' | Kelme C.F. 'A' | 0-0 | Campo Torre Levante-Orriols F-11 | 1-4-3-3 | 1-4-4-2
+L POR 1 Illia Miroshnychenko Stepanov
+L DEF 3 Jacob Regalado Pechuan
+L DEF 4 Guillermo Romeo Albors
+L DEF 5 Victor Gimenez Mesado
+L DEF 18 Samuel Temina Gaviria
+L MED 6 Miguel Sanz Pedro
+L MED 8 Farouk Aouane Qatfaoui
+L MED 17 Javier Villaescusa Mas
+L DEL 9 Oke Carrasco Calvillo
+L DEL 11 Jorge Monteagudo Navarro
+L DEL 19 Alejandro Bonfiglio Fuentes
+L SUP 2 Bruno Navarro Valverde
+L SUP 7 Ximo Nieto-Guerrero Cuesta
+L SUP 12 Jorge Caro Toral
+L SUPPOR 13 Asier Vega Lozano
+L SUP 14 Jose Contelles Zarzo
+L SUP 15 Mihail Kevin Balta
+L SUP 22 Marc Marti Olaya
+V POR 25 Mario Parodi Caceres
+V DEF 4 David Navarro Cerdá
+V DEF 5 Pedro Carreño Noguera
+V DEF 12 Pablo Soler Lumbreras
+V DEF 22 Angel Belmonte Risueño
+V MED 10 Jonathan Felix Martinez
+V MED 15 Cristian Sánchez Ruiz
+V MED 17 Jayden Lucas Williams
+V MED 19 Luca Giuseppe Annunziata Tomas
+V DEL 18 Amir Abdelkader Sebih Boukhit
+V DEL 30 Gonzalo Celdran Garre
+V SUP 7 Mario Navarro Terol
+V SUP 8 Pablo Sanchez Ortega
+V SUP 9 Joel Clos Arjona
+V SUPPOR 13 Bosko Martic
+V SUP 14 Miguel Molina Martinez
+V SUP 20 David Moya Salmon
+V SUP 24 Antonio Tihomir Dachev
+NOTA Fecha según la lista de resultados (sábado 12 septiembre 2026); hora no visible.
+EV L 41 cambio X. Nieto-Guerrero > A. Bonfiglio
+EV L 53 amarilla F. Aouane
+EV V 55 cambio M. Navarro > J. Lucas
+EV V 55 cambio D. Moya > L. Giuseppe
+EV L 58 cambio M. Kevin > O. Carrasco
+EV L 58 cambio M. Marti > F. Aouane
+EV L 65 cambio J. Contelles > J. Villaescusa
+EV V 67 cambio J. Clos > C. Sánchez
+EV V 67 cambio M. Molina > A. Abdelkader
+EV V 67 cambio P. Sanchez > G. Celdran
+EV V 70 cambio A. Tihomir > A. Belmonte
+EV L 72 amarilla M. Sanz
+EV L 73 cambio B. Navarro > G. Romeo
+EV L 73 cambio J. Caro > M. Sanz
+
+PARTIDO J2 | 13/09/2026 | Alboraya U.D. 'A' | Celtic Elche C.F. 'A' | 1-2 | Estadio Mpal. Fran... Alboraya F-11 | 1-5-4-1 | 1-4-3-3
+L POR 1 Diego Boso Brunet
+L DEF 3 Xavi Verdu Planells
+L DEF 4 Antonio Hölderl Raimundo
+L DEF 5 Nicolas Morillas Ubach
+L DEF 18 Matias Sanchez Diaz
+L DEF 24 Elian Merino Franco
+L MED 7 Cayetano Garcia Soriano
+L MED 8 Joel Patiño Martinez
+L MED 10 Cayetano Garcia Villar
+L MED 12 Hugo Villaescusa Cabrera
+L DEL 16 Gonzalo Escorihuela Prieto
+L SUP 9 Carlos Diaz Guevara
+L SUP 11 Arnau Ribera Rangel
+L SUPPOR 13 Hugo Iturbide Andres
+L SUP 14 Leo Morales Oliva
+L SUP 17 Jorge De Jaime Blasco
+L SUP 20 Asier Alcañiz Baldovi
+L SUP 21 Hugo Martinez Boluda
+V POR 13 Jorge Martinez Munar
+V DEF 2 Carmelo Santacruz Beneite
+V DEF 3 Aitor Lopez Canto
+V DEF 5 Sergio Martinez Castellano
+V DEF 18 Pedro Garcia Girona
+V MED 6 Rubén Pérez Andreu
+V MED 10 Oriol Asensio Verdu
+V MED 11 Iker Ramallo Lloret
+V DEL 7 Alvaro Torrano Martinez
+V DEL 9 Aleix Nieto Almagro
+V DEL 19 Ahmed Rida Tariki Kharbouch
+V SUPPOR 1 Thiago Canepa Pellicer
+V SUP 8 Nacho Sirvent Guillen
+V SUP 14 Cayetano Ramon Moreno
+V SUP 15 Francisco Mondejar Maya
+V SUP 16 Hugo Garcia Gonzalez
+V SUP 17 Sergio Manchon Penalva
+V SUP 22 Julian Chudzik
+NOTA Fecha según la lista de resultados (domingo 13 septiembre 2026); hora no visible. Nombre del campo cortado en la grabación.
+NOTA El cambio del 60' («J. De > C. Garcia») no permite saber cuál de los dos Cayetano Garcia sale.
+NOTA A. Alcañiz aparece dos veces con tarjeta amarilla en el 80': segunda amarilla (expulsión).
+EV V 3 gol S. Martinez
+EV L 38 amarilla G. Escorihuela
+EV L 41 cambio H. Martinez > J. Patiño
+EV V 50 gol A. Nieto
+EV L 53 cambio L. Morales > G. Escorihuela
+EV L 53 cambio A. Ribera > H. Villaescusa
+EV L 53 cambio C. Diaz > M. Sanchez
+EV V 55 cambio S. Manchon > A. Torrano
+EV V 55 cambio N. Sirvent > O. Asensio
+EV V 55 cambio J. Chudzik > A. Rida
+EV L 60 cambio J. De > C. Garcia
+EV V 67 amarilla A. Nieto
+EV V 69 cambio F. Mondejar > A. Nieto
+EV V 69 cambio C. Ramon > C. Santacruz
+EV L 70 cambio A. Alcañiz > N. Morillas
+EV V 72 cambio H. Garcia > R. Pérez
+EV L 75 gol L. Morales
+EV L 80 amarilla A. Alcañiz
+EV L 80 segunda_amarilla A. Alcañiz
+
+PARTIDO J3 | 19/09/2026 | C.F. Inter San José Valencia 'A' | Patacona C.F. 'A' | 0-0 | Campo de Fútbol Mpal. de Beniferri F-11 | 1-3-5-2 | 1-4-4-2
+L POR 1 Santiago Pinedo Nóbile
+L DEF 5 Xavi Torrijos Navarro
+L DEF 15 Enrique Lurbe De Vicente
+L DEF 20 Carlos Sierra Arnal
+L MED 4 Adrián Civera Gallach
+L MED 6 Pablo Lopez Almarcha
+L MED 7 Lucas Amoros Tello
+L MED 23 Rafael Alejandro Beltrán Valencia
+L MED 26 Alejandro Miró Andrés
+L DEL 14 Marc Miralles Serrano
+L DEL 27 Wilter Job Sanchez Rodriguez
+L SUP 2 Daniel Molina Viñes
+L SUP 9 Luis Lopez Rosa
+L SUP 10 Carles Guanter Sanchez
+L SUP 11 Victor Serrano Talamantes
+L SUPPOR 13 Juan Jose Gil Calisalvo
+L SUP 18 Juan Diego De La Fuente Wila
+L SUP 22 Hugo Tarraso Perez
+V POR 1 Marc Rodriguez Badia
+V DEF 2 Angel Navarro Michelena
+V DEF 3 Victor Blanco Lorente
+V DEF 4 Pau Carrasco Cantero
+V DEF 19 Yosin Yusupov
+V MED 5 Nicolas Gomis Dominguez
+V MED 8 Diego Borrajo De Orozco Maldonado
+V MED 10 Eric Pacha Hernández
+V MED 18 Carlos Gomez Pallardo
+V DEL 9 Nicolas Diaz Lorenzo
+V DEL 27 Roberto Nicolas Stirbu Moldovan
+V SUP 6 Hugo Machi Olcina
+V SUP 11 Niko Palop Herman
+V SUP 12 Cristian Cuco Moscardo
+V SUP 14 Rafa Montes Garcia
+V SUP 16 Lluis Mateu I Martin
+V SUP 17 Daniel Nuñez Najera
+V SUPPOR 22 Raul Toboso Nicolau
+NOTA Amarilla del 42' a «J. Vicente»: cuerpo técnico del Inter San José (Jose Vicente Carot...), no es jugador.
+NOTA Fecha según la lista de resultados (sábado 19 septiembre 2026); hora no visible.
+EV V 36 amarilla N. Gomis
+EV L 41 cambio H. Tarraso > A. Civera
+EV L 42 amarilla_tecnico J. Vicente
+EV L 50 cambio V. Serrano > W. Job
+EV L 50 cambio L. Lopez > E. Lurbe
+EV V 53 cambio L. Mateu > N. Gomis
+EV V 53 cambio R. Montes > N. Diaz
+EV V 57 amarilla R. Nicolas
+EV L 59 cambio D. Molina > C. Sierra
+EV L 59 cambio J. Diego > R. Alejandro
+EV V 64 cambio H. Machi > R. Nicolas
+EV V 64 cambio N. Palop > E. Pacha
+EV L 68 cambio C. Guanter > M. Miralles
+EV L 68 amarilla V. Serrano
+EV V 71 cambio D. Nuñez > C. Gomez
+EV V 71 cambio C. Cuco > A. Navarro
+EV L 79 amarilla L. Amoros
+
+PARTIDO J3 | 19/09/2026 | Levante U.D. 'A' | C.F. Torre Levante 'A' | 2-0 | Ciudad Dptva. del Levante U.D. F-11 Campo 4 | 1-4-4-2 | 1-5-4-1
+L POR 1 Asier Gomez Diaz
+L DEF 2 Steven Chiemela Igbojionu Ajuzie
+L DEF 5 Unai Saez Vallejo
+L DEF 15 Ivan Rodriguez Paris
+L DEF 16 Diego Moyano Ribera
+L MED 8 Marco Nevot Cervera
+L MED 17 Aythami Rodriguez Suárez
+L MED 18 Alejandro Flores Inclan
+L MED 20 Manuel Matamoros Nuñez
+L DEL 7 Esteban Ferrer Sanchez
+L DEL 11 Alejandro Arnau Franco
+L SUP 3 Alejandro Lujan Forment
+L SUP 6 Lucas Alcala Cardoso
+L SUP 9 Ivan Galan Redko
+L SUPPOR 13 Daniel Pedrajas Abril
+L SUP 14 Alvaro Castellanos Anaya
+L SUP 22 Aaron Aroba Santos
+L SUP 27 Daniel Calvente De Jesús
+V POR 1 Illia Miroshnychenko Stepanov
+V DEF 3 Jacob Regalado Pechuan
+V DEF 5 Victor Gimenez Mesado
+V DEF 10 Bruno Navarro Valverde
+V DEF 15 Nicolas Calderon Gutierrez
+V DEF 30 Guillermo Romeo Albors
+V MED 7 Ximo Nieto-Guerrero Cuesta
+V MED 12 Jorge Caro Toral
+V MED 14 Jose Contelles Zarzo
+V MED 22 Marc Marti Olaya
+V DEL 25 Mihail Kevin Balta
+V SUP 2 Gonzalo Bolinches Ruiz
+V SUP 6 Miguel Sanz Pedro
+V SUP 9 Oke Carrasco Calvillo
+V SUP 11 Jorge Monteagudo Navarro
+V SUPPOR 13 Asier Vega Lozano
+V SUP 16 Javier Villaescusa Mas
+V SUP 19 Carles Arenes Valero
+NOTA Fecha según la lista de resultados (sábado 19 septiembre 2026); hora no legible.
+EV L 23 gol A. Arnau
+EV L 40 gol E. Ferrer
+EV L 46 cambio L. Alcala > M. Matamoros
+EV L 56 cambio A. Aroba > A. Flores
+EV L 56 cambio I. Galan > A. Rodriguez
+EV L 56 cambio D. Calvente > E. Ferrer
+EV V 59 cambio O. Carrasco > B. Navarro
+EV V 59 cambio J. Villaescusa > M. Marti
+EV V 59 cambio M. Sanz > N. Calderon
+EV V 59 cambio J. Monteagudo > X. Nieto-Guerrero
+EV V 62 cambio G. Bolinches > J. Contelles
+EV L 70 cambio A. Castellanos > U. Saez
+EV L 70 cambio D. Pedrajas > A. Gomez
+EV L 70 cambio A. Lujan > A. Arnau
+EV V 70 cambio C. Arenes > M. Kevin
+EV V 70 amarilla G. Bolinches
+EV L 75 amarilla I. Galan
+
+PARTIDO J3 | 19/09/2026 09:00 | Elda Unión Cableworld C.F. 'A' | Elche C.F. 'A' | 0-8 | Campo de Futbol Fernando Tomas F-11 Campo 3 | 1-4-4-2 | 1-4-3-3
+L POR 80 Marc Lozano Tomas
+L DEF 14 Daniel Gil Garcia
+L DEF 16 Luca Mateo Daza
+L DEF 17 Pablo Barrantes Mira
+L DEF 19 Alberto Canto Vegara
+L MED 5 Victor Ibáñez Garcia
+L MED 8 Diego Leiva Ucles
+L MED 9 Marc Navarro Pla
+L MED 18 Miguel Hoyos Tarraga
+L DEL 3 David Penalva Alfonso
+L DEL 7 Angel Rodriguez Palao
+L SUP 4 Miguel Sempere Blasco
+L SUP 6 Pablo Alarcon Vera
+L SUP 11 Adrian Sanchez Cano
+L SUP 12 Sergio Simon Iñigo
+L SUP 15 Alejandro Ponsoda Vallcanera
+L SUPPOR 22 Agustín Lozano Herrera
+L SUP 23 Aitor Tomas Benitez
+V POR 1 Pablo Fernandez Sposaro
+V DEF 3 Hector Barcelo Soler
+V DEF 4 Samuel Navarro Gomez
+V DEF 12 David Giner Martinez
+V DEF 15 Marc Verdú Masiá
+V MED 8 Marc Sempere Anton
+V MED 16 Iker Pico Tenza
+V MED 21 Alex Perea Ferma
+V DEL 11 Pablo Cañizares Ruiz
+V DEL 18 Adrian Sanchez Amat
+V DEL 23 Andreu Perez Berbegal
+V SUP 2 Neizan Parra Gonzalez
+V SUP 7 Marco Muñoz Alarcon
+V SUP 10 Alejandro De Juan Garcia
+V SUPPOR 13 Izan Lopez Llorente
+V SUP 17 Derek Enrique Martinez Recuerda
+V SUP 20 Mario Galvez Montaño
+V SUP 22 Julian Andres Vasquez Cano
+EV L 7 amarilla V. Ibáñez
+EV V 37 gol A. Sanchez
+EV V 41 gol P. Cañizares
+EV L 41 cambio A. Ponsoda > M. Navarro
+EV V 42 gol P. Cañizares
+EV L 44 cambio M. Sempere > V. Ibáñez
+EV L 44 cambio A. Tomas > A. Canto
+EV L 44 cambio S. Simon > L. Mateo
+EV V 45 gol A. Perea
+EV V 51 cambio J. Andres > A. Perea
+EV V 51 cambio M. Muñoz > H. Barcelo
+EV V 56 cambio A. De > I. Pico
+EV V 56 cambio N. Parra > D. Giner
+EV V 56 cambio M. Galvez > A. Perez
+EV L 61 cambio P. Alarcon > A. Rodriguez
+EV V 64 gol P. Cañizares
+EV V 65 cambio D. Enrique > P. Cañizares
+EV V 69 gol M. Verdú
+EV L 70 amarilla D. Penalva
+EV V 75 gol M. Muñoz
+EV V 77 gol A. Sanchez
+
+PARTIDO J3 | 19/09/2026 10:00 | Valencia C.F. 'A' | C.D. Castellón 'A' | 6-2 | Ciudad Dptva. Valencia CF F-11 Campo 4 | 1-4-3-3 | 1-3-5-2
+L POR 1 Mateo Berbis Martinez
+L DEF 2 Mamadou Dansokho Diakhaby
+L DEF 3 Aitor Garrigues Asensio
+L DEF 4 Eric Alaña Barragan
+L DEF 5 Iker Frias Barrajon
+L MED 6 Pablo Jimenez Luque
+L MED 8 Diego Ferri Molina
+L MED 10 Marc Carranza Hernandez
+L DEL 7 Hugo Sanz Lopez
+L DEL 9 Dario Alonso Garcia
+L DEL 11 Ricardo Perez Ruiz
+L SUP 12 Martin Morente Gay
+L SUPPOR 13 Hugo Alvarez Soria
+L SUP 14 Andreu Gimeno Alacreu
+L SUP 15 Abel Yumdjo Taguiawa Massoko
+L SUP 16 Iker Albero Ruiz
+L SUP 17 Alejandro Angulo Ramon
+L SUP 18 Jakson Enrique Gordon
+V POR 1 Hugo Peris Escrig
+V DEF 2 Eric Peris Escrig
+V DEF 4 Marc Cervera Calpe
+V DEF 21 Otto Planagumà Bagan
+V MED 3 Andreu Viciedo Rodrigo
+V MED 6 Asier Sanchez Langa
+V MED 8 Joel Rodriguez Paris
+V MED 11 Max Franciszek Bednorz
+V MED 19 Bruno Fernandez Garrido
+V DEL 18 Gonzalo Tabares Saborit
+V DEL 20 Nianake Diarra
+V SUP 5 Marc Marza Gasulla
+V SUP 7 Daniel Santacruz Santacruz
+V SUP 10 Diego Vicente Herrero
+V SUP 12 Jorge Vidal Tarazona
+V SUPPOR 13 Aitor Rivera Leal
+V SUP 15 Yulen Acosta Zalvez
+V SUP 17 Ander Elordi Pastor
+NOTA En el 72' entra el portero suplente A. Rivera por el defensa M. Cervera (así consta en el acta); H. Peris sigue en el campo.
+EV V 2 gol N. Diarra
+EV L 4 gol R. Perez
+EV V 8 gol N. Diarra
+EV L 10 gol D. Alonso
+EV L 40 gol H. Sanz
+EV L 41 cambio I. Albero > R. Perez
+EV V 44 amarilla M. Cervera
+EV L 45 gol I. Albero
+EV L 51 amarilla D. Ferri
+EV L 55 cambio J. Enrique > D. Ferri
+EV V 56 cambio D. Vicente > B. Fernandez
+EV V 56 cambio M. Marza > J. Rodriguez
+EV L 61 cambio A. Yumdjo > I. Albero
+EV L 61 cambio A. Gimeno > P. Jimenez
+EV V 61 cambio A. Elordi > G. Tabares
+EV V 61 cambio Y. Acosta > N. Diarra
+EV V 72 cambio J. Vidal > A. Viciedo
+EV V 72 cambio A. Rivera > M. Cervera
+EV L 74 cambio M. Morente > D. Alonso
+EV L 74 cambio A. Angulo > M. Carranza
+EV L 77 gol J. Enrique
+EV L 78 gol A. Yumdjo
+
+PARTIDO J3 | | Kelme C.F. 'A' | Alboraya U.D. 'A' | 1-1 | Polideportivo Mpal. Altabix Enrique Cervera F-11 | 1-4-4-2 | 1-3-5-2
+L POR 25 Mario Parodi Caceres
+L DEF 2 Edgar Ramirez Chulia
+L DEF 5 Pedro Carreño Noguera
+L DEF 12 Pablo Soler Lumbreras
+L DEF 22 Angel Belmonte Risueño
+L MED 10 Jonathan Felix Martinez
+L MED 15 Cristian Sánchez Ruiz
+L MED 19 Luca Giuseppe Annunziata Tomas
+L MED 20 David Moya Salmon
+L DEL 18 Amir Abdelkader Sebih Boukhit
+L DEL 30 Gonzalo Celdran Garre
+L SUP 4 David Navarro Cerdá
+L SUP 7 Mario Navarro Terol
+L SUP 8 Pablo Sanchez Ortega
+L SUP 11 Ruben Castello Perez
+L SUPPOR 13 Bosko Martic
+L SUP 17 Jayden Lucas Williams
+L SUP 21 Diego Molina Rojo
+V POR 13 Hugo Iturbide Andres
+V DEF 16 Gonzalo Escorihuela Prieto
+V DEF 18 Matias Sanchez Diaz
+V DEF 21 Hugo Martinez Boluda
+V MED 4 Antonio Hölderl Raimundo
+V MED 5 Nicolas Morillas Ubach
+V MED 10 Cayetano Garcia Villar
+V MED 14 Leo Morales Oliva
+V MED 24 Elian Merino Franco
+V DEL 3 Xavi Verdu Planells
+V DEL 7 Cayetano Garcia Soriano
+V SUPPOR 1 Diego Boso Brunet
+V SUP 6 Roberto Company Castellano
+V SUP 8 Joel Patiño Martinez
+V SUP 11 Arnau Ribera Rangel
+V SUP 12 Hugo Villaescusa Cabrera
+V SUP 15 Carles Garcia Guerrero
+V SUP 23 Vicente Bayarri Baldovi
+NOTA El cambio del 50' («A. Ribera > C. Garcia») no permite saber cuál de los dos Cayetano Garcia sale. Fecha y hora no visibles.
+EV V 9 gol L. Morales
+EV V 11 amarilla X. Verdu
+EV L 16 gol D. Moya
+EV L 26 amarilla E. Ramirez
+EV V 27 amarilla L. Morales
+EV V 40 cambio R. Company > X. Verdu
+EV V 47 amarilla N. Morillas
+EV V 47 cambio H. Villaescusa > G. Escorihuela
+EV V 50 cambio A. Ribera > C. Garcia
+EV V 50 cambio V. Bayarri > L. Morales
+EV L 53 cambio P. Sanchez > C. Sánchez
+EV L 53 cambio R. Castello > A. Abdelkader
+EV L 65 cambio J. Lucas > L. Giuseppe
+EV V 71 cambio J. Patiño > H. Martinez
+EV V 71 cambio C. Garcia > A. Ribera
+EV L 73 cambio M. Navarro > J. Felix
+EV L 73 cambio D. Navarro > D. Moya
+EV L 73 amarilla J. Lucas
+
+PARTIDO J3 | | C.F. La Nucía 'A' | Primer Toque C.F. 'A' | 1-2 | Ciutat Esptva. Camilo Cano F-11 La Nucia Anexo | 1-4-3-3 | 1-5-4-1
+L POR 1 David Zahonero Cantizano
+L DEF 2 Pere Terol Orozco
+L DEF 5 Thiago Benjamin Malvezzi Quiroga
+L DEF 15 Francesc Climent Ciscar
+L DEF 16 Noel Matias Bartolome
+L MED 7 Dario Barreto Redondo
+L MED 8 Daniel Abraham Goudsmit
+L MED 24 Vicente Marcos Martinez
+L DEL 10 Joaquin Rodriguez Muñoz
+L DEL 21 Sergi Holguin Diaz
+L DEL 27 Pablo Gallo Carmona
+L SUP 3 Ignacio Lozano Cortes
+L SUP 4 Mihai Nicusor Titiriga
+L SUP 11 Vicent Signes Mas
+L SUPPOR 13 Roberto James Peñalver Simm
+L SUP 17 Victor Perez Sepulveda
+L SUP 20 Daniel Sanchez Andreu
+L SUP 22 Xavi Martinez Mañez
+V POR 25 Pau Enrique Fuster
+V DEF 5 Javier Lafuente Perez
+V DEF 12 Jose David Barreda Galiana
+V DEF 14 Pere Tomas Ribes
+V DEF 16 Hugo Carrasquer Orenga
+V DEF 20 Marc Ventura Climent
+V MED 8 Gerard Planell Vidal
+V MED 10 Diego Sanchez Alvaro
+V MED 11 Ayoub Ammou El Hafydy
+V MED 18 Pol Pablo Vericat
+V DEL 7 Marc Rojano Rubio
+V SUPPOR 1 Marc Menezo Perez
+V SUP 2 Yasser Taoussi
+V SUP 4 Hernan Sanchez Pascual
+V SUP 9 Mohammed Ousrout Khannouss
+V SUP 17 Marcos Santamaria Albert
+V SUP 19 Marc Monfort Noguera
+NOTA Fecha y hora no visibles en la grabación. D. Abraham: amarilla (48') y tarjeta roja (57'), registrada como segunda amarilla.
+EV L 41 cambio V. Perez > J. Rodriguez
+EV L 41 cambio D. Sanchez > D. Barreto
+EV V 41 cambio M. Ousrout > A. Ammou
+EV V 41 cambio Y. Taoussi > H. Carrasquer
+EV V 44 gol M. Ousrout
+EV L 47 cambio V. Signes > P. Gallo
+EV L 47 cambio I. Lozano > P. Terol
+EV L 48 amarilla D. Abraham
+EV V 53 cambio H. Sanchez > J. Lafuente
+EV V 55 gol M. Ousrout
+EV L 56 cambio M. Nicusor > F. Climent
+EV L 57 segunda_amarilla D. Abraham
+EV V 59 cambio M. Santamaria > M. Rojano
+EV V 62 amarilla H. Sanchez
+EV L 63 gol S. Holguin
+EV L 74 amarilla T. Benjamin
+EV L 75 cambio X. Martinez > T. Benjamin
+EV V 80 amarilla M. Ousrout
+
+PARTIDO J3 | | Villarreal C.F. 'A' | S.C.D. Intangco 'A' | 5-0 | Ciudad Dptva. José Manuel Llaneza F-11 Vila-real Campo 5 | 1-4-3-3 | 1-4-3-3
+L POR 25 Luca Reina Ruiz
+L DEF 2 Balla Dembele Kamissoko
+L DEF 5 Eric Rodriguez Casas
+L DEF 15 Guillermo Cuartero Calavia
+L DEF 20 Marc Ascoz Gil
+L MED 8 Mario Pinazo Trujillo
+L MED 14 Iker Vicent Segarra
+L MED 16 Ruben Herrera Gonzalez
+L DEL 7 Aaron Ruiz Sanchez
+L DEL 9 Victor Maestra Rodriguez
+L DEL 17 Jaume Mas Salom
+L SUPPOR 1 Leo Rico Albert
+L SUP 3 Eduardo De Haro Hernández
+L SUP 10 Alejandro Garcia Carcelen
+L SUP 11 Pablo Lopez Argüello
+L SUP 19 Neville Winston Knowles Iii
+L SUP 22 Josue Caballero Cerdeña
+L SUP 23 Arturo Martinez Azorin
+V POR 1 Izan Sanchez Cofrade
+V DEF 4 Martin Limorte Riquelme
+V DEF 5 Eric Galvez Buitrago
+V DEF 18 Luca Eric Goian
+V DEF 21 Diego Cotarelo Alvarez
+V MED 7 Martin Perez Llopis
+V MED 8 Lucas Andres Pico
+V MED 14 Adam Parres Rahim
+V DEL 6 Gonzalo Ruiz Pagan
+V DEL 19 Juan Gil Iborra
+V DEL 30 Hector Perez Duran
+V SUP 3 Hugo Cobeño German
+V SUP 10 Fran Moya Romero
+V SUP 11 Oscar Moral Sanchez
+V SUPPOR 13 Daniel Sanchez Cano
+V SUP 16 Jorge Chamorro Sanchez
+V SUP 20 Sergio Gadea Atencia
+V SUP 22 Eloy Mañogil Dolz
+NOTA Fecha y hora no visibles. I. Vicent (56'): icono de gol de penalti.
+EV L 7 amarilla B. Dembele
+EV V 12 amarilla A. Parres
+EV L 25 gol J. Mas
+EV L 31 gol R. Herrera
+EV L 37 gol A. Ruiz
+EV L 41 cambio A. Garcia > M. Pinazo
+EV V 41 cambio E. Mañogil > G. Ruiz
+EV V 41 cambio F. Moya > H. Perez
+EV L 44 amarilla G. Cuartero
+EV L 52 gol A. Garcia
+EV L 53 cambio A. Martinez > A. Ruiz
+EV L 53 cambio N. Winston > B. Dembele
+EV L 53 cambio E. De > G. Cuartero
+EV V 53 cambio S. Gadea > A. Parres
+EV V 53 cambio O. Moral > L. Andres
+EV V 53 cambio J. Chamorro > L. Eric
+EV L 56 penalti I. Vicent
+EV V 63 cambio H. Cobeño > E. Galvez
+EV L 65 cambio J. Caballero > I. Vicent
+EV L 65 cambio P. Lopez > R. Herrera
+EV L 67 amarilla A. Garcia
+EV L 67 amarilla E. De
+EV L 73 amarilla A. Martinez
+
+PARTIDO J3 | 19/09/2026 12:15 | C.F. Benidorm 'A' | C.D. Roda 'A' | 1-3 | Inst. Dptvas. Antonio Lopez Benidorm F-11 Campo 2 | 1-3-5-2 | 1-4-3-3
+L POR 1 Manuel Irles Castaños
+L DEF 2 Manel Perez Marquez
+L DEF 4 Hugo Causera Mena
+L DEF 5 Xavi Martinez Torres
+L MED 3 Neymar Omar Salazar Calva
+L MED 6 Cristian Garcia Dominguez
+L MED 8 Simone Molinelli
+L MED 10 Carlos Ramis Gonzalez
+L MED 11 Nathael Aracil Calderon
+L DEL 7 Malin Malinov Sinanski
+L DEL 9 Iker Perles Quintero
+L SUP 12 Daniel Iranzo Casañ
+L SUP 14 Oleksandr Parobok
+L SUP 15 Neizan Garcia Esquinas
+L SUP 16 Gonzalo Padilla Barreno
+L SUP 17 Raul Poquet Matulic
+L SUP 18 Aaron Guessas Pia
+L SUP 24 Juan David Carrasco Gonzalez
+V POR 1 Ezequiel Francisco Valverde Lorenzo
+V DEF 2 Ahmed Ben Ali Laghmich El Haad
+V DEF 3 Daniel Cortes Pacheco
+V DEF 5 Mario Granell Calafell
+V DEF 21 Omar Rami El Marouni
+V MED 8 Ferran Fortuny Albert
+V MED 10 Sergi Alcover Alvarez
+V MED 11 Miguel Ángel Tena Saco De Larriva
+V DEL 7 Javier Martinez Gonzalez
+V DEL 18 Brian Kwame Bada Gonzalez
+V DEL 19 David Eghosa Idahosa Ojeile
+V SUP 9 Marti Carreras Collado
+V SUP 12 Banouhoum Coulibaly Coulibaly
+V SUPPOR 13 Marc Franch Julia
+V SUP 14 Alejandro Buedo Rubio
+V SUP 15 Collins Baidoo Yeboah
+V SUP 17 Alex Cantalapiedra Cocho
+V SUP 24 Guillermo Mora Lorca
+EV L 35 gol N. Aracil
+EV L 38 amarilla C. Ramis
+EV V 38 amarilla F. Fortuny
+EV V 44 gol M. Ángel
+EV V 45 cambio M. Carreras > B. Kwame
+EV V 52 gol M. Ángel
+EV L 58 cambio G. Padilla > M. Malinov
+EV L 61 cambio R. Poquet > S. Molinelli
+EV L 61 cambio A. Guessas > N. Aracil
+EV V 63 cambio C. Baidoo > F. Fortuny
+EV V 63 cambio G. Mora > M. Ángel
+EV V 69 amarilla J. Martinez
+EV V 70 cambio A. Cantalapiedra > J. Martinez
+EV V 70 cambio B. Coulibaly > D. Eghosa
+EV L 73 cambio N. Garcia > C. Garcia
+EV L 73 cambio J. David > M. Perez
+EV L 73 cambio O. Parobok > N. Omar
+EV V 80 gol C. Baidoo
+
+PARTIDO J3 | 23/09/2026 18:45 | Celtic Elche C.F. 'A' | C.F. Fundació VCF 'A' | 0-2 | Polideportivo Mpal. Altabix Enrique Cervera F-11 | 1-4-3-3 | 1-4-4-2
+L POR 1 Ilay Marcus Marinus Bronsdijk
+L DEF 3 Aitor Lopez Canto
+L DEF 4 Isaac Patiño Hernandez
+L DEF 12 Gonzalo Lopez Lozano
+L DEF 18 Pedro Garcia Girona
+L MED 6 Rubén Pérez Andreu
+L MED 16 Hugo Garcia Gonzalez
+L MED 20 Oleksii Umansky
+L DEL 7 Alvaro Torrano Martinez
+L DEL 9 Aleix Nieto Almagro
+L DEL 19 Ahmed Rida Tariki Kharbouch
+L SUP 2 Carmelo Santacruz Beneite
+L SUP 5 Sergio Martinez Castellano
+L SUP 8 Nacho Sirvent Guillen
+L SUP 10 Oriol Asensio Verdu
+L SUP 11 Iker Ramallo Lloret
+L SUPPOR 13 Jorge Martinez Munar
+L SUP 15 Francisco Mondejar Maya
+V POR 1 Diego Llorens Segovia
+V DEF 2 Jorge Calomarde Gomez
+V DEF 3 Hugo Salas Mauri
+V DEF 4 Enzo Pacha Torres
+V DEF 5 Aritz Gandia Mira
+V MED 6 Jean Pool Cardona Rivas
+V MED 7 Zakaria Idrissa Toure
+V MED 8 Sergio Revert Arribas
+V MED 11 Gabidolla Orazaly
+V DEL 9 Francesco Martin Moschella Compostela
+V DEL 10 Lucas Serra Blasco
+V SUP 12 Joaquin Cano De Jose
+V SUPPOR 13 Vicente Fores Ferrer
+V SUP 14 Ferran Mut Gilabert
+V SUP 15 Albert Ortega Fontanet
+V SUP 16 Timur Kuzmin
+V SUP 17 Axel Daniel Mosquera Barona
+NOTA Partido de la J3 aplazado y jugado el miércoles 23 septiembre 2026.
+EV V 31 gol L. Serra
+EV L 48 cambio N. Sirvent > H. Garcia
+EV L 48 cambio O. Asensio > A. Rida
+EV L 48 cambio I. Ramallo > O. Umansky
+EV L 53 cambio S. Martinez > R. Pérez
+EV V 54 cambio J. Cano > E. Pacha
+EV V 54 cambio T. Kuzmin > G. Orazaly
+EV V 56 gol L. Serra
+EV L 62 cambio F. Mondejar > P. Garcia
+EV L 62 cambio C. Santacruz > G. Lopez
+EV V 69 cambio F. Mut > A. Gandia
+EV V 69 cambio A. Daniel > S. Revert
+EV V 71 cambio A. Ortega > J. Pool
+EV L 78 amarilla S. Martinez
+
+PARTIDO J4 | 25/09/2026 20:15 | C.F. Torre Levante 'A' | C.F. Inter San José Valencia 'A' | 1-1 | Campo Torre Levante-Orriols F-11 | 1-5-4-1 | 1-4-4-2
+L POR 1 Illia Miroshnychenko Stepanov
+L DEF 3 Jacob Regalado Pechuan
+L DEF 4 Guillermo Romeo Albors
+L DEF 5 Victor Gimenez Mesado
+L DEF 11 Jorge Monteagudo Navarro
+L DEF 18 Samuel Temina Gaviria
+L MED 6 Miguel Sanz Pedro
+L MED 7 Ximo Nieto-Guerrero Cuesta
+L MED 16 Javier Villaescusa Mas
+L MED 22 Marc Marti Olaya
+L DEL 13 Mihail Kevin Balta
+L SUP 2 Gonzalo Bolinches Ruiz
+L SUP 8 Alejandro Bonfiglio Fuentes
+L SUP 9 Oke Carrasco Calvillo
+L SUP 14 Jose Contelles Zarzo
+L SUP 25 Jorge Caro Toral
+L SUP 27 Bruno Navarro Valverde
+L SUPPOR 73 Asier Vega Lozano
+V POR 13 Juan Jose Gil Calisalvo
+V DEF 2 Daniel Molina Viñes
+V DEF 3 Marc Gómez Casinos
+V DEF 12 David Javaloyes Marco
+V DEF 15 Enrique Lurbe De Vicente
+V MED 6 Pablo Lopez Almarcha
+V MED 18 Juan Diego De La Fuente Wila
+V MED 23 Rafael Alejandro Beltrán Valencia
+V MED 26 Alejandro Miró Andrés
+V DEL 14 Marc Miralles Serrano
+V DEL 21 Bruno Aguilar Baya
+V SUPPOR 1 Santiago Pinedo Nóbile
+V SUP 5 Xavi Torrijos Navarro
+V SUP 7 Lucas Amoros Tello
+V SUP 8 Anton Cristian Terties Ardelean
+V SUP 9 Luis Lopez Rosa
+V SUP 19 Gonzalo Mascarell Marti
+V SUP 27 Carles Guanter Sanchez
+NOTA La amarilla de E. Lurbe figura en el acta con minuto «999» (posterior al partido); se registra en el 80'.
+EV V 4 gol M. Miralles
+EV L 20 amarilla X. Nieto-Guerrero
+EV V 30 amarilla J. Diego
+EV V 41 cambio A. Cristian > J. Diego
+EV L 48 cambio A. Bonfiglio > J. Villaescusa
+EV L 48 cambio J. Contelles > X. Nieto-Guerrero
+EV V 53 cambio G. Mascarell > M. Miralles
+EV V 53 cambio L. Amoros > B. Aguilar
+EV L 62 cambio O. Carrasco > S. Temina
+EV V 68 amarilla R. Alejandro
+EV V 69 cambio X. Torrijos > A. Miró
+EV V 69 cambio L. Lopez > D. Javaloyes
+EV L 70 cambio J. Caro > J. Monteagudo
+EV L 70 cambio B. Navarro > M. Marti
+EV V 78 cambio C. Guanter > R. Alejandro
+EV L 80 gol M. Kevin
+EV V 80 amarilla C. Guanter
+EV V 80 amarilla E. Lurbe
+
+PARTIDO J4 | 26/09/2026 | Alboraya U.D. 'A' | Levante U.D. 'A' | 0-3 | Estadio Mpal. Fran... Alboraya F-11 | 1-3-5-2 | 1-4-4-2
+L POR 13 Hugo Iturbide Andres
+L DEF 5 Nicolas Morillas Ubach
+L DEF 16 Gonzalo Escorihuela Prieto
+L DEF 21 Hugo Martinez Boluda
+L MED 3 Xavi Verdu Planells
+L MED 4 Antonio Hölderl Raimundo
+L MED 6 Roberto Company Castellano
+L MED 18 Matias Sanchez Diaz
+L MED 24 Elian Merino Franco
+L DEL 7 Cayetano Garcia Soriano
+L DEL 10 Cayetano Garcia Villar
+L SUPPOR 1 Diego Boso Brunet
+L SUP 8 Joel Patiño Martinez
+L SUP 9 Carlos Diaz Guevara
+L SUP 11 Arnau Ribera Rangel
+L SUP 12 Hugo Villaescusa Cabrera
+L SUP 14 Leo Morales Oliva
+L SUP 23 Vicente Bayarri Baldovi
+V POR 13 Daniel Pedrajas Abril
+V DEF 2 Steven Chiemela Igbojionu Ajuzie
+V DEF 5 Unai Saez Vallejo
+V DEF 15 Ivan Rodriguez Paris
+V DEF 16 Diego Moyano Ribera
+V MED 8 Marco Nevot Cervera
+V MED 17 Aythami Rodriguez Suárez
+V MED 18 Alejandro Flores Inclan
+V MED 22 Aaron Aroba Santos
+V DEL 9 Ivan Galan Redko
+V DEL 11 Alejandro Arnau Franco
+V SUPPOR 1 Asier Gomez Diaz
+V SUP 3 Alejandro Lujan Forment
+V SUP 4 Diego Miranda Rodriguez
+V SUP 7 Esteban Ferrer Sanchez
+V SUP 14 Alvaro Castellanos Anaya
+V SUP 20 Manuel Matamoros Nuñez
+V SUP 27 Daniel Calvente De Jesús
+NOTA Hora no legible. La amarilla del 48' y los cambios de 52' y 67' de «C. Garcia» no permiten saber cuál de los dos Cayetano Garcia es.
+EV L 2 amarilla G. Escorihuela
+EV V 14 gol I. Galan
+EV V 21 amarilla I. Galan
+EV L 41 cambio C. Diaz > R. Company
+EV L 45 amarilla N. Morillas
+EV L 48 amarilla C. Garcia
+EV V 48 gol I. Galan
+EV L 52 cambio H. Villaescusa > C. Garcia
+EV L 52 cambio V. Bayarri > H. Martinez
+EV L 52 cambio A. Ribera > G. Escorihuela
+EV L 52 cambio L. Morales > X. Verdu
+EV V 52 cambio A. Castellanos > U. Saez
+EV V 52 cambio E. Ferrer > I. Galan
+EV V 61 cambio A. Lujan > A. Flores
+EV V 61 cambio D. Miranda > I. Rodriguez
+EV V 61 cambio D. Calvente > A. Rodriguez
+EV L 67 cambio J. Patiño > C. Garcia
+EV V 73 cambio M. Matamoros > M. Nevot
+EV L 75 amarilla V. Bayarri
+EV V 76 gol E. Ferrer
+EV V 79 amarilla E. Ferrer
+
+PARTIDO J4 | 26/09/2026 10:45 | Elche C.F. 'A' | Valencia C.F. 'A' | 1-4 | Polideportivo Mpal. Altabix Enrique Cervera F-11 | 1-4-3-3 | 1-4-3-3
+L POR 1 Pablo Fernandez Sposaro
+L DEF 3 Hector Barcelo Soler
+L DEF 4 Samuel Navarro Gomez
+L DEF 12 David Giner Martinez
+L DEF 15 Marc Verdú Masiá
+L MED 8 Marc Sempere Anton
+L MED 10 Alejandro De Juan Garcia
+L MED 16 Iker Pico Tenza
+L DEL 11 Pablo Cañizares Ruiz
+L DEL 18 Adrian Sanchez Amat
+L DEL 21 Alex Perea Ferma
+L SUP 2 Neizan Parra Gonzalez
+L SUP 7 Marco Muñoz Alarcon
+L SUPPOR 13 Tomás
+L SUP 19 Velasco
+L SUP 20 Mario Galvez Montaño
+L SUP 22 Julian Andres Vasquez Cano
+L SUP 23 Andreu Perez Berbegal
+V POR 1 Mateo Berbis Martinez
+V DEF 2 Eric Alaña Barragan
+V DEF 3 Aitor Garrigues Asensio
+V DEF 4 Yulian Mosquera Ibarguen
+V DEF 5 Iker Frias Barrajon
+V MED 6 Pablo Jimenez Luque
+V MED 8 Marc Carranza Hernandez
+V MED 10 Jakson Enrique Gordon
+V DEL 7 Hugo Sanz Lopez
+V DEL 9 Dario Alonso Garcia
+V DEL 11 Ricardo Perez Ruiz
+V SUP 12 Miguel Angel Prieto Serer
+V SUPPOR 13 Hugo Alvarez Soria
+V SUP 14 Martin Morente Gay
+V SUP 15 Diego Ferri Molina
+V SUP 16 Andreu Gimeno Alacreu
+V SUP 17 Alejandro Angulo Ramon
+V SUP 18 Abel Yumdjo Taguiawa Massoko
+EV V 8 gol R. Perez
+EV L 12 gol P. Cañizares
+EV L 30 cambio Velasco > P. Cañizares
+EV V 40 gol D. Alonso
+EV L 41 cambio J. Andres > M. Verdú
+EV L 57 cambio M. Muñoz > A. Perea
+EV L 57 cambio M. Galvez > A. De
+EV L 57 cambio A. Perez > M. Sempere
+EV V 61 amarilla Y. Mosquera
+EV L 62 cambio N. Parra > D. Giner
+EV V 67 cambio A. Gimeno > J. Enrique
+EV V 68 amarilla I. Frias
+EV V 70 gol M. Carranza
+EV V 73 cambio A. Angulo > H. Sanz
+EV V 73 cambio D. Ferri > M. Carranza
+EV V 75 gol D. Alonso
+EV V 79 cambio M. Morente > I. Frias
+EV V 79 cambio M. Angel > A. Garrigues
+EV V 79 cambio A. Yumdjo > D. Alonso
+
+PARTIDO J4 | 26/09/2026 12:00 | C.D. Castellón 'A' | Celtic Elche C.F. 'A' | 1-3 | Campos Gaeta Huguet Castellón F-11 Campo B | 1-3-5-2 | 1-4-3-3
+L POR 1 Hugo Peris Escrig
+L DEF 2 Eric Peris Escrig
+L DEF 3 Andreu Viciedo Rodrigo
+L DEF 4 Marc Cervera Calpe
+L MED 8 Joel Rodriguez Paris
+L MED 10 Diego Vicente Herrero
+L MED 11 Max Franciszek Bednorz
+L MED 15 Yulen Acosta Zalvez
+L MED 18 Gonzalo Tabares Saborit
+L DEL 9 Antonio Ramos Gomez
+L DEL 20 Nianake Diarra
+L SUP 5 Marc Marza Gasulla
+L SUP 6 Asier Sanchez Langa
+L SUP 7 Daniel Santacruz Santacruz
+L SUP 12 Jorge Vidal Tarazona
+L SUPPOR 13 Aitor Rivera Leal
+L SUP 19 Bruno Fernandez Garrido
+L SUP 21 Otto Planagumà Bagan
+V POR 1 Jorge Martinez Munar
+V DEF 2 Carmelo Santacruz Beneite
+V DEF 3 Aitor Lopez Canto
+V DEF 4 Pedro Garcia Girona
+V DEF 5 Sergio Martinez Castellano
+V MED 6 Isaac Patiño Hernandez
+V MED 8 Nacho Sirvent Guillen
+V MED 11 Iker Ramallo Lloret
+V DEL 7 Alvaro Torrano Martinez
+V DEL 9 Aleix Nieto Almagro
+V DEL 10 Oriol Asensio Verdu
+V SUP 12 Gonzalo Lopez Lozano
+V SUPPOR 13 Ilay Marcus Marinus Bronsdijk
+V SUP 14 Francisco Mondejar Maya
+V SUP 15 Jakub Lewczuk
+V SUP 16 Hugo Garcia Gonzalez
+V SUP 17 Oleksii Umansky
+EV L 11 gol G. Tabares
+EV V 22 gol O. Asensio
+EV V 27 gol A. Torrano
+EV V 39 gol I. Ramallo
+EV L 41 cambio A. Sanchez > Y. Acosta
+EV L 50 cambio B. Fernandez > D. Vicente
+EV L 50 cambio O. Planagumà > A. Viciedo
+EV V 55 amarilla I. Patiño
+EV V 55 cambio G. Lopez > C. Santacruz
+EV V 59 cambio O. Umansky > A. Torrano
+EV V 60 amarilla S. Martinez
+EV L 70 cambio D. Santacruz > A. Ramos
+EV L 70 cambio M. Marza > G. Tabares
+EV L 73 amarilla O. Planagumà
+EV L 74 cambio J. Vidal > J. Rodriguez
+EV V 76 cambio J. Lewczuk > I. Patiño
+EV V 76 cambio H. Garcia > O. Asensio
+EV V 76 cambio F. Mondejar > I. Ramallo
+
+PARTIDO J4 | 26/09/2026 17:45 | C.D. Roda 'A' | C.F. La Nucía 'A' | 3-2 | Ciudad Dptva. José Manuel Llaneza F-11 Vila-real Campo 5 | 1-4-3-3 | 1-4-3-3
+L POR 1 Ezequiel Francisco Valverde Lorenzo
+L DEF 2 Ahmed Ben Ali Laghmich El Haad
+L DEF 5 Mario Granell Calafell
+L DEF 12 Banouhoum Coulibaly Coulibaly
+L DEF 20 Victor Borrego Luzzi
+L MED 8 Ferran Fortuny Albert
+L MED 10 Sergi Alcover Alvarez
+L MED 15 Collins Baidoo Yeboah
+L DEL 9 Marti Carreras Collado
+L DEL 11 Miguel Ángel Tena Saco De Larriva
+L DEL 19 David Eghosa Idahosa Ojeile
+L SUP 3 Daniel Cortes Pacheco
+L SUP 6 Moustapha Sanghare Traore
+L SUPPOR 13 Marc Franch Julia
+L SUP 14 Alejandro Buedo Rubio
+L SUP 21 Omar Rami El Marouni
+L SUP 23 Iker Delgado Castellanos
+L SUP 26 Brunno Valentino Biacio Castro
+V POR 1 David Zahonero Cantizano
+V DEF 4 Mihai Nicusor Titiriga
+V DEF 5 Thiago Benjamin Malvezzi Quiroga
+V DEF 15 Francesc Climent Ciscar
+V DEF 22 Xavi Martinez Mañez
+V MED 17 Victor Perez Sepulveda
+V MED 24 Vicente Marcos Martinez
+V MED 26 Alejandro Da Silva Cruz
+V DEL 7 Dario Barreto Redondo
+V DEL 11 Vicent Signes Mas
+V DEL 21 Sergi Holguin Diaz
+V SUP 9 Toni Garcia Segura
+V SUP 10 Joaquin Rodriguez Muñoz
+V SUP 12 Andreu Gimenez Martinez
+V SUP 16 Noel Matias Bartolome
+V SUP 20 Daniel Sanchez Andreu
+V SUPPOR 25 Alexis Cita Adan
+V SUP 27 Pablo Gallo Carmona
+EV V 4 gol D. Barreto
+EV V 9 amarilla V. Perez
+EV L 19 gol D. Eghosa
+EV V 23 gol V. Perez
+EV L 41 cambio D. Cortes > A. Ben
+EV V 41 cambio P. Gallo > V. Perez
+EV V 41 cambio N. Matias > F. Climent
+EV V 44 cambio D. Sanchez > A. Da
+EV L 56 gol M. Carreras
+EV L 57 cambio A. Buedo > F. Fortuny
+EV L 57 cambio M. Sanghare > C. Baidoo
+EV L 57 cambio O. Rami > B. Coulibaly
+EV V 59 cambio T. Garcia > V. Signes
+EV L 63 cambio I. Delgado > M. Ángel
+EV V 63 cambio J. Rodriguez > S. Holguin
+EV L 64 amarilla D. Eghosa
+EV L 68 gol M. Carreras
+EV L 70 cambio B. Valentino > D. Eghosa
+EV L 80 amarilla A. Buedo
+
+PARTIDO J4 | 26/09/2026 17:15 | Primer Toque C.F. 'A' | Elda Unión Cableworld C.F. 'A' | 3-1 | Ciudad Dptva. Chencho C-F-11 Castellón | 1-5-4-1 | 1-4-4-2
+L POR 1 Marc Menezo Perez
+L DEF 2 Yasser Taoussi
+L DEF 4 Hernan Sanchez Pascual
+L DEF 5 Javier Lafuente Perez
+L DEF 14 Pere Tomas Ribes
+L DEF 18 Pol Pablo Vericat
+L MED 6 Vicent Roda Barbera
+L MED 7 Marc Rojano Rubio
+L MED 10 Diego Sanchez Alvaro
+L MED 17 Marcos Santamaria Albert
+L DEL 9 Mohammed Ousrout Khannouss
+L SUP 3 Marc Ventura Climent
+L SUP 8 Gerard Planell Vidal
+L SUP 11 Ayoub Ammou El Hafydy
+L SUP 12 Jose David Barreda Galiana
+L SUP 15 Dario Picher Aguilella
+L SUPPOR 25 Pau Enrique Fuster
+L SUP 29 Hugo Carrasquer Orenga
+V POR 22 Agustín Lozano Herrera
+V DEF 7 Angel Rodriguez Palao
+V DEF 11 Adrian Sanchez Cano
+V DEF 12 Sergio Simon Iñigo
+V DEF 20 Javier Terol Almiñana
+V MED 9 Marc Navarro Pla
+V MED 14 Daniel Gil Garcia
+V MED 18 Miguel Hoyos Tarraga
+V MED 19 Alberto Canto Vegara
+V DEL 6 Pablo Alarcon Vera
+V DEL 17 Pablo Barrantes Mira
+V SUP 2 Iker Bañon Aracil
+V SUP 3 David Penalva Alfonso
+V SUP 4 Miguel Sempere Blasco
+V SUP 8 Diego Leiva Ucles
+V SUPPOR 13 Marc Lozano Tomas
+V SUP 21 Marc Peñaranda Ruiz
+V SUP 23 Aitor Tomas Benitez
+NOTA P. Tomas (15') y M. Ousrout (57'): icono de gol de penalti. A. Sanchez (Elda): amarilla 27' y expulsión 37' (segunda amarilla). Amarilla 58' a «J. Moreno»: primer entrenador del Elda.
+EV L 15 penalti P. Tomas
+EV L 24 gol M. Rojano
+EV V 27 amarilla A. Sanchez
+EV L 37 amarilla H. Sanchez
+EV V 37 segunda_amarilla A. Sanchez
+EV L 40 amarilla M. Rojano
+EV V 41 cambio A. Tomas > A. Canto
+EV L 47 cambio H. Carrasquer > M. Rojano
+EV L 47 cambio M. Ventura > H. Sanchez
+EV V 47 cambio M. Peñaranda > M. Navarro
+EV L 55 cambio A. Ammou > V. Roda
+EV L 55 cambio G. Planell > P. Pablo
+EV L 57 penalti M. Ousrout
+EV V 58 amarilla_tecnico J. Moreno
+EV L 61 cambio D. Picher > M. Santamaria
+EV V 61 cambio D. Leiva > P. Alarcon
+EV V 61 cambio D. Penalva > P. Barrantes
+EV V 66 cambio M. Sempere > D. Gil
+EV V 66 cambio I. Bañon > S. Simon
+EV V 68 gol M. Hoyos
+
+PARTIDO J4 | 26/09/2026 19:00 | S.C.D. Intangco 'A' | C.F. Benidorm 'A' | 3-1 | Ciudad Dptva. Elche Campo 5 Palmeral D'Elx F-11 | 1-4-3-3 | 1-5-4-1
+L POR 13 Daniel Sanchez Cano
+L DEF 3 Hugo Cobeño German
+L DEF 5 Eric Galvez Buitrago
+L DEF 18 Luca Eric Goian
+L DEF 21 Diego Cotarelo Alvarez
+L MED 8 Lucas Andres Pico
+L MED 14 Adam Parres Rahim
+L MED 22 Eloy Mañogil Dolz
+L DEL 7 Martin Perez Llopis
+L DEL 11 Oscar Moral Sanchez
+L DEL 19 Juan Gil Iborra
+L SUPPOR 1 Izan Sanchez Cofrade
+L SUP 4 Martin Limorte Riquelme
+L SUP 6 Gonzalo Ruiz Pagan
+L SUP 10 Fran Moya Romero
+L SUP 16 Jorge Chamorro Sanchez
+L SUP 20 Sergio Gadea Atencia
+L SUP 30 Hector Perez Duran
+V POR 13 Manuel Irles Castaños
+V DEF 3 Neymar Omar Salazar Calva
+V DEF 4 Hugo Causera Mena
+V DEF 8 Cristian Garcia Dominguez
+V DEF 23 Xavi Martinez Torres
+V DEF 27 Manel Perez Marquez
+V MED 6 Guillermo Sempere Catala
+V MED 7 Raul Poquet Matulic
+V MED 10 Carlos Ramis Gonzalez
+V MED 19 Nathael Aracil Calderon
+V DEL 11 Iker Perles Quintero
+V SUP 15 Neizan Garcia Esquinas
+V SUP 17 Malin Malinov Sinanski
+V SUP 18 Aaron Guessas Pia
+V SUP 20 Daniel Iranzo Casañ
+V SUP 21 Oleksandr Parobok
+V SUP 30 Juan David Carrasco Gonzalez
+NOTA I. Perles (44'): icono de gol de penalti. F. Moya: amarilla 25' (en el banquillo) y expulsión 80' (segunda amarilla).
+EV L 4 amarilla H. Cobeño
+EV L 7 amarilla A. Parres
+EV L 25 amarilla F. Moya
+EV L 32 cambio G. Ruiz > E. Mañogil
+EV L 35 gol D. Cotarelo
+EV L 39 gol J. Gil
+EV V 41 cambio A. Guessas > R. Poquet
+EV V 41 cambio M. Malinov > N. Omar
+EV V 44 penalti I. Perles
+EV V 50 cambio N. Garcia > N. Aracil
+EV L 54 cambio S. Gadea > H. Cobeño
+EV L 54 cambio M. Limorte > O. Moral
+EV L 54 cambio J. Chamorro > L. Eric
+EV V 57 amarilla H. Causera
+EV V 58 cambio J. David > C. Garcia
+EV L 68 gol L. Andres
+EV V 68 cambio O. Parobok > M. Perez
+EV V 68 cambio D. Iranzo > I. Perles
+EV L 73 cambio H. Perez > M. Perez
+EV L 73 cambio F. Moya > L. Andres
+EV L 80 segunda_amarilla F. Moya
+
+PARTIDO J4 | 27/09/2026 11:00 | Patacona C.F. 'A' | Villarreal C.F. 'A' | 0-8 | Campo Mpal. de la Patacona F-11 | 1-4-4-2 | 1-4-3-3
+L POR 22 Raul Toboso Nicolau
+L DEF 3 Victor Blanco Lorente
+L DEF 4 Pau Carrasco Cantero
+L DEF 17 Daniel Nuñez Najera
+L DEF 23 Dario Stefano Boso Fernandez
+L MED 6 Hugo Machi Olcina
+L MED 12 Cristian Cuco Moscardo
+L MED 20 Marc Joan Gomez Oscar
+L MED 29 Marco Alpuente Blazquez
+L DEL 11 Niko Palop Herman
+L DEL 14 Rafa Montes Garcia
+L SUPPOR 1 Marc Rodriguez Badia
+L SUP 7 Izan Vicente Alos
+L SUP 8 Diego Borrajo De Orozco Maldonado
+L SUP 9 Nicolas Diaz Lorenzo
+L SUP 10 Eric Pacha Hernández
+L SUP 24 Luis Andreu Valor
+L SUP 27 Roberto Nicolas Stirbu Moldovan
+V POR 1 Leo Rico Albert
+V DEF 3 Eduardo De Haro Hernández
+V DEF 4 Izan Muñoz Garcia
+V DEF 20 Marc Ascoz Gil
+V DEF 21 Daniel Vizuete Marti
+V MED 10 Alejandro Garcia Carcelen
+V MED 16 Ruben Herrera Gonzalez
+V MED 17 Jaume Mas Salom
+V DEL 7 Aaron Ruiz Sanchez
+V DEL 18 Alvaro Tarraso Perez
+V DEL 23 Arturo Martinez Azorin
+V SUP 5 Eric Rodriguez Casas
+V SUP 6 Victor Pardo Pastor
+V SUP 8 Mario Pinazo Trujillo
+V SUP 9 Victor Maestra Rodriguez
+V SUP 11 Pablo Lopez Argüello
+V SUPPOR 13 Yehor Troinkov
+V SUP 14 Iker Vicent Segarra
+NOTA J. Mas (30'): icono de gol de penalti. Cambio de portero del Patacona en el 41' (M. Rodriguez por R. Toboso).
+EV V 3 gol J. Mas
+EV L 12 cambio L. Andreu > P. Carrasco
+EV V 27 gol A. Tarraso
+EV V 30 penalti J. Mas
+EV V 32 gol A. Martinez
+EV V 38 amarilla A. Martinez
+EV L 41 cambio M. Rodriguez > R. Toboso
+EV V 49 cambio V. Pardo > A. Tarraso
+EV V 49 cambio I. Vicent > A. Ruiz
+EV V 49 cambio P. Lopez > R. Herrera
+EV L 51 cambio N. Diaz > N. Palop
+EV L 51 cambio I. Vicente > M. Joan
+EV L 51 cambio R. Nicolas > D. Stefano
+EV V 53 gol A. Martinez
+EV L 57 cambio E. Pacha > M. Alpuente
+EV L 57 cambio D. Borrajo > H. Machi
+EV V 58 cambio V. Maestra > A. Martinez
+EV V 58 cambio M. Pinazo > A. Garcia
+EV V 63 gol J. Mas
+EV V 64 cambio E. Rodriguez > I. Muñoz
+EV V 72 gol I. Vicent
+EV V 78 gol V. Pardo
+
+PARTIDO J4 | 27/09/2026 11:00 | C.F. Fundació VCF 'A' | Kelme C.F. 'A' | 5-1 | Ciudad Dptva. Valencia CF F-11 Campo 4 | 1-4-4-2 | 1-4-4-2
+L POR 1 Vicente Fores Ferrer
+L DEF 2 Jorge Calomarde Gomez
+L DEF 3 Hugo Salas Mauri
+L DEF 4 Enzo Pacha Torres
+L DEF 5 Aritz Gandia Mira
+L MED 6 Jean Pool Cardona Rivas
+L MED 7 Zakaria Idrissa Toure
+L MED 8 Sergio Revert Arribas
+L MED 11 Gabidolla Orazaly
+L DEL 9 Francesco Martin Moschella Compostela
+L DEL 10 Lucas Serra Blasco
+L SUP 12 Joaquin Cano De Jose
+L SUPPOR 13 Diego Llorens Segovia
+L SUP 14 Sergio Rodriguez Garcia
+L SUP 15 Ferran Mut Gilabert
+L SUP 16 Timur Kuzmin
+L SUP 17 Axel Daniel Mosquera Barona
+L SUP 18 Albert Ortega Fontanet
+V POR 25 Mario Parodi Caceres
+V DEF 2 Pablo Soler Lumbreras
+V DEF 3 Angel Belmonte Risueño
+V DEF 4 Hector Saez Anton
+V DEF 5 Pedro Carreño Noguera
+V MED 6 Edgar Ramirez Chulia
+V MED 7 David Moya Salmon
+V MED 10 Jonathan Felix Martinez
+V MED 11 Cristian Sánchez Ruiz
+V DEL 8 Gonzalo Celdran Garre
+V DEL 9 Amir Abdelkader Sebih Boukhit
+V SUP 12 Antonio Tihomir Dachev
+V SUPPOR 13 Bosko Martic
+V SUP 14 Miguel Molina Martinez
+V SUP 15 Pablo Sanchez Ortega
+V SUP 16 Luca Giuseppe Annunziata Tomas
+V SUP 17 Ruben Castello Perez
+V SUP 18 Diego Molina Rojo
+NOTA Cambio de portero del Kelme en el 60' (B. Martic por M. Parodi).
+EV V 10 gol G. Celdran
+EV L 24 gol F. Martin
+EV L 27 gol F. Martin
+EV V 33 amarilla H. Saez
+EV L 37 gol G. Orazaly
+EV V 41 cambio P. Sanchez > C. Sánchez
+EV V 47 cambio D. Molina > A. Abdelkader
+EV V 47 cambio R. Castello > D. Moya
+EV L 49 cambio T. Kuzmin > Z. Idrissa
+EV L 49 cambio A. Daniel > L. Serra
+EV V 52 amarilla E. Ramirez
+EV L 55 cambio A. Ortega > S. Revert
+EV L 55 cambio S. Rodriguez > F. Martin
+EV V 55 cambio M. Molina > J. Felix
+EV V 55 cambio L. Giuseppe > A. Belmonte
+EV L 58 gol A. Ortega
+EV V 60 cambio A. Tihomir > H. Saez
+EV V 60 cambio B. Martic > M. Parodi
+EV L 62 cambio F. Mut > J. Pool
+EV L 64 amarilla T. Kuzmin
+EV L 78 gol S. Rodriguez
+
+PARTIDO J5 | 03/10/2026 09:00 | C.F. Inter San José Valencia 'A' | Alboraya U.D. 'A' | 1-2 | Campo de Fútbol Mpal. de Beniferri F-11 | 1-4-4-2 | 1-4-3-3
+L POR 1 Santiago Pinedo Nóbile
+L DEF 2 Daniel Molina Viñes
+L DEF 5 Xavi Torrijos Navarro
+L DEF 12 David Javaloyes Marco
+L DEF 15 Enrique Lurbe De Vicente
+L MED 6 Pablo Lopez Almarcha
+L MED 19 Gonzalo Mascarell Marti
+L MED 23 Rafael Alejandro Beltrán Valencia
+L MED 27 Alejandro Miró Andrés
+L DEL 11 Victor Serrano Talamantes
+L DEL 14 Marc Miralles Serrano
+L SUP 7 Lucas Amoros Tello
+L SUP 8 Anton Cristian Terties Ardelean
+L SUP 9 Luis Lopez Rosa
+L SUPPOR 13 Juan Jose Gil Calisalvo
+L SUP 20 Carlos Sierra Arnal
+L SUP 21 Bruno Aguilar Baya
+L SUP 22 Hugo Tarraso Perez
+V POR 13 Hugo Iturbide Andres
+V DEF 4 Antonio Hölderl Raimundo
+V DEF 5 Nicolas Morillas Ubach
+V DEF 18 Matias Sanchez Diaz
+V DEF 24 Elian Merino Franco
+V MED 7 Cayetano Garcia Soriano
+V MED 10 Cayetano Garcia Villar
+V MED 17 Jorge De Jaime Blasco
+V DEL 3 Xavi Verdu Planells
+V DEL 11 Arnau Ribera Rangel
+V DEL 16 Gonzalo Escorihuela Prieto
+V SUPPOR 1 Diego Boso Brunet
+V SUP 2 Ruben Alonso Camin
+V SUP 12 Hugo Villaescusa Cabrera
+V SUP 15 Carles Garcia Guerrero
+V SUP 20 Asier Alcañiz Baldovi
+V SUP 21 Hugo Martinez Boluda
+V SUP 23 Vicente Bayarri Baldovi
+NOTA G. Escorihuela (16'): icono de gol de penalti. Roja directa al portero H. Iturbide (36'); entra el portero D. Boso por un «C. Garcia» (no se puede saber cuál de los dos Cayetano).
+EV V 12 amarilla A. Hölderl
+EV V 16 penalti G. Escorihuela
+EV V 30 amarilla N. Morillas
+EV V 36 roja H. Iturbide
+EV V 36 cambio D. Boso > C. Garcia
+EV L 40 gol A. Miró
+EV L 50 amarilla R. Alejandro
+EV L 53 cambio A. Cristian > G. Mascarell
+EV L 53 cambio L. Amoros > E. Lurbe
+EV V 54 gol A. Ribera
+EV V 55 cambio H. Martinez > G. Escorihuela
+EV V 55 cambio V. Bayarri > J. De
+EV L 60 cambio L. Lopez > M. Miralles
+EV L 60 cambio B. Aguilar > R. Alejandro
+EV V 70 cambio C. Garcia > X. Verdu
+EV V 70 cambio R. Alonso > A. Ribera
+EV V 70 amarilla H. Villaescusa
+EV L 72 cambio H. Tarraso > P. Lopez
+EV L 72 cambio C. Sierra > D. Molina
+EV L 76 amarilla H. Tarraso
+EV L 79 amarilla L. Amoros
+
+PARTIDO J5 | 03/10/2026 11:00 | Kelme C.F. 'A' | C.D. Castellón 'A' | 1-0 | Polideportivo Mpal. Altabix Enrique Cervera F-11 | 1-4-3-3 | 1-3-5-2
+L POR 25 Mario Parodi Caceres
+L DEF 4 David Navarro Cerdá
+L DEF 5 Pedro Carreño Noguera
+L DEF 12 Pablo Soler Lumbreras
+L DEF 19 Luca Giuseppe Annunziata Tomas
+L MED 2 Edgar Ramirez Chulia
+L MED 8 Pablo Sanchez Ortega
+L MED 10 Jonathan Felix Martinez
+L DEL 7 Mario Navarro Terol
+L DEL 20 David Moya Salmon
+L DEL 30 Gonzalo Celdran Garre
+L SUPPOR 13 Bosko Martic
+L SUP 14 Miguel Molina Martinez
+L SUP 17 Jayden Lucas Williams
+L SUP 18 Amir Abdelkader Sebih Boukhit
+L SUP 21 Diego Molina Rojo
+L SUP 22 Angel Belmonte Risueño
+L SUP 24 Antonio Tihomir Dachev
+V POR 13 Aitor Rivera Leal
+V DEF 2 Eric Peris Escrig
+V DEF 4 Marc Cervera Calpe
+V DEF 21 Otto Planagumà Bagan
+V MED 3 Andreu Viciedo Rodrigo
+V MED 6 Asier Sanchez Langa
+V MED 8 Joel Rodriguez Paris
+V MED 11 Max Franciszek Bednorz
+V MED 19 Bruno Fernandez Garrido
+V DEL 9 Antonio Ramos Gomez
+V DEL 20 Nianake Diarra
+V SUPPOR 1 Hugo Peris Escrig
+V SUP 5 Marc Marza Gasulla
+V SUP 7 Daniel Santacruz Santacruz
+V SUP 10 Diego Vicente Herrero
+V SUP 12 Jorge Vidal Tarazona
+V SUP 15 Yulen Acosta Zalvez
+V SUP 18 Gonzalo Tabares Saborit
+NOTA Amarilla del 64' a «A. Marcelino»: cuerpo técnico del Castellón (Andres Marcelino M...), no es jugador.
+EV L 24 amarilla P. Soler
+EV L 41 cambio A. Abdelkader > P. Soler
+EV L 41 cambio A. Belmonte > L. Giuseppe
+EV V 41 cambio D. Vicente > A. Ramos
+EV V 44 amarilla O. Planagumà
+EV L 53 gol M. Navarro
+EV V 57 cambio G. Tabares > A. Sanchez
+EV L 59 cambio J. Lucas > D. Moya
+EV L 59 cambio D. Molina > G. Celdran
+EV V 61 amarilla D. Vicente
+EV V 64 amarilla_tecnico A. Marcelino
+EV L 67 amarilla J. Lucas
+EV L 70 cambio M. Molina > J. Lucas
+EV L 71 amarilla D. Molina
+EV V 74 cambio Y. Acosta > B. Fernandez
+EV V 74 cambio D. Santacruz > O. Planagumà
+EV V 77 cambio J. Vidal > J. Rodriguez
+EV V 77 cambio M. Marza > M. Cervera
+EV L 80 cambio A. Tihomir > M. Navarro
+
+PARTIDO J5 | 03/10/2026 12:15 | Valencia C.F. 'A' | Primer Toque C.F. 'A' | 8-1 | Ciudad Dptva. Valencia CF F-11 Campo 4 | 1-4-3-3 | 1-5-4-1
+L POR 1 Hugo Alvarez Soria
+L DEF 2 Hugo Sanz Lopez
+L DEF 3 Aitor Garrigues Asensio
+L DEF 4 Eric Alaña Barragan
+L DEF 5 Iker Frias Barrajon
+L MED 6 Pablo Jimenez Luque
+L MED 8 Marc Carranza Hernandez
+L MED 10 Jakson Enrique Gordon
+L DEL 7 Alejandro Angulo Ramón
+L DEL 9 Dario Alonso Garcia
+L DEL 11 Ricardo Perez Ruiz
+L SUP 12 Miguel Angel Prieto Serer
+L SUPPOR 13 Mateo Berbis Martinez
+L SUP 14 Martin Morente Gay
+L SUP 15 Diego Ferri Molina
+L SUP 16 Andreu Gimeno Alacreu
+L SUP 17 Iker Albero Ruiz
+L SUP 18 Abel Yumdjo Taguiawa Massoko
+V POR 25 Pau Enrique Fuster
+V DEF 2 Yasser Taoussi
+V DEF 5 Javier Lafuente Perez
+V DEF 12 Jose David Barreda Galiana
+V DEF 14 Pere Tomas Ribes
+V DEF 29 Hugo Carrasquer Orenga
+V MED 6 Vicent Roda Barbera
+V MED 8 Gerard Planell Vidal
+V MED 10 Diego Sanchez Alvaro
+V MED 17 Marcos Santamaria Albert
+V DEL 9 Mohammed Ousrout Khannouss
+V SUPPOR 1 Marc Menezo Perez
+V SUP 3 Marc Ventura Climent
+V SUP 4 Hernan Sanchez Pascual
+V SUP 7 Marc Rojano Rubio
+V SUP 11 Ayoub Ammou El Hafydy
+V SUP 15 Dario Picher Aguilella
+V SUP 18 Pol Pablo Vericat
+NOTA M. Carranza (13'): icono de gol de penalti. H. Sanchez entra en el 29', marca en el 35' y es sustituido en el 40'.
+EV L 10 gol J. Enrique
+EV L 13 penalti M. Carranza
+EV L 21 gol J. Enrique
+EV L 23 gol A. Angulo
+EV L 25 gol R. Perez
+EV V 29 cambio P. Pablo > J. Lafuente
+EV V 29 cambio H. Sanchez > D. Sanchez
+EV V 35 gol H. Sanchez
+EV L 37 gol M. Carranza
+EV L 40 cambio M. Angel > A. Garrigues
+EV L 40 cambio D. Ferri > M. Carranza
+EV V 40 cambio M. Ventura > H. Sanchez
+EV V 40 cambio A. Ammou > M. Santamaria
+EV L 43 gol D. Ferri
+EV L 49 cambio A. Yumdjo > I. Frias
+EV L 49 cambio M. Morente > J. Enrique
+EV V 55 cambio D. Picher > M. Ousrout
+EV V 55 cambio M. Rojano > H. Carrasquer
+EV L 69 gol D. Alonso
+EV V 72 amarilla A. Ammou
+
+PARTIDO J5 | 03/10/2026 12:45 | Elda Unión Cableworld C.F. 'A' | C.D. Roda 'A' | 2-0 | Campo de Futbol Fernando Tomas F-11 Campo 3 | 1-4-4-2 | 1-4-3-3
+L POR 22 Agustín Lozano Herrera
+L DEF 7 Angel Rodriguez Palao
+L DEF 12 Sergio Simon Iñigo
+L DEF 20 Javier Terol Almiñana
+L DEF 23 Aitor Tomas Benitez
+L MED 3 David Penalva Alfonso
+L MED 15 Alejandro Ponsoda Vallcanera
+L MED 18 Miguel Hoyos Tarraga
+L MED 21 Marc Peñaranda Ruiz
+L DEL 6 Pablo Alarcon Vera
+L DEL 14 Daniel Gil Garcia
+L SUP 2 Iker Bañon Aracil
+L SUP 8 Diego Leiva Ucles
+L SUP 9 Marc Navarro Pla
+L SUPPOR 13 Marc Lozano Tomas
+L SUP 16 Luca Mateo Daza
+L SUP 17 Pablo Barrantes Mira
+L SUP 19 Alberto Canto Vegara
+V POR 1 Ezequiel Francisco Valverde Lorenzo
+V DEF 2 Ahmed Ben Ali Laghmich El Haad
+V DEF 3 Daniel Cortes Pacheco
+V DEF 5 Mario Granell Calafell
+V DEF 21 Omar Rami El Marouni
+V MED 6 Moustapha Sanghare Traore
+V MED 8 Ferran Fortuny Albert
+V MED 11 Miguel Ángel Tena Saco De Larriva
+V DEL 9 Marti Carreras Collado
+V DEL 17 Alex Cantalapiedra Cocho
+V DEL 19 David Eghosa Idahosa Ojeile
+V SUP 10 Sergi Alcover Alvarez
+V SUPPOR 13 Marc Franch Julia
+V SUP 14 Alejandro Buedo Rubio
+V SUP 15 Collins Baidoo Yeboah
+V SUP 16 Aaron Torralbo Charki
+V SUP 22 Ivan Gonzalez Artiles
+V SUP 24 Guillermo Mora Lorca
+NOTA Dorsal de Alberto Canto Vegara poco legible en la grabación (parece 17, igual que P. Barrantes); se usa el 19 que lleva en las jornadas 3 y 4. Amarilla 77' a «J. Castillo»: cuerpo técnico del Elda.
+EV L 35 gol A. Ponsoda
+EV V 40 amarilla O. Rami
+EV V 41 cambio I. Gonzalez > A. Cantalapiedra
+EV V 41 cambio S. Alcover > M. Sanghare
+EV L 50 amarilla A. Tomas
+EV L 54 cambio D. Leiva > P. Alarcon
+EV L 54 cambio M. Navarro > A. Ponsoda
+EV L 60 cambio P. Barrantes > A. Tomas
+EV L 60 cambio A. Canto > M. Peñaranda
+EV V 60 cambio A. Buedo > A. Ben
+EV V 60 cambio A. Torralbo > F. Fortuny
+EV V 60 cambio G. Mora > M. Ángel
+EV L 63 gol A. Rodriguez
+EV L 67 amarilla D. Penalva
+EV V 67 cambio C. Baidoo > M. Granell
+EV L 70 amarilla A. Canto
+EV L 75 cambio I. Bañon > D. Penalva
+EV L 75 cambio L. Mateo > A. Rodriguez
+EV L 77 amarilla_tecnico J. Castillo
+
+PARTIDO J5 | 03/10/2026 12:45 | Villarreal C.F. 'A' | C.F. Benidorm 'A' | 7-0 | Ciudad Dptva. José Manuel Llaneza F-11 Vila-real Campo 5 | 1-4-3-3 | 1-5-4-1
+L POR 25 Luca Reina Ruiz
+L DEF 3 Eduardo De Haro Hernández
+L DEF 4 Izan Muñoz Garcia
+L DEF 5 Eric Rodriguez Casas
+L DEF 21 Daniel Vizuete Marti
+L MED 6 Victor Pardo Pastor
+L MED 10 Alejandro Garcia Carcelen
+L MED 14 Iker Vicent Segarra
+L DEL 11 Pablo Lopez Argüello
+L DEL 17 Jaume Mas Salom
+L DEL 23 Arturo Martinez Azorin
+L SUPPOR 1 Leo Rico Albert
+L SUP 7 Aaron Ruiz Sanchez
+L SUP 15 Guillermo Cuartero Calavia
+L SUP 16 Ruben Herrera Gonzalez
+L SUP 18 Alvaro Tarraso Perez
+L SUP 19 Neville Winston Knowles Iii
+L SUP 22 Josue Caballero Cerdeña
+V POR 1 Manuel Irles Castaños
+V DEF 2 Neizan Garcia Esquinas
+V DEF 3 Neymar Omar Salazar Calva
+V DEF 4 Hugo Causera Mena
+V DEF 5 Xavi Martinez Torres
+V DEF 17 Manel Perez Marquez
+V MED 7 Malin Malinov Sinanski
+V MED 10 Carlos Ramis Gonzalez
+V MED 14 Cristian Garcia Dominguez
+V MED 16 Nathael Aracil Calderon
+V DEL 6 Guillermo Sempere Catala
+V SUP 8 Raul Poquet Matulic
+V SUP 9 Yilio Wong Zubieta
+V SUP 11 Juan David Carrasco Gonzalez
+V SUP 18 Oleksandr Parobok
+V SUP 20 Daniel Iranzo Casañ
+V SUP 21 Aaron Guessas Pia
+V SUP 76 Iker Perles Quintero
+EV L 6 gol I. Vicent
+EV V 13 amarilla N. Aracil
+EV L 19 gol V. Pardo
+EV L 26 gol A. Martinez
+EV L 27 gol J. Mas
+EV L 32 gol V. Pardo
+EV L 41 cambio N. Winston > J. Mas
+EV V 47 cambio Y. Wong > N. Garcia
+EV V 47 cambio R. Poquet > M. Perez
+EV V 47 cambio A. Guessas > N. Aracil
+EV L 50 cambio J. Caballero > E. De
+EV L 50 cambio G. Cuartero > D. Vizuete
+EV V 53 cambio D. Iranzo > C. Ramis
+EV V 53 cambio O. Parobok > G. Sempere
+EV V 53 cambio J. David > M. Malinov
+EV L 57 amarilla G. Cuartero
+EV L 62 cambio R. Herrera > A. Garcia
+EV L 62 cambio A. Ruiz > P. Lopez
+EV L 67 cambio A. Tarraso > I. Vicent
+EV L 68 gol N. Winston
+EV L 76 gol E. Rodriguez
+
+PARTIDO J5 | 03/10/2026 13:05 | Celtic Elche C.F. 'A' | Elche C.F. 'A' | 0-0 | Ciudad Dptva. Elche Campo 6 José Ant. Morante "Lico" F-11 | 1-4-3-3 | 1-4-3-3
+L POR 1 Ilay Marcus Marinus Bronsdijk
+L DEF 2 Carmelo Santacruz Beneite
+L DEF 3 Aitor Lopez Canto
+L DEF 5 Sergio Martinez Castellano
+L DEF 15 Francisco Mondejar Maya
+L MED 8 Nacho Sirvent Guillen
+L MED 16 Hugo Garcia Gonzalez
+L MED 20 Oleksii Umansky
+L DEL 7 Alvaro Torrano Martinez
+L DEL 9 Aleix Nieto Almagro
+L DEL 21 Julian Chudzik
+L SUP 4 Isaac Patiño Hernandez
+L SUP 6 Rubén Pérez Andreu
+L SUP 10 Oriol Asensio Verdu
+L SUP 11 Iker Ramallo Lloret
+L SUPPOR 13 Jorge Martinez Munar
+L SUP 18 Pedro Garcia Girona
+L SUP 19 Ahmed Rida Tariki Kharbouch
+V POR 1 Pablo Fernandez Sposaro
+V DEF 3 Hector Barcelo Soler
+V DEF 12 David Giner Martinez
+V DEF 14 Adrian Valero Salmeron
+V DEF 15 Marc Verdú Masiá
+V MED 7 Andreu Perez Berbegal
+V MED 8 Marc Sempere Anton
+V MED 16 Iker Pico Tenza
+V DEL 17 Derek Enrique Martinez Recuerda
+V DEL 18 Adrian Sanchez Amat
+V DEL 21 Alex Perea Ferma
+V SUP 2 Neizan Parra Gonzalez
+V SUP 4 Samuel Navarro Gomez
+V SUP 10 Alejandro De Juan Garcia
+V SUP 11 Pablo Cañizares Ruiz
+V SUPPOR 13 Sergio Parra Garcia
+V SUP 20 Mario Galvez Montaño
+V SUP 22 Julian Andres Vasquez Cano
+EV L 9 amarilla F. Mondejar
+EV L 50 cambio I. Patiño > F. Mondejar
+EV L 50 cambio P. Garcia > H. Garcia
+EV V 55 cambio A. De > D. Enrique
+EV V 55 cambio P. Cañizares > A. Perez
+EV L 59 cambio I. Ramallo > O. Umansky
+EV L 59 cambio O. Asensio > J. Chudzik
+EV L 66 cambio A. Rida > C. Santacruz
+EV L 66 cambio R. Pérez > N. Sirvent
+EV V 70 cambio J. Andres > A. Perea
+EV V 70 cambio M. Galvez > M. Sempere
+EV V 70 cambio N. Parra > A. Sanchez
+EV V 77 cambio S. Navarro > I. Pico
+
+PARTIDO J5 | 03/10/2026 18:30 | C.F. La Nucía 'A' | S.C.D. Intangco 'A' | 5-1 | Ciutat Esptva. Camilo Cano F-11 La Nucia Anexo | 1-4-3-3 | 1-4-3-3
+L POR 1 David Zahonero Cantizano
+L DEF 3 Ignacio Lozano Cortes
+L DEF 4 Mihai Nicusor Titiriga
+L DEF 5 Thiago Benjamin Malvezzi Quiroga
+L DEF 16 Noel Matias Bartolome
+L MED 8 Daniel Abraham Goudsmit
+L MED 24 Vicente Marcos Martinez
+L MED 26 Alejandro Da Silva Cruz
+L DEL 7 Dario Barreto Redondo
+L DEL 17 Victor Perez Sepulveda
+L DEL 21 Sergi Holguin Diaz
+L SUP 10 Joaquin Rodriguez Muñoz
+L SUP 11 Vicent Signes Mas
+L SUP 12 Andreu Gimenez Martinez
+L SUPPOR 13 Roberto James Peñalver Simm
+L SUP 20 Daniel Sanchez Andreu
+L SUP 22 Xavi Martinez Mañez
+L SUP 27 Pablo Gallo Carmona
+V POR 1 Izan Sanchez Cofrade
+V DEF 3 Hugo Cobeño German
+V DEF 5 Eric Galvez Buitrago
+V DEF 18 Luca Eric Goian
+V DEF 21 Diego Cotarelo Alvarez
+V MED 8 Lucas Andres Pico
+V MED 14 Adam Parres Rahim
+V MED 19 Juan Gil Iborra
+V DEL 6 Gonzalo Ruiz Pagan
+V DEL 7 Martin Perez Llopis
+V DEL 30 Hector Perez Duran
+V SUP 4 Martin Limorte Riquelme
+V SUP 9 Iker Milan Giménez
+V SUP 11 Oscar Moral Sanchez
+V SUPPOR 13 Daniel Sanchez Cano
+V SUP 16 Jorge Chamorro Sanchez
+V SUP 17 Hector Amoros Fernandez
+V SUP 20 Sergio Gadea Atencia
+NOTA S. Holguin (31'): icono de gol de penalti. Amarilla 39' a «S. Arias»: segundo entrenador del Intangco. O. Moral: roja directa (69').
+EV L 10 amarilla V. Perez
+EV L 17 gol V. Perez
+EV L 29 gol N. Matias
+EV L 31 penalti S. Holguin
+EV V 36 amarilla D. Cotarelo
+EV L 37 amarilla A. Da
+EV V 39 amarilla_tecnico S. Arias
+EV V 41 cambio J. Chamorro > G. Ruiz
+EV V 41 cambio I. Milan > H. Perez
+EV V 41 cambio O. Moral > L. Andres
+EV L 48 cambio A. Gimenez > A. Da
+EV L 59 gol D. Barreto
+EV L 60 cambio V. Signes > D. Barreto
+EV L 60 cambio D. Sanchez > V. Perez
+EV V 62 gol J. Gil
+EV L 67 amarilla D. Sanchez
+EV V 67 amarilla A. Parres
+EV V 67 cambio M. Limorte > D. Cotarelo
+EV V 67 cambio H. Amoros > A. Parres
+EV V 67 cambio S. Gadea > L. Eric
+EV L 69 cambio X. Martinez > S. Holguin
+EV L 69 cambio P. Gallo > M. Nicusor
+EV L 69 cambio J. Rodriguez > V. Marcos
+EV V 69 roja O. Moral
+EV L 74 amarilla N. Matias
+EV L 76 gol V. Signes
+
+PARTIDO J5 | 04/10/2026 09:00 | Patacona C.F. 'A' | C.F. Torre Levante 'A' | 3-0 | Campo Mpal. de la Patacona F-11 | 1-4-4-2 | 1-5-4-1
+L POR 1 Marc Rodriguez Badia
+L DEF 2 Angel Navarro Michelena
+L DEF 3 Victor Blanco Lorente
+L DEF 18 Carlos Gomez Pallardo
+L DEF 24 Luis Andreu Valor
+L MED 5 Nicolas Gomis Dominguez
+L MED 7 Izan Vicente Alos
+L MED 8 Diego Borrajo De Orozco Maldonado
+L MED 10 Eric Pacha Hernández
+L DEL 19 Yosin Yusupov
+L DEL 27 Roberto Nicolas Stirbu Moldovan
+L SUP 6 Hugo Machi Olcina
+L SUP 9 Nicolas Diaz Lorenzo
+L SUP 11 Niko Palop Herman
+L SUPPOR 13 Iván Martinez Moreno
+L SUP 14 Rafa Montes Garcia
+L SUP 16 Lluis Mateu I Martin
+L SUP 17 Daniel Nuñez Najera
+V POR 1 Illia Miroshnychenko Stepanov
+V DEF 3 Jacob Regalado Pechuan
+V DEF 4 Guillermo Romeo Albors
+V DEF 6 Miguel Sanz Pedro
+V DEF 14 Jose Contelles Zarzo
+V DEF 18 Samuel Temina Gaviria
+V MED 5 Victor Gimenez Mesado
+V MED 11 Jorge Monteagudo Navarro
+V MED 22 Marc Marti Olaya
+V MED 29 Mihail Kevin Balta
+V DEL 9 Oke Carrasco Calvillo
+V SUP 7 Ximo Nieto-Guerrero Cuesta
+V SUP 8 Farouk Aouane Qatfaoui
+V SUP 10 Alejandro Bonfiglio Fuentes
+V SUPPOR 13 Asier Vega Lozano
+V SUP 19 Carles Arenes Valero
+V SUP 25 Jorge Caro Toral
+V SUP 40 Bruno Navarro Valverde
+NOTA Amarillas del 12' a «P. Ruiz» (entrenador del Patacona) y «J. Ginard» (cuerpo técnico del Torre Levante).
+EV L 12 amarilla_tecnico P. Ruiz
+EV V 12 amarilla_tecnico J. Ginard
+EV V 41 cambio F. Aouane > J. Contelles
+EV V 41 cambio J. Caro > M. Sanz
+EV L 47 gol C. Gomez
+EV V 48 cambio A. Bonfiglio > J. Monteagudo
+EV V 48 cambio X. Nieto-Guerrero > O. Carrasco
+EV L 53 amarilla L. Andreu
+EV V 57 cambio B. Navarro > G. Romeo
+EV L 58 cambio L. Mateu > R. Nicolas
+EV L 58 cambio N. Diaz > N. Gomis
+EV V 64 cambio C. Arenes > V. Gimenez
+EV L 67 gol Y. Yusupov
+EV L 68 cambio R. Montes > C. Gomez
+EV L 68 cambio D. Nuñez > Y. Yusupov
+EV L 71 amarilla R. Montes
+EV L 73 gol I. Vicente
+EV L 74 cambio N. Palop > V. Blanco
+EV L 74 cambio H. Machi > E. Pacha
+EV V 74 amarilla M. Marti
+
+PARTIDO J5 | 04/10/2026 09:45 | Levante U.D. 'A' | C.F. Fundació VCF 'A' | 1-3 | Ciudad Dptva. del Levante U.D. F-11 Campo 4 | 1-4-4-2 | 1-4-4-2
+L POR 1 Asier Gomez Diaz
+L DEF 2 Steven Chiemela Igbojionu Ajuzie
+L DEF 5 Unai Saez Vallejo
+L DEF 15 Ivan Rodriguez Paris
+L DEF 16 Diego Moyano Ribera
+L MED 8 Marco Nevot Cervera
+L MED 17 Aythami Rodriguez Suárez
+L MED 18 Alejandro Flores Inclan
+L MED 22 Aaron Aroba Santos
+L DEL 7 Esteban Ferrer Sanchez
+L DEL 11 Alejandro Arnau Franco
+L SUP 3 Alejandro Lujan Forment
+L SUP 4 Diego Miranda Rodriguez
+L SUP 9 Ivan Galan Redko
+L SUPPOR 13 Daniel Pedrajas Abril
+L SUP 14 Alvaro Castellanos Anaya
+L SUP 20 Manuel Matamoros Nuñez
+L SUP 27 Daniel Calvente De Jesús
+V POR 1 Diego Llorens Segovia
+V DEF 2 Jorge Calomarde Gomez
+V DEF 3 Hugo Salas Mauri
+V DEF 4 Enzo Pacha Torres
+V DEF 5 Aritz Gandia Mira
+V MED 6 Jean Pool Cardona Rivas
+V MED 7 Zakaria Idrissa Toure
+V MED 8 Sergio Revert Arribas
+V MED 11 Gabidolla Orazaly
+V DEL 9 Francesco Martin Moschella Compostela
+V DEL 10 Lucas Serra Blasco
+V SUP 12 Lucas Monguia Al Khalil
+V SUPPOR 13 Vicente Fores Ferrer
+V SUP 14 Sergio Rodriguez Garcia
+V SUP 15 Ferran Mut Gilabert
+V SUP 16 Timur Kuzmin
+V SUP 18 Albert Ortega Fontanet
+V SUP 19 Axel Daniel Mosquera Barona
+NOTA S. Rodriguez (80'): icono de gol de penalti. Amarilla 67' a «C. Libio»: delegado del Levante (Carlos Libio Escriva...).
+EV L 5 gol E. Ferrer
+EV L 22 amarilla A. Arnau
+EV V 26 amarilla H. Salas
+EV V 40 gol Z. Idrissa
+EV L 41 cambio M. Matamoros > A. Flores
+EV L 42 amarilla A. Aroba
+EV V 45 gol S. Revert
+EV L 54 amarilla U. Saez
+EV L 55 cambio A. Lujan > A. Aroba
+EV L 55 cambio I. Galan > A. Rodriguez
+EV L 55 cambio D. Calvente > E. Ferrer
+EV L 59 cambio D. Miranda > D. Moyano
+EV V 59 cambio S. Rodriguez > Z. Idrissa
+EV V 59 cambio T. Kuzmin > S. Revert
+EV V 66 amarilla D. Llorens
+EV L 67 amarilla_tecnico C. Libio
+EV L 72 amarilla D. Miranda
+EV V 73 amarilla L. Serra
+EV V 74 cambio A. Ortega > L. Serra
+EV V 74 cambio A. Daniel > G. Orazaly
+EV V 78 cambio L. Monguia > H. Salas
+EV V 78 cambio F. Mut > F. Martin
+EV V 80 penalti S. Rodriguez
+EV V 80 amarilla S. Rodriguez
+
+PARTIDO J6 | 08/10/2026 19:00 | C.D. Roda 'A' | Valencia C.F. 'A' | 0-0 | Ciudad Dptva. José Manuel Llaneza F-11 Vila-real Campo 5 | 1-4-3-3 | 1-4-3-3
+L POR 1 Ezequiel Francisco Valverde Lorenzo
+L DEF 2 Ahmed Ben Ali Laghmich El Haad
+L DEF 3 Daniel Cortes Pacheco
+L DEF 5 Mario Granell Calafell
+L DEF 21 Omar Rami El Marouni
+L MED 8 Ferran Fortuny Albert
+L MED 10 Sergi Alcover Alvarez
+L MED 24 Guillermo Mora Lorca
+L DEL 9 Marti Carreras Collado
+L DEL 11 Miguel Ángel Tena Saco De Larriva
+L DEL 23 Iker Delgado Castellanos
+L SUP 6 Moustapha Sanghare Traore
+L SUP 12 Banouhoum Coulibaly Coulibaly
+L SUPPOR 13 Marc Franch Julia
+L SUP 15 Collins Baidoo Yeboah
+L SUP 18 Brian Kwame Bada Gonzalez
+L SUP 20 Victor Borrego Luzzi
+L SUP 22 Ivan Gonzalez Artiles
+V POR 1 Hugo Alvarez Soria
+V DEF 2 Mamadou Dansokho Diakhaby
+V DEF 3 Aitor Garrigues Asensio
+V DEF 4 Eric Alaña Barragan
+V DEF 5 Iker Frias Barrajon
+V MED 6 Pablo Jimenez Luque
+V MED 8 Marc Carranza Hernandez
+V MED 10 Jakson Enrique Gordon
+V DEL 7 Hugo Sanz Lopez
+V DEL 9 Dario Alonso Garcia
+V DEL 11 Ricardo Perez Ruiz
+V SUP 12 Miguel Angel Prieto Serer
+V SUPPOR 13 Mateo Berbis Martinez
+V SUP 14 Andreu Gimeno Alacreu
+V SUP 15 Diego Ferri Molina
+V SUP 16 Iker Albero Ruiz
+V SUP 17 Alejandro Angulo Ramon
+V SUP 18 Abel Yumdjo Taguiawa Massoko
+EV L 14 amarilla S. Alcover
+EV L 21 amarilla O. Rami
+EV L 41 cambio C. Baidoo > G. Mora
+EV V 41 cambio I. Albero > R. Perez
+EV L 59 cambio V. Borrego > S. Alcover
+EV V 59 cambio A. Gimeno > P. Jimenez
+EV V 59 cambio A. Angulo > M. Dansokho
+EV V 62 cambio D. Ferri > A. Garrigues
+EV L 69 cambio M. Sanghare > M. Ángel
+EV L 69 cambio B. Coulibaly > M. Carreras
+EV V 71 cambio A. Yumdjo > D. Alonso
+EV V 71 cambio M. Angel > M. Carranza
+EV L 74 cambio I. Gonzalez > I. Delgado
+EV V 78 amarilla I. Albero
+
+PARTIDO J6 | 09/10/2026 | C.F. Fundació VCF 'A' | C.F. Inter San José Valencia 'A' | 1-6 | Ciudad Dptva. Valencia CF F-11 Campo 1 | 1-4-4-2 | 1-4-4-2
+L POR 1 Vicente Fores Ferrer
+L DEF 2 Jorge Calomarde Gomez
+L DEF 3 Hugo Salas Mauri
+L DEF 4 Enzo Pacha Torres
+L DEF 5 Aritz Gandia Mira
+L MED 6 Jean Pool Cardona Rivas
+L MED 7 Zakaria Idrissa Toure
+L MED 8 Sergio Revert Arribas
+L MED 11 Lucas Serra Blasco
+L DEL 9 Francesco Martin Moschella Compostela
+L DEL 10 Sergio Rodriguez Garcia
+L SUP 12 Joaquin Cano De Jose
+L SUPPOR 13 Diego Llorens Segovia
+L SUP 14 Timur Kuzmin
+L SUP 15 Lucas Monguia Al Khalil
+L SUP 16 Albert Ortega Fontanet
+L SUP 17 Gabidolla Orazaly
+L SUP 18 Axel Daniel Mosquera Barona
+V POR 1 Santiago Pinedo Nóbile
+V DEF 2 Daniel Molina Viñes
+V DEF 3 Marc Gómez Casinos
+V DEF 12 David Javaloyes Marco
+V DEF 15 Enrique Lurbe De Vicente
+V MED 6 Pablo Lopez Almarcha
+V MED 11 Victor Serrano Talamantes
+V MED 18 Juan Diego De La Fuente Wila
+V MED 23 Rafael Alejandro Beltrán Valencia
+V DEL 14 Marc Miralles Serrano
+V DEL 26 Alejandro Miró Andrés
+V SUP 4 Adrián Civera Gallach
+V SUP 5 Xavi Torrijos Navarro
+V SUP 7 Lucas Amoros Tello
+V SUP 8 Anton Cristian Terties Ardelean
+V SUPPOR 13 Juan Jose Gil Calisalvo
+V SUP 16 Wilter Job Sanchez Rodriguez
+V SUP 21 Bruno Aguilar Baya
+NOTA Fecha según la lista de resultados (viernes 9 octubre 2026); hora no visible.
+EV V 23 gol D. Molina
+EV L 31 gol J. Pool
+EV V 35 gol A. Miró
+EV V 38 gol M. Miralles
+EV V 42 gol M. Miralles
+EV L 45 cambio T. Kuzmin > J. Calomarde
+EV L 45 cambio G. Orazaly > S. Rodriguez
+EV L 55 cambio A. Ortega > S. Revert
+EV L 55 cambio J. Cano > E. Pacha
+EV L 55 cambio A. Daniel > J. Pool
+EV V 57 cambio B. Aguilar > A. Miró
+EV V 57 cambio W. Job > M. Miralles
+EV V 62 cambio L. Amoros > D. Javaloyes
+EV V 62 cambio A. Cristian > J. Diego
+EV V 64 gol A. Cristian
+EV L 65 cambio L. Monguia > H. Salas
+EV V 66 cambio A. Civera > V. Serrano
+EV V 66 cambio X. Torrijos > M. Gómez
+EV L 67 amarilla T. Kuzmin
+EV V 77 gol W. Job
+
+PARTIDO J6 | 09/10/2026 12:30 | Primer Toque C.F. 'A' | Celtic Elche C.F. 'A' | 2-3 | Ciudad Dptva. Chencho Campo A F-11 Castellón | 1-5-4-1 | 1-4-3-3
+L POR 1 Marc Menezo Perez
+L DEF 2 Yasser Taoussi
+L DEF 5 Javier Lafuente Perez
+L DEF 12 Jose David Barreda Galiana
+L DEF 14 Pere Tomas Ribes
+L DEF 18 Pol Pablo Vericat
+L MED 6 Vicent Roda Barbera
+L MED 8 Gerard Planell Vidal
+L MED 11 Ayoub Ammou El Hafydy
+L MED 15 Dario Picher Aguilella
+L DEL 7 Marc Rojano Rubio
+L SUP 3 Marc Ventura Climent
+L SUP 4 Fabian Ion Genoiu
+L SUP 9 Mohammed Ousrout Khannouss
+L SUP 17 Marcos Santamaria Albert
+L SUPPOR 25 Pau Enrique Fuster
+L SUP 29 Hugo Carrasquer Orenga
+V POR 1 Jorge Martinez Munar
+V DEF 2 Gonzalo Lopez Lozano
+V DEF 3 Aitor Lopez Canto
+V DEF 4 Pedro Garcia Girona
+V DEF 5 Sergio Martinez Castellano
+V MED 6 Isaac Patiño Hernandez
+V MED 8 Nacho Sirvent Guillen
+V MED 10 Oriol Asensio Verdu
+V DEL 7 Alvaro Torrano Martinez
+V DEL 9 Aleix Nieto Almagro
+V DEL 11 Iker Ramallo Lloret
+V SUP 12 Hugo Garcia Gonzalez
+V SUPPOR 13 Ilay Marcus Marinus Bronsdijk
+V SUP 14 Oleksii Umansky
+V SUP 15 Francisco Mondejar Maya
+V SUP 16 Rubén Pérez Andreu
+V SUP 17 Ahmed Rida Tariki Kharbouch
+V SUP 18 Julian Chudzik
+NOTA Amarilla 44' a «J. Martinez» del Celtic: el portero titular Jorge Martinez Munar (único J. Martinez del acta).
+EV V 20 amarilla A. Torrano
+EV L 26 roja J. Lafuente
+EV V 32 gol N. Sirvent
+EV V 39 gol I. Ramallo
+EV L 41 cambio F. Ion > D. Picher
+EV V 41 cambio A. Rida > A. Torrano
+EV V 43 amarilla I. Patiño
+EV L 44 gol M. Rojano
+EV V 44 amarilla J. Martinez
+EV L 49 cambio M. Ousrout > A. Ammou
+EV L 55 cambio H. Carrasquer > M. Rojano
+EV V 59 cambio R. Pérez > O. Asensio
+EV V 59 cambio J. Chudzik > I. Ramallo
+EV L 61 amarilla V. Roda
+EV L 66 cambio M. Santamaria > V. Roda
+EV L 66 cambio M. Ventura > Y. Taoussi
+EV L 70 amarilla P. Tomas
+EV V 70 cambio H. Garcia > I. Patiño
+EV V 70 cambio F. Mondejar > G. Lopez
+EV L 72 amarilla M. Santamaria
+EV V 73 cambio O. Umansky > N. Sirvent
+EV V 77 amarilla S. Martinez
+EV L 80 gol P. Tomas
+EV V 80 gol J. Chudzik
+
+PARTIDO J6 | 10/10/2026 11:00 | C.F. Benidorm 'A' | C.F. La Nucía 'A' | 1-1 | Inst. Dptvas. Antonio Lopez Benidorm F-11 Campo 2 | 1-5-4-1 | 1-4-3-3
+L POR 13 Manuel Irles Castaños
+L DEF 3 Neymar Omar Salazar Calva
+L DEF 4 Hugo Causera Mena
+L DEF 5 Xavi Martinez Torres
+L DEF 8 Raul Poquet Matulic
+L DEF 17 Manel Perez Marquez
+L MED 6 Guillermo Sempere Catala
+L MED 10 Carlos Ramis Gonzalez
+L MED 16 Nathael Aracil Calderon
+L MED 21 Aaron Guessas Pia
+L DEL 9 Iker Perles Quintero
+L SUP 2 Neizan Garcia Esquinas
+L SUP 7 Malin Malinov Sinanski
+L SUP 12 Daniel Iranzo Casañ
+L SUP 14 Cristian Garcia Dominguez
+L SUP 18 Rayane Chetouane
+L SUP 19 Gonzalo Padilla Barreno
+L SUP 20 Simone Molinelli
+V POR 1 David Zahonero Cantizano
+V DEF 3 Ignacio Lozano Cortes
+V DEF 4 Mihai Nicusor Titiriga
+V DEF 5 Thiago Benjamin Malvezzi Quiroga
+V DEF 16 Noel Matias Bartolome
+V MED 7 Dario Barreto Redondo
+V MED 8 Daniel Abraham Goudsmit
+V MED 24 Vicente Marcos Martinez
+V DEL 9 Toni Garcia Segura
+V DEL 17 Victor Perez Sepulveda
+V DEL 21 Sergi Holguin Diaz
+V SUP 2 Pere Terol Orozco
+V SUP 11 Vicent Signes Mas
+V SUP 12 Andreu Gimenez Martinez
+V SUP 20 Daniel Sanchez Andreu
+V SUPPOR 25 Alexis Cita Adan
+V SUP 26 Alejandro Da Silva Cruz
+V SUP 27 Pablo Gallo Carmona
+NOTA A. Guessas (7'): icono de gol de penalti. Nombre «Rayane Chetouane» poco legible. Amarillas a «J. Quiles» (60'), «D. Nadal» (69') y «V. Mendoza» (74'): cuerpos técnicos.
+EV L 7 penalti A. Guessas
+EV V 7 amarilla D. Zahonero
+EV L 12 amarilla M. Perez
+EV L 32 amarilla I. Perles
+EV V 41 cambio A. Da > T. Garcia
+EV V 41 cambio P. Terol > M. Nicusor
+EV V 47 cambio D. Sanchez > V. Marcos
+EV L 53 cambio M. Malinov > N. Aracil
+EV V 56 cambio A. Gimenez > V. Perez
+EV V 56 cambio V. Signes > S. Holguin
+EV V 58 amarilla V. Signes
+EV L 60 amarilla_tecnico J. Quiles
+EV V 61 amarilla D. Sanchez
+EV L 62 amarilla A. Guessas
+EV V 65 cambio P. Gallo > T. Benjamin
+EV L 69 cambio S. Molinelli > A. Guessas
+EV L 69 cambio N. Garcia > H. Causera
+EV V 69 amarilla_tecnico D. Nadal
+EV L 73 cambio G. Padilla > C. Ramis
+EV L 73 cambio C. Garcia > I. Perles
+EV V 74 amarilla_tecnico V. Mendoza
+EV L 76 amarilla N. Omar
+EV V 77 gol A. Gimenez
+EV L 78 amarilla G. Sempere
+EV V 79 amarilla P. Gallo
+
+PARTIDO J6 | 10/10/2026 11:15 | S.C.D. Intangco 'A' | Elda Unión Cableworld C.F. 'A' | 0-2 | Ciudad Dptva. Elche Campo 5 Palmeral D'Elx F-11 | 1-4-3-3 | 1-4-4-2
+L POR 13 Daniel Sanchez Cano
+L DEF 4 Martin Limorte Riquelme
+L DEF 5 Eric Galvez Buitrago
+L DEF 20 Sergio Gadea Atencia
+L DEF 21 Diego Cotarelo Alvarez
+L MED 8 Lucas Andres Pico
+L MED 9 Iker Milan Giménez
+L MED 16 Jorge Chamorro Sanchez
+L DEL 6 Gonzalo Ruiz Pagan
+L DEL 7 Martin Perez Llopis
+L DEL 14 Adam Parres Rahim
+L SUPPOR 1 Izan Sanchez Cofrade
+L SUP 3 Hugo Cobeño German
+L SUP 10 Fran Moya Romero
+L SUP 17 Hector Amoros Fernandez
+L SUP 18 Luca Eric Goian
+L SUP 19 Juan Gil Iborra
+L SUP 30 Hector Perez Duran
+V POR 22 Agustín Lozano Herrera
+V DEF 3 David Penalva Alfonso
+V DEF 12 Sergio Simon Iñigo
+V DEF 20 Javier Terol Almiñana
+V DEF 23 Aitor Tomas Benitez
+V MED 7 Angel Rodriguez Palao
+V MED 15 Alejandro Ponsoda Vallcanera
+V MED 18 Miguel Hoyos Tarraga
+V MED 21 Marc Peñaranda Ruiz
+V DEL 6 Pablo Alarcon Vera
+V DEL 14 Daniel Gil Garcia
+V SUPPOR 1 Hector Paisano Riquelme
+V SUP 2 Iker Bañon Aracil
+V SUP 4 Miguel Sempere Blasco
+V SUP 8 Diego Leiva Ucles
+V SUP 16 Luca Mateo Daza
+V SUP 17 Pablo Barrantes Mira
+V SUP 19 Alberto Canto Vegara
+NOTA Amarillas a «J. Carlos» y «S. Arias» (16') y dos a «P. Soriano» (76'): cuerpo técnico del Intangco. P. Barrantes: roja directa en el 80'.
+EV L 16 amarilla_tecnico J. Carlos
+EV L 16 amarilla_tecnico S. Arias
+EV V 21 gol D. Penalva
+EV V 43 amarilla D. Gil
+EV L 52 cambio J. Gil > G. Ruiz
+EV L 52 cambio F. Moya > J. Chamorro
+EV V 52 cambio D. Leiva > M. Peñaranda
+EV L 64 amarilla G. Ruiz
+EV V 65 gol A. Ponsoda
+EV V 65 cambio P. Barrantes > A. Tomas
+EV L 67 amarilla M. Perez
+EV V 67 amarilla S. Simon
+EV L 70 cambio H. Perez > M. Perez
+EV L 70 cambio H. Cobeño > D. Cotarelo
+EV V 76 cambio A. Canto > P. Alarcon
+EV V 76 cambio M. Sempere > S. Simon
+EV V 76 cambio I. Bañon > A. Ponsoda
+EV L 76 amarilla_tecnico P. Soriano
+EV L 76 roja_tecnico P. Soriano
+EV L 76 amarilla I. Milan
+EV L 77 amarilla M. Limorte
+EV L 79 cambio H. Amoros > S. Gadea
+EV L 79 cambio L. Eric > M. Limorte
+EV V 80 roja P. Barrantes
+
+PARTIDO J6 | 10/10/2026 11:35 | Alboraya U.D. 'A' | Patacona C.F. 'A' | 1-1 | Estadio Mpal. Fran... Alboraya F-11 | 1-4-3-3 | 1-4-4-2
+L POR 1 Diego Boso Brunet
+L DEF 3 Xavi Verdu Planells
+L DEF 4 Antonio Hölderl Raimundo
+L DEF 18 Matias Sanchez Diaz
+L DEF 24 Elian Merino Franco
+L MED 7 Cayetano Garcia Soriano
+L MED 10 Cayetano Garcia Villar
+L MED 17 Jorge De Jaime Blasco
+L DEL 11 Arnau Ribera Rangel
+L DEL 16 Gonzalo Escorihuela Prieto
+L DEL 21 Hugo Martinez Boluda
+L SUP 2 Ruben Alonso Camin
+L SUP 5 Nicolas Morillas Ubach
+L SUP 8 Joel Patiño Martinez
+L SUPPOR 13 Alvaro Izquierdo Muñoz
+L SUP 14 Leo Morales Oliva
+L SUP 15 Carles Garcia Guerrero
+L SUP 23 Vicente Bayarri Baldovi
+V POR 1 Marc Rodriguez Badia
+V DEF 2 Angel Navarro Michelena
+V DEF 3 Victor Blanco Lorente
+V DEF 18 Carlos Gomez Pallardo
+V DEF 24 Luis Andreu Valor
+V MED 5 Nicolas Gomis Dominguez
+V MED 7 Izan Vicente Alos
+V MED 8 Diego Borrajo De Orozco Maldonado
+V MED 10 Eric Pacha Hernández
+V DEL 14 Rafa Montes Garcia
+V DEL 19 Yosin Yusupov
+V SUP 9 Nicolas Diaz Lorenzo
+V SUP 11 Niko Palop Herman
+V SUP 17 Daniel Nuñez Najera
+V SUP 20 Marc Joan Gomez Oscar
+V SUPPOR 22 Raul Toboso Nicolau
+V SUP 23 Dario Stefano Boso Fernandez
+V SUP 29 Marco Alpuente Blazquez
+NOTA Alboraya tiene tres «C. Garcia» (Cayetano Garcia Soriano, Cayetano Garcia Villar y, desde el 62', Carles Garcia Guerrero): las amarillas de 37', 38' y 80' y la salida del 76' no se pueden atribuir. Amarilla 80' a «J. Fuentes»: primer entrenador del Alboraya.
+EV V 24 amarilla Y. Yusupov
+EV L 29 amarilla A. Hölderl
+EV V 31 gol L. Andreu
+EV L 37 amarilla C. Garcia
+EV L 38 amarilla C. Garcia
+EV L 50 cambio V. Bayarri > J. De
+EV V 53 cambio N. Diaz > R. Montes
+EV V 53 cambio N. Palop > I. Vicente
+EV L 57 gol A. Ribera
+EV L 62 cambio C. Garcia > H. Martinez
+EV L 62 cambio L. Morales > G. Escorihuela
+EV V 67 cambio M. Alpuente > N. Gomis
+EV V 73 cambio D. Stefano > V. Blanco
+EV V 73 cambio M. Joan > Y. Yusupov
+EV L 76 cambio R. Alonso > C. Garcia
+EV L 76 cambio J. Patiño > A. Ribera
+EV V 77 amarilla L. Andreu
+EV V 79 amarilla M. Alpuente
+EV L 80 amarilla R. Alonso
+EV L 80 amarilla C. Garcia
+EV L 80 amarilla_tecnico J. Fuentes
+
+PARTIDO J6 | 10/10/2026 12:45 | Elche C.F. 'A' | Kelme C.F. 'A' | 6-0 | Polideportivo Mpal. Altabix Enrique Cervera F-11 | 1-4-3-3 | 1-4-3-3
+L POR 13 Sergio Parra Garcia
+L DEF 3 Hector Barcelo Soler
+L DEF 12 David Giner Martinez
+L DEF 14 Adrian Valero Salmeron
+L DEF 15 Marc Verdú Masiá
+L MED 8 Marc Sempere Anton
+L MED 10 Alejandro De Juan Garcia
+L MED 20 Mario Galvez Montaño
+L DEL 17 Derek Enrique Martinez Recuerda
+L DEL 18 Adrian Sanchez Amat
+L DEL 21 Alex Perea Ferma
+L SUPPOR 1 Pablo Fernandez Sposaro
+L SUP 2 Neizan Parra Gonzalez
+L SUP 4 Samuel Navarro Gomez
+L SUP 6 Jorge Clemente Rodriguez
+L SUP 16 Iker Pico Tenza
+L SUP 19 Velasco
+L SUP 23 Andreu Perez Berbegal
+V POR 13 Bosko Martic
+V DEF 2 Edgar Ramirez Chulia
+V DEF 3 Angel Belmonte Risueño
+V DEF 4 David Navarro Cerdá
+V DEF 5 Pedro Carreño Noguera
+V MED 6 Cristian Sánchez Ruiz
+V MED 8 Pablo Sanchez Ortega
+V MED 10 Jonathan Felix Martinez
+V DEL 7 Mario Navarro Terol
+V DEL 9 Amir Abdelkader Sebih Boukhit
+V DEL 17 David Moya Salmon
+V SUP 11 Ruben Castello Perez
+V SUP 12 Pablo Soler Lumbreras
+V SUP 14 Miguel Molina Martinez
+V SUP 15 Antonio Tihomir Dachev
+V SUP 16 Lucas Matias Alonso Romero
+V SUP 18 Diego Molina Rojo
+V SUPPOR 25 Mario Parodi Caceres
+EV V 30 amarilla J. Felix
+EV L 32 gol M. Sempere
+EV L 33 gol A. Sanchez
+EV L 35 gol D. Enrique
+EV V 41 cambio R. Castello > J. Felix
+EV V 41 cambio P. Soler > A. Abdelkader
+EV L 48 gol A. Sanchez
+EV L 52 gol A. De
+EV V 56 cambio L. Matias > A. Belmonte
+EV V 56 cambio A. Tihomir > M. Navarro
+EV V 56 cambio D. Molina > D. Moya
+EV L 56 cambio N. Parra > M. Galvez
+EV L 56 cambio J. Clemente > M. Sempere
+EV L 56 cambio A. Perez > D. Giner
+EV L 58 amarilla A. Valero
+EV V 60 amarilla P. Sanchez
+EV V 63 cambio M. Molina > P. Sanchez
+EV L 64 cambio Velasco > A. Valero
+EV L 64 cambio S. Navarro > A. Sanchez
+EV L 66 cambio I. Pico > A. Perea
+EV L 78 gol A. Perez
+
+PARTIDO J6 | 10/10/2026 13:10 | C.D. Castellón 'A' | Levante U.D. 'A' | 3-1 | Campos Gaeta Huguet Castellón F-11 Campo B | 1-3-5-2 | 1-4-4-2
+L POR 1 Hugo Peris Escrig
+L DEF 2 Eric Peris Escrig
+L DEF 4 Marc Cervera Calpe
+L DEF 21 Otto Planagumà Bagan
+L MED 3 Andreu Viciedo Rodrigo
+L MED 6 Asier Sanchez Langa
+L MED 8 Joel Rodriguez Paris
+L MED 11 Max Franciszek Bednorz
+L MED 19 Bruno Fernandez Garrido
+L DEL 9 Antonio Ramos Gomez
+L DEL 10 Diego Vicente Herrero
+L SUP 7 Daniel Santacruz Santacruz
+L SUP 12 Jorge Vidal Tarazona
+L SUPPOR 13 Aitor Rivera Leal
+L SUP 14 Hugo Almazan Gumbau
+L SUP 15 Yulen Acosta Zalvez
+L SUP 18 Gonzalo Tabares Saborit
+L SUP 20 Nianake Diarra
+V POR 13 Daniel Pedrajas Abril
+V DEF 2 Steven Chiemela Igbojionu Ajuzie
+V DEF 5 Unai Saez Vallejo
+V DEF 15 Ivan Rodriguez Paris
+V DEF 16 Diego Moyano Ribera
+V MED 8 Marco Nevot Cervera
+V MED 17 Aythami Rodriguez Suárez
+V MED 20 Manuel Matamoros Nuñez
+V MED 27 Daniel Calvente De Jesús
+V DEL 7 Esteban Ferrer Sanchez
+V DEL 11 Alejandro Arnau Franco
+V SUPPOR 1 Asier Gomez Diaz
+V SUP 3 Alejandro Lujan Forment
+V SUP 4 Diego Miranda Rodriguez
+V SUP 9 Lucas Fuentes Gimenez
+V SUP 18 Alejandro Flores Inclan
+V SUP 19 Alejandro Desco Maiques
+V SUP 22 Aaron Aroba Santos
+NOTA Amarillas a «I. Molina» (37', Castellón) y «C. Libio» (47', Levante): cuerpos técnicos. O. Planagumà: amarilla 45' y segunda amarilla 75'.
+EV L 12 amarilla M. Cervera
+EV L 37 amarilla_tecnico I. Molina
+EV V 37 amarilla U. Saez
+EV L 45 amarilla O. Planagumà
+EV V 47 amarilla_tecnico C. Libio
+EV L 53 gol D. Vicente
+EV L 55 cambio N. Diarra > M. Franciszek
+EV V 55 cambio A. Flores > A. Arnau
+EV V 55 cambio A. Aroba > D. Calvente
+EV V 55 cambio L. Fuentes > A. Rodriguez
+EV L 64 cambio Y. Acosta > B. Fernandez
+EV L 64 cambio G. Tabares > A. Sanchez
+EV V 64 gol E. Ferrer
+EV V 66 cambio A. Desco > U. Saez
+EV V 66 cambio A. Lujan > E. Ferrer
+EV L 68 gol D. Vicente
+EV V 71 amarilla A. Aroba
+EV L 75 segunda_amarilla O. Planagumà
+EV V 75 cambio D. Miranda > M. Matamoros
+EV V 77 amarilla I. Rodriguez
+EV L 78 cambio J. Vidal > A. Ramos
+EV L 78 cambio D. Santacruz > D. Vicente
+EV L 80 gol N. Diarra
+EV L 80 amarilla J. Vidal
+
+PARTIDO J6 | 20/10/2026 20:15 | C.F. Torre Levante 'A' | Villarreal C.F. 'A' | 0-5 | Campo Torre Levante-Orriols F-11 | 1-3-5-2 | 1-4-4-2
+L POR 13 Asier Vega Lozano
+L DEF 9 Oke Carrasco Calvillo
+L DEF 16 Bruno Navarro Valverde
+L DEF 25 Jorge Caro Toral
+L MED 3 Jacob Regalado Pechuan
+L MED 4 Guillermo Romeo Albors
+L MED 11 Jorge Monteagudo Navarro
+L MED 14 Jose Contelles Zarzo
+L MED 15 Nicolas Calderon Gutierrez
+L DEL 2 Gonzalo Bolinches Ruiz
+L DEL 19 Carles Arenes Valero
+L SUPPOR 1 Illia Miroshnychenko Stepanov
+L SUP 5 Victor Gimenez Mesado
+L SUP 6 Miguel Sanz Pedro
+L SUP 7 Ximo Nieto-Guerrero Cuesta
+L SUP 8 Farouk Aouane Qatfaoui
+L SUP 10 Alejandro Bonfiglio Fuentes
+L SUP 29 Mihail Kevin Balta
+V POR 25 Luca Reina Ruiz
+V DEF 4 Izan Muñoz Garcia
+V DEF 15 Guillermo Cuartero Calavia
+V DEF 20 Marc Ascoz Gil
+V DEF 21 Daniel Vizuete Marti
+V MED 7 Aaron Ruiz Sanchez
+V MED 8 Mario Pinazo Trujillo
+V MED 16 Ruben Herrera Gonzalez
+V MED 17 Jaume Mas Salom
+V DEL 9 Victor Maestra Rodriguez
+V DEL 18 Alvaro Tarraso Perez
+V SUPPOR 1 Yehor Troinkov
+V SUP 5 Eric Rodriguez Casas
+V SUP 10 Alejandro Garcia Carcelen
+V SUP 11 Pablo Lopez Argüello
+V SUP 14 Iker Vicent Segarra
+V SUP 22 Josue Caballero Cerdeña
+V SUP 23 Arturo Martinez Azorin
+NOTA Partido de la J6 aplazado y jugado el martes 20 octubre 2026. V. Maestra (39'): icono de gol de penalti.
+EV V 13 gol V. Maestra
+EV V 26 gol J. Mas
+EV V 28 gol A. Tarraso
+EV L 39 amarilla A. Vega
+EV V 39 penalti V. Maestra
+EV V 49 cambio I. Vicent > D. Vizuete
+EV V 49 cambio A. Garcia > A. Tarraso
+EV V 49 cambio J. Caballero > R. Herrera
+EV L 51 cambio V. Gimenez > G. Romeo
+EV L 51 cambio F. Aouane > B. Navarro
+EV L 56 cambio M. Kevin > J. Monteagudo
+EV L 56 cambio X. Nieto-Guerrero > O. Carrasco
+EV L 56 cambio A. Bonfiglio > C. Arenes
+EV V 58 cambio A. Martinez > A. Ruiz
+EV V 58 cambio P. Lopez > J. Mas
+EV L 63 cambio M. Sanz > J. Caro
+EV V 65 cambio E. Rodriguez > I. Muñoz
+EV V 68 gol V. Maestra
+
+PARTIDO J7 | 17/10/2026 10:45 | Patacona C.F. 'A' | C.F. Fundació VCF 'A' | 2-2 | Campo Mpal. de la Patacona F-11 | 1-4-4-2 | 1-4-4-2
+L POR 1 Marc Rodriguez Badia
+L DEF 2 Angel Navarro Michelena
+L DEF 3 Victor Blanco Lorente
+L DEF 17 Daniel Nuñez Najera
+L DEF 24 Luis Andreu Valor
+L MED 7 Izan Vicente Alos
+L MED 8 Diego Borrajo De Orozco Maldonado
+L MED 10 Eric Pacha Hernández
+L MED 19 Yosin Yusupov
+L DEL 14 Rafa Montes Garcia
+L DEL 27 Roberto Nicolas Stirbu Moldovan
+L SUP 4 Pau Carrasco Cantero
+L SUP 5 Nicolas Gomis Dominguez
+L SUP 16 Lluis Mateu I Martin
+L SUP 18 Carlos Gomez Pallardo
+L SUP 20 Marc Joan Gomez Oscar
+L SUPPOR 22 Raul Toboso Nicolau
+L SUP 29 Marco Alpuente Blazquez
+V POR 1 Diego Llorens Segovia
+V DEF 2 Jorge Calomarde Gomez
+V DEF 3 Hugo Salas Mauri
+V DEF 4 Joaquin Cano De Jose
+V DEF 5 Enzo Pacha Torres
+V MED 6 Jean Pool Cardona Rivas
+V MED 7 Zakaria Idrissa Toure
+V MED 8 Sergio Revert Arribas
+V MED 11 Gabidolla Orazaly
+V DEL 9 Francesco Martin Moschella Compostela
+V DEL 10 Sergio Rodriguez Garcia
+V SUP 12 Timur Kuzmin
+V SUPPOR 13 Vicente Fores Ferrer
+V SUP 14 Ferran Mut Gilabert
+V SUP 15 Lucas Serra Blasco
+V SUP 16 Axel Daniel Mosquera Barona
+V SUP 17 Guillermo Marco Daza
+V SUP 18 Enrique Antonio Blanquer Muñoz
+NOTA Amarilla 27' a «M. Angel»: primer entrenador de la Fundació (Miguel Angel Gandia...). D. Borrajo: amarilla 40' y segunda amarilla 50'.
+EV L 7 gol R. Montes
+EV V 21 amarilla J. Cano
+EV V 27 amarilla_tecnico M. Angel
+EV V 28 amarilla J. Calomarde
+EV L 38 amarilla R. Nicolas
+EV L 40 amarilla D. Borrajo
+EV L 49 cambio P. Carrasco > R. Nicolas
+EV L 49 cambio L. Mateu > I. Vicente
+EV L 50 segunda_amarilla D. Borrajo
+EV V 54 cambio L. Serra > S. Revert
+EV V 54 cambio E. Antonio > E. Pacha
+EV V 54 cambio F. Mut > F. Martin
+EV V 55 gol L. Serra
+EV L 58 cambio C. Gomez > E. Pacha
+EV L 63 gol Y. Yusupov
+EV V 68 cambio T. Kuzmin > J. Calomarde
+EV V 68 cambio A. Daniel > J. Pool
+EV V 68 cambio G. Marco > G. Orazaly
+EV L 70 amarilla R. Montes
+EV L 71 amarilla P. Carrasco
+EV L 71 cambio N. Gomis > R. Montes
+EV V 72 gol L. Serra
+EV L 80 amarilla A. Navarro
+
+PARTIDO J7 | 17/10/2026 11:00 | Valencia C.F. 'A' | S.C.D. Intangco 'A' | 7-0 | Ciudad Dptva. Valencia CF F-11 Campo 4 | 1-4-3-3 | 1-4-3-3
+L POR 1 Mateo Berbis Martinez
+L DEF 2 Hugo Sanz Lopez
+L DEF 3 Miguel Angel Prieto Serer
+L DEF 4 Eric Alaña Barragan
+L DEF 5 Iker Frias Barrajon
+L MED 6 Pablo Jimenez Luque
+L MED 8 Marc Carranza Hernandez
+L MED 10 Jakson Enrique Gordon
+L DEL 7 Abel Yumdjo Taguiawa Massoko
+L DEL 9 Dario Alonso Garcia
+L DEL 11 Ricardo Perez Ruiz
+L SUP 12 Aitor Garrigues Asensio
+L SUPPOR 13 Hugo Alvarez Soria
+L SUP 14 Martin Morente Gay
+L SUP 15 Diego Ferri Molina
+L SUP 16 Andreu Gimeno Alacreu
+L SUP 17 Alejandro Angulo Ramon
+L SUP 18 Iker Albero Ruiz
+V POR 1 Izan Sanchez Cofrade
+V DEF 3 Hugo Cobeño German
+V DEF 4 Martin Limorte Riquelme
+V DEF 5 Eric Galvez Buitrago
+V DEF 20 Sergio Gadea Atencia
+V MED 8 Lucas Andres Pico
+V MED 10 Fran Moya Romero
+V MED 16 Jorge Chamorro Sanchez
+V DEL 7 Martin Perez Llopis
+V DEL 14 Adam Parres Rahim
+V DEL 19 Juan Gil Iborra
+V SUP 6 Gonzalo Ruiz Pagan
+V SUP 9 Iker Milan Giménez
+V SUPPOR 13 Daniel Sanchez Cano
+V SUP 17 Hector Amoros Fernandez
+V SUP 18 Luca Eric Goian
+V SUP 21 Diego Cotarelo Alvarez
+V SUP 30 Hector Perez Duran
+EV L 6 gol R. Perez
+EV L 17 gol H. Sanz
+EV L 32 gol M. Angel
+EV L 35 gol M. Carranza
+EV L 40 gol D. Alonso
+EV L 41 cambio I. Albero > R. Perez
+EV L 50 gol D. Alonso
+EV V 50 cambio D. Cotarelo > S. Gadea
+EV V 50 cambio G. Ruiz > A. Parres
+EV V 50 cambio H. Amoros > M. Limorte
+EV L 51 cambio D. Ferri > I. Frias
+EV L 51 cambio A. Garrigues > P. Jimenez
+EV L 51 cambio M. Morente > D. Alonso
+EV L 56 cambio A. Angulo > A. Yumdjo
+EV L 56 cambio A. Gimeno > M. Carranza
+EV V 56 cambio I. Milan > L. Andres
+EV V 56 cambio L. Eric > J. Chamorro
+EV V 58 cambio H. Perez > F. Moya
+EV L 60 gol J. Enrique
+EV V 63 amarilla E. Galvez
+
+PARTIDO J7 | 17/10/2026 11:03 | Kelme C.F. 'A' | Primer Toque C.F. 'A' | 1-1 | Polideportivo Mpal. Altabix Enrique Cervera F-11 | 1-4-4-2 | 1-5-4-1
+L POR 25 Mario Parodi Caceres
+L DEF 2 Edgar Ramirez Chulia
+L DEF 4 David Navarro Cerdá
+L DEF 5 Pedro Carreño Noguera
+L DEF 22 Angel Belmonte Risueño
+L MED 7 Mario Navarro Terol
+L MED 8 Pablo Sanchez Ortega
+L MED 10 Jonathan Felix Martinez
+L MED 20 David Moya Salmon
+L DEL 18 Amir Abdelkader Sebih Boukhit
+L DEL 30 Gonzalo Celdran Garre
+L SUP 3 Hector Saez Anton
+L SUP 9 Joel Clos Arjona
+L SUP 11 Ruben Castello Perez
+L SUP 12 Pablo Soler Lumbreras
+L SUPPOR 13 Bosko Martic
+L SUP 14 Miguel Molina Martinez
+L SUP 15 Cristian Sánchez Ruiz
+V POR 1 Marc Menezo Perez
+V DEF 2 Yasser Taoussi
+V DEF 3 Fabian Ion Genoiu
+V DEF 12 Jose David Barreda Galiana
+V DEF 14 Pere Tomas Ribes
+V DEF 18 Pol Pablo Vericat
+V MED 6 Vicent Roda Barbera
+V MED 7 Marc Rojano Rubio
+V MED 8 Gerard Planell Vidal
+V MED 15 Dario Picher Aguilella
+V DEL 9 Mohammed Ousrout Khannouss
+V SUP 5 Aritz Martin Pacheco
+V SUP 11 Ayoub Ammou El Hafydy
+V SUP 17 Marcos Santamaria Albert
+V SUP 19 Marc Vidal Perez
+V SUPPOR 25 Pau Enrique Fuster
+V SUP 29 Hugo Carrasquer Orenga
+EV V 6 gol Y. Taoussi
+EV L 32 amarilla P. Sanchez
+EV L 40 cambio C. Sánchez > M. Navarro
+EV V 40 cambio A. Ammou > M. Rojano
+EV V 41 amarilla J. David
+EV L 42 gol D. Navarro
+EV L 51 cambio R. Castello > A. Abdelkader
+EV V 51 cambio H. Carrasquer > M. Ousrout
+EV L 60 cambio J. Clos > P. Sanchez
+EV V 60 cambio M. Santamaria > D. Picher
+EV V 66 cambio M. Vidal > F. Ion
+EV V 66 cambio A. Martin > P. Pablo
+EV L 67 amarilla C. Sánchez
+EV L 74 cambio H. Saez > J. Felix
+EV L 74 cambio M. Molina > A. Belmonte
+EV L 74 cambio P. Soler > D. Moya
+
+PARTIDO J7 | 17/10/2026 11:45 | C.F. Inter San José Valencia 'A' | C.D. Castellón 'A' | 3-5 | Campo de Fútbol Mpal. de Beniferri F-11 | 1-4-4-2 | 1-3-5-2
+L POR 13 Juan Jose Gil Calisalvo
+L DEF 2 Daniel Molina Viñes
+L DEF 3 Marc Gómez Casinos
+L DEF 12 David Javaloyes Marco
+L DEF 15 Enrique Lurbe De Vicente
+L MED 6 Pablo Lopez Almarcha
+L MED 7 Juan Diego De La Fuente Wila
+L MED 11 Victor Serrano Talamantes
+L MED 23 Rafael Alejandro Beltrán Valencia
+L DEL 14 Marc Miralles Serrano
+L DEL 27 Alejandro Miró Andrés
+L SUPPOR 1 Santiago Pinedo Nóbile
+L SUP 5 Xavi Torrijos Navarro
+L SUP 8 Anton Cristian Terties Ardelean
+L SUP 10 Carles Guanter Sanchez
+L SUP 16 Wilter Job Sanchez Rodriguez
+L SUP 19 Gonzalo Mascarell Marti
+L SUP 21 Bruno Aguilar Baya
+V POR 13 Aitor Rivera Leal
+V DEF 2 Eric Peris Escrig
+V DEF 4 Marc Cervera Calpe
+V DEF 12 Jorge Vidal Tarazona
+V MED 3 Andreu Viciedo Rodrigo
+V MED 8 Joel Rodriguez Paris
+V MED 10 Diego Vicente Herrero
+V MED 11 Max Franciszek Bednorz
+V MED 18 Gonzalo Tabares Saborit
+V DEL 9 Antonio Ramos Gomez
+V DEL 20 Nianake Diarra
+V SUPPOR 1 Hugo Peris Escrig
+V SUP 6 Asier Sanchez Langa
+V SUP 7 Daniel Santacruz Santacruz
+V SUP 15 Yulen Acosta Zalvez
+V SUP 16 Artem Byelousov
+V SUP 19 Bruno Fernandez Garrido
+V SUP 21 Marcos Fernandez Martinez
+EV L 12 gol M. Miralles
+EV V 24 gol N. Diarra
+EV V 33 gol D. Vicente
+EV L 35 gol M. Gómez
+EV L 38 amarilla A. Miró
+EV V 41 gol E. Peris
+EV V 44 gol E. Peris
+EV L 49 amarilla P. Lopez
+EV V 52 gol A. Ramos
+EV L 52 cambio A. Cristian > J. Diego
+EV L 52 cambio W. Job > R. Alejandro
+EV V 52 cambio B. Fernandez > N. Diarra
+EV L 57 cambio G. Mascarell > V. Serrano
+EV L 57 cambio B. Aguilar > M. Gómez
+EV V 60 cambio Y. Acosta > G. Tabares
+EV V 60 cambio D. Santacruz > D. Vicente
+EV V 69 cambio A. Byelousov > A. Ramos
+EV V 69 cambio M. Fernandez > A. Viciedo
+EV V 69 cambio A. Sanchez > M. Franciszek
+EV L 72 cambio C. Guanter > D. Javaloyes
+EV L 72 cambio X. Torrijos > E. Lurbe
+EV L 75 gol M. Miralles
+EV V 79 amarilla M. Cervera
+
+PARTIDO J7 | 17/10/2026 17:45 | Elda Unión Cableworld C.F. 'A' | C.F. Benidorm 'A' | 3-1 | Campo de Futbol Fernando Tomas F-11 Campo 3 | 1-4-4-2 | 1-5-4-1
+L POR 22 Agustín Lozano Herrera
+L DEF 7 Angel Rodriguez Palao
+L DEF 12 Sergio Simon Iñigo
+L DEF 20 Javier Terol Almiñana
+L DEF 23 Aitor Tomas Benitez
+L MED 3 David Penalva Alfonso
+L MED 8 Diego Leiva Ucles
+L MED 15 Alejandro Ponsoda Vallcanera
+L MED 18 Miguel Hoyos Tarraga
+L DEL 6 Pablo Alarcon Vera
+L DEL 14 Daniel Gil Garcia
+L SUP 4 Miguel Sempere Blasco
+L SUP 9 Marc Navarro Pla
+L SUP 10 Fidel Gonzalez Palmer
+L SUP 11 Adrian Sanchez Cano
+L SUPPOR 13 Marc Lozano Tomas
+L SUP 16 Luca Mateo Daza
+L SUP 21 Marc Peñaranda Ruiz
+V POR 1 Manuel Irles Castaños
+V DEF 3 Neymar Omar Salazar Calva
+V DEF 4 Hugo Causera Mena
+V DEF 5 Xavi Martinez Torres
+V DEF 8 Raul Poquet Matulic
+V DEF 17 Manel Perez Marquez
+V MED 6 Guillermo Sempere Catala
+V MED 10 Carlos Ramis Gonzalez
+V MED 14 Cristian Garcia Dominguez
+V MED 21 Aaron Guessas Pia
+V DEL 9 Iker Perles Quintero
+V SUP 2 Rayane Chetouane
+V SUP 7 Malin Malinov Sinanski
+V SUP 11 Juan David Carrasco Gonzalez
+V SUP 12 Daniel Iranzo Casañ
+V SUP 16 Nathael Aracil Calderon
+V SUP 18 Oleksandr Parobok
+V SUP 25 Yilio Wong Zubieta
+NOTA El icono del gol de A. Rodriguez (70') es más pequeño de lo habitual; se registra como gol.
+EV L 26 amarilla M. Hoyos
+EV V 45 gol I. Perles
+EV L 49 cambio A. Sanchez > A. Tomas
+EV L 49 cambio M. Peñaranda > D. Leiva
+EV L 50 gol M. Peñaranda
+EV V 54 cambio N. Aracil > R. Poquet
+EV L 65 gol A. Ponsoda
+EV L 66 cambio M. Navarro > A. Ponsoda
+EV L 66 cambio L. Mateo > D. Penalva
+EV L 70 gol A. Rodriguez
+EV V 70 cambio R. Chetouane > A. Guessas
+EV V 70 cambio M. Malinov > H. Causera
+EV V 70 cambio Y. Wong > C. Garcia
+EV V 72 cambio J. David > C. Ramis
+EV V 72 cambio D. Iranzo > G. Sempere
+EV V 72 cambio O. Parobok > N. Omar
+EV L 73 cambio F. Gonzalez > P. Alarcon
+EV L 73 cambio M. Sempere > A. Rodriguez
+
+PARTIDO J7 | 17/10/2026 17:49 | Levante U.D. 'A' | Elche C.F. 'A' | 2-3 | Ciudad Dptva. del Levante U.D. F-11 Campo 4 | 1-4-3-3 | 1-4-3-3
+L POR 25 Hector Noel Clair Perez
+L DEF 2 Steven Chiemela Igbojionu Ajuzie
+L DEF 4 Diego Miranda Rodriguez
+L DEF 5 Unai Saez Vallejo
+L DEF 15 Ivan Rodriguez Paris
+L MED 8 Marco Nevot Cervera
+L MED 11 Alejandro Arnau Franco
+L MED 20 Manuel Matamoros Nuñez
+L DEL 7 Esteban Ferrer Sanchez
+L DEL 17 Aythami Rodriguez Suárez
+L DEL 18 Alejandro Flores Inclan
+L SUPPOR 1 Asier Gomez Diaz
+L SUP 3 Alejandro Lujan Forment
+L SUP 16 Diego Moyano Ribera
+L SUP 22 Aaron Aroba Santos
+L SUP 24 Alan Scola Gimenez
+L SUP 27 Daniel Calvente De Jesús
+V POR 1 Pablo Fernandez Sposaro
+V DEF 3 Hector Barcelo Soler
+V DEF 4 Samuel Navarro Gomez
+V DEF 12 David Giner Martinez
+V DEF 15 Marc Verdú Masiá
+V MED 8 Marc Sempere Anton
+V MED 10 Alejandro De Juan Garcia
+V MED 20 Mario Galvez Montaño
+V DEL 17 Derek Enrique Martinez Recuerda
+V DEL 18 Adrian Sanchez Amat
+V DEL 21 Alex Perea Ferma
+V SUP 2 Neizan Parra Gonzalez
+V SUP 6 Jorge Clemente Rodriguez
+V SUPPOR 13 Sergio Parra Garcia
+V SUP 16 Iker Pico Tenza
+V SUP 19 Velasco
+V SUP 22 Julian Andres Vasquez Cano
+V SUP 23 Andreu Perez Berbegal
+NOTA D. Miranda (62'): icono de gol en propia puerta (suma al Elche). Amarilla 38' a «C. Libio»: delegado del Levante.
+EV L 16 amarilla I. Rodriguez
+EV L 20 gol E. Ferrer
+EV L 38 amarilla_tecnico C. Libio
+EV V 38 amarilla M. Verdú
+EV L 41 gol A. Arnau
+EV L 49 cambio A. Aroba > M. Matamoros
+EV V 54 cambio I. Pico > A. De
+EV L 60 cambio A. Scola > A. Rodriguez
+EV L 60 cambio D. Calvente > A. Flores
+EV L 60 cambio D. Moyano > S. Chiemela
+EV V 60 cambio J. Andres > S. Navarro
+EV V 60 cambio Velasco > D. Enrique
+EV L 62 propia D. Miranda
+EV V 66 cambio A. Perez > M. Galvez
+EV V 66 cambio J. Clemente > M. Sempere
+EV V 68 amarilla Velasco
+EV V 75 gol A. Perez
+EV L 79 amarilla E. Ferrer
+EV L 80 amarilla A. Aroba
+EV L 80 cambio A. Lujan > U. Saez
+EV V 80 gol M. Verdú
+
+PARTIDO J7 | 17/10/2026 18:15 | C.F. Torre Levante 'A' | Alboraya U.D. 'A' | 4-0 | Campo Torre Levante-Orriols F-11 | 1-4-3-3 | 1-4-3-3
+L POR 1 Illia Miroshnychenko Stepanov
+L DEF 3 Jacob Regalado Pechuan
+L DEF 4 Guillermo Romeo Albors
+L DEF 5 Victor Gimenez Mesado
+L DEF 16 Javier Villaescusa Mas
+L MED 6 Miguel Sanz Pedro
+L MED 18 Samuel Temina Gaviria
+L MED 22 Marc Marti Olaya
+L DEL 7 Ximo Nieto-Guerrero Cuesta
+L DEL 10 Alejandro Bonfiglio Fuentes
+L DEL 29 Mihail Kevin Balta
+L SUP 8 Farouk Aouane Qatfaoui
+L SUP 9 Oke Carrasco Calvillo
+L SUP 11 Jorge Monteagudo Navarro
+L SUPPOR 13 Asier Vega Lozano
+L SUP 14 Jose Contelles Zarzo
+L SUP 15 Nicolas Calderon Gutierrez
+L SUP 25 Jorge Caro Toral
+V POR 13 Hugo Iturbide Andres
+V DEF 6 Vicente Bayarri Baldovi
+V DEF 7 Cayetano Garcia Soriano
+V DEF 10 Cayetano Garcia Villar
+V DEF 16 Gonzalo Escorihuela Prieto
+V MED 4 Antonio Hölderl Raimundo
+V MED 21 Hugo Martinez Boluda
+V MED 22 Elian Merino Franco
+V DEL 5 Nicolas Morillas Ubach
+V DEL 11 Arnau Ribera Rangel
+V DEL 18 Matias Sanchez Diaz
+V SUPPOR 1 Alvaro Izquierdo Muñoz
+V SUP 2 Ruben Alonso Camin
+V SUP 3 Xavi Verdu Planells
+V SUP 12 Hugo Villaescusa Cabrera
+V SUP 14 Leo Morales Oliva
+V SUP 15 Carles Garcia Guerrero
+V SUP 17 Jorge De Jaime Blasco
+NOTA H. Martinez: roja directa (34'). La amarilla del 36' y las salidas del 63' de «C. Garcia» no se pueden atribuir a uno de los dos Cayetano Garcia.
+EV V 26 amarilla N. Morillas
+EV V 34 roja H. Martinez
+EV V 36 amarilla C. Garcia
+EV L 51 gol A. Bonfiglio
+EV V 51 cambio X. Verdu > V. Bayarri
+EV V 51 cambio J. De > A. Ribera
+EV L 56 gol A. Bonfiglio
+EV L 59 cambio J. Monteagudo > X. Nieto-Guerrero
+EV L 63 gol M. Kevin
+EV V 63 cambio C. Garcia > C. Garcia
+EV V 63 cambio H. Villaescusa > C. Garcia
+EV V 63 cambio R. Alonso > G. Escorihuela
+EV V 63 cambio L. Morales > M. Sanchez
+EV L 65 cambio O. Carrasco > M. Kevin
+EV L 65 cambio J. Contelles > A. Bonfiglio
+EV L 71 cambio N. Calderon > M. Marti
+EV L 71 cambio F. Aouane > J. Villaescusa
+EV L 71 cambio J. Caro > M. Sanz
+EV L 78 gol O. Carrasco
+
+PARTIDO J7 | 27/10/2026 19:45 | Villarreal C.F. 'A' | C.F. La Nucía 'A' | 6-0 | Ciudad Dptva. José Manuel Llaneza F-11 Vila-real Campo 5 | 1-4-4-2 | 1-4-3-3
+L POR 25 Luca Reina Ruiz
+L DEF 3 Eduardo De Haro Hernández
+L DEF 4 Eric Rodriguez Casas
+L DEF 20 Marc Ascoz Gil
+L DEF 22 Josue Caballero Cerdeña
+L MED 7 Aaron Ruiz Sanchez
+L MED 8 Mario Pinazo Trujillo
+L MED 16 Ruben Herrera Gonzalez
+L MED 19 Neville Winston Knowles Iii
+L DEL 9 Victor Maestra Rodriguez
+L DEL 11 Pablo Lopez Argüello
+L SUPPOR 1 Yehor Troinkov
+L SUP 6 Victor Pardo Pastor
+L SUP 12 Pablo Bayo Guerrero
+L SUP 15 Guillermo Cuartero Calavia
+L SUP 17 Jaume Mas Salom
+L SUP 18 Alvaro Tarraso Perez
+L SUP 21 Daniel Vizuete Marti
+V POR 25 Alexis Cita Adan
+V DEF 2 Pere Terol Orozco
+V DEF 5 Thiago Benjamin Malvezzi Quiroga
+V DEF 15 Francesc Climent Ciscar
+V DEF 24 Vicente Marcos Martinez
+V MED 7 Dario Barreto Redondo
+V MED 11 Vicent Signes Mas
+V MED 26 Alejandro Da Silva Cruz
+V DEL 10 Joaquin Rodriguez Muñoz
+V DEL 12 Andreu Gimenez Martinez
+V DEL 27 Pablo Gallo Carmona
+V SUPPOR 1 David Zahonero Cantizano
+V SUP 3 Ignacio Lozano Cortes
+V SUP 16 Noel Matias Bartolome
+V SUP 17 Victor Perez Sepulveda
+V SUP 20 Daniel Sanchez Andreu
+V SUP 21 Sergi Holguin Diaz
+V SUP 22 Xavi Martinez Mañez
+NOTA Partido de la J7 aplazado y jugado el martes 27 octubre 2026.
+EV L 38 gol E. Rodriguez
+EV L 41 cambio G. Cuartero > E. De
+EV V 41 cambio S. Holguin > A. Gimenez
+EV V 41 cambio N. Matias > D. Barreto
+EV V 46 cambio I. Lozano > F. Climent
+EV L 46 gol P. Lopez
+EV V 53 cambio V. Perez > P. Gallo
+EV L 54 gol V. Maestra
+EV V 54 cambio X. Martinez > V. Signes
+EV V 54 cambio D. Sanchez > J. Rodriguez
+EV L 57 cambio A. Tarraso > A. Ruiz
+EV L 57 cambio P. Bayo > V. Maestra
+EV L 57 cambio J. Mas > R. Herrera
+EV L 57 gol E. Rodriguez
+EV L 60 gol A. Tarraso
+EV L 62 cambio D. Vizuete > P. Lopez
+EV L 62 cambio V. Pardo > M. Pinazo
+EV L 73 gol J. Mas
+
+PARTIDO J8 | 24/10/2026 10:30 | C.D. Castellón 'A' | Patacona C.F. 'A' | 3-1 | Campos Gaeta Huguet Castellón F-11 Campo B | 1-3-5-2 | 1-4-4-2
+L POR 1 Hugo Peris Escrig
+L DEF 2 Eric Peris Escrig
+L DEF 4 Marc Cervera Calpe
+L DEF 21 Otto Planagumà Bagan
+L MED 3 Andreu Viciedo Rodrigo
+L MED 8 Joel Rodriguez Paris
+L MED 12 Jorge Vidal Tarazona
+L MED 18 Gonzalo Tabares Saborit
+L MED 19 Bruno Fernandez Garrido
+L DEL 10 Diego Vicente Herrero
+L DEL 20 Nianake Diarra
+L SUP 6 Asier Sanchez Langa
+L SUP 7 Daniel Santacruz Santacruz
+L SUP 9 Antonio Ramos Gomez
+L SUP 11 Max Franciszek Bednorz
+L SUPPOR 13 Aitor Rivera Leal
+L SUP 15 Yulen Acosta Zalvez
+L SUP 16 Artem Byelousov
+V POR 1 Marc Rodriguez Badia
+V DEF 2 Angel Navarro Michelena
+V DEF 3 Victor Blanco Lorente
+V DEF 4 Pau Carrasco Cantero
+V DEF 24 Luis Andreu Valor
+V MED 10 Eric Pacha Hernández
+V MED 16 Lluis Mateu I Martin
+V MED 17 Daniel Nuñez Najera
+V MED 27 Roberto Nicolas Stirbu Moldovan
+V DEL 14 Rafa Montes Garcia
+V DEL 19 Yosin Yusupov
+V SUP 5 Nicolas Gomis Dominguez
+V SUP 7 Izan Vicente Alos
+V SUP 9 Nicolas Diaz Lorenzo
+V SUP 20 Marc Joan Gomez Oscar
+V SUPPOR 22 Raul Toboso Nicolau
+V SUP 23 Dario Stefano Boso Fernandez
+V SUP 29 Marco Alpuente Blazquez
+NOTA Último partido de la grabación: de la J8 solo consta este acta.
+EV V 9 gol R. Nicolas
+EV L 31 gol N. Diarra
+EV L 52 cambio A. Ramos > G. Tabares
+EV L 52 cambio M. Franciszek > O. Planagumà
+EV V 54 cambio N. Gomis > R. Nicolas
+EV V 54 cambio I. Vicente > L. Mateu
+EV V 62 cambio M. Joan > E. Pacha
+EV V 62 cambio N. Diaz > R. Montes
+EV L 68 cambio A. Sanchez > B. Fernandez
+EV V 68 amarilla V. Blanco
+EV L 72 gol E. Peris
+EV V 74 cambio M. Alpuente > A. Navarro
+EV V 74 cambio D. Stefano > D. Nuñez
+EV L 75 gol A. Ramos
+EV L 76 cambio Y. Acosta > D. Vicente
+EV L 76 cambio D. Santacruz > A. Viciedo
+EV L 76 cambio A. Byelousov > N. Diarra
+EV V 78 amarilla M. Joan
