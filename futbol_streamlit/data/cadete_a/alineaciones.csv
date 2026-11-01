@@ -17,7 +17,7 @@ Levante U.D. 'A',1,14,Alvaro Castellanos Anaya,SUP,5,15
 Levante U.D. 'A',1,17,Aythami Rodriguez Suárez,SUP,5,16
 Levante U.D. 'A',1,18,Alejandro Flores Inclan,SUP,5,17
 Levante U.D. 'A',1,21,Alejandro Miro Andrés,SUP,5,18
-C.F. Inter San José Valencia 'A',1,1,Santiago Pinedo Nobile,POR,1,1
+C.F. Inter San José Valencia 'A',1,1,Santiago Pinedo Nóbile,POR,1,1
 C.F. Inter San José Valencia 'A',1,2,Daniel Molina Viñes,DEF,2,2
 C.F. Inter San José Valencia 'A',1,5,Xavi Torrijos Navarro,DEF,2,3
 C.F. Inter San José Valencia 'A',1,15,Enrique Lurbe De Vicente,DEF,2,4
@@ -60,7 +60,7 @@ Patacona C.F. 'A',1,4,Pau Carrasco Cantero,DEF,2,4
 Patacona C.F. 'A',1,18,Carlos Gomez Pallardo,DEF,2,5
 Patacona C.F. 'A',1,5,Nicolas Gomis Dominguez,MED,3,6
 Patacona C.F. 'A',1,8,Diego Borrajo De Orozco Maldonado,MED,3,7
-Patacona C.F. 'A',1,10,Eric Pacha Hernandez,MED,3,8
+Patacona C.F. 'A',1,10,Eric Pacha Hernández,MED,3,8
 Patacona C.F. 'A',1,19,Yosin Yusupov,MED,3,9
 Patacona C.F. 'A',1,7,Izan Vicente Alos,DEL,4,10
 Patacona C.F. 'A',1,27,Roberto Nicolas Stirbu Moldovan,DEL,4,11
@@ -348,7 +348,7 @@ Levante U.D. 'A',2,8,Marco Nevot Cervera,MED,3,6
 Levante U.D. 'A',2,18,Alejandro Flores Inclan,MED,3,7
 Levante U.D. 'A',2,20,Manuel Matamoros Nuñez,MED,3,8
 Levante U.D. 'A',2,27,Daniel Calvente De Jesús,MED,3,9
-Levante U.D. 'A',2,7,Esteban Ferrer Sánchez,DEL,4,10
+Levante U.D. 'A',2,7,Esteban Ferrer Sanchez,DEL,4,10
 Levante U.D. 'A',2,11,Alejandro Arnau Franco,DEL,4,11
 Levante U.D. 'A',2,3,Alejandro Lujan Forment,SUP,5,12
 Levante U.D. 'A',2,4,Diego Miranda Rodriguez,SUP,5,13
@@ -427,7 +427,7 @@ Valencia C.F. 'A',2,13,Mateo Berbis Martinez,SUP_POR,5,13
 Valencia C.F. 'A',2,14,Eric Alaña Barragan,SUP,5,14
 Valencia C.F. 'A',2,15,Miguel Angel Prieto Serer,SUP,5,15
 Valencia C.F. 'A',2,16,Andreu Gimeno Alacreu,SUP,5,16
-Valencia C.F. 'A',2,17,Alejandro Angulo Ramón,SUP,5,17
+Valencia C.F. 'A',2,17,Alejandro Angulo Ramon,SUP,5,17
 Valencia C.F. 'A',2,18,Abel Yumdjo Taguiawa Massoko,SUP,5,18
 C.D. Castellón 'A',2,13,Aitor Rivera Leal,POR,1,1
 C.D. Castellón 'A',2,2,Eric Peris Escrig,DEF,2,2
@@ -1366,7 +1366,7 @@ Valencia C.F. 'A',5,5,Iker Frias Barrajon,DEF,2,5
 Valencia C.F. 'A',5,6,Pablo Jimenez Luque,MED,3,6
 Valencia C.F. 'A',5,8,Marc Carranza Hernandez,MED,3,7
 Valencia C.F. 'A',5,10,Jakson Enrique Gordon,MED,3,8
-Valencia C.F. 'A',5,7,Alejandro Angulo Ramón,DEL,4,9
+Valencia C.F. 'A',5,7,Alejandro Angulo Ramon,DEL,4,9
 Valencia C.F. 'A',5,9,Dario Alonso Garcia,DEL,4,10
 Valencia C.F. 'A',5,11,Ricardo Perez Ruiz,DEL,4,11
 Valencia C.F. 'A',5,12,Miguel Angel Prieto Serer,SUP,5,12

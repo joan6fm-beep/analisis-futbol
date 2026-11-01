@@ -1140,12 +1140,13 @@ def render_advanced(veo, pt_tm, partidos, clas, short_name, goals, share_all, se
 
 
 # ================================================================ PORTEROS (Liga y Rivales)
-def keeper_stats(minutos, alineaciones, eventos, jmax=None):
+def keeper_stats(minutos, alineaciones, eventos, jmax=None, match_minutes=90):
     """Estadística de porteros con atribución de cada gol al portero que estaba en el campo.
 
     - Portero = jugador con rol POR en la alineación titular de esa jornada.
     - Un gol se atribuye si exactamente un portero estaba en el campo en ese minuto
-      (titular: minutos 0..m; suplente: 90-m..90). Si no se puede determinar
+      (titular: minutos 0..m; suplente: D-m..D, con D = duración del partido: 90 juvenil, 80 cadete).
+      Si no se puede determinar
       (p. ej. el titular ya había salido y el sustituto no consta), queda pendiente.
     Devuelve (tabla, pendientes).
     """
@@ -1161,9 +1162,10 @@ def keeper_stats(minutos, alineaciones, eventos, jmax=None):
     mm = m.assign(minutos=num(m.minutos).fillna(0), titular=num(m.titular).fillna(0))
     gk_any = set(zip(keepers.equipo, keepers.jugador))
     extra = []
-    for k in km[(km.titular == 1) & (km.minutos < 90)].itertuples():
+    D = float(match_minutes)
+    for k in km[(km.titular == 1) & (km.minutos < D)].itertuples():
         subs = mm[(mm.equipo == k.equipo) & (num(mm.jornada) == num(pd.Series([k.jornada])).iloc[0]) & (mm.titular == 0) & (mm.minutos > 0)]
-        hit = subs[(90 - subs.minutos == k.minutos) & subs.jugador.map(lambda j: (k.equipo, j) in gk_any)]
+        hit = subs[(D - subs.minutos == k.minutos) & subs.jugador.map(lambda j: (k.equipo, j) in gk_any)]
         if len(hit) == 1:
             extra.append(hit.iloc[0][["equipo", "jornada", "jugador", "minutos", "titular"]].to_dict())
     if extra:
@@ -1178,8 +1180,8 @@ def keeper_stats(minutos, alineaciones, eventos, jmax=None):
         cand = km[(km.equipo == g.equipo) & (num(km.jornada) == gj)]
         on = []
         for _, k in cand.iterrows():
-            start, end = (0.0, min(90.0, k.minutos)) if k.titular == 1 else (max(0.0, 90.0 - k.minutos), 90.0)
-            if start < gm <= end or (gm == 0 and start == 0) or (gm > 90 and end >= 90):
+            start, end = (0.0, min(D, k.minutos)) if k.titular == 1 else (max(0.0, D - k.minutos), D)
+            if start < gm <= end or (gm == 0 and start == 0) or (gm > D and end >= D):
                 on.append(k.jugador)
         if len(on) == 1:
             conceded[(g.equipo, gj, on[0])] = conceded.get((g.equipo, gj, on[0]), 0) + 1
@@ -1187,10 +1189,10 @@ def keeper_stats(minutos, alineaciones, eventos, jmax=None):
             pending.append(dict(equipo=g.equipo, jornada=gj, minuto=gm,
                                 motivo="portero en el campo no identificado" if not on else "varios porteros posibles"))
     km["gc"] = [conceded.get((r.equipo, int(float(r.jornada)), r.jugador), 0) for r in km.itertuples()]
-    km["cero"] = ((km.minutos >= 90) & (km.gc == 0)).astype(int)
+    km["cero"] = ((km.minutos >= D) & (km.gc == 0)).astype(int)
     t = km.groupby(["equipo", "jugador"], as_index=False).agg(pj=("jornada", "nunique"), titularidades=("titular", "sum"),
                                                                minutos=("minutos", "sum"), gc=("gc", "sum"), cero=("cero", "sum"))
-    t["gc90"] = t.gc * 90.0 / t.minutos
+    t["gc90"] = t.gc * D / t.minutos  # goles encajados por partido reglamentario (90' o 80')
     t = t.sort_values(["gc90", "minutos", "gc", "jugador"], ascending=[True, False, True, True]).reset_index(drop=True)
     return t, pd.DataFrame(pending)
 
@@ -1205,7 +1207,7 @@ def jornada_status(partidos, jornada):
     return len(played), len(teams) // 2, missing
 
 
-def keeper_table_html(t, pending, team_col=True, logo=None, clean=lambda s: s):
+def keeper_table_html(t, pending, team_col=True, logo=None, clean=lambda s: s, match_minutes=90):
     rows = []
     for i, r in t.iterrows():
         team = (f"<td class='team-col rank-team'>{logo(str(r.equipo), 24) if logo else ''}<span>{escape(clean(str(r.equipo)))}</span></td>"
@@ -1217,7 +1219,7 @@ def keeper_table_html(t, pending, team_col=True, logo=None, clean=lambda s: s):
     head = ("<thead><tr><th class='rank-pos'>Pos.</th><th class='team-col rank-player'>Portero</th>"
             + ("<th class='team-col rank-team'>Equipo</th>" if team_col else "")
             + "<th class='rank-goals'>PJ</th><th class='rank-goals'>Tit.</th><th class='rank-min'>Min</th><th class='rank-goals'>GC</th>"
-              "<th class='rank-rate'>GC/90</th><th class='rank-goals'>0</th></tr></thead>")
+              f"<th class='rank-rate'>GC/{match_minutes}</th><th class='rank-goals'>0</th></tr></thead>")
     return ("<div class='ranking-scroll'><table class='heat league-table premium-table performance-table'>" + head
             + "<tbody>" + "".join(rows) + "</tbody></table></div>")
 

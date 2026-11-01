@@ -28,6 +28,9 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
     en `data/cadete_a/fuente/actas.txt`; `tools/importar_cadete_a.py` genera los CSV.
   - Cálculos en `league_core.py`, parametrizados por duración (`teams.py`: Juvenil 90', Cadete 80', Infantil 70').
   - Muro, calendario y adjuntos propios en `data/cadete_a/`.
+  - Resumen de liga y Rivales del Cadete A = los del Juvenil A parametrizados por liga (`LEAGUES` en app.py:
+    datos, 80', tramos de 10', sin vídeos/PDF). Comprobado que las 17 vistas del Juvenil A quedan idénticas.
+  - Escudos compartidos en `crests.py` (16 del Juvenil A + 12 FFCV del Cadete A).
 
 ## Pendiente / datos a revisar
 - Cadete A: J7 Celtic Elche–Roda (10/11) y resto de J8; asistencias no registradas en actas;

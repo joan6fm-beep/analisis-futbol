@@ -24,14 +24,27 @@ y volver a ejecutar el importador. El importador comprueba que cada marcador coi
 goles del acta, que hay 11 titulares y un portero, que el sistema coincide con las líneas y que
 cada nombre abreviado de la cronología corresponde a un único jugador; si no, lo indica.
 
+## Resumen de liga y Rivales (mismos componentes que el Juvenil A)
+El importador escribe también `liga/` con los mismos archivos y columnas que el Juvenil A
+(`partidos_rivales`, `eventos_rivales`, `minutos_rivales`, `alineaciones_rivales`, `plantillas_rivales`,
+`clasificacion_liga`, `equipos_liga`). `app.py` usa la configuración `LEAGUES["cadete"]`
+(80', 8 tramos de 10', sin vídeos ni PDF de 90') y reutiliza el Resumen de liga y la ficha de Rivales
+del Juvenil A. La clasificación de `liga/` está calculada desde los resultados de las actas.
+
+## Escudos
+`futbol_streamlit/crests.py` asigna a cada equipo el escudo de su club. Se reutilizan los del Juvenil A
+(Primer Toque, Villarreal, Alboraya, Patacona, Torre Levante, Inter San José) y 12 nuevos tomados de la
+app oficial de la FFCV en la misma grabación (`futbol_streamlit/escudos/`).
+
 ## Reglas de cálculo
 - Minutos: titular de 0' a su cambio o expulsión; suplente desde su entrada. El tiempo añadido no
   suma: máximo 80' por partido. % de participación = minutos ÷ (80 × partidos del equipo).
 - Porteros: cada gol encajado se atribuye al portero que estaba en el campo en ese minuto.
   Si hay dos porteros en el campo o falta el minuto, el gol queda «sin atribuir».
   GC por 80' = encajados ÷ minutos × 80.
-- Goles por tramos: 1–10 … 71–80. Un gol en el añadido cuenta en el último tramo de su parte
-  y conserva su minuto real.
+- Goles por tramos: 0–10, 10–20 … 70–80, cada tramo (lo, hi]: un gol en el 10' cuenta en 0–10 y el
+  minuto 0 también. Un gol en el tiempo añadido final (minuto > 80) cuenta en 70–80 («70–80+'») y
+  conserva su minuto real. El acta no distingue el añadido de la 1ª parte del inicio de la 2ª.
 - Clasificación: 3-1-0, ordenada por puntos, diferencia de goles y goles a favor. Los desempates
   oficiales (enfrentamiento directo) pueden diferir.
 
@@ -42,3 +55,4 @@ cada nombre abreviado de la cronología corresponde a un único jugador; si no, 
 - Alboraya tiene dos titulares «C. Garcia» (Cayetano Garcia Soriano y Cayetano Garcia Villar):
   algunas tarjetas y cambios no se pueden atribuir; sus minutos en esos partidos quedan pendientes.
 - Algunas fechas u horas no se veían en la grabación (se indica en `NOTA`).
+- Nombres escritos con y sin tilde en distintas actas se unifican dentro del equipo (aviso «Nombre unificado»).

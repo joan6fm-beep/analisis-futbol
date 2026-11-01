@@ -27,6 +27,7 @@ import player_charts
 import team360_advanced as t360adv
 import infantil_d as infd
 import cadete_a as cad
+import crests
 
 
 def _reload_local_modules(*modules):
@@ -46,7 +47,7 @@ def _reload_local_modules(*modules):
 
 
 # Orden de dependencia: ui_theme <- team360_charts / player_charts <- team360_advanced.
-pdf_export_v63, ui_theme, t360, player_charts, t360adv, infd, cad = _reload_local_modules(pdf_export_v63, ui_theme, t360, player_charts, t360adv, infd, cad)
+pdf_export_v63, ui_theme, t360, player_charts, t360adv, infd, cad, crests = _reload_local_modules(pdf_export_v63, ui_theme, t360, player_charts, t360adv, infd, cad, crests)
 build_rival_pdf_diseno = pdf_export_v63.generate
 
 
@@ -222,6 +223,8 @@ VEO_GOAL_SYNC = {
 }
 
 def match_link(team, jornada):
+    if not LG.get("video"):
+        return None  # los enlaces de Veo son del Juvenil A
     try:
         return MATCH_LINKS.get((str(team), int(jornada)))
     except Exception:
@@ -232,6 +235,31 @@ def short_team_name(name):
     for suffix in [" 'A'", " 'B'", " 'C'"]:
         out = out.replace(suffix, "")
     return out
+
+
+# Ligas con Resumen de liga y Rivales. Juvenil A conserva exactamente sus valores originales
+# (90', tramos de 15', enlaces de vídeo y PDF). Cadete A reutiliza los mismos componentes con
+# sus propios datos (data/cadete_a/liga/, generados por tools/importar_cadete_a.py) y partidos de 80'.
+LEAGUE_FILES = {"partidos_rivales.csv", "eventos_rivales.csv", "minutos_rivales.csv", "alineaciones_rivales.csv",
+                "plantillas_rivales.csv", "clasificacion_liga.csv", "equipos_liga.csv"}
+LEAGUES = {
+    "juvenil": dict(key="juvenil", data=DATA, mm=90, team_label="Juvenil A", label="Lliga Comunitat Juvenil · Nord",
+                    bins=[(0, 15), (15, 30), (30, 45), (45, 60), (60, 75), (75, 90)], extra_last=False,
+                    slot_labels=["0–15'", "16–30'", "31–45+'", "46–60'", "61–75'", "76–90+'"],
+                    default_rival="Bétera C.F. 'A'", video=True, pdf=True, comparator=False),
+    "cadete": dict(key="cadete", data=DATA / "cadete_a" / "liga", mm=80, team_label="Cadete A",
+                   label="Lliga Autonòmica Cadet · Grup Únic",
+                   bins=[(0, 10), (10, 20), (20, 30), (30, 40), (40, 50), (50, 60), (60, 70), (70, 80)], extra_last=True,
+                   slot_labels=["0–10'", "10–20'", "20–30'", "30–40'", "40–50'", "50–60'", "60–70'", "70–80+'"],
+                   default_rival=None, video=False, pdf=False, comparator=True),
+}
+LG = LEAGUES["juvenil"]
+
+
+def _league_minute_class_limits():
+    """Umbrales de color de la tabla de minutos (20/45/60/75 sobre 90), escalados a la duración de la liga."""
+    k = LG["mm"] / 90.0
+    return [round(x * k) for x in (20, 45, 60, 75)]
 
 
 EXPECTED_COLUMNS = {
@@ -245,10 +273,15 @@ EXPECTED_COLUMNS = {
     "jugadores_perfil.csv": ["jugador", "altura_cm", "peso_kg", "course_navette", "fecha_medicion"],
 }
 
+def _csv_path(name):
+    """Los archivos de liga se leen de la carpeta de la liga activa (Juvenil A o Cadete A)."""
+    return (LG["data"] if name in LEAGUE_FILES else DATA) / name
+
+
 @st.cache_data(show_spinner=False)
-def _load_csv_cached(name, file_stamp):
+def _load_csv_cached(name, file_stamp, path_str=None):
     """Carga defensiva cacheada. file_stamp obliga a refrescar cuando cambia el CSV."""
-    p = DATA / name
+    p = Path(path_str) if path_str else DATA / name
     cols = EXPECTED_COLUMNS.get(name, [])
     try:
         df = pd.read_csv(p) if p.exists() else pd.DataFrame(columns=cols)
@@ -262,13 +295,13 @@ def _load_csv_cached(name, file_stamp):
 
 def load_csv(name):
     """Carga un CSV y refresca automáticamente el caché si cambia el archivo."""
-    p = DATA / name
+    p = _csv_path(name)
     try:
         stat = p.stat()
         file_stamp = (stat.st_mtime_ns, stat.st_size)
     except Exception:
         file_stamp = (-1, -1)
-    return _load_csv_cached(name, file_stamp)
+    return _load_csv_cached(name, file_stamp, str(p))
 
 
 @st.cache_data(show_spinner=False)
@@ -1468,32 +1501,20 @@ def clean_name(name):
 
 
 def _team_logo_path(team):
-    logos = {
-        "Bétera C.F. 'A'": BASE / "betera_logo.png",
-        "C.D. Acero 'A'": BASE / "acero_logo.png",
-        "Primer Toque C.F. 'A'": BASE / "primer_toque_logo.png",
-        "C.F. At. Burriana - Salesianos 'A'": BASE / "salesianos_logo.png",
-        "Villarreal C.F. 'C'": BASE / "villarreal_logo.png",
-        "Alboraya U.D. 'B'": BASE / "alboraya_logo.png",
-        "C.F. Històrics de València 'A'": BASE / "historics_logo.png",
-        "Ath. Massamagrell C.F. 'A'": BASE / "massamagrell_logo.png",
-        "C.F. Torre Levante 'A'": BASE / "torre_levante_logo.png",
-        "C.F. Inter San José Valencia 'B'": BASE / "inter_san_jose_logo.png",
-        "Col. Salgui E.D.E. 'A'": BASE / "salgui_logo.png",
-        "C.F. Cracks 'A'": BASE / "cracks_logo.png",
-        "Paterna C.F. 'A'": BASE / "paterna_logo.png",
-        "Manises C.F. 'A'": BASE / "manises_logo.png",
-        "Patacona C.F. 'B'": BASE / "patacona_logo.png",
-        "C.D.F. Canet 'A'": BASE / "canet_logo.png",
-    }
-    return logos.get(str(team), Path("__missing__"))
+    """Escudo del equipo (módulo compartido crests.py, válido para todas las competiciones)."""
+    return crests.crest_path(team)
+
+
 
 
 @st.cache_data(show_spinner=False)
 def _team_logo_tag(team, size=26):
     lp = _team_logo_path(team)
     if not lp or not lp.exists():
-        return "<span style='display:inline-block;width:%dpx;text-align:center'>⚽</span>" % size
+        # Marcador neutro: sin escudo verificado no se muestra ninguna imagen de otro club.
+        return ("<span title='Escudo pendiente' style='display:inline-flex;align-items:center;justify-content:center;"
+                f"width:{size}px;height:{size}px;border-radius:50%;border:1px dashed #3A465B;color:#8A97AB;"
+                f"font-size:{max(9, size // 2.4):.0f}px;vertical-align:middle;margin-right:8px'>?</span>")
     b64 = base64.b64encode(lp.read_bytes()).decode()
     return (
         f"<img src='data:image/png;base64,{b64}' "
@@ -1892,7 +1913,7 @@ def render_infantil():
 
 
 @st.cache_data(show_spinner=False)
-def _league_snapshot(jmax):
+def _league_snapshot(jmax, league_key="juvenil"):
     tab = clasificacion[pd.to_numeric(clasificacion.get("jornada"), errors="coerce").eq(jmax)].copy()
     tab = tab.sort_values(["posicion", "equipo"]) if not tab.empty else tab
 
@@ -1948,19 +1969,20 @@ def _league_snapshot(jmax):
 
     # Goles por minuto registrados
     goal_rows = ev[ev["tipo"].astype(str).isin(["gol","penalti_gol","gol_contra","penalti_contra_gol"])].copy()
-    minute_blocks = ["0–15","15–30","30–45","45–60","60–75","75–90"]
+    # Tramos de la liga activa: (lo, hi] con el minuto 0 en el primero; un minuto posterior
+    # al reglamentario (tiempo añadido) se cuenta en el último tramo.
+    minute_blocks = [f"{lo}–{hi}" for lo, hi in LEAGUES[league_key]["bins"]]
     timing = {b: {"gf":0,"gc":0} for b in minute_blocks}
     for _, e in goal_rows.iterrows():
         try:
             minute = int(float(e.minuto))
         except Exception:
             continue
-        if minute <= 15: block = "0–15"
-        elif minute <= 30: block = "15–30"
-        elif minute <= 45: block = "30–45"
-        elif minute <= 60: block = "45–60"
-        elif minute <= 75: block = "60–75"
-        else: block = "75–90"
+        block = minute_blocks[-1]
+        for (_lo, _hi), _lab in zip(LEAGUES[league_key]["bins"], minute_blocks):
+            if minute <= _hi:
+                block = _lab
+                break
         if str(e.tipo) in ("gol","penalti_gol"):
             timing[block]["gf"] += 1
         else:
@@ -1994,9 +2016,9 @@ def render_league_summary():
     st.markdown(
         "<div class='league-hero'><div>"
         "<div class='league-eyebrow'>TEMPORADA 2026/2027</div>"
-        "<div class='league-title'>🏆 Resumen de liga · Juvenil A</div>"
+        f"<div class='league-title'>🏆 Resumen de liga · {LG['team_label']}</div>"
         "<div class='league-subtitle'>Clasificación, forma, producción ofensiva, disciplina, goles por minuto y rendimiento casa/fuera.</div>"
-        "</div><div class='league-badge'>Lliga Comunitat Juvenil · Nord</div></div>",
+        f"</div><div class='league-badge'>{LG['label']}</div></div>",
         unsafe_allow_html=True,
     )
 
@@ -2005,7 +2027,13 @@ def render_league_summary():
         .dropna().astype(int).unique().tolist()
     )
     opts = ["Total"] + [f"J{x}" for x in jornadas]
-    jornada_label = st.selectbox("Vista acumulada", opts, index=0, key="league_summary_jornada")
+    _default_idx = 0
+    if LG["key"] != "juvenil" and jornadas:
+        # Cadete A: por defecto, la última jornada con todos sus partidos documentados.
+        _complete = [j for j in jornadas if t360adv.jornada_status(partidos, j)[0] >= t360adv.jornada_status(partidos, j)[1]]
+        if _complete and f"J{max(_complete)}" in opts:
+            _default_idx = opts.index(f"J{max(_complete)}")
+    jornada_label = st.selectbox("Vista acumulada", opts, index=_default_idx, key="league_summary_jornada")
     jmax = max(jornadas) if jornada_label == "Total" and jornadas else (
         int(jornada_label[1:]) if jornada_label != "Total" else None
     )
@@ -2013,7 +2041,7 @@ def render_league_summary():
         st.info("Sin clasificación cargada.")
         return
 
-    tab, pp, ev, valid, team_stats, form, timing = _league_snapshot(jmax)
+    tab, pp, ev, valid, team_stats, form, timing = _league_snapshot(jmax, LG["key"])
     if tab.empty:
         st.info(f"Sin clasificación cargada para J{jmax}.")
         return
@@ -2256,12 +2284,12 @@ def render_league_summary():
             st.info("No hay goleadores con minutos registrados para este filtro.")
 
     # 3) Porteros: cada gol encajado se atribuye al portero que estaba en el campo (minutos y cambios).
-    _kt, _kpend = t360adv.keeper_stats(min_scope, ali_scope, ev)
+    _kt, _kpend = t360adv.keeper_stats(min_scope, ali_scope, ev, match_minutes=LG["mm"])
     st.markdown("<div class='league-subrank-title'>🧤 Porteros · goles encajados por minutos jugados</div>", unsafe_allow_html=True)
     if not _kt.empty:
-        st.markdown("<div class='goal-time-note'>GC/90 más bajo = mejor registro. PJ = partidos con minutos · Tit. = titularidades · "
+        st.markdown(f"<div class='goal-time-note'>GC/{LG['mm']} más bajo = mejor registro. PJ = partidos con minutos · Tit. = titularidades · "
                     "0 = partidos completos sin encajar. Desliza dentro de la tabla para ver todos.</div>"
-                    + t360adv.keeper_table_html(_kt, _kpend, logo=_team_logo_tag, clean=clean_name), unsafe_allow_html=True)
+                    + t360adv.keeper_table_html(_kt, _kpend, logo=_team_logo_tag, clean=clean_name, match_minutes=LG["mm"]), unsafe_allow_html=True)
         _pn = t360adv.pending_note(_kpend, clean_name)
         if _pn:
             st.caption(_pn)
@@ -3479,6 +3507,20 @@ with st.sidebar:
       "Resultados":"<svg viewBox='0 0 24 24'><path d='M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z'/><path d='M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4'/></svg>",
     }
     _nav_area = _area if _area in ("infantil", "cadete") else "juvenil"
+    LG = LEAGUES.get(_nav_area, LEAGUES["juvenil"])
+    if len(LG["bins"]) != 6:
+        # Las rejillas de tramos del Juvenil A están maquetadas para 6 tramos de 15'.
+        # Con 8 tramos de 10' (Cadete A) se adaptan sin tocar el diseño del Juvenil A.
+        _nb = len(LG["bins"])
+        st.markdown(
+            "<style>"
+            f".goaltype-grid{{grid-template-columns:150px repeat({_nb},minmax(46px,1fr)) 34px!important}}"
+            ".goal-time-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}"
+            ".goal-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}"
+            f"@media (max-width:900px){{.goaltype-grid{{grid-template-columns:110px repeat({_nb},minmax(34px,1fr)) 26px!important}}}}"
+            f"@media (max-width:640px){{.goaltype-grid{{grid-template-columns:74px repeat({_nb},minmax(24px,1fr)) 20px!important}}"
+            ".goal-time-grid,.goal-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}"
+            "</style>", unsafe_allow_html=True)
     if _nav_area == "cadete":
         _nav_info=[('Inicio','inicio'),('Resumen liga','liga'),('Rivales','rivales'),('Estadísticas','estadisticas'),('Calendario','calendario'),('Muro','muro')]
     elif _nav_area == "infantil":
@@ -3494,10 +3536,10 @@ with st.sidebar:
     st.markdown(''.join(_nh),unsafe_allow_html=True)
 
     seleccionado = None
-    if modulo == "Rivales" and _nav_area == "juvenil":
+    if modulo == "Rivales" and _nav_area in LEAGUES:
         equipos = load_csv("equipos_liga.csv")
-        st.markdown("<div class='side-label'>Rivales · 16 equipos</div>", unsafe_allow_html=True)
         lista = equipos.sort_values("orden")["equipo"].tolist() if not equipos.empty else []
+        st.markdown(f"<div class='side-label'>Rivales · {len(lista)} equipos</div>", unsafe_allow_html=True)
         try:
             _team_q = st.query_params.get("team", "")
         except Exception:
@@ -3509,12 +3551,13 @@ with st.sidebar:
         if _team_q in lista:
             default_idx = lista.index(_team_q)
         else:
-            default_idx = lista.index("Bétera C.F. 'A'") if "Bétera C.F. 'A'" in lista else 0
+            _dr = LG.get("default_rival") or next((t for t in lista if t != "Primer Toque C.F. 'A'"), None)
+            default_idx = lista.index(_dr) if _dr in lista else 0
         seleccionado = st.selectbox(
             "Selecciona rival",
             lista,
             index=default_idx,
-            help="Elige cualquiera de los 16 equipos. Los perfiles con minutos y eventos cargados se muestran completos; los demás conservan partidos y clasificación sin inventar datos individuales.",
+            help=f"Elige cualquiera de los {len(lista)} equipos. Los perfiles con minutos y eventos cargados se muestran completos; los demás conservan partidos y clasificación sin inventar datos individuales.",
         )
         st.markdown(
             f"<div class='team-count' style='display:flex;align-items:center;gap:8px'>"
@@ -3522,7 +3565,7 @@ with st.sidebar:
             f"<span>Equipo seleccionado: <b>{_safe_html(seleccionado)}</b></span></div>",
             unsafe_allow_html=True,
         )
-        with st.expander("Ver los 16 equipos"):
+        with st.expander(f"Ver los {len(lista)} equipos"):
             for _, row in equipos.sort_values("orden").iterrows():
                 mark = "✅" if row.equipo == seleccionado else "•"
                 st.markdown(
@@ -3536,8 +3579,8 @@ with st.sidebar:
 # Resumen: solo clasificación, partidos y eventos.
 # Individual: solo sus tablas necesarias.
 # Rivales: solo al entrar en Rivales se cargan las seis tablas del análisis.
-if _nav_area != "juvenil":
-    pass  # Infantil D y Cadete A cargan sus propios datos en su módulo
+if _nav_area not in LEAGUES or (_nav_area != "juvenil" and modulo not in ("Resumen liga", "Rivales")):
+    pass  # Infantil D y el resto de apartados del Cadete A cargan sus propios datos
 elif modulo == "Resumen liga":
     partidos = load_csv("partidos_rivales.csv")
     eventos = load_csv("eventos_rivales.csv")
@@ -3606,7 +3649,7 @@ if modulo == "Inicio" and not _landing:
         unsafe_allow_html=True,
     )
 
-if modulo == "Rivales" and seleccionado and _nav_area == "juvenil":
+if modulo == "Rivales" and seleccionado and _nav_area in LEAGUES:
     _equipos_mobile = load_csv("equipos_liga.csv")
     if not _equipos_mobile.empty:
         _chips = ["<div class='mobile-rival-strip' aria-label='Selector rápido de rival'>"]
@@ -3616,7 +3659,7 @@ if modulo == "Rivales" and seleccionado and _nav_area == "juvenil":
             _logo = _team_logo_tag(_tm, 20)
             _short = _safe_html(short_team_name(_tm))
             _chips.append(
-                f"<a class='mobile-rival-chip{_ac}' href='?area=juvenil&view=rivales&team={quote(_tm)}' target='_self'>"
+                f"<a class='mobile-rival-chip{_ac}' href='?area={_nav_area}&view=rivales&team={quote(_tm)}' target='_self'>"
                 f"{_logo}<span>{_short}</span></a>"
             )
         _chips.append("</div>")
@@ -3629,14 +3672,16 @@ if _area == "cadete":
     elif modulo == "Calendario":
         render_calendar()
     elif modulo == "Resumen liga":
-        cad.render_league()
+        render_league_summary()  # mismo Resumen de liga que el Juvenil A, con datos y duración del Cadete A
+        cad.render_league_extras(logo=_team_logo_tag)
     elif modulo == "Rivales":
-        cad.render_rivals()
+        pass  # continúa con la ficha de Rivales del Juvenil A (datos y duración del Cadete A)
     elif modulo == "Estadísticas":
         cad.render_stats()
     else:
         cad.render_home(_image_data_uri(str(BASE / "cadete_a_portada.jpeg")))
-    st.stop()
+    if modulo != "Rivales":
+        st.stop()
 if _area == "infantil":
     ACTIVE_STORE = TEAM_STORES["infantil"]
     if modulo == "Muro":
@@ -3698,22 +3743,16 @@ def team_score(row, team):
 
 
 def goal_time_slot(minute):
-    """Devuelve uno de los seis tramos de 15 minutos usados en la ficha rival."""
+    """Índice del tramo de la liga activa (Juvenil 6 × 15', Cadete 8 × 10'): (lo, hi], el 0 en el primero
+    y los minutos de tiempo añadido en el último."""
     try:
         m = float(minute)
     except Exception:
         return None
-    if m <= 15:
-        return 0
-    if m <= 30:
-        return 1
-    if m <= 45:
-        return 2
-    if m <= 60:
-        return 3
-    if m <= 75:
-        return 4
-    return 5
+    for i, (_lo, hi) in enumerate(LG["bins"]):
+        if m <= hi:
+            return i
+    return len(LG["bins"]) - 1
 
 
 def build_goal_meaning_records(part_df, ev_df, team):
@@ -3792,13 +3831,14 @@ def minute_class(v):
     if pd.isna(v):
         return "mx"
     x = float(v)
-    if x <= 20:
+    l0, l1, l2, l3 = _league_minute_class_limits()
+    if x <= l0:
         return "m0"
-    if x <= 45:
+    if x <= l1:
         return "m1"
-    if x <= 60:
+    if x <= l2:
         return "m2"
-    if x <= 75:
+    if x <= l3:
         return "m3"
     return "m4"
 
@@ -3847,36 +3887,38 @@ roster = plantillas[plantillas.equipo == seleccionado].copy()
 forms = team_formations(seleccionado)
 
 logo_path = _team_logo_path(seleccionado)
+_team_sub = f"{LG['label']} · Temporada 2026/2027" + (f" · partidos de {LG['mm']}'" if LG["mm"] != 90 else "")
 
 st.markdown(
-    f"""<div class='team-head'>{image_html(logo_path)}<div><div class='team-name'>{_safe_html(seleccionado)}</div><div class='team-sub'>Lliga Comunitat Juvenil · Nord · Temporada 2026/2027</div><span class='badge'>{('ANÁLISIS REAL · HASTA J' + str(int(pd.to_numeric(minutos.loc[minutos.equipo == seleccionado, 'jornada'], errors='coerce').max()))) if seleccionado in ["Primer Toque C.F. 'A'", "C.F. At. Burriana - Salesianos 'A'", "Villarreal C.F. 'C'", "Alboraya U.D. 'B'", "C.F. Històrics de València 'A'", "C.F. Torre Levante 'A'", "Ath. Massamagrell C.F. 'A'", "C.F. Inter San José Valencia 'B'", "Col. Salgui E.D.E. 'A'", "C.F. Cracks 'A'", "Paterna C.F. 'A'", "Manises C.F. 'A'", "Patacona C.F. 'B'", "C.D.F. Canet 'A'", "Bétera C.F. 'A'", "C.D. Acero 'A'"] else 'PERFIL PREPARADO · DATOS PENDIENTES'}</span></div></div>""",
+    f"""<div class='team-head'>{image_html(logo_path)}<div><div class='team-name'>{_safe_html(seleccionado)}</div><div class='team-sub'>{_team_sub}</div><span class='badge'>{('ANÁLISIS REAL · HASTA J' + str(int(pd.to_numeric(minutos.loc[minutos.equipo == seleccionado, 'jornada'], errors='coerce').max()))) if LG["key"] != "juvenil" or seleccionado in ["Primer Toque C.F. 'A'", "C.F. At. Burriana - Salesianos 'A'", "Villarreal C.F. 'C'", "Alboraya U.D. 'B'", "C.F. Històrics de València 'A'", "C.F. Torre Levante 'A'", "Ath. Massamagrell C.F. 'A'", "C.F. Inter San José Valencia 'B'", "Col. Salgui E.D.E. 'A'", "C.F. Cracks 'A'", "Paterna C.F. 'A'", "Manises C.F. 'A'", "Patacona C.F. 'B'", "C.D.F. Canet 'A'", "Bétera C.F. 'A'", "C.D. Acero 'A'"] else 'PERFIL PREPARADO · DATOS PENDIENTES'}</span></div></div>""",
     unsafe_allow_html=True,
 )
 
-# Exportación individual del rival: genera un PDF estático completo, pensado para compartir por WhatsApp.
-try:
-    # El Acero conserva el PDF de referencia; TODOS los otros rivales usan el mismo diseño visual.
-    # No pasar por el generador dinámico ni por validaciones de huellas de datos.
-    _es_acero = str(seleccionado).strip() == "C.D. Acero 'A'"
-    if _es_acero:
-        _pdf_file = BASE / "informe_acero_aprobado.pdf"
-        _pdf_bytes = _pdf_file.read_bytes()
-        if not _pdf_bytes.startswith(b"%PDF-"):
-            raise ValueError("El archivo aprobado del Acero no es un PDF válido.")
-    else:
-        _pdf_bytes = build_rival_pdf_diseno(
-            seleccionado, partidos, minutos, eventos, clasificacion, alineaciones, plantillas,
-            logo_path=logo_path, match_links=MATCH_LINKS,
+if LG.get("pdf"):
+    # Exportación individual del rival: genera un PDF estático completo, pensado para compartir por WhatsApp.
+    try:
+        # El Acero conserva el PDF de referencia; TODOS los otros rivales usan el mismo diseño visual.
+        # No pasar por el generador dinámico ni por validaciones de huellas de datos.
+        _es_acero = str(seleccionado).strip() == "C.D. Acero 'A'"
+        if _es_acero:
+            _pdf_file = BASE / "informe_acero_aprobado.pdf"
+            _pdf_bytes = _pdf_file.read_bytes()
+            if not _pdf_bytes.startswith(b"%PDF-"):
+                raise ValueError("El archivo aprobado del Acero no es un PDF válido.")
+        else:
+            _pdf_bytes = build_rival_pdf_diseno(
+                seleccionado, partidos, minutos, eventos, clasificacion, alineaciones, plantillas,
+                logo_path=logo_path, match_links=MATCH_LINKS,
+            )
+        st.download_button(
+            "📄 Descargar PDF",
+            data=_pdf_bytes,
+            file_name=("Informe_C_D_Acero.pdf" if _es_acero else 'Informe_Rival_' + ''.join(ch if ch.isalnum() else '_' for ch in str(seleccionado)).strip('_') + '.pdf'),
+            mime="application/pdf", type="primary", use_container_width=False,
+            key=f"pdf_rival_v15_12_75_{seleccionado}",
         )
-    st.download_button(
-        "📄 Descargar PDF",
-        data=_pdf_bytes,
-        file_name=("Informe_C_D_Acero.pdf" if _es_acero else 'Informe_Rival_' + ''.join(ch if ch.isalnum() else '_' for ch in str(seleccionado)).strip('_') + '.pdf'),
-        mime="application/pdf", type="primary", use_container_width=False,
-        key=f"pdf_rival_v15_12_75_{seleccionado}",
-    )
-except Exception as _pdf_exc:
-    st.error(f"No se ha podido preparar el PDF de este rival: {_pdf_exc}")
+    except Exception as _pdf_exc:
+        st.error(f"No se ha podido preparar el PDF de este rival: {_pdf_exc}")
 
 
 st.markdown(t360adv.team_summary_html(partidos, eventos, clasificacion, seleccionado, short_team_name), unsafe_allow_html=True)
@@ -3973,7 +4015,7 @@ if seleccionado == "C.D.F. Canet 'A'":
 
 # Perfiles ya desarrollados con jornadas completas.
 analizados = ["Bétera C.F. 'A'", "C.D. Acero 'A'", "Primer Toque C.F. 'A'", "C.F. At. Burriana - Salesianos 'A'", "Villarreal C.F. 'C'", "Alboraya U.D. 'B'", "C.F. Històrics de València 'A'", "C.F. Torre Levante 'A'", "Ath. Massamagrell C.F. 'A'", "C.F. Inter San José Valencia 'B'", "Col. Salgui E.D.E. 'A'", "C.F. Cracks 'A'", "Paterna C.F. 'A'", "Manises C.F. 'A'", "Patacona C.F. 'B'", "C.D.F. Canet 'A'"]
-if seleccionado not in analizados:
+if LG["key"] == "juvenil" and seleccionado not in analizados:
     st.info(
         "Este equipo ya está dentro del menú de Rivales. Todavía no hemos cargado sus actas y jornadas. "
         "Los equipos ya cargados con actas completas aparecen con la etiqueta ANÁLISIS REAL. El resto queda preparado para incorporar sus jornadas."
@@ -4232,7 +4274,7 @@ for j in js:
 jcols = [f"J{j}" for j in js]
 if jcols:
     table["Total"] = table[jcols].sum(axis=1, skipna=True)
-    avail = 90 * len(js)
+    avail = LG["mm"] * len(js)
     table["% min"] = (table.Total / avail * 100).round(0)
     starts_m = m.groupby("jugador")["titular"].sum()
     table["% tit"] = (table.jugador.map(starts_m).fillna(0) / max(1, len(js)) * 100).round(0)
@@ -4254,6 +4296,9 @@ if jcols:
     table["🟥"] = table.jugador.map(evr).fillna(0).astype(int)
     table = table.sort_values(["Total", "% tit", "jugador"], ascending=[False, False, True]).reset_index(drop=True)
 
+    _l = _league_minute_class_limits()
+    _mc_legend = (f"0–{_l[0]} rojo · {_l[0]+1}–{_l[1]} naranja · {_l[1]+1}–{_l[2]} amarillo · {_l[2]+1}–{_l[3]} verde claro · "
+                  f"{_l[3]+1}–{LG['mm']} verde oscuro" + (f" · % min sobre {LG['mm']}' por jornada" if LG["mm"] != 90 else ""))
     head = "<tr><th>#</th><th style='text-align:left'>Jugador</th>" + "".join(f"<th class='{x.lower()}'>{x}</th>" for x in jcols) + "<th>Total</th><th>% min</th><th>% tit</th><th>Prob. XI</th><th>G</th><th>🟨</th><th>🟨🟥</th><th>🟥</th></tr>"
     body = []
     for _, r in table.iterrows():
@@ -4262,7 +4307,7 @@ if jcols:
             f"<tr><td class='num'>{_safe_html(str(r.dorsal))}</td><td class='name'>{_safe_html(display_name(r.jugador))}</td>{cells}<td><b>{int(r.Total)}</b></td><td>{int(r['% min'])}%</td><td>{int(r['% tit'])}%</td><td><b>{int(r['Prob. XI'])}%</b></td><td>{int(r.G)}</td><td>{int(r['🟨'])}</td><td>{int(r['🟨🟥'])}</td><td>{int(r['🟥'])}</td></tr>"
         )
     st.markdown(
-        f"<div class='heat-wrap'><table class='heat'>{head}{''.join(body)}</table><div class='note'>Colores: 0–20 rojo · 21–45 naranja · 46–60 amarillo · 61–75 verde claro · 76–90 verde oscuro. &nbsp; 🟨🟥 = expulsión por doble amarilla · 🟥 = roja directa.</div></div>",
+        f"<div class='heat-wrap'><table class='heat'>{head}{''.join(body)}</table><div class='note'>Colores: {_mc_legend}. &nbsp; 🟨🟥 = expulsión por doble amarilla · 🟥 = roja directa.</div></div>",
         unsafe_allow_html=True,
     )
 else:
@@ -4339,10 +4384,10 @@ with d4:
     st.markdown(f"<div style='height:10px'></div><div class='card'><div class='section-title'>Penaltis</div><div class='mini-list'>{pen_html}</div></div>", unsafe_allow_html=True)
 
 # ---------------- Porteros del rival ----------------
-_rkt, _rkp = t360adv.keeper_stats(mm, al_scope, ev_scope)
+_rkt, _rkp = t360adv.keeper_stats(mm, al_scope, ev_scope, match_minutes=LG["mm"])
 if not _rkt.empty:
     st.markdown("<div style='height:10px'></div><div class='section-title'>Porteros · goles encajados con cada portero en el campo</div>", unsafe_allow_html=True)
-    st.markdown(t360adv.keeper_table_html(_rkt, _rkp, team_col=False), unsafe_allow_html=True)
+    st.markdown(t360adv.keeper_table_html(_rkt, _rkp, team_col=False, match_minutes=LG["mm"]), unsafe_allow_html=True)
     _rpn = t360adv.pending_note(_rkp, clean_name)
     if _rpn:
         st.caption(_rpn)
@@ -4359,16 +4404,17 @@ if not scorer_goals.empty and not mm.empty:
     if not conv.empty:
         dorsal_map = dorsal_labels(roster)
         conv["Jugador"] = conv["jugador"].apply(lambda n: name_with_number(n, dorsal_map.get(n, 0)) if dorsal_map.get(n) else str(n))
-        conv["Goles / 90"] = (conv["goles"] / conv["minutos"] * 90).round(2)
+        _GL = f"Goles / {LG['mm']}"
+        conv[_GL] = (conv["goles"] / conv["minutos"] * LG["mm"]).round(2)
         conv["Minutos por gol"] = (conv["minutos"] / conv["goles"]).round(0)
-        conv = conv.sort_values(["Goles / 90", "goles"], ascending=[False, False])
+        conv = conv.sort_values([_GL, "goles"], ascending=[False, False])
         # SVG propio: orden estricto de mayor a menor y columnas finas.
         n = len(conv)
         width = max(900, 105 * n)
         height = 315
         left, right, top, bottom = 58, 24, 28, 92
         plot_w, plot_h = width - left - right, height - top - bottom
-        vmax = max(float(conv["Goles / 90"].max()), 0.1)
+        vmax = max(float(conv[_GL].max()), 0.1)
         step = plot_w / max(1, n)
         bar_w = min(24, max(12, step * 0.24))
         svg = []
@@ -4380,7 +4426,7 @@ if not scorer_goals.empty and not mm.empty:
             svg.append(f"<text x='{left-9}' y='{yy+4:.1f}' text-anchor='end' font-size='10' fill='#B8C2D1'>{val_tick:.2f}</text>")
         for i, (_, r) in enumerate(conv.iterrows()):
             x = left + step * (i + .5)
-            val = float(r["Goles / 90"])
+            val = float(r[_GL])
             bh = (val / vmax) * plot_h if vmax else 0
             y0 = top + plot_h - bh
             label = _safe_html(str(r["Jugador"]))
@@ -4389,11 +4435,11 @@ if not scorer_goals.empty and not mm.empty:
             svg.append(f"<text x='{x:.1f}' y='{max(14,y0-7):.1f}' text-anchor='middle' font-size='11' font-weight='800' fill='#FFFFFF'>{val:.2f}</text>")
             svg.append(f"<text x='{x:.1f}' y='{top+plot_h+22:.1f}' text-anchor='middle' font-size='10' font-weight='700' fill='#FFFFFF' transform='rotate(-28 {x:.1f} {top+plot_h+22:.1f})'>{label}</text>")
             svg.append(f"<text x='{x:.1f}' y='{height-14:.1f}' text-anchor='middle' font-size='9' fill='#B8C2D1'>{_safe_html(meta)}</text>")
-        svg.append(f"<text x='16' y='{top+plot_h/2:.1f}' transform='rotate(-90 16 {top+plot_h/2:.1f})' text-anchor='middle' font-size='11' font-weight='700' fill='#B8C2D1'>Goles / 90</text>")
+        svg.append(f"<text x='16' y='{top+plot_h/2:.1f}' transform='rotate(-90 16 {top+plot_h/2:.1f})' text-anchor='middle' font-size='11' font-weight='700' fill='#B8C2D1'>{_GL}</text>")
         svg.append("</svg>")
         st.markdown("".join(svg), unsafe_allow_html=True)
-        st.dataframe(conv[["Jugador", "goles", "minutos", "Goles / 90", "Minutos por gol"]], width="stretch", hide_index=True)
-        st.markdown("<div class='note'>Ordenado de mayor a menor eficacia: el mejor G/90 aparece a la izquierda. Las columnas son deliberadamente finas para facilitar la comparación.</div>", unsafe_allow_html=True)
+        st.dataframe(conv[["Jugador", "goles", "minutos", _GL, "Minutos por gol"]], width="stretch", hide_index=True)
+        st.markdown(f"<div class='note'>Ordenado de mayor a menor eficacia: el mejor G/{LG['mm']} aparece a la izquierda. Las columnas son deliberadamente finas para facilitar la comparación.</div>", unsafe_allow_html=True)
     else:
         st.info("No hay goleadores con minutos registrados para este filtro.")
 else:
@@ -4405,13 +4451,17 @@ st.markdown("<div class='goal-legend'><span><span class='legend-dot' style='back
 
 goals_for = ev_scope[ev_scope.tipo.isin(["gol", "penalti_gol"])].copy()
 goals_against = ev_scope[ev_scope.tipo.isin(["gol_contra", "penalti_contra_gol"])].copy()
-bins = [(0, 15), (15, 30), (30, 45), (45, 60), (60, 75), (75, 90)]
+bins = LG["bins"]
 
 def count_bins(df):
+    """Convención única: (lo, hi], con el minuto 0 en el primer tramo. En el Cadete A, los goles
+    en tiempo añadido (minuto > 80) se cuentan en el último tramo (70–80+')."""
     vals = []
-    for lo, hi in bins:
+    for i, (lo, hi) in enumerate(bins):
         if lo == 0:
             n = int(((df.minuto >= lo) & (df.minuto <= hi)).sum())
+        elif i == len(bins) - 1 and LG.get("extra_last"):
+            n = int((df.minuto > lo).sum())
         else:
             n = int(((df.minuto > lo) & (df.minuto <= hi)).sum())
         vals.append(n)
@@ -4523,7 +4573,7 @@ _goal_meaning_order = [
     "Igualar marcador",
     "Reducir distancia",
 ]
-_goal_slot_labels = ["0–15'", "16–30'", "31–45+'", "46–60'", "61–75'", "76–90+'"][0:6]
+_goal_slot_labels = list(LG["slot_labels"])
 
 st.markdown(
     "<div class='goaltype-wrap'><div class='goaltype-head'>"
@@ -4537,7 +4587,7 @@ def _goaltype_matrix(side):
     dd = _goal_meanings[_goal_meanings.lado == side].copy() if not _goal_meanings.empty else pd.DataFrame()
     against = side == "contra"
     top = []
-    for slot in range(6):
+    for slot in range(len(_goal_slot_labels)):
         n = int((dd.tramo == slot).sum()) if not dd.empty else 0
         top.append(n)
     max_n = max([1] + top)
@@ -4550,7 +4600,7 @@ def _goaltype_matrix(side):
     for meaning in _goal_meaning_order:
         html.append(f"<div class='gt-rowlab'>{_safe_html(meaning)}</div>")
         row_total = 0
-        for slot in range(6):
+        for slot in range(len(_goal_slot_labels)):
             if dd.empty:
                 cell = dd
                 n = 0
@@ -4683,7 +4733,13 @@ else:
         )
 
 # En vista Total, biblioteca de todos los partidos del equipo con sus enlaces.
-if ambito == "Total" and jornada_sel == "Total":
+if not LG.get("video"):
+    # Cadete A: no hay vídeos; cada partido abre su acta (alineaciones, cambios, goles y tarjetas)
+    # y la ficha termina con el comparador de equipos.
+    cad.render_match_library(seleccionado, jornada_sel)
+    if LG.get("comparator"):
+        cad.render_comparator(seleccionado, logo=_team_logo_tag)
+elif ambito == "Total" and jornada_sel == "Total":
     st.markdown("<div style='height:14px'></div><div class='section-title'>Partidos analizados · enlaces de vídeo</div>", unsafe_allow_html=True)
     _cards = []
     for _, _rr in team_parts.sort_values("jornada").iterrows():
@@ -4700,4 +4756,7 @@ if ambito == "Total" and jornada_sel == "Total":
         )
     st.markdown("<div class='match-links-grid'>" + "".join(_cards) + "</div>", unsafe_allow_html=True)
 
-st.caption("Datos de liga hasta J8 (31/10/2026) · estadísticas Veo de J2, J3, J5 y J7.")
+if LG["key"] == "juvenil":
+    st.caption("Datos de liga hasta J8 (31/10/2026) · estadísticas Veo de J2, J3, J5 y J7.")
+else:
+    st.caption(f"Datos de las actas FFCV del {LG['team_label']} · partidos de {LG['mm']}' · fuente: data/cadete_a/fuente/actas.txt.")

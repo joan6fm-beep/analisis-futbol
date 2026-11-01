@@ -257,6 +257,24 @@ def main() -> int:
     partidos = pd.DataFrame(part_rows).sort_values(["jornada", "fecha", "hora", "local"])
     alineaciones = pd.DataFrame(al_all)
     eventos = pd.DataFrame(ev_all, columns=["jornada", "equipo", "minuto", "tipo", "jugador", "detalle"])
+    # Un mismo jugador puede aparecer con y sin tilde según el acta: se unifica dentro de su equipo
+    # usando la forma con más apariciones (la identidad no cambia; solo la grafía).
+    canon = {}
+    for (team, key), grp in alineaciones.assign(k=alineaciones.jugador.map(norm)).groupby(["equipo", "k"]):
+        forms = grp.jugador.value_counts()
+        if len(forms) > 1:
+            best = sorted(forms.index, key=lambda f: (-forms[f], -sum(ch != unicodedata.normalize("NFKD", ch)[0] for ch in f)))[0]
+            for f in forms.index:
+                if f != best:
+                    canon[(team, f)] = best
+                    avisos.append(dict(jornada=0, partido=team, tipo="nota", detalle=f"Nombre unificado: «{f}» → «{best}»", linea=0))
+    if canon:
+        def _fix(df, col="jugador"):
+            df[col] = [canon.get((t, j), j) for t, j in zip(df.equipo, df[col])]
+        _fix(alineaciones)
+        _fix(eventos)
+        eventos["detalle"] = [";".join((f"sale={canon.get((t, x[5:]), x[5:])}" if x.startswith("sale=") else x) for x in str(d).split(";"))
+                              for t, d in zip(eventos.equipo, eventos.detalle)]
     minutos = lc.minutes_from_acta(alineaciones, eventos, MATCH_MINUTES, fuente="Acta FFCV (vídeo aportado por el usuario)")
     # minutos que dependen de un cambio ambiguo: no se inventan
     minutos["minutos"] = minutos["minutos"].astype("Float64")
@@ -289,6 +307,7 @@ def main() -> int:
                              gc=_int(rest[1]) if len(rest) > 1 else None))
         pd.DataFrame(rows).to_csv(DIR / "clasificacion_oficial.csv", index=False)
 
+    export_league_schema(partidos, alineaciones, eventos, minutos, plantillas)
     n_acta = int((partidos.estado == "acta").sum())
     print(f"{len(partidos)} partidos ({n_acta} con acta) · jornadas {sorted(partidos.jornada.unique().tolist())}")
     print(f"{len(teams)} equipos · {alineaciones.jugador.nunique() if not alineaciones.empty else 0} nombres de jugador · "
@@ -299,6 +318,69 @@ def main() -> int:
         if a["tipo"] != "nota":
             print(f"  J{a['jornada']} {a['partido']} · {a['tipo']}: {a['detalle']} (línea {a['linea']})")
     return 1 if serious else 0
+
+
+def export_league_schema(partidos, alineaciones, eventos, minutos, plantillas):
+    """Escribe data/cadete_a/liga/ con los mismos archivos y columnas que el Juvenil A
+    (partidos_rivales, eventos_rivales, minutos_rivales, alineaciones_rivales, plantillas_rivales,
+    clasificacion_liga, equipos_liga), para reutilizar Resumen de liga y Rivales sin duplicar código.
+
+    Convención de eventos del Juvenil A: cada gol figura dos veces, «gol» en el equipo que marca y
+    «gol_contra» en el que lo encaja (penalti_gol / penalti_contra_gol). Un gol en propia puerta es
+    «gol» con jugador «G.P.» en el equipo beneficiado. Segunda amarilla = «doble_amarilla».
+    """
+    out = DIR / "liga"
+    out.mkdir(parents=True, exist_ok=True)
+    p = partidos.copy()
+    p["estado"] = "validado"
+    p[["jornada", "fecha", "local", "visitante", "goles_local", "goles_visitante", "campo", "sistema_local",
+       "sistema_visitante", "estado"]].to_csv(out / "partidos_rivales.csv", index=False)
+    rows = []
+    for e in eventos.itertuples():
+        rival = lc._kv(e.detalle, "rival")
+        t = e.tipo
+        if t in ("gol", "penalti_gol"):
+            pen = t == "penalti_gol"
+            rows.append(dict(jornada=e.jornada, equipo=e.equipo, minuto=e.minuto, tipo=t, jugador=e.jugador,
+                             detalle="Gol de penalti" if pen else ""))
+            rows.append(dict(jornada=e.jornada, equipo=rival, minuto=e.minuto,
+                             tipo="penalti_contra_gol" if pen else "gol_contra", jugador=e.jugador,
+                             detalle=f"Gol encajado ante {e.equipo}" + (" de penalti" if pen else "")))
+        elif t == "gol_propia":
+            rows.append(dict(jornada=e.jornada, equipo=rival, minuto=e.minuto, tipo="gol", jugador="G.P.",
+                             detalle=f"Gol en propia rival: {e.jugador}"))
+            rows.append(dict(jornada=e.jornada, equipo=e.equipo, minuto=e.minuto, tipo="gol_contra", jugador=e.jugador,
+                             detalle="Gol en propia puerta"))
+        elif t == "amarilla":
+            rows.append(dict(jornada=e.jornada, equipo=e.equipo, minuto=e.minuto, tipo="amarilla", jugador=e.jugador, detalle=""))
+        elif t == "segunda_amarilla":
+            rows.append(dict(jornada=e.jornada, equipo=e.equipo, minuto=e.minuto, tipo="doble_amarilla", jugador=e.jugador,
+                             detalle="Segunda amarilla / expulsión"))
+        elif t == "roja":
+            rows.append(dict(jornada=e.jornada, equipo=e.equipo, minuto=e.minuto, tipo="roja", jugador=e.jugador, detalle=""))
+    pd.DataFrame(rows, columns=["jornada", "equipo", "minuto", "tipo", "jugador", "detalle"]).sort_values(
+        ["jornada", "equipo", "minuto"], kind="stable").to_csv(out / "eventos_rivales.csv", index=False)
+    m = minutos.copy()
+    m["fuente"] = m["fuente"].fillna("Acta FFCV")
+    m.to_csv(out / "minutos_rivales.csv", index=False)
+    a = alineaciones[~alineaciones.rol.astype(str).str.startswith("SUP")].copy()
+    a["rol"] = a["rol"].replace({"DEL": "ATA"})
+    a[["equipo", "jornada", "dorsal", "jugador", "rol", "linea", "orden"]].to_csv(out / "alineaciones_rivales.csv", index=False)
+    plantillas.to_csv(out / "plantillas_rivales.csv", index=False)
+    teams = sorted(set(partidos.local) | set(partidos.visitante))
+    clas = []
+    for j in sorted(partidos.jornada.unique()):
+        tab = lc.standings(partidos[partidos.jornada <= j], teams)
+        fechas = pd.to_datetime(partidos[partidos.jornada == j].fecha, format="%d/%m/%Y", errors="coerce").dropna()
+        fecha = fechas.max().strftime("%d/%m/%Y") if not fechas.empty else ""
+        for r in tab.itertuples():
+            clas.append(dict(jornada=int(j), fecha=fecha, posicion=r.pos, equipo=r.equipo, puntos=r.pts, pj=r.pj,
+                             pg=r.pg, pe=r.pe, pp=r.pp))
+    pd.DataFrame(clas).to_csv(out / "clasificacion_liga.csv", index=False)
+    last = max(j for j in partidos.jornada.unique()
+               if (partidos.jornada == j).sum() >= len(teams) // 2) if len(partidos) else 0
+    order = lc.standings(partidos[partidos.jornada <= last], teams).equipo.tolist()
+    pd.DataFrame({"orden": range(1, len(order) + 1), "equipo": order}).to_csv(out / "equipos_liga.csv", index=False)
 
 
 def _int(v):

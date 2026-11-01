@@ -482,9 +482,10 @@ def test_cadete_a():
           "Castellón J3: dos porteros en el campo → 2 goles sin atribuir (no se inventa)")
     labels = [b[2] for b in lc.minute_bins(80)]
     gb = lc.goals_by_bin(ev, T, 80)
-    check(labels[0] == "1–10" and labels[-1] == "71–80" and len(labels) == 8 and gb.a_favor.sum() == 14
-          and gb.en_contra.sum() == 15 and lc.bin_label(83, 80) == "71–80+",
-          "Tramos 1–10 … 71–80 (sin 81–90); el añadido cuenta en 71–80 conservando el minuto")
+    check(labels[0] == "0–10" and labels[-1] == "70–80" and len(labels) == 8 and gb.a_favor.sum() == 14
+          and gb.en_contra.sum() == 15 and lc.bin_label(83, 80) == "70–80+" and lc.bin_label(10, 80) == "0–10"
+          and lc.bin_label(11, 80) == "10–20" and lc.bin_label(0, 80) == "0–10",
+          "Tramos 0–10 … 70–80 (sin 80–90): (lo, hi], el 10' en 0–10 y el añadido en 70–80+ conservando el minuto")
     sc = lc.scorers(ev, mins)
     check(not sc.duplicated(["equipo", "jugador"]).any() and sc.goles.sum() == int(ev.tipo.isin(lc.GOAL_TYPES_FOR).sum()),
           "Goleadores: una fila por jugador y equipo; propia puerta por separado")
@@ -504,8 +505,52 @@ def test_cadete_a():
         check(not a.exception and "CADETE A" in hh, f"Cadete A · {v}: sin errores y con su propia cabecera")
     a = run({"area": "cadete", "view": "liga"})
     hh = html_of(a)
-    check("Resumen de liga · Cadete A" in hh and "PARTIDOS DE 80'" in hh and "/90" not in hh,
-          "Resumen de liga del Cadete A en unidades de 80' (sin métricas /90)")
+    check("Resumen de liga · Cadete A" in hh and "Lliga Autonòmica Cadet" in hh and "GC/80" in hh and "GC/90" not in hh
+          and "70–80" in hh and "75–90" not in hh and "Comparador de equipos" in hh,
+          "Resumen de liga del Cadete A: componentes del Juvenil A con 80', tramos de 10' y comparador")
+    test_cadete_rivales_y_escudos()
+
+
+def test_cadete_rivales_y_escudos():
+    """Cadete A: ficha de Rivales del Juvenil A con datos del Cadete A, escudos y archivos de liga."""
+    import pandas as pd
+    import crests
+    import team360_advanced as A
+    L = APP_DIR / "data" / "cadete_a" / "liga"
+    part = pd.read_csv(L / "partidos_rivales.csv"); ev = pd.read_csv(L / "eventos_rivales.csv")
+    mins = pd.read_csv(L / "minutos_rivales.csv"); al = pd.read_csv(L / "alineaciones_rivales.csv")
+    goals = int(part.goles_local.sum() + part.goles_visitante.sum())
+    check(int(ev.tipo.isin(["gol", "penalti_gol"]).sum()) == goals == int(ev.tipo.isin(["gol_contra", "penalti_contra_gol"]).sum()),
+          f"Liga del Cadete A en formato Juvenil A: {goals} goles = goles marcados = goles encajados en los eventos")
+    juv = set(pd.read_csv(APP_DIR / "data" / "equipos_liga.csv", encoding="utf-8-sig").equipo)
+    cad = set(pd.read_csv(L / "equipos_liga.csv").equipo)
+    check(len(cad) == 18 and not (cad & juv) - {"Primer Toque C.F. 'A'", "C.F. Torre Levante 'A'"},
+          "Equipos del Cadete A propios (solo comparten nombre con el Juvenil A Primer Toque y Torre Levante)")
+    check(set(al.rol) <= {"POR", "DEF", "MED", "ATA"} and al.groupby(["equipo", "jornada"]).size().eq(11).all(),
+          "Alineaciones: 11 titulares por equipo y partido con los roles del Juvenil A")
+    t, pend = A.keeper_stats(mins, al, ev, match_minutes=80)
+    pt = t[t.equipo == "Primer Toque C.F. 'A'"]
+    check(int(pt.gc.sum()) == 15 and (abs(t.gc * 80 / t.minutos - t.gc90) < 1e-9).all() and t.minutos.max() <= 80 * 8,
+          "Porteros (cálculo del Juvenil A con 80'): Primer Toque 15 GC; GC por 80' = GC × 80 ÷ minutos")
+    t90, _ = A.keeper_stats(pd.read_csv(APP_DIR / "data" / "minutos_rivales.csv"), pd.read_csv(APP_DIR / "data" / "alineaciones_rivales.csv"),
+                            pd.read_csv(APP_DIR / "data" / "eventos_rivales.csv"))
+    check(not t90.empty and (abs(t90.gc * 90 / t90.minutos - t90.gc90) < 1e-9).all(), "Juvenil A: porteros siguen por 90' (valor por defecto)")
+    missing = [x for x in cad | juv if not crests.has_crest(x)]
+    check(not missing, f"Escudo verificado para los 34 equipos de las dos ligas {missing}")
+    same = crests.crest_path("Villarreal C.F. 'A'") == crests.crest_path("Villarreal C.F. 'C'")
+    diff = len({crests.crest_path(x) for x in ("Levante U.D. 'A'", "C.F. Torre Levante 'A'")}) == 2 and         len({crests.crest_path(x) for x in ("Elche C.F. 'A'", "Celtic Elche C.F. 'A'", "S.C.D. Intangco 'A'")}) == 3 and         crests.crest_path("Valencia C.F. 'A'") != crests.crest_path("C.F. Fundació VCF 'A'")
+    check(same and diff and not crests.has_crest("Equipo inventado 'Z'"),
+          "Escudos: mismo club → mismo archivo; clubes parecidos → escudos distintos; sin escudo → marcador neutro")
+    for team in ("Valencia C.F. 'A'", "Primer Toque C.F. 'A'", "C.D. Roda 'A'"):
+        a = run({"area": "cadete", "view": "rivales", "team": team})
+        hh = html_of(a)
+        check(not a.exception and "partidos de 80'" in hh and "GC/80" in hh and "70–80+'" in hh and "Goles / 90" not in hh
+              and "GC/90" not in hh and "ANÁLISIS REAL" in hh and "Partidos analizados · actas FFCV" in hh
+              and not a.get("download_button"), f"Rivales del Cadete A · {team}: ficha del Juvenil A a 80', sin PDF de 90' ni enlaces de vídeo")
+    a = run({"area": "juvenil", "view": "rivales", "team": "Bétera C.F. 'A'"})
+    hh = html_of(a)
+    check(not a.exception and "GC/90" in hh and "76–90+'" in hh and a.get("download_button"),
+          "Juvenil A sin cambios: GC/90, tramos de 15' y PDF del rival")
 
 
 def main():

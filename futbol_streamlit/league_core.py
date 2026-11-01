@@ -97,25 +97,23 @@ def position_evolution(partidos: pd.DataFrame, teams: list[str]) -> pd.DataFrame
 # --------------------------------------------------------------------------- tramos de goles
 
 def minute_bins(match_minutes: int, step: int = 10) -> list[tuple[int, int, str]]:
-    """Tramos reglamentarios: (1,10,'1–10') … hasta match_minutes. No hay tramo posterior."""
-    return [(a, min(a + step - 1, match_minutes), f"{a}–{min(a + step - 1, match_minutes)}")
-            for a in range(1, match_minutes + 1, step)]
+    """Tramos reglamentarios (lo, hi]: 0–10, 10–20 … hasta match_minutes. No hay tramo posterior."""
+    return [(a, min(a + step, match_minutes), f"{a}–{min(a + step, match_minutes)}") for a in range(0, match_minutes, step)]
 
 
 def bin_label(minute, match_minutes: int, step: int = 10) -> str | None:
-    """Tramo de un gol. Los goles en el añadido de la 1ª parte van al último tramo de la 1ª parte
-    y los del añadido final al último tramo, marcados con '+' (se conserva el minuto real aparte)."""
+    """Tramo de un gol con una convención única, sin duplicados en los límites:
+    el minuto m va al tramo (lo, hi] que lo contiene (un gol en el 10' cuenta en 0–10; el minuto 0 también).
+    Un minuto posterior al reglamentario (tiempo añadido) va al último tramo con '+'; el minuto real se conserva."""
     try:
-        m = int(float(minute))
+        m = float(minute)
     except (TypeError, ValueError):
         return None
-    if m < 1:
-        m = 1
+    bins = minute_bins(match_minutes, step)
     if m > match_minutes:
-        last = minute_bins(match_minutes, step)[-1]
-        return last[2] + "+"
-    for a, b, lab in minute_bins(match_minutes, step):
-        if a <= m <= b:
+        return bins[-1][2] + "+"
+    for lo, hi, lab in bins:
+        if m <= hi:
             return lab
     return None
 
