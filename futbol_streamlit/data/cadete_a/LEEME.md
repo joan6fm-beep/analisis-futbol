@@ -31,6 +31,12 @@ El importador escribe también `liga/` con los mismos archivos y columnas que el
 (80', 8 tramos de 10', sin vídeos ni PDF de 90') y reutiliza el Resumen de liga y la ficha de Rivales
 del Juvenil A. La clasificación de `liga/` está calculada desde los resultados de las actas.
 
+## Informe PDF de rival
+El botón «📄 Descargar informe PDF» de cada ficha usa el mismo generador del Juvenil A
+(`pdf_export_v63.generate`) con los parámetros de la liga: 80', tramos de 10', 18 equipos y
+escudos de `crests.py`. La sección de vídeos se sustituye por los resultados de cada partido
+(no hay vídeos del Cadete A). El Resumen de liga no tiene PDF en el Juvenil A, así que tampoco aquí.
+
 ## Escudos
 `futbol_streamlit/crests.py` asigna a cada equipo el escudo de su club. Se reutilizan los del Juvenil A
 (Primer Toque, Villarreal, Alboraya, Patacona, Torre Levante, Inter San José) y 12 nuevos tomados de la

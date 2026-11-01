@@ -16,6 +16,11 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
 try:
+    import crests as _crests
+except Exception:  # el generador también funciona aislado
+    _crests = None
+
+try:
     pdfmetrics.registerFont(TTFont('D','/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'))
     pdfmetrics.registerFont(TTFont('DB','/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'))
     FONT='D'; BOLD='DB'
@@ -53,19 +58,24 @@ def _team_score(row, team):
         return int(row.goles_local), int(row.goles_visitante), row.visitante
     return int(row.goles_visitante), int(row.goles_local), row.local
 
-def _goal_slot(minute):
+JUVENIL_BINS = [(0, 15), (15, 30), (30, 45), (45, 60), (60, 75), (75, 90)]
+JUVENIL_PERIODS = ['0–15’','16–30’','31–45+’','46–60’','61–75’','76–90+’']
+
+
+def _goal_slot(minute, bins=None):
+    """Tramo (lo, hi] con el minuto 0 en el primero; el tiempo añadido va al último tramo.
+    Juvenil A: 6 × 15'. Cadete A: 8 × 10'."""
     try:
         m = float(minute)
     except Exception:
         return None
-    if m <= 15: return 0
-    if m <= 30: return 1
-    if m <= 45: return 2
-    if m <= 60: return 3
-    if m <= 75: return 4
-    return 5
+    bins = bins or JUVENIL_BINS
+    for i, (_lo, hi) in enumerate(bins):
+        if m <= hi:
+            return i
+    return len(bins) - 1
 
-def _goal_meanings(part_df, ev_df, team):
+def _goal_meanings(part_df, ev_df, team, bins=None):
     out = []
     goal_for = {'gol','penalti_gol'}
     goal_against = {'gol_contra','penalti_contra_gol'}
@@ -99,7 +109,7 @@ def _goal_meanings(part_df, ev_df, team):
             else: sa += 1
             if sf < sa: trail_for = True
             if sa < sf: trail_against = True
-            sl = _goal_slot(er.minuto)
+            sl = _goal_slot(er.minuto, bins)
             if sl is not None:
                 out.append({'jornada':j,'oponente':str(opp),'minuto':int(float(er.minuto)),
                             'lado':'favor' if is_for else 'contra','meaning':meaning,'slot':sl,
@@ -107,6 +117,9 @@ def _goal_meanings(part_df, ev_df, team):
     return pd.DataFrame(out)
 
 def _opponent_badge_path(name):
+    if _crests is not None:  # escudos compartidos de toda la app (Juvenil A y Cadete A)
+        p = _crests.crest_path(name)
+        return p if p.exists() else None
     filename = _TEAM_LOGOS.get(str(name))
     path = Path(__file__).parent / filename if filename else None
     return path if path and path.exists() else None
@@ -124,7 +137,11 @@ def _build_selected_xi(al, mdf, scope_js, main_form):
         for _,r in sub.iterrows(): chosen.append({'role':role,'name':r.jugador,'dorsal':int(r.dorsal) if pd.notna(r.dorsal) else '', 'prob':float(r.prob)})
     return chosen
 
-def generate(team,partidos,minutos,eventos,clasificacion,alineaciones,plantillas,logo_path=None,match_links=None):
+def generate(team,partidos,minutos,eventos,clasificacion,alineaciones,plantillas,logo_path=None,match_links=None,
+             match_minutes=90,bins=None,period_labels=None,league_label='Lliga Comunitat Juvenil · Nord',show_videos=True):
+    """Informe de rival en 4 páginas. Los parámetros de liga generan el mismo informe para el
+    Cadete A (80', 8 tramos de 10', 18 equipos, sin vídeos). Por defecto: Juvenil A (90')."""
+    MM = match_minutes; BINS = bins or JUVENIL_BINS; PERIODS = period_labels or JUVENIL_PERIODS; NB = len(BINS)
     buf=BytesIO(); c=canvas.Canvas(buf,pagesize=A4); c.setTitle('Informe de rival · '+str(team)); c.setAuthor('Primer Toque C.F.')
     P=partidos[(partidos.local==team)|(partidos.visitante==team)].copy().sort_values('jornada')
     m=minutos[minutos.equipo==team].copy(); ev=eventos[eventos.equipo==team].copy(); a=alineaciones[alineaciones.equipo==team].copy(); roster=plantillas[plantillas.equipo==team].copy()
@@ -167,7 +184,7 @@ def generate(team,partidos,minutos,eventos,clasificacion,alineaciones,plantillas
     def header(number):
         rect(0,H-66,W,66,navy)
         text(M,H-34,'INFORME DE RIVAL  ·  '+_short_team(team).upper(),14,HexColor('#FFFFFF'),True,maxwidth=IW)
-        text(M,H-51,'Lliga Comunitat Juvenil · Nord · Temporada 2026/2027',8,HexColor('#C9D9EB'))
+        text(M,H-51,league_label+' · Temporada 2026/2027'+(f' · Partidos de {MM}’' if MM!=90 else ''),8,HexColor('#C9D9EB'))
         line(M,30,W-M,30);text(M,17,'Primer Toque C.F.  |  Informe de rival',7,muted)
         text(W-M-68,17,f'Página {number}',7,muted)
     def crest(path,x,y,w,h):
@@ -241,6 +258,8 @@ def generate(team,partidos,minutos,eventos,clasificacion,alineaciones,plantillas
     players=sorted(set(totals)|set(roster.jugador.dropna().astype(str)),key=lambda p:(-totals.get(p,0),p))
     # Cabe más de 30 jugadores sin cortar tablas; en clubes grandes se reducen filas.
     rowh=min(21,max(13,515/max(1,len(players))))
+    # Umbrales de color de minutos (sobre 90: 20/45/60/80), escalados a la duración del partido.
+    LIM=[20,45,60,80] if MM==90 else [round(x*MM/90) for x in (20,45,60,80)]
     cols=['#','Jugador','PJ','Tit.','Min','G']+[f'J{j}' for j in display_js]
     base=[26,178,25,25,36,23];cw=(IW-sum(base))/max(1,len(display_js));ws=base+[cw]*len(display_js)
     xs=[M]
@@ -254,12 +273,14 @@ def generate(team,partidos,minutos,eventos,clasificacion,alineaciones,plantillas
         for k,v in enumerate(name_values): text(xs[k]+3,lower+rowh*.33,v,6.0 if k==1 else 6.7,navy,k in (4,5),maxwidth=ws[k]-5)
         for k,j in enumerate(display_js):
             psub=mins[(mins.jugador==p)&(mins.jornada==j)];v=int(psub.minutos.sum()) if len(psub) else None
-            bg=grey if v is None else (red if v<=20 else orange if v<=45 else yellow if v<=60 else mint if v<80 else green)
+            bg=grey if v is None else (red if v<=LIM[0] else orange if v<=LIM[1] else yellow if v<=LIM[2] else mint if v<LIM[3] else green)
             rect(xs[k+6]+1,lower+1,ws[k+6]-2,rowh-2,bg,r=2)
             centered(xs[k+6]+ws[k+6]/2,lower+rowh*.33,'—' if v is None else str(v),6.7,navy,True)
         y-=rowh
     y-=15;text(M,y,'Colores:',7,navy,True)
-    lg=[('80–90',green),('61–79',mint),('46–60',yellow),('21–45',orange),('0–20',red),('Sin registro',grey)]
+    lg=([('80–90',green),('61–79',mint),('46–60',yellow),('21–45',orange),('0–20',red),('Sin registro',grey)] if MM==90 else
+        [(f'{LIM[3]}–{MM}',green),(f'{LIM[2]+1}–{LIM[3]-1}',mint),(f'{LIM[1]+1}–{LIM[2]}',yellow),(f'{LIM[0]+1}–{LIM[1]}',orange),
+         (f'0–{LIM[0]}',red),('Sin registro',grey)])
     x=M+50
     for t,col in lg:
         rect(x,y-2,9,9,col);text(x+11,y,t,6,muted);x+=72 if t!='Sin registro' else 85
@@ -272,34 +293,38 @@ def generate(team,partidos,minutos,eventos,clasificacion,alineaciones,plantillas
     page()
     # PAGE 3: goals by minute, situation matrices, goal difference.
     header(3);y=H-91;y=heading(y,'3. Goles y momentos del partido');y=sub(y,'Distribución de goles por minuto')
-    periods=['0–15’','16–30’','31–45+’','46–60’','61–75’','76–90+’'];gfslots=[0]*6;gcslots=[0]*6
+    periods=PERIODS;gfslots=[0]*NB;gcslots=[0]*NB
     for _,r in ev.iterrows():
-        s=_goal_slot(r.minuto)
+        s=_goal_slot(r.minuto,BINS)
         if s is None:continue
         if r.tipo in ('gol','penalti_gol'):gfslots[s]+=1
         if r.tipo in ('gol_contra','penalti_contra_gol'):gcslots[s]+=1
     ht=147;bottom=y-ht+24;maxval=max(1,*gfslots,*gcslots);barh=ht-50
     for k,p in enumerate(periods):
-        xx=M+22+k*(IW-44)/6;a=gfslots[k]/maxval*barh;b=gcslots[k]/maxval*barh
-        if a:rect(xx,bottom,21,a,green)
-        if b:rect(xx+25,bottom,21,b,HexColor('#EF6171'))
-        text(xx+6,bottom+a+5,gfslots[k],7,navy,True);text(xx+29,bottom+b+5,gcslots[k],7,navy,True)
-        text(xx-5,bottom-16,p,7,muted)
+        bw=21 if NB==6 else 18;bgap=25 if NB==6 else 21
+        xx=M+22+k*(IW-44)/NB;a=gfslots[k]/maxval*barh;b=gcslots[k]/maxval*barh
+        if a:rect(xx,bottom,bw,a,green)
+        if b:rect(xx+bgap,bottom,bw,b,HexColor('#EF6171'))
+        text(xx+(6 if NB==6 else bw/2-4.5),bottom+a+5,gfslots[k],7,navy,True)
+        text(xx+(29 if NB==6 else bgap+bw/2-4.5),bottom+b+5,gcslots[k],7,navy,True)
+        text(xx-5,bottom-16,p,7 if NB==6 else 6.4,muted)
     text(W-M-150,y+10,'■ A favor',7,green,True);text(W-M-76,y+10,'■ En contra',7,HexColor('#EF6171'),True)
-    y=bottom-43;meaning=_goal_meanings(P,ev,team)
+    y=bottom-43;meaning=_goal_meanings(P,ev,team,BINS)
+    # Matriz de situaciones: 6 columnas de 52 pt (Juvenil A) o NB columnas en el mismo ancho.
+    cstep=52 if NB==6 else (IW-215)/NB;cw_=43 if NB==6 else cstep-5
     categories=['Apertura de marcador','Victoria (1-0)','Ampliar ventaja','Ponerse por delante','Remontada','Igualar marcador','Reducir distancia']
     for side,title in [('favor','Tipos de gol - a favor'),('contra','Tipos de gol - en contra')]:
         y=sub(y,title);rect(M,y-18,IW,18,navy);text(M+5,y-12,'Situación del gol',6.7,HexColor('#FFFFFF'),True)
-        for j,p in enumerate(periods):text(M+213+j*52,y-12,p,6.1,HexColor('#FFFFFF'),True)
+        for j,p in enumerate(periods):text(M+213+j*cstep,y-12,p,6.1 if NB==6 else 5.6,HexColor('#FFFFFF'),True)
         y-=18
         for i,cat in enumerate(categories):
             rect(M,y-17,IW,17,HexColor('#FFFFFF') if i%2==0 else pale)
             text(M+5,y-12,cat,6.8)
-            for j in range(6):
+            for j in range(NB):
                 val=int(((meaning.lado==side)&(meaning.meaning==cat)&(meaning.slot==j)).sum()) if not meaning.empty else 0
                 if val:
-                    rect(M+214+j*52,y-15,43,13,HexColor('#C9F2DC') if side=='favor' else HexColor('#F9DADD'),r=2)
-                    text(M+233+j*52,y-12,val,7,navy,True)
+                    rect(M+214+j*cstep,y-15,cw_,13,HexColor('#C9F2DC') if side=='favor' else HexColor('#F9DADD'),r=2)
+                    text(M+233+j*cstep if NB==6 else M+214+j*cstep+cw_/2-2,y-12,val,7,navy,True)
             y-=17
         y-=16
     y=heading(y,'4. Tendencia de resultados');y=sub(y,'Diferencia por jornada (barras) y acumulada (línea)')
@@ -337,28 +362,40 @@ def generate(team,partidos,minutos,eventos,clasificacion,alineaciones,plantillas
     for _,r in standings.iterrows():
         if pd.notna(r.posicion): values.append((int(r.jornada),int(r.posicion)))
     ctop=y-15;cbottom=y-170
-    for rank in [1,4,8,12,16]:
-        yy=ctop-(rank-1)*(ctop-cbottom)/15;line(M+30,yy,W-M-15,yy);text(M+5,yy-3,str(rank)+'º',7,muted)
+    _all_pos=pd.to_numeric(clasificacion.get('posicion'),errors='coerce').dropna()
+    NT=16 if MM==90 else max(2,int(_all_pos.max()) if len(_all_pos) else 16)
+    ranks=[1,4,8,12,16] if NT==16 else sorted({1,*range(6,NT-2,6),NT})  # sin etiquetas pegadas
+    for rank in ranks:
+        yy=ctop-(rank-1)*(ctop-cbottom)/(NT-1);line(M+30,yy,W-M-15,yy);text(M+5,yy-3,str(rank)+'º',7,muted)
     points=[]
     for i,(j,p) in enumerate(values):
         xx=M+52+i*(IW-103)/max(1,len(values)-1)
-        yy=ctop-(p-1)*(ctop-cbottom)/15;points.append((xx,yy))
+        yy=ctop-(p-1)*(ctop-cbottom)/(NT-1);points.append((xx,yy))
     c.setStrokeColor(HexColor('#2475B8'));c.setLineWidth(2.5)
     for u,v in zip(points,points[1:]):c.line(u[0],u[1],v[0],v[1])
     for (xx,yy),(j,p) in zip(points,values):
         c.setFillColor(HexColor('#2475B8'));c.circle(xx,yy,5,fill=1,stroke=0)
         centered(xx,yy-17,str(p)+'º',7,navy,True);centered(xx,cbottom-12,'J'+str(j),7)
-    y=cbottom-46;y=heading(y,'7. Vídeos de los partidos')
-    text(M,y,'Pulsa «VER PARTIDO» para abrir el vídeo disponible.',8,muted);y-=14
+    y=cbottom-46
+    if show_videos:
+        y=heading(y,'7. Vídeos de los partidos')
+        text(M,y,'Pulsa «VER PARTIDO» para abrir el vídeo disponible.',8,muted);y-=14
+    else:
+        y=heading(y,'7. Resultados de los partidos')
+        text(M,y,'Últimos partidos con acta oficial de la FFCV · resultado y sistema utilizado.',8,muted);y-=14
     show=matches[-6:]  # URLs de los seis últimos para no recortar la hoja.
     for i,r in enumerate(show):
         yy=y-36;rect(M,yy,IW,31,pale if i%2 else HexColor('#FFFFFF'),border,3)
         text(M+10,yy+10,'J'+str(r['j']),8,navy,True)
-        text(M+55,yy+10,_short_team(r['opp']),7.5,navy,maxwidth=224)
+        if show_videos:text(M+55,yy+10,_short_team(r['opp']),7.5,navy,maxwidth=224)
+        else:crest(_opponent_badge_path(r['opp']),M+52,yy+5,20,20);text(M+78,yy+10,_short_team(r['opp']),7.5,navy,maxwidth=200)
         text(M+307,yy+10,f"{r['gf']}-{r['gc']}",8.5,navy,True)
-        u=(match_links or {}).get((str(team),int(r['j'])))
+        u=(match_links or {}).get((str(team),int(r['j']))) if show_videos else None
         bx=W-M-105
-        if u:
+        if not show_videos:
+            res='Victoria' if r['gf']>r['gc'] else ('Empate' if r['gf']==r['gc'] else 'Derrota')
+            text(bx+5,yy+12,f"{res} · {r['form']}",7,muted,maxwidth=99)
+        elif u:
             rect(bx,yy+5,99,22,blue,r=4);text(bx+10,yy+12,'VER PARTIDO  ›',7.5,HexColor('#FFFFFF'),True)
             c.linkURL(str(u),(bx,yy+5,bx+99,yy+27),relative=0,thickness=0)
         else:text(bx+5,yy+12,'Sin vídeo disponible',7,muted)

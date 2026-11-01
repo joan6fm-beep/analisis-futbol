@@ -251,7 +251,7 @@ LEAGUES = {
                    label="Lliga Autonòmica Cadet · Grup Únic",
                    bins=[(0, 10), (10, 20), (20, 30), (30, 40), (40, 50), (50, 60), (60, 70), (70, 80)], extra_last=True,
                    slot_labels=["0–10'", "10–20'", "20–30'", "30–40'", "40–50'", "50–60'", "60–70'", "70–80+'"],
-                   default_rival=None, video=False, pdf=False, comparator=True),
+                   default_rival=None, video=False, pdf=True, comparator=True),
 }
 LG = LEAGUES["juvenil"]
 
@@ -3899,7 +3899,7 @@ if LG.get("pdf"):
     try:
         # El Acero conserva el PDF de referencia; TODOS los otros rivales usan el mismo diseño visual.
         # No pasar por el generador dinámico ni por validaciones de huellas de datos.
-        _es_acero = str(seleccionado).strip() == "C.D. Acero 'A'"
+        _es_acero = LG["key"] == "juvenil" and str(seleccionado).strip() == "C.D. Acero 'A'"
         if _es_acero:
             _pdf_file = BASE / "informe_acero_aprobado.pdf"
             _pdf_bytes = _pdf_file.read_bytes()
@@ -3909,13 +3909,16 @@ if LG.get("pdf"):
             _pdf_bytes = build_rival_pdf_diseno(
                 seleccionado, partidos, minutos, eventos, clasificacion, alineaciones, plantillas,
                 logo_path=logo_path, match_links=MATCH_LINKS,
+                **({} if LG["key"] == "juvenil" else dict(
+                    match_minutes=LG["mm"], bins=LG["bins"], period_labels=[x.replace("'", "’") for x in LG["slot_labels"]],
+                    league_label=LG["label"], show_videos=False)),
             )
         st.download_button(
-            "📄 Descargar PDF",
+            "📄 Descargar PDF" if LG["key"] == "juvenil" else "📄 Descargar informe PDF",
             data=_pdf_bytes,
             file_name=("Informe_C_D_Acero.pdf" if _es_acero else 'Informe_Rival_' + ''.join(ch if ch.isalnum() else '_' for ch in str(seleccionado)).strip('_') + '.pdf'),
             mime="application/pdf", type="primary", use_container_width=False,
-            key=f"pdf_rival_v15_12_75_{seleccionado}",
+            key=f"pdf_rival_v15_12_75_{seleccionado}" + ("" if LG["key"] == "juvenil" else f"_{LG['key']}"),
         )
     except Exception as _pdf_exc:
         st.error(f"No se ha podido preparar el PDF de este rival: {_pdf_exc}")

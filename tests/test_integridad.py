@@ -546,11 +546,44 @@ def test_cadete_rivales_y_escudos():
         hh = html_of(a)
         check(not a.exception and "partidos de 80'" in hh and "GC/80" in hh and "70–80+'" in hh and "Goles / 90" not in hh
               and "GC/90" not in hh and "ANÁLISIS REAL" in hh and "Partidos analizados · actas FFCV" in hh
-              and not a.get("download_button"), f"Rivales del Cadete A · {team}: ficha del Juvenil A a 80', sin PDF de 90' ni enlaces de vídeo")
+              and len(a.get("download_button")) == 1, f"Rivales del Cadete A · {team}: ficha del Juvenil A a 80' con botón de informe PDF")
+    test_pdf_cadete()
     a = run({"area": "juvenil", "view": "rivales", "team": "Bétera C.F. 'A'"})
     hh = html_of(a)
     check(not a.exception and "GC/90" in hh and "76–90+'" in hh and a.get("download_button"),
           "Juvenil A sin cambios: GC/90, tramos de 15' y PDF del rival")
+
+
+def test_pdf_cadete():
+    """Informe PDF de rival: mismo generador del Juvenil A, adaptado al Cadete A (80', 10', 18 equipos)."""
+    import re
+    import pandas as pd
+    import pdf_export_v63 as P
+    try:
+        import pymupdf  # solo para leer el texto del PDF en la prueba (pip install pymupdf)
+    except ImportError:
+        print("AVISO pymupdf no instalado: se omite la lectura del PDF del Cadete A")
+        return
+    L = APP_DIR / "data" / "cadete_a" / "liga"
+    rd = lambda n: pd.read_csv(L / n)
+    args = [rd(n) for n in ("partidos_rivales.csv", "minutos_rivales.csv", "eventos_rivales.csv", "clasificacion_liga.csv",
+                            "alineaciones_rivales.csv", "plantillas_rivales.csv")]
+    bins = [(i, i + 10) for i in range(0, 80, 10)]
+    per = [f"{a}–{b}’" for a, b in bins[:-1]] + ["70–80+’"]
+    bad = []
+    for t in rd("equipos_liga.csv").equipo:
+        d = pymupdf.open(stream=P.generate(t, *args, match_minutes=80, bins=bins, period_labels=per,
+                                           league_label="Lliga Autonòmica Cadet · Grup Únic", show_videos=False))
+        txt = " ".join(p.get_text() for p in d)
+        if len(d) != 4 or re.search(r"90[’']|/90|–90|0–15|Vídeos de los partidos", txt) or "70–80+" not in txt                 or "Partidos de 80" not in txt or "Lliga Autonòmica Cadet" not in txt:
+            bad.append(t)
+    check(not bad, f"PDF del Cadete A para los 18 equipos: 4 páginas, 80', tramos 0–10 … 70–80+, sin vídeos {bad}")
+    J = APP_DIR / "data"
+    jargs = [pd.read_csv(J / n, encoding="utf-8-sig") for n in ("partidos_rivales.csv", "minutos_rivales.csv", "eventos_rivales.csv",
+                                                                 "clasificacion_liga.csv", "alineaciones_rivales.csv", "plantillas_rivales.csv")]
+    txt = " ".join(p.get_text() for p in pymupdf.open(stream=P.generate("Bétera C.F. 'A'", *jargs)))
+    check("Lliga Comunitat Juvenil · Nord" in txt and "76–90+" in txt and "Vídeos de los partidos" in txt,
+          "PDF del Juvenil A sin cambios: liga juvenil, tramos de 15' y vídeos")
 
 
 def main():
