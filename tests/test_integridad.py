@@ -508,6 +508,12 @@ def test_cadete_a():
         check(not a.exception and "CADETE A" in hh, f"Cadete A · {v}: sin errores y con su propia cabecera")
     a = run({"area": "cadete", "view": "liga"})
     hh = html_of(a)
+    jlast = int(part.jornada.max())
+    check(a.selectbox[0].value == f"J{jlast}" and f"J1–J{jlast}" in hh and "Lucas Serra" in hh and "Marc Menezo Perez" in hh,
+          f"Resumen de liga del Cadete A abre en la última jornada (J{jlast}) con sus goleadores y porteros")
+    src = (APP_DIR / "app.py").read_text(encoding="utf-8")
+    check('_league_snapshot(jmax, LG["key"], _league_data_stamp())' in src,
+          "Resumen de liga: el caché se renueva cuando cambian los CSV de la liga (no se quedan jornadas antiguas)")
     check("Resumen de liga · Cadete A" in hh and "Lliga Autonòmica Cadet" in hh and "GC/80" in hh and "GC/90" not in hh
           and "70–80" in hh and "75–90" not in hh and "Comparador de equipos" not in hh and "Equipo · Cadete A" not in hh,
           "Resumen de liga del Cadete A: componentes del Juvenil A con 80' y tramos de 10', sin los análisis propios del equipo")

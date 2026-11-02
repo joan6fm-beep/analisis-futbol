@@ -1912,8 +1912,20 @@ def render_infantil():
     )
 
 
+def _league_data_stamp():
+    """Huella de los CSV de la liga activa: el caché del Resumen de liga se renueva al añadir jornadas."""
+    out = []
+    for n in ("partidos_rivales.csv", "eventos_rivales.csv", "clasificacion_liga.csv"):
+        try:
+            st_ = _csv_path(n).stat()
+            out.append((n, st_.st_mtime_ns, st_.st_size))
+        except Exception:
+            out.append((n, -1, -1))
+    return tuple(out)
+
+
 @st.cache_data(show_spinner=False)
-def _league_snapshot(jmax, league_key="juvenil"):
+def _league_snapshot(jmax, league_key="juvenil", data_stamp=None):
     tab = clasificacion[pd.to_numeric(clasificacion.get("jornada"), errors="coerce").eq(jmax)].copy()
     tab = tab.sort_values(["posicion", "equipo"]) if not tab.empty else tab
 
@@ -2029,10 +2041,9 @@ def render_league_summary():
     opts = ["Total"] + [f"J{x}" for x in jornadas]
     _default_idx = 0
     if LG["key"] != "juvenil" and jornadas:
-        # Cadete A: por defecto, la última jornada con todos sus partidos documentados.
-        _complete = [j for j in jornadas if t360adv.jornada_status(partidos, j)[0] >= t360adv.jornada_status(partidos, j)[1]]
-        if _complete and f"J{max(_complete)}" in opts:
-            _default_idx = opts.index(f"J{max(_complete)}")
+        # Cadete A: por defecto, la última jornada con resultados (los partidos aplazados o suspendidos se avisan abajo).
+        if f"J{max(jornadas)}" in opts:
+            _default_idx = opts.index(f"J{max(jornadas)}")
     jornada_label = st.selectbox("Vista acumulada", opts, index=_default_idx, key="league_summary_jornada")
     jmax = max(jornadas) if jornada_label == "Total" and jornadas else (
         int(jornada_label[1:]) if jornada_label != "Total" else None
@@ -2041,7 +2052,7 @@ def render_league_summary():
         st.info("Sin clasificación cargada.")
         return
 
-    tab, pp, ev, valid, team_stats, form, timing = _league_snapshot(jmax, LG["key"])
+    tab, pp, ev, valid, team_stats, form, timing = _league_snapshot(jmax, LG["key"], _league_data_stamp())
     if tab.empty:
         st.info(f"Sin clasificación cargada para J{jmax}.")
         return
