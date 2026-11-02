@@ -46,9 +46,10 @@ C.D. Castellón 'A',20,Nianake Diarra
 C.D. Castellón 'A',21,Marcos Fernandez Martinez
 C.D. Castellón 'A',21,Otto Planagumà Bagan
 C.D. Roda 'A',1,Ezequiel Francisco Valverde Lorenzo
+C.D. Roda 'A',1,Oleksii Nasibullin
 C.D. Roda 'A',2,Ahmed Ben Ali Laghmich El Haad
 C.D. Roda 'A',3,Daniel Cortes Pacheco
-C.D. Roda 'A',4,Aaron Torralbo Charki
+C.D. Roda 'A',4,Platon Moskalenko
 C.D. Roda 'A',5,Mario Granell Calafell
 C.D. Roda 'A',6,Moustapha Sanghare Traore
 C.D. Roda 'A',7,Javier Martinez Gonzalez
@@ -61,6 +62,7 @@ C.D. Roda 'A',13,Alvaro Muñoz Garcia
 C.D. Roda 'A',13,Marc Franch Julia
 C.D. Roda 'A',14,Alejandro Buedo Rubio
 C.D. Roda 'A',15,Collins Baidoo Yeboah
+C.D. Roda 'A',16,Aaron Torralbo Charki
 C.D. Roda 'A',17,Alex Cantalapiedra Cocho
 C.D. Roda 'A',18,Brian Kwame Bada Gonzalez
 C.D. Roda 'A',19,David Eghosa Idahosa Ojeile
@@ -70,37 +72,42 @@ C.D. Roda 'A',22,Ivan Gonzalez Artiles
 C.D. Roda 'A',23,Iker Delgado Castellanos
 C.D. Roda 'A',24,Guillermo Mora Lorca
 C.D. Roda 'A',26,Brunno Valentino Biacio Castro
+C.D. Roda 'A',26,Brunno Valentino Blacio Castro
 C.F. Benidorm 'A',1,Manuel Irles Castaños
 C.F. Benidorm 'A',2,Neizan Garcia Esquinas
-C.F. Benidorm 'A',2,Rayane Chetouane
 C.F. Benidorm 'A',3,Neymar Omar Salazar Calva
 C.F. Benidorm 'A',4,Hugo Causera Mena
 C.F. Benidorm 'A',5,Xavi Martinez Torres
 C.F. Benidorm 'A',6,Guillermo Sempere Catala
 C.F. Benidorm 'A',7,Malin Malinov Sinanski
-C.F. Benidorm 'A',8,Cristian Garcia Dominguez
 C.F. Benidorm 'A',8,Raul Poquet Matulic
-C.F. Benidorm 'A',8,Simone Molinelli
 C.F. Benidorm 'A',9,Iker Perles Quintero
 C.F. Benidorm 'A',9,Yilio Wong Zubieta
 C.F. Benidorm 'A',10,Carlos Ramis Gonzalez
 C.F. Benidorm 'A',11,Juan David Carrasco Gonzalez
 C.F. Benidorm 'A',12,Daniel Iranzo Casañ
 C.F. Benidorm 'A',13,Alexis Cita Adan
+C.F. Benidorm 'A',14,Cristian Garcia Dominguez
+C.F. Benidorm 'A',15,Rayane Chetouane
 C.F. Benidorm 'A',16,Gonzalo Padilla Barreno
 C.F. Benidorm 'A',16,Nathael Aracil Calderon
 C.F. Benidorm 'A',17,Manel Perez Marquez
 C.F. Benidorm 'A',18,Oleksandr Parobok
+C.F. Benidorm 'A',20,Simone Molinelli
 C.F. Benidorm 'A',21,Aaron Guessas Pia
+C.F. Benidorm 'A',42,Ivan Carmona Perez
+C.F. Benidorm 'A',99,Alejandro Abadia De Barbara Varon
 C.F. Fundació VCF 'A',1,Diego Llorens Segovia
 C.F. Fundació VCF 'A',2,Jorge Calomarde Gomez
 C.F. Fundació VCF 'A',3,Hugo Salas Mauri
 C.F. Fundació VCF 'A',4,Enzo Pacha Torres
 C.F. Fundació VCF 'A',5,Aritz Gandia Mira
 C.F. Fundació VCF 'A',5,Liam Videla Corbalan
+C.F. Fundació VCF 'A',6,Ferran Mut Gilabert
 C.F. Fundació VCF 'A',6,Jean Pool Cardona Rivas
 C.F. Fundació VCF 'A',7,Zakaria Idrissa Toure
 C.F. Fundació VCF 'A',8,Sergio Revert Arribas
+C.F. Fundació VCF 'A',9,Enrique Antonio Blanquer Muñoz
 C.F. Fundació VCF 'A',9,Francesco Martin Moschella Compostela
 C.F. Fundació VCF 'A',10,Lucas Serra Blasco
 C.F. Fundació VCF 'A',10,Sergio Rodriguez Garcia
@@ -108,12 +115,10 @@ C.F. Fundació VCF 'A',11,Gabidolla Orazaly
 C.F. Fundació VCF 'A',12,Joaquin Cano De Jose
 C.F. Fundació VCF 'A',12,Lucas Monguia Al Khalil
 C.F. Fundació VCF 'A',13,Vicente Fores Ferrer
-C.F. Fundació VCF 'A',14,Ferran Mut Gilabert
 C.F. Fundació VCF 'A',15,Albert Ortega Fontanet
+C.F. Fundació VCF 'A',15,Guillermo Marco Daza
 C.F. Fundació VCF 'A',16,Timur Kuzmin
 C.F. Fundació VCF 'A',17,Axel Daniel Mosquera Barona
-C.F. Fundació VCF 'A',17,Guillermo Marco Daza
-C.F. Fundació VCF 'A',18,Enrique Antonio Blanquer Muñoz
 C.F. Inter San José Valencia 'A',1,Santiago Pinedo Nóbile
 C.F. Inter San José Valencia 'A',2,Daniel Molina Viñes
 C.F. Inter San José Valencia 'A',3,Marc Gómez Casinos
@@ -200,10 +205,10 @@ Celtic Elche C.F. 'A',15,Francisco Mondejar Maya
 Celtic Elche C.F. 'A',15,Jakub Lewczuk
 Celtic Elche C.F. 'A',16,Hugo Garcia Gonzalez
 Celtic Elche C.F. 'A',17,Sergio Manchon Penalva
+Celtic Elche C.F. 'A',18,Julian Chudzik
 Celtic Elche C.F. 'A',18,Pedro Garcia Girona
 Celtic Elche C.F. 'A',19,Ahmed Rida Tariki Kharbouch
 Celtic Elche C.F. 'A',20,Oleksii Umansky
-Celtic Elche C.F. 'A',22,Julian Chudzik
 Elche C.F. 'A',1,Pablo Fernandez Sposaro
 Elche C.F. 'A',2,Neizan Parra Gonzalez
 Elche C.F. 'A',3,Hector Barcelo Soler
@@ -284,6 +289,7 @@ Levante U.D. 'A',8,Marco Nevot Cervera
 Levante U.D. 'A',9,Ivan Galan Redko
 Levante U.D. 'A',9,Lucas Fuentes Gimenez
 Levante U.D. 'A',11,Alejandro Arnau Franco
+Levante U.D. 'A',12,Alberto Barres Ros
 Levante U.D. 'A',13,Daniel Pedrajas Abril
 Levante U.D. 'A',14,Alvaro Castellanos Anaya
 Levante U.D. 'A',15,Ivan Rodriguez Paris
@@ -334,6 +340,7 @@ Primer Toque C.F. 'A',8,Gerard Planell Vidal
 Primer Toque C.F. 'A',9,Mohammed Ousrout Khannouss
 Primer Toque C.F. 'A',10,Diego Sanchez Alvaro
 Primer Toque C.F. 'A',11,Ayoub Ammou El Hafydy
+Primer Toque C.F. 'A',11,Ayoub Ammou El Halydy
 Primer Toque C.F. 'A',12,Jose David Barreda Galiana
 Primer Toque C.F. 'A',14,Pere Tomas Ribes
 Primer Toque C.F. 'A',15,Dario Picher Aguilella
@@ -341,6 +348,7 @@ Primer Toque C.F. 'A',17,Marcos Santamaria Albert
 Primer Toque C.F. 'A',18,Pol Pablo Vericat
 Primer Toque C.F. 'A',19,Marc Monfort Noguera
 Primer Toque C.F. 'A',19,Marc Vidal Perez
+Primer Toque C.F. 'A',21,Angel Fernandez Peiro
 Primer Toque C.F. 'A',24,Javier Sanchez Martinez
 Primer Toque C.F. 'A',25,Pau Enrique Fuster
 Primer Toque C.F. 'A',29,Hugo Carrasquer Orenga
@@ -361,14 +369,16 @@ S.C.D. Intangco 'A',16,Jorge Chamorro Sanchez
 S.C.D. Intangco 'A',17,Hector Amoros Fernandez
 S.C.D. Intangco 'A',18,Luca Eric Goian
 S.C.D. Intangco 'A',19,Juan Gil Iborra
+S.C.D. Intangco 'A',20,Sergio Gadea Alencia
 S.C.D. Intangco 'A',20,Sergio Gadea Atencia
 S.C.D. Intangco 'A',21,Diego Cotarelo Alvarez
 S.C.D. Intangco 'A',22,Eloy Mañogil Dolz
+S.C.D. Intangco 'A',23,Gaspar Mendez Gallardo
 S.C.D. Intangco 'A',30,Hector Perez Duran
 Valencia C.F. 'A',1,Mateo Berbis Martinez
 Valencia C.F. 'A',2,Hugo Sanz Lopez
-Valencia C.F. 'A',2,Mamadou Dansokho Diakhaby
 Valencia C.F. 'A',3,Aitor Garrigues Asensio
+Valencia C.F. 'A',3,Miguel Angel Prieto Serer
 Valencia C.F. 'A',4,Eric Alaña Barragan
 Valencia C.F. 'A',4,Yulian Mosquera Ibarguen
 Valencia C.F. 'A',5,Iker Frias Barrajon
@@ -380,12 +390,12 @@ Valencia C.F. 'A',10,Alfonso Calderon Trillo-Figueroa
 Valencia C.F. 'A',10,Jakson Enrique Gordon
 Valencia C.F. 'A',11,Ricardo Perez Ruiz
 Valencia C.F. 'A',12,Alejandro Gargoles Jimenez
-Valencia C.F. 'A',12,Miguel Angel Prieto Serer
+Valencia C.F. 'A',12,Mamadou Dansokho Diakhaby
 Valencia C.F. 'A',13,Hugo Alvarez Soria
 Valencia C.F. 'A',14,Martin Morente Gay
 Valencia C.F. 'A',15,Diego Ferri Molina
 Valencia C.F. 'A',16,Andreu Gimeno Alacreu
-Valencia C.F. 'A',17,Alejandro Angulo Ramon
+Valencia C.F. 'A',17,Alejandro Angulo Ramón
 Valencia C.F. 'A',18,Abel Yumdjo Taguiawa Massoko
 Villarreal C.F. 'A',1,Leo Rico Albert
 Villarreal C.F. 'A',1,Yehor Troinkov
@@ -411,3 +421,4 @@ Villarreal C.F. 'A',21,Daniel Vizuete Marti
 Villarreal C.F. 'A',22,Josue Caballero Cerdeña
 Villarreal C.F. 'A',23,Arturo Martinez Azorin
 Villarreal C.F. 'A',25,Luca Reina Ruiz
+Villarreal C.F. 'A',26,Jeroni Serra Clavell

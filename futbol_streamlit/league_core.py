@@ -208,7 +208,8 @@ def minutes_from_acta(alineaciones: pd.DataFrame, eventos: pd.DataFrame, match_m
                 end[out] = m
         for _, s in e[e["tipo"].isin({"roja", "doble_amarilla", "segunda_amarilla"})].iterrows():
             if pd.notna(s["minuto"]):
-                end[s["jugador"]] = min(float(s["minuto"]), match_minutes)
+                # Una expulsión registrada después de ser sustituido (en el banquillo) no alarga sus minutos.
+                end[s["jugador"]] = min(float(s["minuto"]), match_minutes, end.get(s["jugador"], match_minutes))
         for _, r in lineup.iterrows():
             n = r["jugador"]
             if n in start:

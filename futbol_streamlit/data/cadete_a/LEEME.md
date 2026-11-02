@@ -4,7 +4,8 @@ Partidos de **80 minutos** (2 × 40). Todos los cálculos del Cadete A usan 80' 
 
 ## Origen de los datos
 - `fuente/actas.txt`: transcripción de las actas de la app de la FFCV que aparecen en la grabación
-  `DATOS VEO/CADETE A/WhatsApp Video 2026-11-01 at 19.19.56.mp4` (aportada por el usuario).
+  `DATOS VEO/CADETE A/WhatsApp Video 2026-11-01 at 19.19.56.mp4` (J1–J7 y un partido de la J8) y
+  `WhatsApp Video 2026-11-02 at 11.36.27.mp4` (resto de la J8 y la J9), aportadas por el usuario.
   Contiene alineaciones (titulares, suplentes, porteros), sistemas, cambios, goles, penaltis,
   goles en propia puerta y tarjetas, con su minuto. Las notas `NOTA` explican cada duda.
 - Foto del equipo: `DATOS VEO/CADETE A/WhatsApp Image 2026-11-01 at 19.19.57.jpeg`,
@@ -56,7 +57,8 @@ app oficial de la FFCV en la misma grabación (`futbol_streamlit/escudos/`).
 
 ## Datos pendientes o no disponibles
 - J7 Celtic Elche – C.D. Roda: no jugado en la grabación (programado el 10/11/2026).
-- J8: solo el acta de C.D. Castellón 3-1 Patacona (1 de 9 partidos).
+- J8 completa (9 de 9). J9: 8 de 9; Kelme – Intangco figura «Suspendido» en la app de la FFCV (sin resultado).
+- J8 Alboraya – Villarreal: los cambios de 50' y 57' con «C. Garcia» (tres jugadores posibles) no se pueden atribuir.
 - Asistencias, estadísticas de vídeo: las actas no las incluyen.
 - Alboraya tiene dos titulares «C. Garcia» (Cayetano Garcia Soriano y Cayetano Garcia Villar):
   algunas tarjetas y cambios no se pueden atribuir; sus minutos en esos partidos quedan pendientes.

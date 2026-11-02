@@ -427,7 +427,7 @@ Valencia C.F. 'A',2,13,Mateo Berbis Martinez,SUP_POR,5,13
 Valencia C.F. 'A',2,14,Eric Alaña Barragan,SUP,5,14
 Valencia C.F. 'A',2,15,Miguel Angel Prieto Serer,SUP,5,15
 Valencia C.F. 'A',2,16,Andreu Gimeno Alacreu,SUP,5,16
-Valencia C.F. 'A',2,17,Alejandro Angulo Ramon,SUP,5,17
+Valencia C.F. 'A',2,17,Alejandro Angulo Ramón,SUP,5,17
 Valencia C.F. 'A',2,18,Abel Yumdjo Taguiawa Massoko,SUP,5,18
 C.D. Castellón 'A',2,13,Aitor Rivera Leal,POR,1,1
 C.D. Castellón 'A',2,2,Eric Peris Escrig,DEF,2,2
@@ -766,7 +766,7 @@ Valencia C.F. 'A',3,13,Hugo Alvarez Soria,SUP_POR,5,13
 Valencia C.F. 'A',3,14,Andreu Gimeno Alacreu,SUP,5,14
 Valencia C.F. 'A',3,15,Abel Yumdjo Taguiawa Massoko,SUP,5,15
 Valencia C.F. 'A',3,16,Iker Albero Ruiz,SUP,5,16
-Valencia C.F. 'A',3,17,Alejandro Angulo Ramon,SUP,5,17
+Valencia C.F. 'A',3,17,Alejandro Angulo Ramón,SUP,5,17
 Valencia C.F. 'A',3,18,Jakson Enrique Gordon,SUP,5,18
 C.D. Castellón 'A',3,1,Hugo Peris Escrig,POR,1,1
 C.D. Castellón 'A',3,2,Eric Peris Escrig,DEF,2,2
@@ -1070,7 +1070,7 @@ Valencia C.F. 'A',4,13,Hugo Alvarez Soria,SUP_POR,5,13
 Valencia C.F. 'A',4,14,Martin Morente Gay,SUP,5,14
 Valencia C.F. 'A',4,15,Diego Ferri Molina,SUP,5,15
 Valencia C.F. 'A',4,16,Andreu Gimeno Alacreu,SUP,5,16
-Valencia C.F. 'A',4,17,Alejandro Angulo Ramon,SUP,5,17
+Valencia C.F. 'A',4,17,Alejandro Angulo Ramón,SUP,5,17
 Valencia C.F. 'A',4,18,Abel Yumdjo Taguiawa Massoko,SUP,5,18
 C.D. Castellón 'A',4,1,Hugo Peris Escrig,POR,1,1
 C.D. Castellón 'A',4,2,Eric Peris Escrig,DEF,2,2
@@ -1366,7 +1366,7 @@ Valencia C.F. 'A',5,5,Iker Frias Barrajon,DEF,2,5
 Valencia C.F. 'A',5,6,Pablo Jimenez Luque,MED,3,6
 Valencia C.F. 'A',5,8,Marc Carranza Hernandez,MED,3,7
 Valencia C.F. 'A',5,10,Jakson Enrique Gordon,MED,3,8
-Valencia C.F. 'A',5,7,Alejandro Angulo Ramon,DEL,4,9
+Valencia C.F. 'A',5,7,Alejandro Angulo Ramón,DEL,4,9
 Valencia C.F. 'A',5,9,Dario Alonso Garcia,DEL,4,10
 Valencia C.F. 'A',5,11,Ricardo Perez Ruiz,DEL,4,11
 Valencia C.F. 'A',5,12,Miguel Angel Prieto Serer,SUP,5,12
@@ -1644,7 +1644,7 @@ Valencia C.F. 'A',6,13,Mateo Berbis Martinez,SUP_POR,5,13
 Valencia C.F. 'A',6,14,Andreu Gimeno Alacreu,SUP,5,14
 Valencia C.F. 'A',6,15,Diego Ferri Molina,SUP,5,15
 Valencia C.F. 'A',6,16,Iker Albero Ruiz,SUP,5,16
-Valencia C.F. 'A',6,17,Alejandro Angulo Ramon,SUP,5,17
+Valencia C.F. 'A',6,17,Alejandro Angulo Ramón,SUP,5,17
 Valencia C.F. 'A',6,18,Abel Yumdjo Taguiawa Massoko,SUP,5,18
 C.F. Fundació VCF 'A',6,1,Vicente Fores Ferrer,POR,1,1
 C.F. Fundació VCF 'A',6,2,Jorge Calomarde Gomez,DEF,2,2
@@ -1985,7 +1985,7 @@ Valencia C.F. 'A',7,13,Hugo Alvarez Soria,SUP_POR,5,13
 Valencia C.F. 'A',7,14,Martin Morente Gay,SUP,5,14
 Valencia C.F. 'A',7,15,Diego Ferri Molina,SUP,5,15
 Valencia C.F. 'A',7,16,Andreu Gimeno Alacreu,SUP,5,16
-Valencia C.F. 'A',7,17,Alejandro Angulo Ramon,SUP,5,17
+Valencia C.F. 'A',7,17,Alejandro Angulo Ramón,SUP,5,17
 Valencia C.F. 'A',7,18,Iker Albero Ruiz,SUP,5,18
 S.C.D. Intangco 'A',7,1,Izan Sanchez Cofrade,POR,1,1
 S.C.D. Intangco 'A',7,3,Hugo Cobeño German,DEF,2,2
@@ -2255,3 +2255,571 @@ Patacona C.F. 'A',8,20,Marc Joan Gomez Oscar,SUP,5,15
 Patacona C.F. 'A',8,22,Raul Toboso Nicolau,SUP_POR,5,16
 Patacona C.F. 'A',8,23,Dario Stefano Boso Fernandez,SUP,5,17
 Patacona C.F. 'A',8,29,Marco Alpuente Blazquez,SUP,5,18
+Elche C.F. 'A',8,13,Sergio Parra Garcia,POR,1,1
+Elche C.F. 'A',8,3,Hector Barcelo Soler,DEF,2,2
+Elche C.F. 'A',8,12,David Giner Martinez,DEF,2,3
+Elche C.F. 'A',8,14,Adrian Valero Salmeron,DEF,2,4
+Elche C.F. 'A',8,22,Julian Andres Vasquez Cano,DEF,2,5
+Elche C.F. 'A',8,8,Marc Sempere Anton,MED,3,6
+Elche C.F. 'A',8,16,Iker Pico Tenza,MED,3,7
+Elche C.F. 'A',8,20,Mario Galvez Montaño,MED,3,8
+Elche C.F. 'A',8,17,Derek Enrique Martinez Recuerda,DEL,4,9
+Elche C.F. 'A',8,18,Adrian Sanchez Amat,DEL,4,10
+Elche C.F. 'A',8,19,Velasco,DEL,4,11
+Elche C.F. 'A',8,1,Pablo Fernandez Sposaro,SUP_POR,5,12
+Elche C.F. 'A',8,2,Neizan Parra Gonzalez,SUP,5,13
+Elche C.F. 'A',8,4,Samuel Navarro Gomez,SUP,5,14
+Elche C.F. 'A',8,6,Jorge Clemente Rodriguez,SUP,5,15
+Elche C.F. 'A',8,10,Alejandro De Juan Garcia,SUP,5,16
+Elche C.F. 'A',8,23,Andreu Perez Berbegal,SUP,5,17
+C.F. Inter San José Valencia 'A',8,1,Santiago Pinedo Nóbile,POR,1,1
+C.F. Inter San José Valencia 'A',8,3,Marc Gómez Casinos,DEF,2,2
+C.F. Inter San José Valencia 'A',8,4,Adrián Civera Gallach,DEF,2,3
+C.F. Inter San José Valencia 'A',8,12,David Javaloyes Marco,DEF,2,4
+C.F. Inter San José Valencia 'A',8,15,Enrique Lurbe De Vicente,DEF,2,5
+C.F. Inter San José Valencia 'A',8,6,Pablo Lopez Almarcha,MED,3,6
+C.F. Inter San José Valencia 'A',8,7,Lucas Amoros Tello,MED,3,7
+C.F. Inter San José Valencia 'A',8,21,Bruno Aguilar Baya,MED,3,8
+C.F. Inter San José Valencia 'A',8,23,Rafael Alejandro Beltrán Valencia,MED,3,9
+C.F. Inter San José Valencia 'A',8,14,Marc Miralles Serrano,DEL,4,10
+C.F. Inter San José Valencia 'A',8,27,Alejandro Miró Andrés,DEL,4,11
+C.F. Inter San José Valencia 'A',8,9,Luis Lopez Rosa,SUP,5,12
+C.F. Inter San José Valencia 'A',8,11,Victor Serrano Talamantes,SUP,5,13
+C.F. Inter San José Valencia 'A',8,13,Juan Jose Gil Calisalvo,SUP_POR,5,14
+C.F. Inter San José Valencia 'A',8,16,Wilter Job Sanchez Rodriguez,SUP,5,15
+C.F. Inter San José Valencia 'A',8,18,Juan Diego De La Fuente Wila,SUP,5,16
+C.F. Inter San José Valencia 'A',8,20,Carlos Sierra Arnal,SUP,5,17
+C.F. Inter San José Valencia 'A',8,22,Hugo Tarraso Perez,SUP,5,18
+C.D. Roda 'A',8,1,Ezequiel Francisco Valverde Lorenzo,POR,1,1
+C.D. Roda 'A',8,2,Ahmed Ben Ali Laghmich El Haad,DEF,2,2
+C.D. Roda 'A',8,3,Daniel Cortes Pacheco,DEF,2,3
+C.D. Roda 'A',8,12,Banouhoum Coulibaly Coulibaly,DEF,2,4
+C.D. Roda 'A',8,20,Victor Borrego Luzzi,DEF,2,5
+C.D. Roda 'A',8,6,Moustapha Sanghare Traore,MED,3,6
+C.D. Roda 'A',8,8,Ferran Fortuny Albert,MED,3,7
+C.D. Roda 'A',8,10,Sergi Alcover Alvarez,MED,3,8
+C.D. Roda 'A',8,14,Alejandro Buedo Rubio,DEL,4,9
+C.D. Roda 'A',8,22,Ivan Gonzalez Artiles,DEL,4,10
+C.D. Roda 'A',8,23,Iker Delgado Castellanos,DEL,4,11
+C.D. Roda 'A',8,4,Platon Moskalenko,SUP,5,12
+C.D. Roda 'A',8,11,Miguel Ángel Tena Saco De Larriva,SUP,5,13
+C.D. Roda 'A',8,13,Marc Franch Julia,SUP_POR,5,14
+C.D. Roda 'A',8,15,Collins Baidoo Yeboah,SUP,5,15
+C.D. Roda 'A',8,17,Alex Cantalapiedra Cocho,SUP,5,16
+C.D. Roda 'A',8,18,Brian Kwame Bada Gonzalez,SUP,5,17
+C.D. Roda 'A',8,21,Omar Rami El Marouni,SUP,5,18
+Kelme C.F. 'A',8,25,Mario Parodi Caceres,POR,1,1
+Kelme C.F. 'A',8,2,Edgar Ramirez Chulia,DEF,2,2
+Kelme C.F. 'A',8,4,David Navarro Cerdá,DEF,2,3
+Kelme C.F. 'A',8,12,Pablo Soler Lumbreras,DEF,2,4
+Kelme C.F. 'A',8,22,Angel Belmonte Risueño,DEF,2,5
+Kelme C.F. 'A',8,10,Jonathan Felix Martinez,MED,3,6
+Kelme C.F. 'A',8,15,Cristian Sánchez Ruiz,MED,3,7
+Kelme C.F. 'A',8,30,Gonzalo Celdran Garre,MED,3,8
+Kelme C.F. 'A',8,9,Joel Clos Arjona,DEL,4,9
+Kelme C.F. 'A',8,11,Ruben Castello Perez,DEL,4,10
+Kelme C.F. 'A',8,20,David Moya Salmon,DEL,4,11
+Kelme C.F. 'A',8,3,Hector Saez Anton,SUP,5,12
+Kelme C.F. 'A',8,7,Mario Navarro Terol,SUP,5,13
+Kelme C.F. 'A',8,8,Pablo Sanchez Ortega,SUP,5,14
+Kelme C.F. 'A',8,13,Bosko Martic,SUP_POR,5,15
+Kelme C.F. 'A',8,18,Amir Abdelkader Sebih Boukhit,SUP,5,16
+Kelme C.F. 'A',8,19,Luca Giuseppe Annunziata Tomas,SUP,5,17
+Kelme C.F. 'A',8,24,Antonio Tihomir Dachev,SUP,5,18
+Alboraya U.D. 'A',8,13,Hugo Iturbide Andres,POR,1,1
+Alboraya U.D. 'A',8,2,Ruben Alonso Camin,DEF,2,2
+Alboraya U.D. 'A',8,3,Xavi Verdu Planells,DEF,2,3
+Alboraya U.D. 'A',8,4,Antonio Hölderl Raimundo,DEF,2,4
+Alboraya U.D. 'A',8,24,Elian Merino Franco,DEF,2,5
+Alboraya U.D. 'A',8,10,Cayetano Garcia Villar,MED,3,6
+Alboraya U.D. 'A',8,12,Hugo Villaescusa Cabrera,MED,3,7
+Alboraya U.D. 'A',8,17,Jorge De Jaime Blasco,MED,3,8
+Alboraya U.D. 'A',8,11,Arnau Ribera Rangel,DEL,4,9
+Alboraya U.D. 'A',8,14,Leo Morales Oliva,DEL,4,10
+Alboraya U.D. 'A',8,18,Matias Sanchez Diaz,DEL,4,11
+Alboraya U.D. 'A',8,1,Alvaro Izquierdo Muñoz,SUP_POR,5,12
+Alboraya U.D. 'A',8,7,Cayetano Garcia Soriano,SUP,5,13
+Alboraya U.D. 'A',8,8,Joel Patiño Martinez,SUP,5,14
+Alboraya U.D. 'A',8,15,Carles Garcia Guerrero,SUP,5,15
+Alboraya U.D. 'A',8,16,Gonzalo Escorihuela Prieto,SUP,5,16
+Alboraya U.D. 'A',8,23,Vicente Bayarri Baldovi,SUP,5,17
+Villarreal C.F. 'A',8,25,Luca Reina Ruiz,POR,1,1
+Villarreal C.F. 'A',8,4,Izan Muñoz Garcia,DEF,2,2
+Villarreal C.F. 'A',8,15,Guillermo Cuartero Calavia,DEF,2,3
+Villarreal C.F. 'A',8,20,Marc Ascoz Gil,DEF,2,4
+Villarreal C.F. 'A',8,21,Daniel Vizuete Marti,DEF,2,5
+Villarreal C.F. 'A',8,6,Victor Pardo Pastor,MED,3,6
+Villarreal C.F. 'A',8,7,Aaron Ruiz Sanchez,MED,3,7
+Villarreal C.F. 'A',8,10,Alejandro Garcia Carcelen,MED,3,8
+Villarreal C.F. 'A',8,17,Jaume Mas Salom,MED,3,9
+Villarreal C.F. 'A',8,14,Iker Vicent Segarra,DEL,4,10
+Villarreal C.F. 'A',8,18,Alvaro Tarraso Perez,DEL,4,11
+Villarreal C.F. 'A',8,1,Yehor Troinkov,SUP_POR,5,12
+Villarreal C.F. 'A',8,3,Eduardo De Haro Hernández,SUP,5,13
+Villarreal C.F. 'A',8,8,Mario Pinazo Trujillo,SUP,5,14
+Villarreal C.F. 'A',8,9,Victor Maestra Rodriguez,SUP,5,15
+Villarreal C.F. 'A',8,16,Ruben Herrera Gonzalez,SUP,5,16
+Villarreal C.F. 'A',8,19,Neville Winston Knowles Iii,SUP,5,17
+Villarreal C.F. 'A',8,22,Josue Caballero Cerdeña,SUP,5,18
+S.C.D. Intangco 'A',8,13,Daniel Sanchez Cano,POR,1,1
+S.C.D. Intangco 'A',8,3,Hugo Cobeño German,DEF,2,2
+S.C.D. Intangco 'A',8,5,Eric Galvez Buitrago,DEF,2,3
+S.C.D. Intangco 'A',8,20,Sergio Gadea Alencia,DEF,2,4
+S.C.D. Intangco 'A',8,21,Diego Cotarelo Alvarez,DEF,2,5
+S.C.D. Intangco 'A',8,6,Gonzalo Ruiz Pagan,MED,3,6
+S.C.D. Intangco 'A',8,14,Adam Parres Rahim,MED,3,7
+S.C.D. Intangco 'A',8,22,Eloy Mañogil Dolz,MED,3,8
+S.C.D. Intangco 'A',8,7,Martin Perez Llopis,DEL,4,9
+S.C.D. Intangco 'A',8,8,Lucas Andres Pico,DEL,4,10
+S.C.D. Intangco 'A',8,19,Juan Gil Iborra,DEL,4,11
+S.C.D. Intangco 'A',8,1,Izan Sanchez Cofrade,SUP_POR,5,12
+S.C.D. Intangco 'A',8,4,Martin Limorte Riquelme,SUP,5,13
+S.C.D. Intangco 'A',8,9,Iker Milan Giménez,SUP,5,14
+S.C.D. Intangco 'A',8,10,Fran Moya Romero,SUP,5,15
+S.C.D. Intangco 'A',8,17,Hector Amoros Fernandez,SUP,5,16
+S.C.D. Intangco 'A',8,18,Luca Eric Goian,SUP,5,17
+S.C.D. Intangco 'A',8,23,Gaspar Mendez Gallardo,SUP,5,18
+Celtic Elche C.F. 'A',8,1,Jorge Martinez Munar,POR,1,1
+Celtic Elche C.F. 'A',8,2,Francisco Mondejar Maya,DEF,2,2
+Celtic Elche C.F. 'A',8,3,Aitor Lopez Canto,DEF,2,3
+Celtic Elche C.F. 'A',8,4,Isaac Patiño Hernandez,DEF,2,4
+Celtic Elche C.F. 'A',8,5,Sergio Martinez Castellano,DEF,2,5
+Celtic Elche C.F. 'A',8,6,Hugo Garcia Gonzalez,MED,3,6
+Celtic Elche C.F. 'A',8,8,Rubén Pérez Andreu,MED,3,7
+Celtic Elche C.F. 'A',8,10,Iker Ramallo Lloret,MED,3,8
+Celtic Elche C.F. 'A',8,7,Alvaro Torrano Martinez,DEL,4,9
+Celtic Elche C.F. 'A',8,9,Aleix Nieto Almagro,DEL,4,10
+Celtic Elche C.F. 'A',8,11,Ahmed Rida Tariki Kharbouch,DEL,4,11
+Celtic Elche C.F. 'A',8,12,Gonzalo Lopez Lozano,SUP,5,12
+Celtic Elche C.F. 'A',8,13,Ilay Marcus Marinus Bronsdijk,SUP_POR,5,13
+Celtic Elche C.F. 'A',8,14,Pedro Garcia Girona,SUP,5,14
+Celtic Elche C.F. 'A',8,15,Sergio Manchon Penalva,SUP,5,15
+Celtic Elche C.F. 'A',8,16,Oleksii Umansky,SUP,5,16
+Celtic Elche C.F. 'A',8,17,Oriol Asensio Verdu,SUP,5,17
+Celtic Elche C.F. 'A',8,18,Julian Chudzik,SUP,5,18
+C.F. Fundació VCF 'A',8,1,Diego Llorens Segovia,POR,1,1
+C.F. Fundació VCF 'A',8,2,Joaquin Cano De Jose,DEF,2,2
+C.F. Fundació VCF 'A',8,3,Hugo Salas Mauri,DEF,2,3
+C.F. Fundació VCF 'A',8,4,Jean Pool Cardona Rivas,DEF,2,4
+C.F. Fundació VCF 'A',8,5,Enzo Pacha Torres,DEF,2,5
+C.F. Fundació VCF 'A',8,6,Ferran Mut Gilabert,MED,3,6
+C.F. Fundació VCF 'A',8,7,Zakaria Idrissa Toure,MED,3,7
+C.F. Fundació VCF 'A',8,8,Lucas Serra Blasco,MED,3,8
+C.F. Fundació VCF 'A',8,11,Gabidolla Orazaly,MED,3,9
+C.F. Fundació VCF 'A',8,9,Enrique Antonio Blanquer Muñoz,DEL,4,10
+C.F. Fundació VCF 'A',8,10,Sergio Rodriguez Garcia,DEL,4,11
+C.F. Fundació VCF 'A',8,12,Timur Kuzmin,SUP,5,12
+C.F. Fundació VCF 'A',8,13,Vicente Fores Ferrer,SUP_POR,5,13
+C.F. Fundació VCF 'A',8,14,Sergio Revert Arribas,SUP,5,14
+C.F. Fundació VCF 'A',8,15,Guillermo Marco Daza,SUP,5,15
+C.F. Fundació VCF 'A',8,16,Albert Ortega Fontanet,SUP,5,16
+C.F. Fundació VCF 'A',8,17,Axel Daniel Mosquera Barona,SUP,5,17
+C.F. Torre Levante 'A',8,1,Illia Miroshnychenko Stepanov,POR,1,1
+C.F. Torre Levante 'A',8,4,Guillermo Romeo Albors,DEF,2,2
+C.F. Torre Levante 'A',8,5,Victor Gimenez Mesado,DEF,2,3
+C.F. Torre Levante 'A',8,18,Samuel Temina Gaviria,DEF,2,4
+C.F. Torre Levante 'A',8,3,Jacob Regalado Pechuan,MED,3,5
+C.F. Torre Levante 'A',8,6,Miguel Sanz Pedro,MED,3,6
+C.F. Torre Levante 'A',8,14,Jose Contelles Zarzo,MED,3,7
+C.F. Torre Levante 'A',8,22,Marc Marti Olaya,MED,3,8
+C.F. Torre Levante 'A',8,29,Mihail Kevin Balta,MED,3,9
+C.F. Torre Levante 'A',8,7,Ximo Nieto-Guerrero Cuesta,DEL,4,10
+C.F. Torre Levante 'A',8,16,Javier Villaescusa Mas,DEL,4,11
+C.F. Torre Levante 'A',8,2,Gonzalo Bolinches Ruiz,SUP,5,12
+C.F. Torre Levante 'A',8,8,Farouk Aouane Qatfaoui,SUP,5,13
+C.F. Torre Levante 'A',8,9,Oke Carrasco Calvillo,SUP,5,14
+C.F. Torre Levante 'A',8,11,Jorge Monteagudo Navarro,SUP,5,15
+C.F. Torre Levante 'A',8,13,Asier Vega Lozano,SUP_POR,5,16
+C.F. Torre Levante 'A',8,15,Nicolas Calderon Gutierrez,SUP,5,17
+C.F. Torre Levante 'A',8,25,Jorge Caro Toral,SUP,5,18
+C.F. La Nucía 'A',8,25,Alexis Cita Adan,POR,1,1
+C.F. La Nucía 'A',8,2,Pere Terol Orozco,DEF,2,2
+C.F. La Nucía 'A',8,3,Ignacio Lozano Cortes,DEF,2,3
+C.F. La Nucía 'A',8,5,Thiago Benjamin Malvezzi Quiroga,DEF,2,4
+C.F. La Nucía 'A',8,16,Noel Matias Bartolome,DEF,2,5
+C.F. La Nucía 'A',8,8,Daniel Abraham Goudsmit,MED,3,6
+C.F. La Nucía 'A',8,24,Vicente Marcos Martinez,MED,3,7
+C.F. La Nucía 'A',8,26,Alejandro Da Silva Cruz,MED,3,8
+C.F. La Nucía 'A',8,7,Dario Barreto Redondo,DEL,4,9
+C.F. La Nucía 'A',8,12,Andreu Gimenez Martinez,DEL,4,10
+C.F. La Nucía 'A',8,17,Victor Perez Sepulveda,DEL,4,11
+C.F. La Nucía 'A',8,1,David Zahonero Cantizano,SUP_POR,5,12
+C.F. La Nucía 'A',8,10,Joaquin Rodriguez Muñoz,SUP,5,13
+C.F. La Nucía 'A',8,11,Vicent Signes Mas,SUP,5,14
+C.F. La Nucía 'A',8,15,Francesc Climent Ciscar,SUP,5,15
+C.F. La Nucía 'A',8,20,Daniel Sanchez Andreu,SUP,5,16
+C.F. La Nucía 'A',8,21,Sergi Holguin Diaz,SUP,5,17
+C.F. La Nucía 'A',8,27,Pablo Gallo Carmona,SUP,5,18
+Elda Unión Cableworld C.F. 'A',8,13,Marc Lozano Tomas,POR,1,1
+Elda Unión Cableworld C.F. 'A',8,7,Angel Rodriguez Palao,DEF,2,2
+Elda Unión Cableworld C.F. 'A',8,15,Alejandro Ponsoda Vallcanera,DEF,2,3
+Elda Unión Cableworld C.F. 'A',8,20,Javier Terol Almiñana,DEF,2,4
+Elda Unión Cableworld C.F. 'A',8,23,Aitor Tomas Benitez,DEF,2,5
+Elda Unión Cableworld C.F. 'A',8,3,David Penalva Alfonso,MED,3,6
+Elda Unión Cableworld C.F. 'A',8,14,Daniel Gil Garcia,MED,3,7
+Elda Unión Cableworld C.F. 'A',8,18,Miguel Hoyos Tarraga,MED,3,8
+Elda Unión Cableworld C.F. 'A',8,21,Marc Peñaranda Ruiz,MED,3,9
+Elda Unión Cableworld C.F. 'A',8,6,Pablo Alarcon Vera,DEL,4,10
+Elda Unión Cableworld C.F. 'A',8,16,Luca Mateo Daza,DEL,4,11
+Elda Unión Cableworld C.F. 'A',8,1,Hector Paisano Riquelme,SUP_POR,5,12
+Elda Unión Cableworld C.F. 'A',8,4,Miguel Sempere Blasco,SUP,5,13
+Elda Unión Cableworld C.F. 'A',8,8,Diego Leiva Ucles,SUP,5,14
+Elda Unión Cableworld C.F. 'A',8,9,Marc Navarro Pla,SUP,5,15
+Elda Unión Cableworld C.F. 'A',8,11,Adrian Sanchez Cano,SUP,5,16
+Elda Unión Cableworld C.F. 'A',8,12,Sergio Simon Iñigo,SUP,5,17
+Elda Unión Cableworld C.F. 'A',8,17,Pablo Barrantes Mira,SUP,5,18
+C.F. Benidorm 'A',8,1,Manuel Irles Castaños,POR,1,1
+C.F. Benidorm 'A',8,3,Neymar Omar Salazar Calva,DEF,2,2
+C.F. Benidorm 'A',8,4,Hugo Causera Mena,DEF,2,3
+C.F. Benidorm 'A',8,5,Xavi Martinez Torres,DEF,2,4
+C.F. Benidorm 'A',8,6,Guillermo Sempere Catala,DEF,2,5
+C.F. Benidorm 'A',8,10,Carlos Ramis Gonzalez,DEF,2,6
+C.F. Benidorm 'A',8,7,Malin Malinov Sinanski,MED,3,7
+C.F. Benidorm 'A',8,9,Iker Perles Quintero,MED,3,8
+C.F. Benidorm 'A',8,14,Cristian Garcia Dominguez,MED,3,9
+C.F. Benidorm 'A',8,21,Aaron Guessas Pia,MED,3,10
+C.F. Benidorm 'A',8,42,Ivan Carmona Perez,DEL,4,11
+C.F. Benidorm 'A',8,2,Neizan Garcia Esquinas,SUP,5,12
+C.F. Benidorm 'A',8,8,Raul Poquet Matulic,SUP,5,13
+C.F. Benidorm 'A',8,11,Juan David Carrasco Gonzalez,SUP,5,14
+C.F. Benidorm 'A',8,15,Rayane Chetouane,SUP,5,15
+C.F. Benidorm 'A',8,16,Nathael Aracil Calderon,SUP,5,16
+C.F. Benidorm 'A',8,17,Manel Perez Marquez,SUP,5,17
+C.F. Benidorm 'A',8,18,Oleksandr Parobok,SUP,5,18
+Valencia C.F. 'A',8,1,Mateo Berbis Martinez,POR,1,1
+Valencia C.F. 'A',8,2,Hugo Sanz Lopez,DEF,2,2
+Valencia C.F. 'A',8,3,Miguel Angel Prieto Serer,DEF,2,3
+Valencia C.F. 'A',8,4,Eric Alaña Barragan,DEF,2,4
+Valencia C.F. 'A',8,5,Iker Frias Barrajon,DEF,2,5
+Valencia C.F. 'A',8,6,Pablo Jimenez Luque,MED,3,6
+Valencia C.F. 'A',8,7,Iker Albero Ruiz,MED,3,7
+Valencia C.F. 'A',8,8,Diego Ferri Molina,MED,3,8
+Valencia C.F. 'A',8,9,Dario Alonso Garcia,MED,3,9
+Valencia C.F. 'A',8,10,Jakson Enrique Gordon,DEL,4,10
+Valencia C.F. 'A',8,11,Aitor Garrigues Asensio,DEL,4,11
+Valencia C.F. 'A',8,12,Mamadou Dansokho Diakhaby,SUP,5,12
+Valencia C.F. 'A',8,13,Hugo Alvarez Soria,SUP_POR,5,13
+Valencia C.F. 'A',8,14,Martin Morente Gay,SUP,5,14
+Valencia C.F. 'A',8,15,Andreu Gimeno Alacreu,SUP,5,15
+Valencia C.F. 'A',8,16,Abel Yumdjo Taguiawa Massoko,SUP,5,16
+Valencia C.F. 'A',8,17,Alejandro Angulo Ramón,SUP,5,17
+Valencia C.F. 'A',8,18,Alfonso Calderon Trillo-Figueroa,SUP,5,18
+Primer Toque C.F. 'A',8,25,Pau Enrique Fuster,POR,1,1
+Primer Toque C.F. 'A',8,2,Yasser Taoussi,DEF,2,2
+Primer Toque C.F. 'A',8,5,Javier Lafuente Perez,DEF,2,3
+Primer Toque C.F. 'A',8,12,Jose David Barreda Galiana,DEF,2,4
+Primer Toque C.F. 'A',8,14,Pere Tomas Ribes,DEF,2,5
+Primer Toque C.F. 'A',8,18,Pol Pablo Vericat,DEF,2,6
+Primer Toque C.F. 'A',8,6,Vicent Roda Barbera,MED,3,7
+Primer Toque C.F. 'A',8,8,Gerard Planell Vidal,MED,3,8
+Primer Toque C.F. 'A',8,11,Ayoub Ammou El Halydy,MED,3,9
+Primer Toque C.F. 'A',8,17,Marcos Santamaria Albert,MED,3,10
+Primer Toque C.F. 'A',8,9,Mohammed Ousrout Khannouss,DEL,4,11
+Primer Toque C.F. 'A',8,1,Marc Menezo Perez,SUP_POR,5,12
+Primer Toque C.F. 'A',8,4,Hernan Sanchez Pascual,SUP,5,13
+Primer Toque C.F. 'A',8,7,Marc Rojano Rubio,SUP,5,14
+Primer Toque C.F. 'A',8,15,Dario Picher Aguilella,SUP,5,15
+Primer Toque C.F. 'A',8,21,Angel Fernandez Peiro,SUP,5,16
+Primer Toque C.F. 'A',8,29,Hugo Carrasquer Orenga,SUP,5,17
+Levante U.D. 'A',8,25,Hector Noel Clair Perez,POR,1,1
+Levante U.D. 'A',8,2,Steven Chiemela Igbojionu Ajuzie,DEF,2,2
+Levante U.D. 'A',8,3,Alejandro Lujan Forment,DEF,2,3
+Levante U.D. 'A',8,4,Diego Miranda Rodriguez,DEF,2,4
+Levante U.D. 'A',8,15,Ivan Rodriguez Paris,DEF,2,5
+Levante U.D. 'A',8,8,Marco Nevot Cervera,MED,3,6
+Levante U.D. 'A',8,11,Alejandro Arnau Franco,MED,3,7
+Levante U.D. 'A',8,20,Manuel Matamoros Nuñez,MED,3,8
+Levante U.D. 'A',8,7,Esteban Ferrer Sanchez,DEL,4,9
+Levante U.D. 'A',8,18,Alejandro Flores Inclan,DEL,4,10
+Levante U.D. 'A',8,27,Daniel Calvente De Jesús,DEL,4,11
+Levante U.D. 'A',8,9,Ivan Galan Redko,SUP,5,12
+Levante U.D. 'A',8,13,Daniel Pedrajas Abril,SUP_POR,5,13
+Levante U.D. 'A',8,16,Diego Moyano Ribera,SUP,5,14
+Levante U.D. 'A',8,17,Aythami Rodriguez Suárez,SUP,5,15
+Levante U.D. 'A',8,22,Aaron Aroba Santos,SUP,5,16
+Levante U.D. 'A',8,24,Alan Scola Gimenez,SUP,5,17
+Alboraya U.D. 'A',9,13,Hugo Iturbide Andres,POR,1,1
+Alboraya U.D. 'A',9,4,Antonio Hölderl Raimundo,DEF,2,2
+Alboraya U.D. 'A',9,5,Nicolas Morillas Ubach,DEF,2,3
+Alboraya U.D. 'A',9,18,Matias Sanchez Diaz,DEF,2,4
+Alboraya U.D. 'A',9,24,Elian Merino Franco,DEF,2,5
+Alboraya U.D. 'A',9,7,Cayetano Garcia Soriano,MED,3,6
+Alboraya U.D. 'A',9,10,Cayetano Garcia Villar,MED,3,7
+Alboraya U.D. 'A',9,17,Jorge De Jaime Blasco,MED,3,8
+Alboraya U.D. 'A',9,3,Xavi Verdu Planells,DEL,4,9
+Alboraya U.D. 'A',9,14,Leo Morales Oliva,DEL,4,10
+Alboraya U.D. 'A',9,16,Gonzalo Escorihuela Prieto,DEL,4,11
+Alboraya U.D. 'A',9,1,Alvaro Izquierdo Muñoz,SUP_POR,5,12
+Alboraya U.D. 'A',9,2,Ruben Alonso Camin,SUP,5,13
+Alboraya U.D. 'A',9,8,Joel Patiño Martinez,SUP,5,14
+Alboraya U.D. 'A',9,11,Arnau Ribera Rangel,SUP,5,15
+Alboraya U.D. 'A',9,12,Hugo Villaescusa Cabrera,SUP,5,16
+Alboraya U.D. 'A',9,21,Hugo Martinez Boluda,SUP,5,17
+Alboraya U.D. 'A',9,23,Vicente Bayarri Baldovi,SUP,5,18
+C.F. Fundació VCF 'A',9,1,Vicente Fores Ferrer,POR,1,1
+C.F. Fundació VCF 'A',9,2,Joaquin Cano De Jose,DEF,2,2
+C.F. Fundació VCF 'A',9,3,Hugo Salas Mauri,DEF,2,3
+C.F. Fundació VCF 'A',9,4,Jean Pool Cardona Rivas,DEF,2,4
+C.F. Fundació VCF 'A',9,5,Enzo Pacha Torres,DEF,2,5
+C.F. Fundació VCF 'A',9,6,Ferran Mut Gilabert,MED,3,6
+C.F. Fundació VCF 'A',9,7,Zakaria Idrissa Toure,MED,3,7
+C.F. Fundació VCF 'A',9,8,Sergio Revert Arribas,MED,3,8
+C.F. Fundació VCF 'A',9,11,Gabidolla Orazaly,MED,3,9
+C.F. Fundació VCF 'A',9,9,Enrique Antonio Blanquer Muñoz,DEL,4,10
+C.F. Fundació VCF 'A',9,10,Sergio Rodriguez Garcia,DEL,4,11
+C.F. Fundació VCF 'A',9,12,Timur Kuzmin,SUP,5,12
+C.F. Fundació VCF 'A',9,13,Diego Llorens Segovia,SUP_POR,5,13
+C.F. Fundació VCF 'A',9,14,Albert Ortega Fontanet,SUP,5,14
+C.F. Fundació VCF 'A',9,15,Guillermo Marco Daza,SUP,5,15
+C.F. Fundació VCF 'A',9,16,Lucas Serra Blasco,SUP,5,16
+C.F. Fundació VCF 'A',9,17,Axel Daniel Mosquera Barona,SUP,5,17
+C.F. Fundació VCF 'A',9,18,Francesco Martin Moschella Compostela,SUP,5,18
+Patacona C.F. 'A',9,22,Raul Toboso Nicolau,POR,1,1
+Patacona C.F. 'A',9,2,Angel Navarro Michelena,DEF,2,2
+Patacona C.F. 'A',9,4,Pau Carrasco Cantero,DEF,2,3
+Patacona C.F. 'A',9,18,Carlos Gomez Pallardo,DEF,2,4
+Patacona C.F. 'A',9,24,Luis Andreu Valor,DEF,2,5
+Patacona C.F. 'A',9,5,Nicolas Gomis Dominguez,MED,3,6
+Patacona C.F. 'A',9,8,Diego Borrajo De Orozco Maldonado,MED,3,7
+Patacona C.F. 'A',9,10,Eric Pacha Hernández,MED,3,8
+Patacona C.F. 'A',9,20,Marc Joan Gomez Oscar,MED,3,9
+Patacona C.F. 'A',9,7,Izan Vicente Alos,DEL,4,10
+Patacona C.F. 'A',9,19,Yosin Yusupov,DEL,4,11
+Patacona C.F. 'A',9,1,Marc Rodriguez Badia,SUP_POR,5,12
+Patacona C.F. 'A',9,3,Victor Blanco Lorente,SUP,5,13
+Patacona C.F. 'A',9,9,Nicolas Diaz Lorenzo,SUP,5,14
+Patacona C.F. 'A',9,11,Niko Palop Herman,SUP,5,15
+Patacona C.F. 'A',9,14,Rafa Montes Garcia,SUP,5,16
+Patacona C.F. 'A',9,17,Daniel Nuñez Najera,SUP,5,17
+Patacona C.F. 'A',9,27,Roberto Nicolas Stirbu Moldovan,SUP,5,18
+Elche C.F. 'A',9,1,Pablo Fernandez Sposaro,POR,1,1
+Elche C.F. 'A',9,3,Hector Barcelo Soler,DEF,2,2
+Elche C.F. 'A',9,4,Samuel Navarro Gomez,DEF,2,3
+Elche C.F. 'A',9,12,David Giner Martinez,DEF,2,4
+Elche C.F. 'A',9,22,Julian Andres Vasquez Cano,DEF,2,5
+Elche C.F. 'A',9,8,Marc Sempere Anton,MED,3,6
+Elche C.F. 'A',9,16,Iker Pico Tenza,MED,3,7
+Elche C.F. 'A',9,20,Mario Galvez Montaño,MED,3,8
+Elche C.F. 'A',9,18,Adrian Sanchez Amat,DEL,4,9
+Elche C.F. 'A',9,21,Alex Perea Ferma,DEL,4,10
+Elche C.F. 'A',9,23,Andreu Perez Berbegal,DEL,4,11
+Elche C.F. 'A',9,2,Neizan Parra Gonzalez,SUP,5,12
+Elche C.F. 'A',9,6,Jorge Clemente Rodriguez,SUP,5,13
+Elche C.F. 'A',9,10,Alejandro De Juan Garcia,SUP,5,14
+Elche C.F. 'A',9,13,Sergio Parra Garcia,SUP_POR,5,15
+Elche C.F. 'A',9,14,Adrian Valero Salmeron,SUP,5,16
+Elche C.F. 'A',9,17,Derek Enrique Martinez Recuerda,SUP,5,17
+Elche C.F. 'A',9,19,Velasco,SUP,5,18
+Levante U.D. 'A',9,1,Asier Gomez Diaz,POR,1,1
+Levante U.D. 'A',9,2,Steven Chiemela Igbojionu Ajuzie,DEF,2,2
+Levante U.D. 'A',9,3,Alejandro Lujan Forment,DEF,2,3
+Levante U.D. 'A',9,4,Diego Miranda Rodriguez,DEF,2,4
+Levante U.D. 'A',9,15,Ivan Rodriguez Paris,DEF,2,5
+Levante U.D. 'A',9,8,Marco Nevot Cervera,MED,3,6
+Levante U.D. 'A',9,11,Alejandro Arnau Franco,MED,3,7
+Levante U.D. 'A',9,22,Aaron Aroba Santos,MED,3,8
+Levante U.D. 'A',9,9,Ivan Galan Redko,DEL,4,9
+Levante U.D. 'A',9,17,Aythami Rodriguez Suárez,DEL,4,10
+Levante U.D. 'A',9,18,Alejandro Flores Inclan,DEL,4,11
+Levante U.D. 'A',9,7,Esteban Ferrer Sanchez,SUP,5,12
+Levante U.D. 'A',9,12,Alberto Barres Ros,SUP,5,13
+Levante U.D. 'A',9,13,Daniel Pedrajas Abril,SUP_POR,5,14
+Levante U.D. 'A',9,14,Alvaro Castellanos Anaya,SUP,5,15
+Levante U.D. 'A',9,20,Manuel Matamoros Nuñez,SUP,5,16
+Levante U.D. 'A',9,24,Alan Scola Gimenez,SUP,5,17
+Levante U.D. 'A',9,27,Daniel Calvente De Jesús,SUP,5,18
+C.D. Roda 'A',9,13,Marc Franch Julia,POR,1,1
+C.D. Roda 'A',9,2,Ahmed Ben Ali Laghmich El Haad,DEF,2,2
+C.D. Roda 'A',9,3,Daniel Cortes Pacheco,DEF,2,3
+C.D. Roda 'A',9,5,Mario Granell Calafell,DEF,2,4
+C.D. Roda 'A',9,21,Omar Rami El Marouni,DEF,2,5
+C.D. Roda 'A',9,6,Moustapha Sanghare Traore,MED,3,6
+C.D. Roda 'A',9,8,Ferran Fortuny Albert,MED,3,7
+C.D. Roda 'A',9,11,Miguel Ángel Tena Saco De Larriva,MED,3,8
+C.D. Roda 'A',9,18,Brian Kwame Bada Gonzalez,DEL,4,9
+C.D. Roda 'A',9,22,Ivan Gonzalez Artiles,DEL,4,10
+C.D. Roda 'A',9,23,Iker Delgado Castellanos,DEL,4,11
+C.D. Roda 'A',9,1,Oleksii Nasibullin,SUP_POR,5,12
+C.D. Roda 'A',9,4,Platon Moskalenko,SUP,5,13
+C.D. Roda 'A',9,14,Alejandro Buedo Rubio,SUP,5,14
+C.D. Roda 'A',9,15,Collins Baidoo Yeboah,SUP,5,15
+C.D. Roda 'A',9,16,Aaron Torralbo Charki,SUP,5,16
+C.D. Roda 'A',9,24,Guillermo Mora Lorca,SUP,5,17
+C.D. Roda 'A',9,26,Brunno Valentino Blacio Castro,SUP,5,18
+Celtic Elche C.F. 'A',9,1,Ilay Marcus Marinus Bronsdijk,POR,1,1
+Celtic Elche C.F. 'A',9,3,Aitor Lopez Canto,DEF,2,2
+Celtic Elche C.F. 'A',9,12,Gonzalo Lopez Lozano,DEF,2,3
+Celtic Elche C.F. 'A',9,15,Francisco Mondejar Maya,DEF,2,4
+Celtic Elche C.F. 'A',9,18,Pedro Garcia Girona,DEF,2,5
+Celtic Elche C.F. 'A',9,6,Rubén Pérez Andreu,MED,3,6
+Celtic Elche C.F. 'A',9,10,Oriol Asensio Verdu,MED,3,7
+Celtic Elche C.F. 'A',9,16,Hugo Garcia Gonzalez,MED,3,8
+Celtic Elche C.F. 'A',9,9,Aleix Nieto Almagro,DEL,4,9
+Celtic Elche C.F. 'A',9,17,Sergio Manchon Penalva,DEL,4,10
+Celtic Elche C.F. 'A',9,21,Julian Chudzik,DEL,4,11
+Celtic Elche C.F. 'A',9,4,Isaac Patiño Hernandez,SUP,5,12
+Celtic Elche C.F. 'A',9,7,Alvaro Torrano Martinez,SUP,5,13
+Celtic Elche C.F. 'A',9,8,Nacho Sirvent Guillen,SUP,5,14
+Celtic Elche C.F. 'A',9,11,Iker Ramallo Lloret,SUP,5,15
+Celtic Elche C.F. 'A',9,13,Jorge Martinez Munar,SUP_POR,5,16
+Celtic Elche C.F. 'A',9,14,Cayetano Ramon Moreno,SUP,5,17
+Celtic Elche C.F. 'A',9,20,Jakub Lewczuk,SUP,5,18
+C.F. Benidorm 'A',9,1,Manuel Irles Castaños,POR,1,1
+C.F. Benidorm 'A',9,2,Neizan Garcia Esquinas,DEF,2,2
+C.F. Benidorm 'A',9,5,Xavi Martinez Torres,DEF,2,3
+C.F. Benidorm 'A',9,6,Guillermo Sempere Catala,DEF,2,4
+C.F. Benidorm 'A',9,9,Iker Perles Quintero,DEF,2,5
+C.F. Benidorm 'A',9,10,Carlos Ramis Gonzalez,DEF,2,6
+C.F. Benidorm 'A',9,4,Hugo Causera Mena,MED,3,7
+C.F. Benidorm 'A',9,8,Raul Poquet Matulic,MED,3,8
+C.F. Benidorm 'A',9,11,Juan David Carrasco Gonzalez,MED,3,9
+C.F. Benidorm 'A',9,15,Rayane Chetouane,MED,3,10
+C.F. Benidorm 'A',9,42,Ivan Carmona Perez,DEL,4,11
+C.F. Benidorm 'A',9,3,Neymar Omar Salazar Calva,SUP,5,12
+C.F. Benidorm 'A',9,7,Malin Malinov Sinanski,SUP,5,13
+C.F. Benidorm 'A',9,14,Cristian Garcia Dominguez,SUP,5,14
+C.F. Benidorm 'A',9,17,Manel Perez Marquez,SUP,5,15
+C.F. Benidorm 'A',9,20,Simone Molinelli,SUP,5,16
+C.F. Benidorm 'A',9,21,Aaron Guessas Pia,SUP,5,17
+C.F. Benidorm 'A',9,99,Alejandro Abadia De Barbara Varon,SUP_POR,5,18
+Villarreal C.F. 'A',9,25,Luca Reina Ruiz,POR,1,1
+Villarreal C.F. 'A',9,3,Eduardo De Haro Hernández,DEF,2,2
+Villarreal C.F. 'A',9,5,Eric Rodriguez Casas,DEF,2,3
+Villarreal C.F. 'A',9,20,Marc Ascoz Gil,DEF,2,4
+Villarreal C.F. 'A',9,21,Daniel Vizuete Marti,DEF,2,5
+Villarreal C.F. 'A',9,8,Mario Pinazo Trujillo,MED,3,6
+Villarreal C.F. 'A',9,11,Pablo Lopez Argüello,MED,3,7
+Villarreal C.F. 'A',9,12,Pablo Bayo Guerrero,MED,3,8
+Villarreal C.F. 'A',9,17,Jaume Mas Salom,MED,3,9
+Villarreal C.F. 'A',9,9,Victor Maestra Rodriguez,DEL,4,10
+Villarreal C.F. 'A',9,18,Alvaro Tarraso Perez,DEL,4,11
+Villarreal C.F. 'A',9,1,Yehor Troinkov,SUP_POR,5,12
+Villarreal C.F. 'A',9,6,Victor Pardo Pastor,SUP,5,13
+Villarreal C.F. 'A',9,7,Aaron Ruiz Sanchez,SUP,5,14
+Villarreal C.F. 'A',9,10,Alejandro Garcia Carcelen,SUP,5,15
+Villarreal C.F. 'A',9,19,Neville Winston Knowles Iii,SUP,5,16
+Villarreal C.F. 'A',9,22,Josue Caballero Cerdeña,SUP,5,17
+Villarreal C.F. 'A',9,26,Jeroni Serra Clavell,SUP,5,18
+Elda Unión Cableworld C.F. 'A',9,13,Marc Lozano Tomas,POR,1,1
+Elda Unión Cableworld C.F. 'A',9,4,Miguel Sempere Blasco,DEF,2,2
+Elda Unión Cableworld C.F. 'A',9,11,Adrian Sanchez Cano,DEF,2,3
+Elda Unión Cableworld C.F. 'A',9,12,Sergio Simon Iñigo,DEF,2,4
+Elda Unión Cableworld C.F. 'A',9,20,Javier Terol Almiñana,DEF,2,5
+Elda Unión Cableworld C.F. 'A',9,7,Angel Rodriguez Palao,MED,3,6
+Elda Unión Cableworld C.F. 'A',9,9,Marc Navarro Pla,MED,3,7
+Elda Unión Cableworld C.F. 'A',9,14,Daniel Gil Garcia,MED,3,8
+Elda Unión Cableworld C.F. 'A',9,18,Miguel Hoyos Tarraga,MED,3,9
+Elda Unión Cableworld C.F. 'A',9,6,Pablo Alarcon Vera,DEL,4,10
+Elda Unión Cableworld C.F. 'A',9,17,Pablo Barrantes Mira,DEL,4,11
+Elda Unión Cableworld C.F. 'A',9,3,David Penalva Alfonso,SUP,5,12
+Elda Unión Cableworld C.F. 'A',9,15,Alejandro Ponsoda Vallcanera,SUP,5,13
+Elda Unión Cableworld C.F. 'A',9,16,Luca Mateo Daza,SUP,5,14
+Elda Unión Cableworld C.F. 'A',9,21,Marc Peñaranda Ruiz,SUP,5,15
+Elda Unión Cableworld C.F. 'A',9,22,Agustín Lozano Herrera,SUP_POR,5,16
+Elda Unión Cableworld C.F. 'A',9,23,Aitor Tomas Benitez,SUP,5,17
+C.F. Inter San José Valencia 'A',9,13,Juan Jose Gil Calisalvo,POR,1,1
+C.F. Inter San José Valencia 'A',9,4,Adrián Civera Gallach,DEF,2,2
+C.F. Inter San José Valencia 'A',9,5,Xavi Torrijos Navarro,DEF,2,3
+C.F. Inter San José Valencia 'A',9,12,David Javaloyes Marco,DEF,2,4
+C.F. Inter San José Valencia 'A',9,15,Enrique Lurbe De Vicente,DEF,2,5
+C.F. Inter San José Valencia 'A',9,6,Pablo Lopez Almarcha,MED,3,6
+C.F. Inter San José Valencia 'A',9,7,Lucas Amoros Tello,MED,3,7
+C.F. Inter San José Valencia 'A',9,18,Juan Diego De La Fuente Wila,MED,3,8
+C.F. Inter San José Valencia 'A',9,21,Bruno Aguilar Baya,MED,3,9
+C.F. Inter San José Valencia 'A',9,14,Marc Miralles Serrano,DEL,4,10
+C.F. Inter San José Valencia 'A',9,27,Alejandro Miró Andrés,DEL,4,11
+C.F. Inter San José Valencia 'A',9,1,Santiago Pinedo Nóbile,SUP_POR,5,12
+C.F. Inter San José Valencia 'A',9,11,Victor Serrano Talamantes,SUP,5,13
+C.F. Inter San José Valencia 'A',9,16,Wilter Job Sanchez Rodriguez,SUP,5,14
+C.F. Inter San José Valencia 'A',9,19,Gonzalo Mascarell Marti,SUP,5,15
+C.F. Inter San José Valencia 'A',9,20,Carlos Sierra Arnal,SUP,5,16
+C.F. Inter San José Valencia 'A',9,22,Hugo Tarraso Perez,SUP,5,17
+C.F. Inter San José Valencia 'A',9,23,Rafael Alejandro Beltrán Valencia,SUP,5,18
+Primer Toque C.F. 'A',9,1,Marc Menezo Perez,POR,1,1
+Primer Toque C.F. 'A',9,2,Yasser Taoussi,DEF,2,2
+Primer Toque C.F. 'A',9,5,Javier Lafuente Perez,DEF,2,3
+Primer Toque C.F. 'A',9,12,Jose David Barreda Galiana,DEF,2,4
+Primer Toque C.F. 'A',9,14,Pere Tomas Ribes,DEF,2,5
+Primer Toque C.F. 'A',9,29,Hugo Carrasquer Orenga,DEF,2,6
+Primer Toque C.F. 'A',9,6,Vicent Roda Barbera,MED,3,7
+Primer Toque C.F. 'A',9,8,Gerard Planell Vidal,MED,3,8
+Primer Toque C.F. 'A',9,15,Dario Picher Aguilella,MED,3,9
+Primer Toque C.F. 'A',9,18,Pol Pablo Vericat,MED,3,10
+Primer Toque C.F. 'A',9,9,Mohammed Ousrout Khannouss,DEL,4,11
+Primer Toque C.F. 'A',9,4,Hernan Sanchez Pascual,SUP,5,12
+Primer Toque C.F. 'A',9,7,Marc Rojano Rubio,SUP,5,13
+Primer Toque C.F. 'A',9,11,Ayoub Ammou El Halydy,SUP,5,14
+Primer Toque C.F. 'A',9,17,Marcos Santamaria Albert,SUP,5,15
+Primer Toque C.F. 'A',9,19,Marc Monfort Noguera,SUP,5,16
+Primer Toque C.F. 'A',9,25,Pau Enrique Fuster,SUP_POR,5,17
+C.F. Torre Levante 'A',9,1,Illia Miroshnychenko Stepanov,POR,1,1
+C.F. Torre Levante 'A',9,3,Jacob Regalado Pechuan,DEF,2,2
+C.F. Torre Levante 'A',9,4,Guillermo Romeo Albors,DEF,2,3
+C.F. Torre Levante 'A',9,5,Victor Gimenez Mesado,DEF,2,4
+C.F. Torre Levante 'A',9,18,Samuel Temina Gaviria,DEF,2,5
+C.F. Torre Levante 'A',9,6,Miguel Sanz Pedro,MED,3,6
+C.F. Torre Levante 'A',9,16,Javier Villaescusa Mas,MED,3,7
+C.F. Torre Levante 'A',9,25,Jorge Caro Toral,MED,3,8
+C.F. Torre Levante 'A',9,10,Alejandro Bonfiglio Fuentes,DEL,4,9
+C.F. Torre Levante 'A',9,11,Jorge Monteagudo Navarro,DEL,4,10
+C.F. Torre Levante 'A',9,29,Mihail Kevin Balta,DEL,4,11
+C.F. Torre Levante 'A',9,2,Gonzalo Bolinches Ruiz,SUP,5,12
+C.F. Torre Levante 'A',9,7,Ximo Nieto-Guerrero Cuesta,SUP,5,13
+C.F. Torre Levante 'A',9,8,Farouk Aouane Qatfaoui,SUP,5,14
+C.F. Torre Levante 'A',9,9,Oke Carrasco Calvillo,SUP,5,15
+C.F. Torre Levante 'A',9,13,Asier Vega Lozano,SUP_POR,5,16
+C.F. Torre Levante 'A',9,14,Jose Contelles Zarzo,SUP,5,17
+C.F. Torre Levante 'A',9,22,Marc Marti Olaya,SUP,5,18
+C.D. Castellón 'A',9,1,Hugo Peris Escrig,POR,1,1
+C.D. Castellón 'A',9,2,Eric Peris Escrig,DEF,2,2
+C.D. Castellón 'A',9,3,Andreu Viciedo Rodrigo,DEF,2,3
+C.D. Castellón 'A',9,4,Marc Cervera Calpe,DEF,2,4
+C.D. Castellón 'A',9,8,Joel Rodriguez Paris,MED,3,5
+C.D. Castellón 'A',9,10,Diego Vicente Herrero,MED,3,6
+C.D. Castellón 'A',9,11,Max Franciszek Bednorz,MED,3,7
+C.D. Castellón 'A',9,12,Jorge Vidal Tarazona,MED,3,8
+C.D. Castellón 'A',9,21,Otto Planagumà Bagan,MED,3,9
+C.D. Castellón 'A',9,9,Antonio Ramos Gomez,DEL,4,10
+C.D. Castellón 'A',9,18,Gonzalo Tabares Saborit,DEL,4,11
+C.D. Castellón 'A',9,6,Asier Sanchez Langa,SUP,5,12
+C.D. Castellón 'A',9,7,Daniel Santacruz Santacruz,SUP,5,13
+C.D. Castellón 'A',9,13,Aitor Rivera Leal,SUP_POR,5,14
+C.D. Castellón 'A',9,15,Yulen Acosta Zalvez,SUP,5,15
+C.D. Castellón 'A',9,16,Artem Byelousov,SUP,5,16
+C.D. Castellón 'A',9,19,Bruno Fernandez Garrido,SUP,5,17
+C.D. Castellón 'A',9,20,Nianake Diarra,SUP,5,18
+Valencia C.F. 'A',9,1,Hugo Alvarez Soria,POR,1,1
+Valencia C.F. 'A',9,2,Hugo Sanz Lopez,DEF,2,2
+Valencia C.F. 'A',9,3,Miguel Angel Prieto Serer,DEF,2,3
+Valencia C.F. 'A',9,4,Eric Alaña Barragan,DEF,2,4
+Valencia C.F. 'A',9,5,Iker Frias Barrajon,DEF,2,5
+Valencia C.F. 'A',9,6,Pablo Jimenez Luque,MED,3,6
+Valencia C.F. 'A',9,8,Marc Carranza Hernandez,MED,3,7
+Valencia C.F. 'A',9,10,Jakson Enrique Gordon,MED,3,8
+Valencia C.F. 'A',9,7,Alfonso Calderon Trillo-Figueroa,DEL,4,9
+Valencia C.F. 'A',9,9,Dario Alonso Garcia,DEL,4,10
+Valencia C.F. 'A',9,11,Aitor Garrigues Asensio,DEL,4,11
+Valencia C.F. 'A',9,12,Mamadou Dansokho Diakhaby,SUP,5,12
+Valencia C.F. 'A',9,13,Mateo Berbis Martinez,SUP_POR,5,13
+Valencia C.F. 'A',9,14,Martin Morente Gay,SUP,5,14
+Valencia C.F. 'A',9,15,Andreu Gimeno Alacreu,SUP,5,15
+Valencia C.F. 'A',9,16,Abel Yumdjo Taguiawa Massoko,SUP,5,16
+Valencia C.F. 'A',9,17,Alejandro Angulo Ramón,SUP,5,17
+C.F. La Nucía 'A',9,1,David Zahonero Cantizano,POR,1,1
+C.F. La Nucía 'A',9,2,Pere Terol Orozco,DEF,2,2
+C.F. La Nucía 'A',9,5,Thiago Benjamin Malvezzi Quiroga,DEF,2,3
+C.F. La Nucía 'A',9,11,Vicent Signes Mas,DEF,2,4
+C.F. La Nucía 'A',9,15,Francesc Climent Ciscar,DEF,2,5
+C.F. La Nucía 'A',9,7,Dario Barreto Redondo,MED,3,6
+C.F. La Nucía 'A',9,24,Vicente Marcos Martinez,MED,3,7
+C.F. La Nucía 'A',9,26,Alejandro Da Silva Cruz,MED,3,8
+C.F. La Nucía 'A',9,10,Joaquin Rodriguez Muñoz,DEL,4,9
+C.F. La Nucía 'A',9,17,Victor Perez Sepulveda,DEL,4,10
+C.F. La Nucía 'A',9,21,Sergi Holguin Diaz,DEL,4,11
+C.F. La Nucía 'A',9,3,Ignacio Lozano Cortes,SUP,5,12
+C.F. La Nucía 'A',9,9,Toni Garcia Segura,SUP,5,13
+C.F. La Nucía 'A',9,12,Andreu Gimenez Martinez,SUP,5,14
+C.F. La Nucía 'A',9,16,Noel Matias Bartolome,SUP,5,15
+C.F. La Nucía 'A',9,22,Xavi Martinez Mañez,SUP,5,16
+C.F. La Nucía 'A',9,25,Alexis Cita Adan,SUP_POR,5,17
+C.F. La Nucía 'A',9,27,Pablo Gallo Carmona,SUP,5,18

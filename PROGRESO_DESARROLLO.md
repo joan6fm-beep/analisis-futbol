@@ -23,8 +23,10 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
   - Muro y Calendario propios (archivos separados); el calendario del Infantil D permite editar y eliminar eventos.
 
 - **Cadete A** (Lliga Autonòmica Cadet, noviembre 2026):
-  - Portada con tres equipos; navegación propia: Inicio · Resumen liga · Rivales · Estadísticas · Calendario · Muro.
-  - 63 actas FFCV transcritas de la grabación del usuario (J1–J7 completas salvo Celtic–Roda; J8: 1 de 9)
+  - Portada con tres equipos; navegación propia: Inicio · Resumen liga · Rivales · Equipo · Calendario · Muro.
+  - Equipo (`cad.render_team`): puntos por jornada, puntos acumulados (con el líder), evolución de la clasificación, goles a favor/en contra,
+    comparador y estadísticas propias. Resumen liga solo con la información general; `view=estadisticas` abre Equipo.
+  - 79 actas FFCV transcritas de dos grabaciones del usuario (J1–J7 completas salvo Celtic–Roda; J8 completa; J9: 8 de 9, Kelme–Intangco suspendido)
     en `data/cadete_a/fuente/actas.txt`; `tools/importar_cadete_a.py` genera los CSV.
   - Cálculos en `league_core.py`, parametrizados por duración (`teams.py`: Juvenil 90', Cadete 80', Infantil 70').
   - Muro, calendario y adjuntos propios en `data/cadete_a/`.
@@ -33,7 +35,7 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
   - Escudos compartidos en `crests.py` (16 del Juvenil A + 12 FFCV del Cadete A).
 
 ## Pendiente / datos a revisar
-- Cadete A: J7 Celtic Elche–Roda (10/11) y resto de J8; asistencias no registradas en actas;
+- Cadete A: J7 Celtic Elche–Roda (10/11) y J9 Kelme–Intangco (suspendido); asistencias no registradas en actas;
   dos «C. Garcia» en Alboraya (tarjetas y cambios sin atribuir); fechas/horas no visibles en algunas actas.
 - J8 Juvenil A: gol de A. Urbina (Inter SJ, 38') con icono distinto en el acta (¿penalti?), registrado como gol;
   tarjetas a técnicos (V. Felipe, R. Hervas) no registradas.

@@ -3492,6 +3492,8 @@ with st.sidebar:
         "estadisticas": "Estadísticas",
     }
     modulo = _view_to_mod.get(_view, "Resumen liga" if _area == "juvenil" else "Inicio")
+    if _area == "cadete" and modulo == "Estadísticas":
+        modulo = "Equipo"  # las estadísticas del Cadete A están ahora en Equipo (se conservan los enlaces antiguos)
     _icons = {
       "Inicio":"<svg viewBox='0 0 24 24'><path d='M3 11.5 12 4l9 7.5'/><path d='M5 10.5V20h14v-9.5'/></svg>",
       "Muro":"<svg viewBox='0 0 24 24'><path d='M4 5h16v12H8l-4 3z'/><path d='M8 9h8M8 13h5'/></svg>",
@@ -3522,7 +3524,7 @@ with st.sidebar:
             ".goal-time-grid,.goal-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}"
             "</style>", unsafe_allow_html=True)
     if _nav_area == "cadete":
-        _nav_info=[('Inicio','inicio'),('Resumen liga','liga'),('Rivales','rivales'),('Estadísticas','estadisticas'),('Calendario','calendario'),('Muro','muro')]
+        _nav_info=[('Inicio','inicio'),('Resumen liga','liga'),('Rivales','rivales'),('Equipo','equipo'),('Calendario','calendario'),('Muro','muro')]
     elif _nav_area == "infantil":
         _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Resultados','resultados'),('Minutos','minutos'),('Seguimiento','seguimiento')]
     else:
@@ -3623,7 +3625,7 @@ _mobile_nav = [
 ]
 if _nav_area == "cadete":
     _mobile_nav = [("Inicio", "inicio", "⌂", "Inicio"), ("Resumen liga", "liga", "▦", "Liga"), ("Rivales", "rivales", "◈", "Rivales"),
-                   ("Estadísticas", "estadisticas", "◷", "Estad."), ("Calendario", "calendario", "▣", "Calendario"), ("Muro", "muro", "✦", "Muro")]
+                   ("Equipo", "equipo", "◷", "Equipo"), ("Calendario", "calendario", "▣", "Calendario"), ("Muro", "muro", "✦", "Muro")]
 elif _nav_area == "infantil":
     _mobile_nav = [("Inicio", "inicio", "⌂", "Inicio"), ("Muro", "muro", "✦", "Muro"), ("Calendario", "calendario", "▣", "Calendario"),
                    ("Resultados", "resultados", "🏆", "Result."), ("Minutos", "minutos", "◷", "Minutos"), ("Seguimiento", "seguimiento", "▤", "Seguim.")]
@@ -3673,11 +3675,10 @@ if _area == "cadete":
         render_calendar()
     elif modulo == "Resumen liga":
         render_league_summary()  # mismo Resumen de liga que el Juvenil A, con datos y duración del Cadete A
-        cad.render_league_extras(logo=_team_logo_tag)
     elif modulo == "Rivales":
         pass  # continúa con la ficha de Rivales del Juvenil A (datos y duración del Cadete A)
-    elif modulo == "Estadísticas":
-        cad.render_stats()
+    elif modulo == "Equipo":
+        cad.render_team(logo=_team_logo_tag)  # evolución, puntos, comparación y estadísticas propias del Cadete A
     else:
         cad.render_home(_image_data_uri(str(BASE / "cadete_a_portada.jpeg")))
     if modulo != "Rivales":

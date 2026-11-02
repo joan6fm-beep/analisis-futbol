@@ -235,7 +235,7 @@ def render_home(photo_uri):
         f"<p style='color:var(--text)'><b>Próximo partido:</b> {escape(nxt_txt)}</p>"
         "<div class='cad-links'><a class='main' href='?area=cadete&view=liga' target='_self'>Resumen de liga →</a>"
         "<a href='?area=cadete&view=rivales' target='_self'>Rivales</a>"
-        "<a href='?area=cadete&view=estadisticas' target='_self'>Estadísticas</a>"
+        "<a href='?area=cadete&view=equipo' target='_self'>Equipo</a>"
         "<a href='?area=cadete&view=calendario' target='_self'>Calendario</a></div></div></div>", unsafe_allow_html=True)
     st.markdown("<div class='cad-kpis k6'>"
                 + _kpi("Posición", f"{me.pos}º", f"de {len(tab)} equipos", "pt")
@@ -427,58 +427,48 @@ def render_match_library(team, jornada_sel="Total"):
                     unsafe_allow_html=True)
 
 
-def render_league_extras(logo=None):
-    """Bloque final del Resumen de liga del Cadete A: evolución, puntos, goles por jornada y comparador.
-    Reutiliza el gráfico de clasificación del Juvenil A (team360_charts.fig_standings)."""
-    import team360_charts as t360
-    part, al, ev, mins, av = data()
-    teams = teams_list(part)
-    st.markdown(CSS, unsafe_allow_html=True)
-    st.markdown("<div style='height:14px'></div><div class='section-title league-section-title'>Evolución y comparación de equipos</div>"
-                "<div class='note'>Elige un equipo: se destaca en azul; Primer Toque siempre en naranja como referencia.</div>",
-                unsafe_allow_html=True)
-    others = [t for t in teams if t != TEAM]
-    sel = st.selectbox("Equipo a destacar", [TEAM] + others, index=0, key="cad_lg_evo_team",
-                       format_func=lambda t: short(t))
-    clas = pd.read_csv(DIR / "liga" / "clasificacion_liga.csv")
-    st.plotly_chart(t360.fig_standings(clas, sel), width="stretch", theme=None, config=PLOTLY_CONFIG, key="cad_lg_standings")
+def _points_charts(part, teams, sel):
+    """Puntos por jornada (barras por resultado) y puntos acumulados (Primer Toque, equipo elegido y líder)."""
+    tm = lc.team_matches(part, TEAM)
     evo = lc.position_evolution(part, teams)
-    show = [TEAM] + ([sel] if sel != TEAM else [])
     c1, c2 = st.columns(2)
     with c1:
-        fig = go.Figure()
-        for t, col in zip(show, (PT, RIVAL)):
-            e = evo[evo.equipo == t]
-            fig.add_scatter(x=[f"J{j}" for j in e.jornada], y=e.pts, mode="lines+markers", name=short(t), line=dict(color=col, width=2),
-                            marker=dict(size=8), hovertemplate=f"{short(t)} · %{{x}}: %{{y}} pts<extra></extra>")
-        _plot(fig, "cad_lg_pts", title="Puntos acumulados por jornada")
+        col = [POS if r == "V" else (TOKENS["warn"] if r == "E" else NEG) for r in tm.resultado]
+        # Las derrotas (0 puntos) se dibujan como una barra mínima para que se vean; el marcador va en la etiqueta.
+        fig = go.Figure(go.Bar(x=[f"J{j}" for j in tm.jornada], y=[max(p, 0.08) for p in tm.puntos], marker_color=col,
+                               marker_line_width=0, text=[f"{a}–{b}" for a, b in zip(tm.gf, tm.gc)], textposition="outside",
+                               textfont=dict(color=TOKENS["ink"], size=12), cliponaxis=False,
+                               customdata=list(zip(tm.rival.map(short), tm.condicion, tm.puntos)),
+                               hovertemplate="%{x} · %{customdata[1]} vs %{customdata[0]}<br>%{text} · %{customdata[2]} pts<extra></extra>"))
+        _plot(fig, "cad_eq_ppj", h=300, title="Puntos por jornada", bargap=0.35,
+              yaxis=dict(range=[0, 3.8], tickvals=[0, 1, 3], ticktext=["0", "1", "3"]))
     with c2:
-        tm = lc.team_matches(part, sel)
         fig = go.Figure()
-        fig.add_bar(x=[f"J{j}" for j in tm.jornada], y=tm.gf, name="Goles a favor", marker_color=PT if sel == TEAM else RIVAL,
-                    customdata=tm.rival.map(short), hovertemplate="%{x} vs %{customdata}: %{y} marcados<extra></extra>")
-        fig.add_bar(x=[f"J{j}" for j in tm.jornada], y=tm.gc, name="Goles en contra", marker_color=NEG,
-                    customdata=tm.rival.map(short), hovertemplate="%{x} vs %{customdata}: %{y} encajados<extra></extra>")
-        fig.add_scatter(x=[f"J{j}" for j in tm.jornada], y=(tm.gf - tm.gc).cumsum(), name="Diferencia acumulada", mode="lines+markers",
-                        line=dict(color=TOKENS["warn"], width=2), hovertemplate="%{x}: %{y:+d} acumulado<extra></extra>")
-        _plot(fig, "cad_lg_gfgc", title=f"Goles a favor, en contra y diferencia · {short(sel)}", barmode="group")
-    last5 = lc.team_matches(part, sel).tail(5)
-    st.markdown(f"<div class='cad-note'>Tendencia reciente de {escape(short(sel))}: "
-                + " ".join(f"<span class='res {r}'>{r}</span>" for r in last5.resultado)
-                + f" · {int(last5.puntos.sum())} de {3 * len(last5)} puntos en sus últimos {len(last5)} partidos.</div>",
-                unsafe_allow_html=True)
-    render_comparator(sel if sel != TEAM else (others[0] if others else TEAM), logo=logo)
+        lead = evo[evo.pos == 1].sort_values("jornada")
+        fig.add_scatter(x=[f"J{j}" for j in lead.jornada], y=lead.pts, name="Líder de cada jornada", mode="lines",
+                        line=dict(color=MUTED, width=1.5, dash="dot"), customdata=lead.equipo.map(short),
+                        hovertemplate="%{x} · líder %{customdata}: %{y} pts<extra></extra>")
+        for t, color in ([(sel, RIVAL)] if sel != TEAM else []) + [(TEAM, PT)]:
+            e = evo[evo.equipo == t]
+            fig.add_scatter(x=[f"J{j}" for j in e.jornada], y=e.pts, name=short(t), mode="lines+markers",
+                            line=dict(color=color, width=3 if t == TEAM else 2),
+                            marker=dict(size=8, line=dict(width=1.5, color=TOKENS["surface"])),
+                            fill="tozeroy" if t == TEAM else None, fillcolor="rgba(255,138,30,0.10)" if t == TEAM else None,
+                            customdata=e.pos, hovertemplate=f"{short(t)} · %{{x}}: %{{y}} pts · %{{customdata}}º<extra></extra>")
+        _plot(fig, "cad_eq_acum", h=300, title="Puntos acumulados")
 
 
-# ------------------------------------------------------------------ estadísticas
-
-def render_stats():
+def render_team(logo=None):
+    """Equipo · Cadete A: evolución, puntos por jornada y acumulados, comparación con la liga y estadísticas propias.
+    Reutiliza el gráfico de clasificación del Juvenil A (team360_charts.fig_standings)."""
+    import team360_charts as t360
     st.markdown(CSS, unsafe_allow_html=True)
     part, al, ev, mins, av = data()
-    st.markdown(f"<div class='league-hero'><div><div class='league-eyebrow'>CADETE A · PRIMER TOQUE C.F.</div>"
-                "<div class='league-title'>📊 Estadísticas</div><div class='league-subtitle'>Resultados, goles por tramos, casa/fuera, porteros, minutos y goleadores. "
-                f"Todos los indicadores por partido usan {MM} minutos.</div></div><div class='league-badge'>Datos de actas FFCV</div></div>",
-                unsafe_allow_html=True)
+    teams = teams_list(part)
+    st.markdown("<div class='league-hero'><div><div class='league-eyebrow'>CADETE A · PRIMER TOQUE C.F.</div>"
+                "<div class='league-title'>👥 Equipo · Cadete A</div><div class='league-subtitle'>Evolución, puntos por jornada, comparación con "
+                f"los equipos de la liga y estadísticas propias. Todos los indicadores por partido usan {MM} minutos.</div></div>"
+                "<div class='league-badge'>Datos de actas FFCV</div></div>", unsafe_allow_html=True)
     tm = lc.team_matches(part, TEAM)
     pj = len(tm)
     home, away = tm[tm.condicion == "Casa"], tm[tm.condicion == "Fuera"]
@@ -489,6 +479,34 @@ def render_stats():
                 + _kpi(f"Encajados por {MM}'", _fmt(tm.gc.mean()), f"{int(tm.gc.sum())} encajados")
                 + _kpi("En casa", f"{int(home.puntos.sum())} pts", f"{len(home)} PJ · {int(home.gf.sum())}–{int(home.gc.sum())}")
                 + _kpi("Fuera", f"{int(away.puntos.sum())} pts", f"{len(away)} PJ · {int(away.gf.sum())}–{int(away.gc.sum())}") + "</div>",
+                unsafe_allow_html=True)
+
+    st.markdown("<div style='height:6px'></div><div class='section-title league-section-title'>Evolución y comparación de equipos</div>"
+                "<div class='note'>Elige un equipo: se destaca en azul; Primer Toque siempre en naranja como referencia.</div>",
+                unsafe_allow_html=True)
+    others = [t for t in teams if t != TEAM]
+    sel = st.selectbox("Equipo a destacar", [TEAM] + others, index=0, key="cad_lg_evo_team", format_func=lambda t: short(t))
+    _points_charts(part, teams, sel)
+    clas = pd.read_csv(DIR / "liga" / "clasificacion_liga.csv")
+    st.plotly_chart(t360.fig_standings(clas, sel), width="stretch", theme=None, config=PLOTLY_CONFIG, key="cad_lg_standings")
+    ts = lc.team_matches(part, sel)
+    fig = go.Figure()
+    fig.add_bar(x=[f"J{j}" for j in ts.jornada], y=ts.gf, name="Goles a favor", marker_color=PT if sel == TEAM else RIVAL,
+                customdata=ts.rival.map(short), hovertemplate="%{x} vs %{customdata}: %{y} marcados<extra></extra>")
+    fig.add_bar(x=[f"J{j}" for j in ts.jornada], y=-ts.gc, name="Goles en contra", marker_color=NEG,
+                customdata=list(zip(ts.rival.map(short), ts.gc)), hovertemplate="%{x} vs %{customdata[0]}: %{customdata[1]} encajados<extra></extra>")
+    fig.add_scatter(x=[f"J{j}" for j in ts.jornada], y=(ts.gf - ts.gc).cumsum(), name="Diferencia acumulada", mode="lines+markers",
+                    line=dict(color=TOKENS["warn"], width=2), hovertemplate="%{x}: %{y:+d} acumulado<extra></extra>")
+    fig.add_hline(y=0, line_color=MUTED, line_width=1)
+    _plot(fig, "cad_lg_gfgc", title=f"Goles a favor (arriba), en contra (abajo) y diferencia acumulada · {short(sel)}", barmode="relative")
+    last5 = ts.tail(5)
+    st.markdown(f"<div class='cad-note'>Tendencia reciente de {escape(short(sel))}: "
+                + " ".join(f"<span class='res {r}'>{r}</span>" for r in last5.resultado)
+                + f" · {int(last5.puntos.sum())} de {3 * len(last5)} puntos en sus últimos {len(last5)} partidos.</div>",
+                unsafe_allow_html=True)
+    render_comparator(sel if sel != TEAM else (others[0] if others else TEAM), logo=logo)
+
+    st.markdown("<div style='height:14px'></div><div class='section-title league-section-title'>Estadísticas del Cadete A</div>",
                 unsafe_allow_html=True)
     t = st.tabs(["Resultados y goles", "Casa / fuera", "Minutos", "Goleadores", "Porteros", "Comparar jornadas"])
     with t[0]:
@@ -529,8 +547,9 @@ def render_stats():
         for k, col in (("Pts/partido", PT), ("GF/partido", POS), ("GC/partido", RIVAL)):
             fig.add_bar(x=df.Campo, y=df[k], name=k, marker_color=col, hovertemplate="%{x} · " + k + ": %{y:.2f}<extra></extra>")
         _plot(fig, "cad_st_cf", title="Casa frente a fuera (valores por partido)", barmode="group")
-        st.dataframe(df, hide_index=True, width="stretch",
-                     column_config={k: st.column_config.NumberColumn(format="%.2f") for k in ("Pts/partido", "GF/partido", "GC/partido")})
+        st.markdown("<div class='cad-note'>" + " · ".join(
+            f"<b style='color:var(--ink)'>{r.Campo}</b>: {r.PJ} PJ, {r.V}-{r.E}-{r.D}, {r.Puntos} pts, {r.GF}–{r.GC}" for r in df.itertuples())
+            + "</div>", unsafe_allow_html=True)
     with t[2]:
         pa = lc.participation(mins, TEAM, MM, pj)
         st.markdown(f"<div class='q-title'>Participación de la plantilla</div><div class='q-sub'>% sobre {MM}' × {pj} partidos. "

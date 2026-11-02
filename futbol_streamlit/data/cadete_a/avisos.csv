@@ -1,71 +1,87 @@
 jornada,partido,tipo,detalle,linea
-1,S.C.D. Intangco 'A' - Primer Toque C.F. 'A',nota,P. Tomas (75'): icono de gol de penalti.,230
-1,Celtic Elche C.F. 'A' - C.F. Torre Levante 'A',nota,"Amarilla del 80' a «A. Manuel»: primer entrenador del Celtic Elche (Alexandre Manuel G.), no es jugador.",349
-1,C.F. Benidorm 'A' - Elche C.F. 'A',nota,"Amarilla del 65' a «D. Piñero»: cuerpo técnico del Elche (Daniel Piñero Moreno), no es jugador.",408
-1,Valencia C.F. 'A' - Alboraya U.D. 'A',ambiguo,"42' amarilla «C. Garcia»: Cayetano Garcia Soriano, Cayetano Garcia Villar",506
-1,Valencia C.F. 'A' - Alboraya U.D. 'A',ambiguo,"50' amarilla «C. Garcia»: Cayetano Garcia Soriano, Cayetano Garcia Villar",512
-1,Valencia C.F. 'A' - Alboraya U.D. 'A',ambiguo,"56' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar",520
-1,Valencia C.F. 'A' - Alboraya U.D. 'A',ambiguo,"67' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar",524
-1,Valencia C.F. 'A' - Alboraya U.D. 'A',nota,Alboraya tiene dos titulares «C. Garcia» (Cayetano Garcia Soriano nº7 y Cayetano Garcia Villar nº10): las amarillas de 42' y 50' y las salidas de 56' y 67' no se pueden atribuir a uno concreto.,460
-1,Valencia C.F. 'A' - Alboraya U.D. 'A',nota,"Roja del 40' a «A. Torrecilla»: cuerpo técnico del Alboraya (Alvaro Torrecilla Gar...), no es jugador.",460
-1,Valencia C.F. 'A' - Alboraya U.D. 'A',nota,Hora no visible en la grabación; fecha según la lista de resultados (miércoles 9 septiembre 2026).,460
-2,Patacona C.F. 'A' - Levante U.D. 'A',nota,"Amarilla del 47' a «P. Ruiz»: primer entrenador del Patacona (Pedro Ruiz Ferrer), no es jugador.",526
-2,Patacona C.F. 'A' - Levante U.D. 'A',nota,Cambios de portero: Patacona 64' (R. Toboso por M. Rodriguez); Levante 68' (sale el portero H. Noel por I. Galan y entra el portero D. Pedrajas por E. Ferrer).,526
-2,C.D. Castellón 'A' - Elda Unión Cableworld C.F. 'A',nota,"«D. Gil» (79', lado local) e «I. Molina» (53' y 79') son del cuerpo técnico del Castellón (Daniel Gil Langa, Ian Molina Alguacil); el «D. Gil» del 69' (visitante) es el jugador Daniel Gil Garcia.",696
-2,Elche C.F. 'A' - C.F. La Nucía 'A',nota,"Amarilla del 72' a «D. Nadal»: cuerpo técnico de La Nucía (Damian Nadal Sierra), no es jugador.",763
-2,Primer Toque C.F. 'A' - C.F. Benidorm 'A',nota,Campo leído parcialmente en la grabación («Ciudad Dptva. Chen... C-F-11 Castellón»).,821
-2,C.F. Torre Levante 'A' - Kelme C.F. 'A',nota,Fecha según la lista de resultados (sábado 12 septiembre 2026); hora no visible.,932
-2,Alboraya U.D. 'A' - Celtic Elche C.F. 'A',ambiguo,"60' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar",1035
-2,Alboraya U.D. 'A' - Celtic Elche C.F. 'A',nota,Fecha según la lista de resultados (domingo 13 septiembre 2026); hora no visible. Nombre del campo cortado en la grabación.,985
-2,Alboraya U.D. 'A' - Celtic Elche C.F. 'A',nota,El cambio del 60' («J. De > C. Garcia») no permite saber cuál de los dos Cayetano Garcia sale.,985
-2,Alboraya U.D. 'A' - Celtic Elche C.F. 'A',nota,A. Alcañiz aparece dos veces con tarjeta amarilla en el 80': segunda amarilla (expulsión).,985
-3,C.F. Inter San José Valencia 'A' - Patacona C.F. 'A',nota,"Amarilla del 42' a «J. Vicente»: cuerpo técnico del Inter San José (Jose Vicente Carot...), no es jugador.",1045
-3,C.F. Inter San José Valencia 'A' - Patacona C.F. 'A',nota,Fecha según la lista de resultados (sábado 19 septiembre 2026); hora no visible.,1045
-3,Levante U.D. 'A' - C.F. Torre Levante 'A',nota,Fecha según la lista de resultados (sábado 19 septiembre 2026); hora no legible.,1102
-3,Valencia C.F. 'A' - C.D. Castellón 'A',nota,En el 72' entra el portero suplente A. Rivera por el defensa M. Cervera (así consta en el acta); H. Peris sigue en el campo.,1217
-3,Kelme C.F. 'A' - Alboraya U.D. 'A',ambiguo,"50' sale «C. Garcia»: puede ser Cayetano Garcia Villar, Cayetano Garcia Soriano",1324
-3,Kelme C.F. 'A' - Alboraya U.D. 'A',nota,El cambio del 50' («A. Ribera > C. Garcia») no permite saber cuál de los dos Cayetano Garcia sale. Fecha y hora no visibles.,1278
-3,C.F. La Nucía 'A' - Primer Toque C.F. 'A',nota,"Fecha y hora no visibles en la grabación. D. Abraham: amarilla (48') y tarjeta roja (57'), registrada como segunda amarilla.",1335
-3,Villarreal C.F. 'A' - S.C.D. Intangco 'A',nota,Fecha y hora no visibles. I. Vicent (56'): icono de gol de penalti.,1391
-3,Celtic Elche C.F. 'A' - C.F. Fundació VCF 'A',nota,Partido de la J3 aplazado y jugado el miércoles 23 septiembre 2026.,1509
-4,C.F. Torre Levante 'A' - C.F. Inter San José Valencia 'A',nota,La amarilla de E. Lurbe figura en el acta con minuto «999» (posterior al partido); se registra en el 80'.,1561
-4,Alboraya U.D. 'A' - Levante U.D. 'A',ambiguo,"48' amarilla «C. Garcia»: Cayetano Garcia Soriano, Cayetano Garcia Villar",1661
-4,Alboraya U.D. 'A' - Levante U.D. 'A',ambiguo,"52' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar",1663
-4,Alboraya U.D. 'A' - Levante U.D. 'A',ambiguo,"67' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar",1672
-4,Alboraya U.D. 'A' - Levante U.D. 'A',nota,Hora no legible. La amarilla del 48' y los cambios de 52' y 67' de «C. Garcia» no permiten saber cuál de los dos Cayetano Garcia es.,1618
-4,Primer Toque C.F. 'A' - Elda Unión Cableworld C.F. 'A',nota,P. Tomas (15') y M. Ousrout (57'): icono de gol de penalti. A. Sanchez (Elda): amarilla 27' y expulsión 37' (segunda amarilla). Amarilla 58' a «J. Moreno»: primer entrenador del Elda.,1847
-4,S.C.D. Intangco 'A' - C.F. Benidorm 'A',nota,I. Perles (44'): icono de gol de penalti. F. Moya: amarilla 25' (en el banquillo) y expulsión 80' (segunda amarilla).,1906
-4,Patacona C.F. 'A' - Villarreal C.F. 'A',nota,J. Mas (30'): icono de gol de penalti. Cambio de portero del Patacona en el 41' (M. Rodriguez por R. Toboso).,1965
-4,C.F. Fundació VCF 'A' - Kelme C.F. 'A',nota,Cambio de portero del Kelme en el 60' (B. Martic por M. Parodi).,2026
-5,C.F. Inter San José Valencia 'A' - Alboraya U.D. 'A',ambiguo,"36' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar",2128
-5,C.F. Inter San José Valencia 'A' - Alboraya U.D. 'A',nota,G. Escorihuela (16'): icono de gol de penalti. Roja directa al portero H. Iturbide (36'); entra el portero D. Boso por un «C. Garcia» (no se puede saber cuál de los dos Cayetano).,2086
-5,Kelme C.F. 'A' - C.D. Castellón 'A',nota,"Amarilla del 64' a «A. Marcelino»: cuerpo técnico del Castellón (Andres Marcelino M...), no es jugador.",2146
-5,Valencia C.F. 'A' - Primer Toque C.F. 'A',nota,"M. Carranza (13'): icono de gol de penalti. H. Sanchez entra en el 29', marca en el 35' y es sustituido en el 40'.",2204
-5,Elda Unión Cableworld C.F. 'A' - C.D. Roda 'A',nota,"Dorsal de Alberto Canto Vegara poco legible en la grabación (parece 17, igual que P. Barrantes); se usa el 19 que lleva en las jornadas 3 y 4. Amarilla 77' a «J. Castillo»: cuerpo técnico del Elda.",2263
-5,C.F. La Nucía 'A' - S.C.D. Intangco 'A',nota,S. Holguin (31'): icono de gol de penalti. Amarilla 39' a «S. Arias»: segundo entrenador del Intangco. O. Moral: roja directa (69').,2431
-5,Patacona C.F. 'A' - C.F. Torre Levante 'A',nota,Amarillas del 12' a «P. Ruiz» (entrenador del Patacona) y «J. Ginard» (cuerpo técnico del Torre Levante).,2496
-5,Levante U.D. 'A' - C.F. Fundació VCF 'A',nota,S. Rodriguez (80'): icono de gol de penalti. Amarilla 67' a «C. Libio»: delegado del Levante (Carlos Libio Escriva...).,2555
-6,C.F. Fundació VCF 'A' - C.F. Inter San José Valencia 'A',nota,Fecha según la lista de resultados (viernes 9 octubre 2026); hora no visible.,2670
-6,Primer Toque C.F. 'A' - Celtic Elche C.F. 'A',nota,Amarilla 44' a «J. Martinez» del Celtic: el portero titular Jorge Martinez Munar (único J. Martinez del acta).,2729
-6,C.F. Benidorm 'A' - C.F. La Nucía 'A',nota,"A. Guessas (7'): icono de gol de penalti. Nombre «Rayane Chetouane» poco legible. Amarillas a «J. Quiles» (60'), «D. Nadal» (69') y «V. Mendoza» (74'): cuerpos técnicos.",2791
-6,S.C.D. Intangco 'A' - Elda Unión Cableworld C.F. 'A',nota,Amarillas a «J. Carlos» y «S. Arias» (16') y dos a «P. Soriano» (76'): cuerpo técnico del Intangco. P. Barrantes: roja directa en el 80'.,2855
-6,Alboraya U.D. 'A' - Patacona C.F. 'A',ambiguo,"37' amarilla «C. Garcia»: Cayetano Garcia Soriano, Cayetano Garcia Villar",2959
-6,Alboraya U.D. 'A' - Patacona C.F. 'A',ambiguo,"38' amarilla «C. Garcia»: Cayetano Garcia Soriano, Cayetano Garcia Villar",2960
-6,Alboraya U.D. 'A' - Patacona C.F. 'A',ambiguo,"76' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar, Carles Garcia Guerrero",2970
-6,Alboraya U.D. 'A' - Patacona C.F. 'A',ambiguo,"80' amarilla «C. Garcia»: Cayetano Garcia Soriano, Cayetano Garcia Villar, Carles Garcia Guerrero",2975
-6,Alboraya U.D. 'A' - Patacona C.F. 'A',nota,"Alboraya tiene tres «C. Garcia» (Cayetano Garcia Soriano, Cayetano Garcia Villar y, desde el 62', Carles Garcia Guerrero): las amarillas de 37', 38' y 80' y la salida del 76' no se pueden atribuir. Amarilla 80' a «J. Fuentes»: primer entrenador del Alboraya.",2918
-6,C.D. Castellón 'A' - Levante U.D. 'A',nota,"Amarillas a «I. Molina» (37', Castellón) y «C. Libio» (47', Levante): cuerpos técnicos. O. Planagumà: amarilla 45' y segunda amarilla 75'.",3037
-6,C.F. Torre Levante 'A' - Villarreal C.F. 'A',nota,Partido de la J6 aplazado y jugado el martes 20 octubre 2026. V. Maestra (39'): icono de gol de penalti.,3100
-7,Patacona C.F. 'A' - C.F. Fundació VCF 'A',nota,Amarilla 27' a «M. Angel»: primer entrenador de la Fundació (Miguel Angel Gandia...). D. Borrajo: amarilla 40' y segunda amarilla 50'.,3157
-7,Elda Unión Cableworld C.F. 'A' - C.F. Benidorm 'A',nota,El icono del gol de A. Rodriguez (70') es más pequeño de lo habitual; se registra como gol.,3391
-7,Levante U.D. 'A' - Elche C.F. 'A',nota,D. Miranda (62'): icono de gol en propia puerta (suma al Elche). Amarilla 38' a «C. Libio»: delegado del Levante.,3448
-7,C.F. Torre Levante 'A' - Alboraya U.D. 'A',ambiguo,"36' amarilla «C. Garcia»: Cayetano Garcia Soriano, Cayetano Garcia Villar",3547
-7,C.F. Torre Levante 'A' - Alboraya U.D. 'A',ambiguo,"63' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar",3554
-7,C.F. Torre Levante 'A' - Alboraya U.D. 'A',ambiguo,"63' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar, Carles Garcia Guerrero",3555
-7,C.F. Torre Levante 'A' - Alboraya U.D. 'A',nota,H. Martinez: roja directa (34'). La amarilla del 36' y las salidas del 63' de «C. Garcia» no se pueden atribuir a uno de los dos Cayetano Garcia.,3507
-7,Villarreal C.F. 'A' - C.F. La Nucía 'A',nota,Partido de la J7 aplazado y jugado el martes 27 octubre 2026.,3565
-8,C.D. Castellón 'A' - Patacona C.F. 'A',nota,Último partido de la grabación: de la J8 solo consta este acta.,3622
+1,S.C.D. Intangco 'A' - Primer Toque C.F. 'A',nota,P. Tomas (75'): icono de gol de penalti.,231
+1,Celtic Elche C.F. 'A' - C.F. Torre Levante 'A',nota,"Amarilla del 80' a «A. Manuel»: primer entrenador del Celtic Elche (Alexandre Manuel G.), no es jugador.",350
+1,C.F. Benidorm 'A' - Elche C.F. 'A',nota,"Amarilla del 65' a «D. Piñero»: cuerpo técnico del Elche (Daniel Piñero Moreno), no es jugador.",409
+1,Valencia C.F. 'A' - Alboraya U.D. 'A',ambiguo,"42' amarilla «C. Garcia»: Cayetano Garcia Soriano, Cayetano Garcia Villar",507
+1,Valencia C.F. 'A' - Alboraya U.D. 'A',ambiguo,"50' amarilla «C. Garcia»: Cayetano Garcia Soriano, Cayetano Garcia Villar",513
+1,Valencia C.F. 'A' - Alboraya U.D. 'A',ambiguo,"56' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar",521
+1,Valencia C.F. 'A' - Alboraya U.D. 'A',ambiguo,"67' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar",525
+1,Valencia C.F. 'A' - Alboraya U.D. 'A',nota,Alboraya tiene dos titulares «C. Garcia» (Cayetano Garcia Soriano nº7 y Cayetano Garcia Villar nº10): las amarillas de 42' y 50' y las salidas de 56' y 67' no se pueden atribuir a uno concreto.,461
+1,Valencia C.F. 'A' - Alboraya U.D. 'A',nota,"Roja del 40' a «A. Torrecilla»: cuerpo técnico del Alboraya (Alvaro Torrecilla Gar...), no es jugador.",461
+1,Valencia C.F. 'A' - Alboraya U.D. 'A',nota,Hora no visible en la grabación; fecha según la lista de resultados (miércoles 9 septiembre 2026).,461
+2,Patacona C.F. 'A' - Levante U.D. 'A',nota,"Amarilla del 47' a «P. Ruiz»: primer entrenador del Patacona (Pedro Ruiz Ferrer), no es jugador.",527
+2,Patacona C.F. 'A' - Levante U.D. 'A',nota,Cambios de portero: Patacona 64' (R. Toboso por M. Rodriguez); Levante 68' (sale el portero H. Noel por I. Galan y entra el portero D. Pedrajas por E. Ferrer).,527
+2,C.D. Castellón 'A' - Elda Unión Cableworld C.F. 'A',nota,"«D. Gil» (79', lado local) e «I. Molina» (53' y 79') son del cuerpo técnico del Castellón (Daniel Gil Langa, Ian Molina Alguacil); el «D. Gil» del 69' (visitante) es el jugador Daniel Gil Garcia.",697
+2,Elche C.F. 'A' - C.F. La Nucía 'A',nota,"Amarilla del 72' a «D. Nadal»: cuerpo técnico de La Nucía (Damian Nadal Sierra), no es jugador.",764
+2,Primer Toque C.F. 'A' - C.F. Benidorm 'A',nota,Campo leído parcialmente en la grabación («Ciudad Dptva. Chen... C-F-11 Castellón»).,822
+2,C.F. Torre Levante 'A' - Kelme C.F. 'A',nota,Fecha según la lista de resultados (sábado 12 septiembre 2026); hora no visible.,933
+2,Alboraya U.D. 'A' - Celtic Elche C.F. 'A',ambiguo,"60' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar",1036
+2,Alboraya U.D. 'A' - Celtic Elche C.F. 'A',nota,Fecha según la lista de resultados (domingo 13 septiembre 2026); hora no visible. Nombre del campo cortado en la grabación.,986
+2,Alboraya U.D. 'A' - Celtic Elche C.F. 'A',nota,El cambio del 60' («J. De > C. Garcia») no permite saber cuál de los dos Cayetano Garcia sale.,986
+2,Alboraya U.D. 'A' - Celtic Elche C.F. 'A',nota,A. Alcañiz aparece dos veces con tarjeta amarilla en el 80': segunda amarilla (expulsión).,986
+3,C.F. Inter San José Valencia 'A' - Patacona C.F. 'A',nota,"Amarilla del 42' a «J. Vicente»: cuerpo técnico del Inter San José (Jose Vicente Carot...), no es jugador.",1046
+3,C.F. Inter San José Valencia 'A' - Patacona C.F. 'A',nota,Fecha según la lista de resultados (sábado 19 septiembre 2026); hora no visible.,1046
+3,Levante U.D. 'A' - C.F. Torre Levante 'A',nota,Fecha según la lista de resultados (sábado 19 septiembre 2026); hora no legible.,1103
+3,Valencia C.F. 'A' - C.D. Castellón 'A',nota,En el 72' entra el portero suplente A. Rivera por el defensa M. Cervera (así consta en el acta); H. Peris sigue en el campo.,1218
+3,Kelme C.F. 'A' - Alboraya U.D. 'A',ambiguo,"50' sale «C. Garcia»: puede ser Cayetano Garcia Villar, Cayetano Garcia Soriano",1325
+3,Kelme C.F. 'A' - Alboraya U.D. 'A',nota,El cambio del 50' («A. Ribera > C. Garcia») no permite saber cuál de los dos Cayetano Garcia sale. Fecha y hora no visibles.,1279
+3,C.F. La Nucía 'A' - Primer Toque C.F. 'A',nota,"Fecha y hora no visibles en la grabación. D. Abraham: amarilla (48') y tarjeta roja (57'), registrada como segunda amarilla.",1336
+3,Villarreal C.F. 'A' - S.C.D. Intangco 'A',nota,Fecha y hora no visibles. I. Vicent (56'): icono de gol de penalti.,1392
+3,Celtic Elche C.F. 'A' - C.F. Fundació VCF 'A',nota,Partido de la J3 aplazado y jugado el miércoles 23 septiembre 2026.,1510
+4,C.F. Torre Levante 'A' - C.F. Inter San José Valencia 'A',nota,La amarilla de E. Lurbe figura en el acta con minuto «999» (posterior al partido); se registra en el 80'.,1562
+4,Alboraya U.D. 'A' - Levante U.D. 'A',ambiguo,"48' amarilla «C. Garcia»: Cayetano Garcia Soriano, Cayetano Garcia Villar",1662
+4,Alboraya U.D. 'A' - Levante U.D. 'A',ambiguo,"52' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar",1664
+4,Alboraya U.D. 'A' - Levante U.D. 'A',ambiguo,"67' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar",1673
+4,Alboraya U.D. 'A' - Levante U.D. 'A',nota,Hora no legible. La amarilla del 48' y los cambios de 52' y 67' de «C. Garcia» no permiten saber cuál de los dos Cayetano Garcia es.,1619
+4,Primer Toque C.F. 'A' - Elda Unión Cableworld C.F. 'A',nota,P. Tomas (15') y M. Ousrout (57'): icono de gol de penalti. A. Sanchez (Elda): amarilla 27' y expulsión 37' (segunda amarilla). Amarilla 58' a «J. Moreno»: primer entrenador del Elda.,1848
+4,S.C.D. Intangco 'A' - C.F. Benidorm 'A',nota,I. Perles (44'): icono de gol de penalti. F. Moya: amarilla 25' (en el banquillo) y expulsión 80' (segunda amarilla).,1907
+4,Patacona C.F. 'A' - Villarreal C.F. 'A',nota,J. Mas (30'): icono de gol de penalti. Cambio de portero del Patacona en el 41' (M. Rodriguez por R. Toboso).,1966
+4,C.F. Fundació VCF 'A' - Kelme C.F. 'A',nota,Cambio de portero del Kelme en el 60' (B. Martic por M. Parodi).,2027
+5,C.F. Inter San José Valencia 'A' - Alboraya U.D. 'A',ambiguo,"36' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar",2129
+5,C.F. Inter San José Valencia 'A' - Alboraya U.D. 'A',nota,G. Escorihuela (16'): icono de gol de penalti. Roja directa al portero H. Iturbide (36'); entra el portero D. Boso por un «C. Garcia» (no se puede saber cuál de los dos Cayetano).,2087
+5,Kelme C.F. 'A' - C.D. Castellón 'A',nota,"Amarilla del 64' a «A. Marcelino»: cuerpo técnico del Castellón (Andres Marcelino M...), no es jugador.",2147
+5,Valencia C.F. 'A' - Primer Toque C.F. 'A',nota,"M. Carranza (13'): icono de gol de penalti. H. Sanchez entra en el 29', marca en el 35' y es sustituido en el 40'.",2205
+5,Elda Unión Cableworld C.F. 'A' - C.D. Roda 'A',nota,"Dorsal de Alberto Canto Vegara poco legible en la grabación (parece 17, igual que P. Barrantes); se usa el 19 que lleva en las jornadas 3 y 4. Amarilla 77' a «J. Castillo»: cuerpo técnico del Elda.",2264
+5,C.F. La Nucía 'A' - S.C.D. Intangco 'A',nota,S. Holguin (31'): icono de gol de penalti. Amarilla 39' a «S. Arias»: segundo entrenador del Intangco. O. Moral: roja directa (69').,2432
+5,Patacona C.F. 'A' - C.F. Torre Levante 'A',nota,Amarillas del 12' a «P. Ruiz» (entrenador del Patacona) y «J. Ginard» (cuerpo técnico del Torre Levante).,2497
+5,Levante U.D. 'A' - C.F. Fundació VCF 'A',nota,S. Rodriguez (80'): icono de gol de penalti. Amarilla 67' a «C. Libio»: delegado del Levante (Carlos Libio Escriva...).,2556
+6,C.F. Fundació VCF 'A' - C.F. Inter San José Valencia 'A',nota,Fecha según la lista de resultados (viernes 9 octubre 2026); hora no visible.,2671
+6,Primer Toque C.F. 'A' - Celtic Elche C.F. 'A',nota,Amarilla 44' a «J. Martinez» del Celtic: el portero titular Jorge Martinez Munar (único J. Martinez del acta).,2730
+6,C.F. Benidorm 'A' - C.F. La Nucía 'A',nota,"A. Guessas (7'): icono de gol de penalti. Nombre «Rayane Chetouane» poco legible. Amarillas a «J. Quiles» (60'), «D. Nadal» (69') y «V. Mendoza» (74'): cuerpos técnicos.",2792
+6,S.C.D. Intangco 'A' - Elda Unión Cableworld C.F. 'A',nota,Amarillas a «J. Carlos» y «S. Arias» (16') y dos a «P. Soriano» (76'): cuerpo técnico del Intangco. P. Barrantes: roja directa en el 80'.,2856
+6,Alboraya U.D. 'A' - Patacona C.F. 'A',ambiguo,"37' amarilla «C. Garcia»: Cayetano Garcia Soriano, Cayetano Garcia Villar",2960
+6,Alboraya U.D. 'A' - Patacona C.F. 'A',ambiguo,"38' amarilla «C. Garcia»: Cayetano Garcia Soriano, Cayetano Garcia Villar",2961
+6,Alboraya U.D. 'A' - Patacona C.F. 'A',ambiguo,"76' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar, Carles Garcia Guerrero",2971
+6,Alboraya U.D. 'A' - Patacona C.F. 'A',ambiguo,"80' amarilla «C. Garcia»: Cayetano Garcia Soriano, Cayetano Garcia Villar, Carles Garcia Guerrero",2976
+6,Alboraya U.D. 'A' - Patacona C.F. 'A',nota,"Alboraya tiene tres «C. Garcia» (Cayetano Garcia Soriano, Cayetano Garcia Villar y, desde el 62', Carles Garcia Guerrero): las amarillas de 37', 38' y 80' y la salida del 76' no se pueden atribuir. Amarilla 80' a «J. Fuentes»: primer entrenador del Alboraya.",2919
+6,C.D. Castellón 'A' - Levante U.D. 'A',nota,"Amarillas a «I. Molina» (37', Castellón) y «C. Libio» (47', Levante): cuerpos técnicos. O. Planagumà: amarilla 45' y segunda amarilla 75'.",3038
+6,C.F. Torre Levante 'A' - Villarreal C.F. 'A',nota,Partido de la J6 aplazado y jugado el martes 20 octubre 2026. V. Maestra (39'): icono de gol de penalti.,3101
+7,Patacona C.F. 'A' - C.F. Fundació VCF 'A',nota,Amarilla 27' a «M. Angel»: primer entrenador de la Fundació (Miguel Angel Gandia...). D. Borrajo: amarilla 40' y segunda amarilla 50'.,3158
+7,Elda Unión Cableworld C.F. 'A' - C.F. Benidorm 'A',nota,El icono del gol de A. Rodriguez (70') es más pequeño de lo habitual; se registra como gol.,3392
+7,Levante U.D. 'A' - Elche C.F. 'A',nota,D. Miranda (62'): icono de gol en propia puerta (suma al Elche). Amarilla 38' a «C. Libio»: delegado del Levante.,3449
+7,C.F. Torre Levante 'A' - Alboraya U.D. 'A',ambiguo,"36' amarilla «C. Garcia»: Cayetano Garcia Soriano, Cayetano Garcia Villar",3548
+7,C.F. Torre Levante 'A' - Alboraya U.D. 'A',ambiguo,"63' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar",3555
+7,C.F. Torre Levante 'A' - Alboraya U.D. 'A',ambiguo,"63' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar, Carles Garcia Guerrero",3556
+7,C.F. Torre Levante 'A' - Alboraya U.D. 'A',nota,H. Martinez: roja directa (34'). La amarilla del 36' y las salidas del 63' de «C. Garcia» no se pueden atribuir a uno de los dos Cayetano Garcia.,3508
+7,Villarreal C.F. 'A' - C.F. La Nucía 'A',nota,Partido de la J7 aplazado y jugado el martes 27 octubre 2026.,3566
+8,C.D. Castellón 'A' - Patacona C.F. 'A',nota,Último partido de la primera grabación (1/11). El resto de la J8 y la J9 proceden de la segunda grabación (2/11).,3623
+8,Alboraya U.D. 'A' - Villarreal C.F. 'A',nombre,50' entra «C. Garcia»: 2 candidatos,3832
+8,Alboraya U.D. 'A' - Villarreal C.F. 'A',nombre,57' entra «C. Garcia»: 2 candidatos,3837
+8,Alboraya U.D. 'A' - Villarreal C.F. 'A',nota,"Alboraya tiene tres «C. Garcia» (Cayetano Garcia Villar, Cayetano Garcia Soriano y Carles Garcia Guerrero): los cambios de 50' y 57' no se pueden atribuir.",3793
+8,S.C.D. Intangco 'A' - Celtic Elche C.F. 'A',nota,"O. Umansky: roja directa (67'), cuatro minutos después de entrar. E. Galvez: amarilla 69' tras ser sustituido en el 66' (así consta en el acta).",3845
+8,C.F. Fundació VCF 'A' - C.F. Torre Levante 'A',nota,El icono del gol de S. Rodriguez (42') es más pequeño de lo habitual; se registra como gol. Jorge Caro Toral (entra en el 51') no se ve en la lista de suplentes de la grabación: se usa el dorsal 25 de la J7. Cambio de portero del Torre Levante en el 58' (A. Vega por I. Miroshnychenko).,3909
+8,C.F. La Nucía 'A' - Elda Unión Cableworld C.F. 'A',nota,El icono del gol de A. Gimenez (36') es más pequeño de lo habitual; se registra como gol. Amarilla 56' a «D. Nadal» (segundo entrenador de La Nucía) y roja con minuto «999» a «J. Castillo» (cuerpo técnico del Elda): no son jugadores. D. Abraham: amarilla 39' y segunda amarilla 74'.,3964
+8,C.F. Benidorm 'A' - Valencia C.F. 'A',nota,G. Sempere (37'): icono de gol en propia puerta (suma al Valencia). El Benidorm no tiene portero suplente en el acta.,4018
+9,Alboraya U.D. 'A' - C.F. Fundació VCF 'A',ambiguo,"63' sale «C. Garcia»: puede ser Cayetano Garcia Soriano, Cayetano Garcia Villar",4175
+9,Alboraya U.D. 'A' - C.F. Fundació VCF 'A',ambiguo,"70' amarilla «C. Garcia»: Cayetano Garcia Soriano, Cayetano Garcia Villar",4178
+9,Alboraya U.D. 'A' - C.F. Fundació VCF 'A',nota,El cambio del 63' y la amarilla del 70' de «C. Garcia» no permiten saber cuál de los dos Cayetano Garcia es.,4134
+9,Patacona C.F. 'A' - Elche C.F. 'A',nota,La amarilla de A. Navarro figura en el acta con minuto «999» (posterior al partido); se registra en el 80'.,4188
+9,Levante U.D. 'A' - C.D. Roda 'A',nota,"M. Ángel: amarilla 62' y segunda amarilla 80', después de ser sustituido en el 76' (así consta en el acta).",4245
+9,Celtic Elche C.F. 'A' - C.F. Benidorm 'A',nota,"Amarilla 50' a «A. Manuel»: primer entrenador del Celtic (Alexandre Manuel G...), no es jugador.",4304
+9,C.F. Inter San José Valencia 'A' - Primer Toque C.F. 'A',nota,"El icono del gol de A. Miró (21') es más pequeño de lo habitual; se registra como gol. H. Sanchez: roja directa (80'). Roja 80' a «J. Vicente»: primer entrenador del Inter San José (Jose Vicente Carot...), no es jugador.",4410
+9,C.F. Torre Levante 'A' - C.D. Castellón 'A',nota,"Tarjetas a «J. Eduardo» (16', encargado de material) y a «J. Alhambra» (amarilla 40' y roja 70', primer entrenador): cuerpo técnico del Torre Levante, no son jugadores.",4471
 0,C.F. Inter San José Valencia 'A',nota,Nombre unificado: «Santiago Pinedo Nobile» → «Santiago Pinedo Nóbile»,0
+0,Elda Unión Cableworld C.F. 'A',nota,Nombre unificado: «Agustin Lozano Herrera» → «Agustín Lozano Herrera»,0
 0,Levante U.D. 'A',nota,Nombre unificado: «Esteban Ferrer Sánchez» → «Esteban Ferrer Sanchez»,0
 0,Patacona C.F. 'A',nota,Nombre unificado: «Eric Pacha Hernandez» → «Eric Pacha Hernández»,0
-0,Valencia C.F. 'A',nota,Nombre unificado: «Alejandro Angulo Ramón» → «Alejandro Angulo Ramon»,0
+0,Valencia C.F. 'A',nota,Nombre unificado: «Alejandro Angulo Ramon» → «Alejandro Angulo Ramón»,0

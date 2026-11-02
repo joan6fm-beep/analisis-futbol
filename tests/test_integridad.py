@@ -375,7 +375,7 @@ def test_navegacion():
           "Portada sin menús de equipo visibles (barra lateral y menú móvil ocultos; no hay redirección)")
     juv = ["inicio", "muro", "calendario", "liga", "rivales", "equipo", "seguimiento", "individual", "jugadores"]
     inf = ["inicio", "muro", "calendario", "resultados", "minutos", "seguimiento"]
-    cad = ["inicio", "liga", "rivales", "estadisticas", "calendario", "muro"]
+    cad = ["inicio", "liga", "rivales", "equipo", "calendario", "muro"]
     for area, view, expected in (("juvenil", "liga", juv), ("infantil", "inicio", inf), ("cadete", "inicio", cad)):
         a = run({"area": area, "view": view})
         hh = html_of(a)
@@ -456,7 +456,7 @@ def test_cadete_a():
         gv = sum(lc.goal_side(x, r.visitante) == "favor" for _, x in e.iterrows())
         if (gl, gv) != (r.goles_local, r.goles_visitante):
             bad.append(f"J{r.jornada} {r.local}")
-    check(not bad and len(part) == 63, f"63 actas: cada marcador coincide con los goles del acta {bad[:3]}")
+    check(not bad and len(part) == 79 and len(part[part.jornada <= 7]) == 62, f"79 actas (J1–J9): cada marcador coincide con los goles del acta {bad[:3]}")
     p7 = part[part.jornada <= 7]
     tab = lc.standings(p7, C.teams_list(part))
     exp_pts = sum(3 if a != b else 2 for a, b in zip(p7.goles_local, p7.goles_visitante))
@@ -469,20 +469,22 @@ def test_cadete_a():
     check(m.minutos.max() == 80 and (m.minutos >= 0).all(), "Minutos por partido entre 0 y 80 (nunca 90)")
     tot = m.groupby(["equipo", "jornada"]).minutos.sum()
     check((tot <= 11 * 80).all(), "Ningún equipo suma más de 11 × 80 minutos en un partido")
-    pa = lc.participation(mins, T, 80, 7)
+    pa = lc.participation(mins[mins.jornada <= 7], T, 80, 7)
     r = pa[pa.jugador == "Pere Tomas Ribes"].iloc[0]
     check(r.minutos == 560 and round(r.pct) == 100, "Participación: 7 partidos completos = 560' = 100 % sobre 80'")
     toy = pd.DataFrame([dict(equipo="X", jornada=1, dorsal=1, jugador="A", minutos=40, titular=1)])
     check(round(lc.participation(toy, "X", 80, 1).pct.iat[0]) == 50, "40 minutos de 80 = 50 %")
-    g, w = lc.goalkeepers(al, mins, ev, part, T, 80)
+    s7 = lambda d: d[d.jornada <= 7]  # cifras de control comprobadas a mano hasta la J7
+    g, w = lc.goalkeepers(s7(al), s7(mins), s7(ev), s7(part), T, 80)
     check(int(g.encajados.sum()) == 15 and not w
           and all(abs(x.encajados / x.minutos * 80 - x.encajados_por_partido_reglamentario) < 1e-9 for x in g.itertuples()),
-          "Porteros del Cadete A: 15 encajados atribuidos; GC por 80' = encajados ÷ minutos × 80")
+          "Porteros del Cadete A (J1–J7): 15 encajados atribuidos; GC por 80' = encajados ÷ minutos × 80")
     g2, w2 = lc.goalkeepers(al, mins, ev, part, "C.D. Castellón 'A'", 80)
-    check(int(g2.encajados.sum()) == 16 and any("sin portero atribuible" in x for x in w2),
-          "Castellón J3: dos porteros en el campo → 2 goles sin atribuir (no se inventa)")
+    gc_cas = int(lc.standings(part, C.teams_list(part)).set_index("equipo").loc["C.D. Castellón 'A'"].gc)
+    check(int(g2.encajados.sum()) == gc_cas - 2 and any("2 gol(es) encajado(s) sin portero atribuible" in x for x in w2),
+          f"Castellón J3: dos porteros en el campo → 2 goles sin atribuir (no se inventa); {gc_cas - 2} de {gc_cas} atribuidos")
     labels = [b[2] for b in lc.minute_bins(80)]
-    gb = lc.goals_by_bin(ev, T, 80)
+    gb = lc.goals_by_bin(s7(ev), T, 80)
     check(labels[0] == "0–10" and labels[-1] == "70–80" and len(labels) == 8 and gb.a_favor.sum() == 14
           and gb.en_contra.sum() == 15 and lc.bin_label(83, 80) == "70–80+" and lc.bin_label(10, 80) == "0–10"
           and lc.bin_label(11, 80) == "10–20" and lc.bin_label(0, 80) == "0–10",
@@ -500,15 +502,21 @@ def test_cadete_a():
     src = (APP_DIR / "app.py").read_text(encoding="utf-8")
     check('DATA / "cadete_a" / "muro.csv"' in src and 'DATA / "cadete_a" / "calendario.csv"' in src
           and 'DATA / "cadete_a" / "muro_adjuntos"' in src, "Muro, calendario y adjuntos propios del Cadete A (data/cadete_a/)")
-    for v in ("inicio", "liga", "rivales", "estadisticas", "calendario", "muro"):
+    for v in ("inicio", "liga", "rivales", "equipo", "estadisticas", "calendario", "muro"):
         a = run({"area": "cadete", "view": v})
         hh = html_of(a)
         check(not a.exception and "CADETE A" in hh, f"Cadete A · {v}: sin errores y con su propia cabecera")
     a = run({"area": "cadete", "view": "liga"})
     hh = html_of(a)
     check("Resumen de liga · Cadete A" in hh and "Lliga Autonòmica Cadet" in hh and "GC/80" in hh and "GC/90" not in hh
-          and "70–80" in hh and "75–90" not in hh and "Comparador de equipos" in hh,
-          "Resumen de liga del Cadete A: componentes del Juvenil A con 80', tramos de 10' y comparador")
+          and "70–80" in hh and "75–90" not in hh and "Comparador de equipos" not in hh and "Equipo · Cadete A" not in hh,
+          "Resumen de liga del Cadete A: componentes del Juvenil A con 80' y tramos de 10', sin los análisis propios del equipo")
+    for v in ("equipo", "estadisticas"):
+        a = run({"area": "cadete", "view": v})
+        hh = html_of(a)
+        check(not a.exception and "Equipo · Cadete A" in hh and "Comparador de equipos" in hh and "Estadísticas del Cadete A" in hh
+              and "GC/90" not in hh and hh.count("Comparador de equipos") == 1,
+              f"Cadete A · {v}: Equipo con evolución, comparador y estadísticas propias (una sola vez)")
     test_cadete_rivales_y_escudos()
 
 
@@ -530,9 +538,15 @@ def test_cadete_rivales_y_escudos():
     check(set(al.rol) <= {"POR", "DEF", "MED", "ATA"} and al.groupby(["equipo", "jornada"]).size().eq(11).all(),
           "Alineaciones: 11 titulares por equipo y partido con los roles del Juvenil A")
     t, pend = A.keeper_stats(mins, al, ev, match_minutes=80)
-    pt = t[t.equipo == "Primer Toque C.F. 'A'"]
-    check(int(pt.gc.sum()) == 15 and (abs(t.gc * 80 / t.minutos - t.gc90) < 1e-9).all() and t.minutos.max() <= 80 * 8,
-          "Porteros (cálculo del Juvenil A con 80'): Primer Toque 15 GC; GC por 80' = GC × 80 ÷ minutos")
+    t7, _ = A.keeper_stats(mins[mins.jornada <= 7], al[al.jornada <= 7], ev[ev.jornada <= 7], match_minutes=80)
+    pt = t7[t7.equipo == "Primer Toque C.F. 'A'"]
+    check(int(pt.gc.sum()) == 15 and (abs(t.gc * 80 / t.minutos - t.gc90) < 1e-9).all()
+          and t.minutos.max() <= 80 * int(part.jornada.max()),
+          "Porteros (cálculo del Juvenil A con 80'): Primer Toque 15 GC hasta J7; GC por 80' = GC × 80 ÷ minutos")
+    pt_all = t[t.equipo == "Primer Toque C.F. 'A'"]
+    ptm = part[(part.local == "Primer Toque C.F. 'A'") | (part.visitante == "Primer Toque C.F. 'A'")]
+    gc_all = int(ptm.apply(lambda r: r.goles_visitante if r.local == "Primer Toque C.F. 'A'" else r.goles_local, axis=1).sum())
+    check(int(pt_all.gc.sum()) == gc_all == 18, f"Porteros J1–J9: los {gc_all} goles encajados por Primer Toque atribuidos a sus porteros")
     t90, _ = A.keeper_stats(pd.read_csv(APP_DIR / "data" / "minutos_rivales.csv"), pd.read_csv(APP_DIR / "data" / "alineaciones_rivales.csv"),
                             pd.read_csv(APP_DIR / "data" / "eventos_rivales.csv"))
     check(not t90.empty and (abs(t90.gc * 90 / t90.minutos - t90.gc90) < 1e-9).all(), "Juvenil A: porteros siguen por 90' (valor por defecto)")

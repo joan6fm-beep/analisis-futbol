@@ -120,7 +120,7 @@ jornada,equipo,minuto,tipo,jugador,detalle
 2,C.F. Fundació VCF 'A',39,gol_contra,Hugo Sanz Lopez,Gol encajado ante Valencia C.F. 'A'
 2,C.F. Fundació VCF 'A',45,gol_contra,Dario Alonso Garcia,Gol encajado ante Valencia C.F. 'A'
 2,C.F. Fundació VCF 'A',56,gol_contra,Hugo Sanz Lopez,Gol encajado ante Valencia C.F. 'A'
-2,C.F. Fundació VCF 'A',67,gol_contra,Alejandro Angulo Ramon,Gol encajado ante Valencia C.F. 'A'
+2,C.F. Fundació VCF 'A',67,gol_contra,Alejandro Angulo Ramón,Gol encajado ante Valencia C.F. 'A'
 2,C.F. Fundació VCF 'A',73,gol_contra,Hugo Sanz Lopez,Gol encajado ante Valencia C.F. 'A'
 2,C.F. Fundació VCF 'A',78,gol_contra,Dario Alonso Garcia,Gol encajado ante Valencia C.F. 'A'
 2,C.F. Inter San José Valencia 'A',20,gol_contra,Alvaro Tarraso Perez,Gol encajado ante Villarreal C.F. 'A'
@@ -175,7 +175,7 @@ jornada,equipo,minuto,tipo,jugador,detalle
 2,Valencia C.F. 'A',39,gol,Hugo Sanz Lopez,
 2,Valencia C.F. 'A',45,gol,Dario Alonso Garcia,
 2,Valencia C.F. 'A',56,gol,Hugo Sanz Lopez,
-2,Valencia C.F. 'A',67,gol,Alejandro Angulo Ramon,
+2,Valencia C.F. 'A',67,gol,Alejandro Angulo Ramón,
 2,Valencia C.F. 'A',73,gol,Hugo Sanz Lopez,
 2,Valencia C.F. 'A',78,gol,Dario Alonso Garcia,
 2,Villarreal C.F. 'A',20,gol,Alvaro Tarraso Perez,
@@ -468,7 +468,7 @@ jornada,equipo,minuto,tipo,jugador,detalle
 5,Primer Toque C.F. 'A',10,gol_contra,Jakson Enrique Gordon,Gol encajado ante Valencia C.F. 'A'
 5,Primer Toque C.F. 'A',13,penalti_contra_gol,Marc Carranza Hernandez,Gol encajado ante Valencia C.F. 'A' de penalti
 5,Primer Toque C.F. 'A',21,gol_contra,Jakson Enrique Gordon,Gol encajado ante Valencia C.F. 'A'
-5,Primer Toque C.F. 'A',23,gol_contra,Alejandro Angulo Ramon,Gol encajado ante Valencia C.F. 'A'
+5,Primer Toque C.F. 'A',23,gol_contra,Alejandro Angulo Ramón,Gol encajado ante Valencia C.F. 'A'
 5,Primer Toque C.F. 'A',25,gol_contra,Ricardo Perez Ruiz,Gol encajado ante Valencia C.F. 'A'
 5,Primer Toque C.F. 'A',35,gol,Hernan Sanchez Pascual,
 5,Primer Toque C.F. 'A',37,gol_contra,Marc Carranza Hernandez,Gol encajado ante Valencia C.F. 'A'
@@ -487,7 +487,7 @@ jornada,equipo,minuto,tipo,jugador,detalle
 5,Valencia C.F. 'A',10,gol,Jakson Enrique Gordon,
 5,Valencia C.F. 'A',13,penalti_gol,Marc Carranza Hernandez,Gol de penalti
 5,Valencia C.F. 'A',21,gol,Jakson Enrique Gordon,
-5,Valencia C.F. 'A',23,gol,Alejandro Angulo Ramon,
+5,Valencia C.F. 'A',23,gol,Alejandro Angulo Ramón,
 5,Valencia C.F. 'A',25,gol,Ricardo Perez Ruiz,
 5,Valencia C.F. 'A',35,gol_contra,Hernan Sanchez Pascual,Gol encajado ante Primer Toque C.F. 'A'
 5,Valencia C.F. 'A',37,gol,Marc Carranza Hernandez,
@@ -718,13 +718,187 @@ jornada,equipo,minuto,tipo,jugador,detalle
 7,Villarreal C.F. 'A',57,gol,Eric Rodriguez Casas,
 7,Villarreal C.F. 'A',60,gol,Alvaro Tarraso Perez,
 7,Villarreal C.F. 'A',73,gol,Jaume Mas Salom,
+8,Alboraya U.D. 'A',17,amarilla,Hugo Villaescusa Cabrera,
+8,Alboraya U.D. 'A',28,gol_contra,Aaron Ruiz Sanchez,Gol encajado ante Villarreal C.F. 'A'
+8,Alboraya U.D. 'A',47,gol_contra,Aaron Ruiz Sanchez,Gol encajado ante Villarreal C.F. 'A'
+8,Alboraya U.D. 'A',79,gol_contra,Josue Caballero Cerdeña,Gol encajado ante Villarreal C.F. 'A'
 8,C.D. Castellón 'A',9,gol_contra,Roberto Nicolas Stirbu Moldovan,Gol encajado ante Patacona C.F. 'A'
 8,C.D. Castellón 'A',31,gol,Nianake Diarra,
 8,C.D. Castellón 'A',72,gol,Eric Peris Escrig,
 8,C.D. Castellón 'A',75,gol,Antonio Ramos Gomez,
+8,C.D. Roda 'A',13,gol,Moustapha Sanghare Traore,
+8,C.D. Roda 'A',17,gol_contra,Edgar Ramirez Chulia,Gol encajado ante Kelme C.F. 'A'
+8,C.D. Roda 'A',47,amarilla,Banouhoum Coulibaly Coulibaly,
+8,C.D. Roda 'A',61,gol,Miguel Ángel Tena Saco De Larriva,
+8,C.D. Roda 'A',80,gol,Iker Delgado Castellanos,
+8,C.F. Benidorm 'A',4,gol_contra,Dario Alonso Garcia,Gol encajado ante Valencia C.F. 'A'
+8,C.F. Benidorm 'A',14,amarilla,Malin Malinov Sinanski,
+8,C.F. Benidorm 'A',19,gol_contra,Miguel Angel Prieto Serer,Gol encajado ante Valencia C.F. 'A'
+8,C.F. Benidorm 'A',29,gol_contra,Aitor Garrigues Asensio,Gol encajado ante Valencia C.F. 'A'
+8,C.F. Benidorm 'A',37,gol_contra,Guillermo Sempere Catala,Gol en propia puerta
+8,C.F. Benidorm 'A',42,gol_contra,Iker Albero Ruiz,Gol encajado ante Valencia C.F. 'A'
+8,C.F. Benidorm 'A',44,gol_contra,Abel Yumdjo Taguiawa Massoko,Gol encajado ante Valencia C.F. 'A'
+8,C.F. Benidorm 'A',45,gol_contra,Pablo Jimenez Luque,Gol encajado ante Valencia C.F. 'A'
+8,C.F. Benidorm 'A',65,gol_contra,Iker Albero Ruiz,Gol encajado ante Valencia C.F. 'A'
+8,C.F. Benidorm 'A',71,gol_contra,Iker Albero Ruiz,Gol encajado ante Valencia C.F. 'A'
+8,C.F. Benidorm 'A',74,gol_contra,Jakson Enrique Gordon,Gol encajado ante Valencia C.F. 'A'
+8,C.F. Fundació VCF 'A',10,gol,Enrique Antonio Blanquer Muñoz,
+8,C.F. Fundació VCF 'A',42,gol,Sergio Rodriguez Garcia,
+8,C.F. Fundació VCF 'A',44,gol,Enrique Antonio Blanquer Muñoz,
+8,C.F. Inter San José Valencia 'A',40,gol_contra,Adrian Sanchez Amat,Gol encajado ante Elche C.F. 'A'
+8,C.F. Inter San José Valencia 'A',75,amarilla,Juan Diego De La Fuente Wila,
+8,C.F. Inter San José Valencia 'A',80,gol_contra,Neizan Parra Gonzalez,Gol encajado ante Elche C.F. 'A'
+8,C.F. La Nucía 'A',36,gol,Andreu Gimenez Martinez,
+8,C.F. La Nucía 'A',39,amarilla,Daniel Abraham Goudsmit,
+8,C.F. La Nucía 'A',74,doble_amarilla,Daniel Abraham Goudsmit,Segunda amarilla / expulsión
+8,C.F. Torre Levante 'A',10,gol_contra,Enrique Antonio Blanquer Muñoz,Gol encajado ante C.F. Fundació VCF 'A'
+8,C.F. Torre Levante 'A',42,gol_contra,Sergio Rodriguez Garcia,Gol encajado ante C.F. Fundació VCF 'A'
+8,C.F. Torre Levante 'A',44,gol_contra,Enrique Antonio Blanquer Muñoz,Gol encajado ante C.F. Fundació VCF 'A'
+8,C.F. Torre Levante 'A',48,amarilla,Victor Gimenez Mesado,
+8,C.F. Torre Levante 'A',68,amarilla,Javier Villaescusa Mas,
+8,Celtic Elche C.F. 'A',8,gol_contra,Eloy Mañogil Dolz,Gol encajado ante S.C.D. Intangco 'A'
+8,Celtic Elche C.F. 'A',23,gol,Ahmed Rida Tariki Kharbouch,
+8,Celtic Elche C.F. 'A',29,gol,Iker Ramallo Lloret,
+8,Celtic Elche C.F. 'A',35,amarilla,Sergio Martinez Castellano,
+8,Celtic Elche C.F. 'A',44,gol,Rubén Pérez Andreu,
+8,Celtic Elche C.F. 'A',67,roja,Oleksii Umansky,
+8,Celtic Elche C.F. 'A',69,gol_contra,Fran Moya Romero,Gol encajado ante S.C.D. Intangco 'A'
+8,Celtic Elche C.F. 'A',71,gol,Pedro Garcia Girona,
+8,Celtic Elche C.F. 'A',77,gol,Aleix Nieto Almagro,
+8,Elche C.F. 'A',40,gol,Adrian Sanchez Amat,
+8,Elche C.F. 'A',67,amarilla,Hector Barcelo Soler,
+8,Elche C.F. 'A',80,gol,Neizan Parra Gonzalez,
+8,Elda Unión Cableworld C.F. 'A',36,gol_contra,Andreu Gimenez Martinez,Gol encajado ante C.F. La Nucía 'A'
+8,Kelme C.F. 'A',13,gol_contra,Moustapha Sanghare Traore,Gol encajado ante C.D. Roda 'A'
+8,Kelme C.F. 'A',17,gol,Edgar Ramirez Chulia,
+8,Kelme C.F. 'A',29,amarilla,Cristian Sánchez Ruiz,
+8,Kelme C.F. 'A',50,amarilla,Edgar Ramirez Chulia,
+8,Kelme C.F. 'A',59,amarilla,Pablo Soler Lumbreras,
+8,Kelme C.F. 'A',61,gol_contra,Miguel Ángel Tena Saco De Larriva,Gol encajado ante C.D. Roda 'A'
+8,Kelme C.F. 'A',68,amarilla,Amir Abdelkader Sebih Boukhit,
+8,Kelme C.F. 'A',80,gol_contra,Iker Delgado Castellanos,Gol encajado ante C.D. Roda 'A'
+8,Levante U.D. 'A',57,amarilla,Manuel Matamoros Nuñez,
+8,Levante U.D. 'A',62,gol,Esteban Ferrer Sanchez,
+8,Levante U.D. 'A',75,gol,Ivan Galan Redko,
 8,Patacona C.F. 'A',9,gol,Roberto Nicolas Stirbu Moldovan,
 8,Patacona C.F. 'A',31,gol_contra,Nianake Diarra,Gol encajado ante C.D. Castellón 'A'
 8,Patacona C.F. 'A',68,amarilla,Victor Blanco Lorente,
 8,Patacona C.F. 'A',72,gol_contra,Eric Peris Escrig,Gol encajado ante C.D. Castellón 'A'
 8,Patacona C.F. 'A',75,gol_contra,Antonio Ramos Gomez,Gol encajado ante C.D. Castellón 'A'
 8,Patacona C.F. 'A',78,amarilla,Marc Joan Gomez Oscar,
+8,Primer Toque C.F. 'A',17,amarilla,Pere Tomas Ribes,
+8,Primer Toque C.F. 'A',27,amarilla,Marcos Santamaria Albert,
+8,Primer Toque C.F. 'A',62,gol_contra,Esteban Ferrer Sanchez,Gol encajado ante Levante U.D. 'A'
+8,Primer Toque C.F. 'A',71,amarilla,Javier Lafuente Perez,
+8,Primer Toque C.F. 'A',75,gol_contra,Ivan Galan Redko,Gol encajado ante Levante U.D. 'A'
+8,Primer Toque C.F. 'A',77,amarilla,Jose David Barreda Galiana,
+8,S.C.D. Intangco 'A',8,gol,Eloy Mañogil Dolz,
+8,S.C.D. Intangco 'A',23,gol_contra,Ahmed Rida Tariki Kharbouch,Gol encajado ante Celtic Elche C.F. 'A'
+8,S.C.D. Intangco 'A',29,gol_contra,Iker Ramallo Lloret,Gol encajado ante Celtic Elche C.F. 'A'
+8,S.C.D. Intangco 'A',35,amarilla,Eloy Mañogil Dolz,
+8,S.C.D. Intangco 'A',44,gol_contra,Rubén Pérez Andreu,Gol encajado ante Celtic Elche C.F. 'A'
+8,S.C.D. Intangco 'A',53,amarilla,Sergio Gadea Alencia,
+8,S.C.D. Intangco 'A',57,amarilla,Diego Cotarelo Alvarez,
+8,S.C.D. Intangco 'A',69,gol,Fran Moya Romero,
+8,S.C.D. Intangco 'A',69,amarilla,Eric Galvez Buitrago,
+8,S.C.D. Intangco 'A',71,gol_contra,Pedro Garcia Girona,Gol encajado ante Celtic Elche C.F. 'A'
+8,S.C.D. Intangco 'A',77,gol_contra,Aleix Nieto Almagro,Gol encajado ante Celtic Elche C.F. 'A'
+8,Valencia C.F. 'A',4,gol,Dario Alonso Garcia,
+8,Valencia C.F. 'A',19,gol,Miguel Angel Prieto Serer,
+8,Valencia C.F. 'A',29,gol,Aitor Garrigues Asensio,
+8,Valencia C.F. 'A',37,gol,G.P.,Gol en propia rival: Guillermo Sempere Catala
+8,Valencia C.F. 'A',42,gol,Iker Albero Ruiz,
+8,Valencia C.F. 'A',44,gol,Abel Yumdjo Taguiawa Massoko,
+8,Valencia C.F. 'A',45,gol,Pablo Jimenez Luque,
+8,Valencia C.F. 'A',65,gol,Iker Albero Ruiz,
+8,Valencia C.F. 'A',71,gol,Iker Albero Ruiz,
+8,Valencia C.F. 'A',74,gol,Jakson Enrique Gordon,
+8,Villarreal C.F. 'A',28,gol,Aaron Ruiz Sanchez,
+8,Villarreal C.F. 'A',47,gol,Aaron Ruiz Sanchez,
+8,Villarreal C.F. 'A',79,gol,Josue Caballero Cerdeña,
+9,Alboraya U.D. 'A',54,gol_contra,Lucas Serra Blasco,Gol encajado ante C.F. Fundació VCF 'A'
+9,Alboraya U.D. 'A',70,amarilla,C. Garcia (sin identificar),
+9,Alboraya U.D. 'A',77,gol_contra,Lucas Serra Blasco,Gol encajado ante C.F. Fundació VCF 'A'
+9,C.D. Castellón 'A',7,gol_contra,Mihail Kevin Balta,Gol encajado ante C.F. Torre Levante 'A'
+9,C.D. Castellón 'A',18,amarilla,Otto Planagumà Bagan,
+9,C.D. Castellón 'A',21,gol,Gonzalo Tabares Saborit,
+9,C.D. Castellón 'A',55,gol,Joel Rodriguez Paris,
+9,C.D. Castellón 'A',55,amarilla,Joel Rodriguez Paris,
+9,C.D. Castellón 'A',64,amarilla,Gonzalo Tabares Saborit,
+9,C.D. Castellón 'A',69,amarilla,Marc Cervera Calpe,
+9,C.D. Roda 'A',20,gol_contra,Steven Chiemela Igbojionu Ajuzie,Gol encajado ante Levante U.D. 'A'
+9,C.D. Roda 'A',48,gol,Mario Granell Calafell,
+9,C.D. Roda 'A',61,amarilla,Ahmed Ben Ali Laghmich El Haad,
+9,C.D. Roda 'A',62,amarilla,Miguel Ángel Tena Saco De Larriva,
+9,C.D. Roda 'A',64,amarilla,Mario Granell Calafell,
+9,C.D. Roda 'A',80,doble_amarilla,Miguel Ángel Tena Saco De Larriva,Segunda amarilla / expulsión
+9,C.F. Benidorm 'A',58,amarilla,Cristian Garcia Dominguez,
+9,C.F. Benidorm 'A',61,amarilla,Xavi Martinez Torres,
+9,C.F. Benidorm 'A',80,gol_contra,Aleix Nieto Almagro,Gol encajado ante Celtic Elche C.F. 'A'
+9,C.F. Fundació VCF 'A',54,gol,Lucas Serra Blasco,
+9,C.F. Fundació VCF 'A',70,amarilla,Ferran Mut Gilabert,
+9,C.F. Fundació VCF 'A',77,gol,Lucas Serra Blasco,
+9,C.F. Fundació VCF 'A',80,amarilla,Timur Kuzmin,
+9,C.F. Inter San José Valencia 'A',14,amarilla,Juan Diego De La Fuente Wila,
+9,C.F. Inter San José Valencia 'A',21,gol,Alejandro Miró Andrés,
+9,C.F. Inter San José Valencia 'A',36,amarilla,Juan Jose Gil Calisalvo,
+9,C.F. Inter San José Valencia 'A',39,gol_contra,Pere Tomas Ribes,Gol encajado ante Primer Toque C.F. 'A'
+9,C.F. Inter San José Valencia 'A',40,amarilla,Bruno Aguilar Baya,
+9,C.F. Inter San José Valencia 'A',80,amarilla,Alejandro Miró Andrés,
+9,C.F. La Nucía 'A',12,gol_contra,Aitor Garrigues Asensio,Gol encajado ante Valencia C.F. 'A'
+9,C.F. La Nucía 'A',17,gol_contra,Iker Frias Barrajon,Gol encajado ante Valencia C.F. 'A'
+9,C.F. La Nucía 'A',27,gol_contra,Hugo Sanz Lopez,Gol encajado ante Valencia C.F. 'A'
+9,C.F. La Nucía 'A',30,amarilla,Pere Terol Orozco,
+9,C.F. La Nucía 'A',45,gol_contra,Alfonso Calderon Trillo-Figueroa,Gol encajado ante Valencia C.F. 'A'
+9,C.F. La Nucía 'A',62,gol_contra,Andreu Gimeno Alacreu,Gol encajado ante Valencia C.F. 'A'
+9,C.F. La Nucía 'A',67,gol_contra,Andreu Gimeno Alacreu,Gol encajado ante Valencia C.F. 'A'
+9,C.F. La Nucía 'A',75,gol_contra,Jakson Enrique Gordon,Gol encajado ante Valencia C.F. 'A'
+9,C.F. Torre Levante 'A',7,gol,Mihail Kevin Balta,
+9,C.F. Torre Levante 'A',9,amarilla,Javier Villaescusa Mas,
+9,C.F. Torre Levante 'A',16,amarilla,Jorge Caro Toral,
+9,C.F. Torre Levante 'A',21,gol_contra,Gonzalo Tabares Saborit,Gol encajado ante C.D. Castellón 'A'
+9,C.F. Torre Levante 'A',27,amarilla,Samuel Temina Gaviria,
+9,C.F. Torre Levante 'A',37,amarilla,Miguel Sanz Pedro,
+9,C.F. Torre Levante 'A',55,gol_contra,Joel Rodriguez Paris,Gol encajado ante C.D. Castellón 'A'
+9,Celtic Elche C.F. 'A',80,gol,Aleix Nieto Almagro,
+9,Elche C.F. 'A',3,gol,Mario Galvez Montaño,
+9,Elche C.F. 'A',14,gol_contra,Yosin Yusupov,Gol encajado ante Patacona C.F. 'A'
+9,Elche C.F. 'A',18,amarilla,Julian Andres Vasquez Cano,
+9,Elche C.F. 'A',32,gol,Iker Pico Tenza,
+9,Elche C.F. 'A',35,gol_contra,Izan Vicente Alos,Gol encajado ante Patacona C.F. 'A'
+9,Elche C.F. 'A',66,gol,Alejandro De Juan Garcia,
+9,Elda Unión Cableworld C.F. 'A',9,amarilla,Miguel Hoyos Tarraga,
+9,Elda Unión Cableworld C.F. 'A',10,gol_contra,Pablo Lopez Argüello,Gol encajado ante Villarreal C.F. 'A'
+9,Elda Unión Cableworld C.F. 'A',15,gol_contra,Jaume Mas Salom,Gol encajado ante Villarreal C.F. 'A'
+9,Elda Unión Cableworld C.F. 'A',30,gol_contra,Alvaro Tarraso Perez,Gol encajado ante Villarreal C.F. 'A'
+9,Elda Unión Cableworld C.F. 'A',49,amarilla,Daniel Gil Garcia,
+9,Levante U.D. 'A',10,amarilla,Aaron Aroba Santos,
+9,Levante U.D. 'A',20,gol,Steven Chiemela Igbojionu Ajuzie,
+9,Levante U.D. 'A',32,amarilla,Diego Miranda Rodriguez,
+9,Levante U.D. 'A',41,amarilla,Alejandro Flores Inclan,
+9,Levante U.D. 'A',48,gol_contra,Mario Granell Calafell,Gol encajado ante C.D. Roda 'A'
+9,Patacona C.F. 'A',3,gol_contra,Mario Galvez Montaño,Gol encajado ante Elche C.F. 'A'
+9,Patacona C.F. 'A',14,gol,Yosin Yusupov,
+9,Patacona C.F. 'A',32,gol_contra,Iker Pico Tenza,Gol encajado ante Elche C.F. 'A'
+9,Patacona C.F. 'A',35,gol,Izan Vicente Alos,
+9,Patacona C.F. 'A',52,amarilla,Daniel Nuñez Najera,
+9,Patacona C.F. 'A',66,gol_contra,Alejandro De Juan Garcia,Gol encajado ante Elche C.F. 'A'
+9,Patacona C.F. 'A',80,amarilla,Angel Navarro Michelena,
+9,Primer Toque C.F. 'A',21,gol_contra,Alejandro Miró Andrés,Gol encajado ante C.F. Inter San José Valencia 'A'
+9,Primer Toque C.F. 'A',30,amarilla,Pere Tomas Ribes,
+9,Primer Toque C.F. 'A',37,amarilla,Gerard Planell Vidal,
+9,Primer Toque C.F. 'A',39,gol,Pere Tomas Ribes,
+9,Primer Toque C.F. 'A',49,amarilla,Pol Pablo Vericat,
+9,Primer Toque C.F. 'A',66,amarilla,Vicent Roda Barbera,
+9,Primer Toque C.F. 'A',80,amarilla,Javier Lafuente Perez,
+9,Primer Toque C.F. 'A',80,roja,Hernan Sanchez Pascual,
+9,Valencia C.F. 'A',12,gol,Aitor Garrigues Asensio,
+9,Valencia C.F. 'A',17,gol,Iker Frias Barrajon,
+9,Valencia C.F. 'A',27,gol,Hugo Sanz Lopez,
+9,Valencia C.F. 'A',45,gol,Alfonso Calderon Trillo-Figueroa,
+9,Valencia C.F. 'A',62,gol,Andreu Gimeno Alacreu,
+9,Valencia C.F. 'A',67,gol,Andreu Gimeno Alacreu,
+9,Valencia C.F. 'A',75,gol,Jakson Enrique Gordon,
+9,Villarreal C.F. 'A',10,gol,Pablo Lopez Argüello,
+9,Villarreal C.F. 'A',15,gol,Jaume Mas Salom,
+9,Villarreal C.F. 'A',30,gol,Alvaro Tarraso Perez,
