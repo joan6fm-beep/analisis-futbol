@@ -8,7 +8,7 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
 ## Hecho
 - Sistema de diseño oscuro (`ui_theme.py`), Plotly, portada con fotos completas.
 - Equipo 360: tres niveles (resumen del partido, áreas, análisis avanzado) + temporada; datos Veo J2/J3/J5/J7.
-- Rivales y Resumen de liga con J8 parcial (4 de 8 partidos, clasificación provisional);
+- Rivales y Resumen de liga con J8 completa (8 de 8 partidos; los 4 del 1/11 desde vídeo FFCV);
   porteros con atribución de goles por minutos.
 - **Infantil D** (bloque completo, noviembre 2026):
   - Navegación propia: Inicio · Muro · Calendario · Resultados · Minutos · Seguimiento.
@@ -35,7 +35,8 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
 ## Pendiente / datos a revisar
 - Cadete A: J7 Celtic Elche–Roda (10/11) y resto de J8; asistencias no registradas en actas;
   dos «C. Garcia» en Alboraya (tarjetas y cambios sin atribuir); fechas/horas no visibles en algunas actas.
-- J8 Juvenil A: faltan los 4 partidos del domingo 1/11.
+- J8 Juvenil A: gol de A. Urbina (Inter SJ, 38') con icono distinto en el acta (¿penalti?), registrado como gol;
+  tarjetas a técnicos (V. Felipe, R. Hervas) no registradas.
 - J7 Juvenil A: ocasiones 14 frente a 13; zonas de pase 8/82/10 frente a 41/48/11.
 - Paterna J5: «Oscar Rubio Montoro» duplicado (dorsales 7 y 8).
 - Infantil D: rival de J2; marcador de J1 (Fomento Castellón); jornada y minuto de cada gol y de la asistencia.

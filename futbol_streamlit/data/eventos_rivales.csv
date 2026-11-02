@@ -607,3 +607,64 @@ jornada,equipo,minuto,tipo,jugador,detalle
 8,Paterna C.F. 'A',84,amarilla,Gonzalo Herrero Adrados,J8 · amarilla · FFCV
 8,C.F. Cracks 'A',19,amarilla,Sebastian Ioan Varga Bacaran,J8 · amarilla · FFCV
 8,C.F. Cracks 'A',63,amarilla,Nikolas Elijah Hiler,J8 · amarilla · FFCV
+8,Villarreal C.F. 'C',7,gol,Salim Khassanov,J8 · gol ante C.F. Torre Levante 'A' · FFCV
+8,C.F. Torre Levante 'A',7,gol_contra,Salim Khassanov,J8 · gol encajado ante Villarreal C.F. 'C' · FFCV
+8,Villarreal C.F. 'C',11,gol,Franklin Chinedu Okolie Okolie,J8 · gol ante C.F. Torre Levante 'A' · FFCV
+8,C.F. Torre Levante 'A',11,gol_contra,Franklin Chinedu Okolie Okolie,J8 · gol encajado ante Villarreal C.F. 'C' · FFCV
+8,Villarreal C.F. 'C',39,gol,Adrian Cantalapiedra Cocho,J8 · gol ante C.F. Torre Levante 'A' · FFCV
+8,C.F. Torre Levante 'A',39,gol_contra,Adrian Cantalapiedra Cocho,J8 · gol encajado ante Villarreal C.F. 'C' · FFCV
+8,Villarreal C.F. 'C',62,gol,Gabriel Duarte Santacruz,J8 · gol ante C.F. Torre Levante 'A' · FFCV
+8,C.F. Torre Levante 'A',62,gol_contra,Gabriel Duarte Santacruz,J8 · gol encajado ante Villarreal C.F. 'C' · FFCV
+8,Villarreal C.F. 'C',67,gol,Franklin Chinedu Okolie Okolie,J8 · gol ante C.F. Torre Levante 'A' · FFCV
+8,C.F. Torre Levante 'A',67,gol_contra,Franklin Chinedu Okolie Okolie,J8 · gol encajado ante Villarreal C.F. 'C' · FFCV
+8,Villarreal C.F. 'C',77,gol,Gabriel Duarte Santacruz,J8 · gol ante C.F. Torre Levante 'A' · FFCV
+8,C.F. Torre Levante 'A',77,gol_contra,Gabriel Duarte Santacruz,J8 · gol encajado ante Villarreal C.F. 'C' · FFCV
+8,Villarreal C.F. 'C',89,gol,Gabriel Duarte Santacruz,J8 · gol ante C.F. Torre Levante 'A' · FFCV
+8,C.F. Torre Levante 'A',89,gol_contra,Gabriel Duarte Santacruz,J8 · gol encajado ante Villarreal C.F. 'C' · FFCV
+8,C.F. Torre Levante 'A',23,gol,Nicolas Cardoso Castaño,J8 · gol ante Villarreal C.F. 'C' · FFCV
+8,Villarreal C.F. 'C',23,gol_contra,Nicolas Cardoso Castaño,J8 · gol encajado ante C.F. Torre Levante 'A' · FFCV
+8,C.F. Torre Levante 'A',80,gol,Alberto Villalba Uceda,J8 · gol ante Villarreal C.F. 'C' · FFCV
+8,Villarreal C.F. 'C',80,gol_contra,Alberto Villalba Uceda,J8 · gol encajado ante C.F. Torre Levante 'A' · FFCV
+8,C.F. Torre Levante 'A',71,amarilla,Andreu Gallardo Salavert,J8 · amarilla · FFCV
+8,Patacona C.F. 'B',10,gol,Miron Saliakhov,J8 · gol ante C.F. Inter San José Valencia 'B' · FFCV
+8,C.F. Inter San José Valencia 'B',10,gol_contra,Miron Saliakhov,J8 · gol encajado ante Patacona C.F. 'B' · FFCV
+8,Patacona C.F. 'B',14,gol,Miron Saliakhov,J8 · gol ante C.F. Inter San José Valencia 'B' · FFCV
+8,C.F. Inter San José Valencia 'B',14,gol_contra,Miron Saliakhov,J8 · gol encajado ante Patacona C.F. 'B' · FFCV
+8,Patacona C.F. 'B',78,gol,Alejandro Palmer Hernando,J8 · gol ante C.F. Inter San José Valencia 'B' · FFCV
+8,C.F. Inter San José Valencia 'B',78,gol_contra,Alejandro Palmer Hernando,J8 · gol encajado ante Patacona C.F. 'B' · FFCV
+8,Patacona C.F. 'B',90,gol,Alejandro Palmer Hernando,J8 · gol ante C.F. Inter San José Valencia 'B' · FFCV
+8,C.F. Inter San José Valencia 'B',90,gol_contra,Alejandro Palmer Hernando,J8 · gol encajado ante Patacona C.F. 'B' · FFCV
+8,Patacona C.F. 'B',27,amarilla,Angel Rosello Soler,J8 · amarilla · FFCV
+8,Patacona C.F. 'B',63,amarilla,Dennys Garcia Lopez,J8 · amarilla · FFCV
+8,Patacona C.F. 'B',82,amarilla,Jose Maria Matias Gorbe,J8 · amarilla · FFCV
+8,Patacona C.F. 'B',84,amarilla,Lucas Ferrandis Paredes,J8 · amarilla · FFCV
+8,Patacona C.F. 'B',88,amarilla,Andrea Cafarelli Piccolo,J8 · amarilla · FFCV
+8,C.F. Inter San José Valencia 'B',9,gol,Erik Da Silva Canobbio,J8 · gol ante Patacona C.F. 'B' · FFCV
+8,Patacona C.F. 'B',9,gol_contra,Erik Da Silva Canobbio,J8 · gol encajado ante C.F. Inter San José Valencia 'B' · FFCV
+8,C.F. Inter San José Valencia 'B',38,gol,Alejandro Urbina Rubio,"J8 · gol ante Patacona C.F. 'B' · FFCV (acta: icono de gol distinto, posible penalti no verificado)"
+8,Patacona C.F. 'B',38,gol_contra,Alejandro Urbina Rubio,J8 · gol encajado ante C.F. Inter San José Valencia 'B' · FFCV
+8,C.F. Inter San José Valencia 'B',22,amarilla,Erik Da Silva Canobbio,J8 · amarilla · FFCV
+8,C.F. Inter San José Valencia 'B',47,amarilla,Alberto Serrano Sanz,J8 · amarilla · FFCV
+8,C.F. Inter San José Valencia 'B',60,amarilla,Enzo Soldado Millan,J8 · amarilla · FFCV
+8,C.F. At. Burriana - Salesianos 'A',15,gol,Dani Hernandez Ballester,J8 · gol ante Manises C.F. 'A' · FFCV
+8,Manises C.F. 'A',15,gol_contra,Dani Hernandez Ballester,J8 · gol encajado ante C.F. At. Burriana - Salesianos 'A' · FFCV
+8,C.F. At. Burriana - Salesianos 'A',72,gol,Miguel Galera Sanz,J8 · gol ante Manises C.F. 'A' · FFCV
+8,Manises C.F. 'A',72,gol_contra,Miguel Galera Sanz,J8 · gol encajado ante C.F. At. Burriana - Salesianos 'A' · FFCV
+8,C.F. At. Burriana - Salesianos 'A',37,amarilla,Marcos Espada Sanchez,J8 · amarilla · FFCV
+8,Manises C.F. 'A',10,gol,David Lopez Garcia,J8 · gol ante C.F. At. Burriana - Salesianos 'A' · FFCV
+8,C.F. At. Burriana - Salesianos 'A',10,gol_contra,David Lopez Garcia,J8 · gol encajado ante Manises C.F. 'A' · FFCV
+8,Manises C.F. 'A',46,gol,Alejandro Aliaga Ortega,J8 · gol ante C.F. At. Burriana - Salesianos 'A' · FFCV
+8,C.F. At. Burriana - Salesianos 'A',46,gol_contra,Alejandro Aliaga Ortega,J8 · gol encajado ante Manises C.F. 'A' · FFCV
+8,Alboraya U.D. 'B',7,gol,He Xie,J8 · gol ante Bétera C.F. 'A' · FFCV
+8,Bétera C.F. 'A',7,gol_contra,He Xie,J8 · gol encajado ante Alboraya U.D. 'B' · FFCV
+8,Alboraya U.D. 'B',19,gol,Luis Carlos Montilla Perez,J8 · gol ante Bétera C.F. 'A' · FFCV
+8,Bétera C.F. 'A',19,gol_contra,Luis Carlos Montilla Perez,J8 · gol encajado ante Alboraya U.D. 'B' · FFCV
+8,Alboraya U.D. 'B',34,gol,Marc Besalduch Lopez,J8 · gol ante Bétera C.F. 'A' · FFCV
+8,Bétera C.F. 'A',34,gol_contra,Marc Besalduch Lopez,J8 · gol encajado ante Alboraya U.D. 'B' · FFCV
+8,Alboraya U.D. 'B',54,gol,Mario Villavicencio Fernández,J8 · gol ante Bétera C.F. 'A' · FFCV
+8,Bétera C.F. 'A',54,gol_contra,Mario Villavicencio Fernández,J8 · gol encajado ante Alboraya U.D. 'B' · FFCV
+8,Alboraya U.D. 'B',51,amarilla,Hugo Turegano Perales,J8 · amarilla · FFCV
+8,Alboraya U.D. 'B',60,amarilla,Iker Descalzo Calomarde,J8 · amarilla · FFCV
+8,Bétera C.F. 'A',22,amarilla,Hugo Alabau Rodrigo,J8 · amarilla · FFCV
+8,Bétera C.F. 'A',40,amarilla,Hugo Jose Morte Garcia,J8 · amarilla · FFCV
+8,Bétera C.F. 'A',87,amarilla,Daniel Ram Levi,J8 · amarilla · FFCV

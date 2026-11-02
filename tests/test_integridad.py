@@ -291,12 +291,13 @@ def test_datos_liga():
                 mism.append(f"J{j} {r.equipo}")
     check(not mism, "Clasificación coincide con los resultados en todas las jornadas" + (f": {mism[:4]}" if mism else ""))
     played, expected, missing = A.jornada_status(part, 8)
-    check(played == 4 and expected == 8 and len(missing) == 8, f"J8 provisional: {played}/{expected} partidos; pendientes {len(missing)} equipos")
+    check(played == 8 and expected == 8 and not missing, f"J8 completa: {played}/{expected} partidos; pendientes {len(missing)} equipos")
     check(set(part[part.jornada == 8].local) | set(part[part.jornada == 8].visitante) == set(m8.equipo),
-          "J8: solo hay minutos de los 8 equipos que han jugado (no se inventan partidos)")
+          "J8: minutos solo de los equipos que han jugado (no se inventan partidos)")
     # Rankings actualizados con J8
     sc = ev[ev.tipo.isin(["gol", "penalti_gol"])].groupby(["equipo", "jugador"]).size()
-    check(sc.get(("C.D. Acero 'A'", "Aaron Madrid Garcia"), 0) >= 2 and sc.get((A.TEAM, "Ian"), 0) >= 1, "Goleadores de J8 incorporados al ranking")
+    check(sc.get(("C.D. Acero 'A'", "Aaron Madrid Garcia"), 0) >= 2 and sc.get((A.TEAM, "Ian"), 0) >= 1
+          and sc.get(("Villarreal C.F. 'C'", "Gabriel Duarte Santacruz"), 0) >= 3, "Goleadores de J8 incorporados al ranking")
     # Nada perdido: todas las filas de la versión base siguen presentes
     root = APP_DIR.parent
     lost = []
