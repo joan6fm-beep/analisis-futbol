@@ -292,6 +292,25 @@ def _load_csv_cached(name, file_stamp, path_str=None):
     for c in cols:
         if c not in df.columns:
             df[c] = pd.NA
+    return _unify_dorsals(df, Path(p).parent == DATA)
+
+
+# Mismo jugador con un dorsal excepcional: se agrupa bajo su dorsal habitual (solo Juvenil A).
+# Alessio (portero) llevó el 13 en J6; el 13 habitual es Jordi y no se toca. Los CSV originales no se modifican.
+DORSAL_ALIAS = {("Primer Toque C.F. 'A'", "Alessio", 13): 1}
+
+
+def _unify_dorsals(df, juvenil=True):
+    if not juvenil or df.empty or not {"equipo", "jugador", "dorsal"} <= set(df.columns):
+        return df
+    d = pd.to_numeric(df["dorsal"], errors="coerce")
+    for (team, player, old), new in DORSAL_ALIAS.items():
+        m = (df["equipo"] == team) & (df["jugador"] == player) & (d == old)
+        if m.any():
+            df = df.copy()
+            df.loc[m, "dorsal"] = new
+    if "jornada" not in df.columns:  # plantilla: una fila por jugador y dorsal
+        df = df.drop_duplicates(subset=["equipo", "jugador", "dorsal"]).reset_index(drop=True)
     return df
 
 
@@ -742,7 +761,7 @@ def render_individual():
     [data-testid="stButton"] button{border-radius:12px!important;font-weight:850!important;border:1px solid var(--line)!important;min-height:42px}.player-label{font-size:.64rem;color:var(--muted);text-align:center;margin-top:-8px;margin-bottom:7px}
     .impact-wrap{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;margin:10px 0 14px;overflow-x:auto;box-shadow:0 5px 18px rgba(16,42,67,.035)}
     .impact-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:10px}.impact-title{font-size:.92rem;font-weight:950;color:var(--ink)}.impact-sub{font-size:.62rem;color:var(--muted);font-weight:750;margin-top:3px}.impact-legend{font-size:.58rem;color:var(--muted);font-weight:800;white-space:nowrap}
-    table.impact-table{width:100%;border-collapse:separate;border-spacing:0;min-width:980px;font-size:.66rem}.impact-table th{padding:8px 7px;text-align:center;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-size:.55rem;border-bottom:1px solid var(--line);background:var(--surface)}.impact-table th:first-child,.impact-table td:first-child{text-align:left;position:sticky;left:0;z-index:2;background:var(--surface)}.impact-table td{padding:7px;border-bottom:1px solid var(--line);text-align:center;font-weight:850;color:var(--ink)}.impact-table tr:last-child td{border-bottom:0}.impact-player{font-weight:950;color:var(--ink);white-space:nowrap}.impact-pos{display:inline-flex;align-items:center;justify-content:center;min-width:27px;height:22px;border-radius:8px;background:var(--surface-2);color:#6f9eec;font-weight:950;margin-right:7px}.impact-cell{border-radius:8px;padding:5px 6px;display:inline-block;min-width:44px}.trend-mini{display:flex;gap:3px;justify-content:center;align-items:end;height:26px}.trend-mini span{width:8px;border-radius:3px 3px 1px 1px;background:#60a5fa;min-height:3px}.activity-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;border-radius:999px;background:var(--surface-2)}.activity-dot{width:7px;height:7px;border-radius:50%}
+    table.impact-table{width:100%;border-collapse:separate;border-spacing:0;min-width:980px;font-size:.66rem}.impact-table th{padding:8px 7px;text-align:center;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-size:.55rem;border-bottom:1px solid var(--line);background:var(--surface)}.impact-table th:first-child,.impact-table td:first-child{text-align:left;position:sticky;left:0;z-index:2;background:var(--surface)}.impact-table td{padding:7px;border-bottom:1px solid var(--line);text-align:center;font-weight:850;color:var(--ink)}.impact-table tr:last-child td{border-bottom:0}.impact-player{font-weight:950;color:var(--ink);white-space:nowrap}.impact-pos{display:inline-flex;align-items:center;justify-content:center;min-width:27px;height:22px;border-radius:8px;background:var(--surface-2);color:#6f9eec;font-weight:950;margin-right:7px}.impact-cell{border-radius:8px;padding:5px 6px;display:inline-block;min-width:44px;color:#F2F5FA!important;text-shadow:0 1px 1px rgba(0,0,0,.35)}.trend-mini{display:flex;gap:3px;justify-content:center;align-items:end;height:26px}.trend-mini span{width:8px;border-radius:3px 3px 1px 1px;background:#60a5fa;min-height:3px}.activity-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;border-radius:999px;background:var(--surface-2)}.activity-dot{width:7px;height:7px;border-radius:50%}
     .journey-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:8px 0 14px}.journey-card{background:linear-gradient(145deg,var(--surface),var(--surface));border:1px solid var(--line);border-radius:16px;padding:13px}.journey-k{font-size:.57rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:950}.journey-v{font-size:1.2rem;font-weight:950;color:var(--ink);margin-top:3px}.journey-meta{font-size:.62rem;color:var(--muted);font-weight:750;margin-top:2px}.journey-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:9px}.journey-stat{background:var(--surface);border-radius:10px;padding:7px;text-align:center}.journey-stat b{display:block;font-size:.8rem;color:var(--ink)}.journey-stat span{font-size:.52rem;color:var(--muted);font-weight:800}
     @media(max-width:1000px){.global-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.minutes-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.compare-metrics{grid-template-columns:1fr}.day-cards{grid-template-columns:1fr}.summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.per90-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.visual-insights{grid-template-columns:repeat(2,minmax(0,1fr))}.leader-grid{grid-template-columns:1fr}.journey-strip{grid-template-columns:1fr}}
     </style>
@@ -1073,7 +1092,7 @@ def render_individual():
 
         def cell_bg(v, series, hue='blue'):
             try: v=float(v)
-            except: return '#f8fafc'
+            except: return 'rgba(138,151,171,.14)'
             vals=pd.to_numeric(series,errors='coerce').dropna()
             if vals.empty or float(vals.max())==float(vals.min()): q=.45
             else: q=(v-float(vals.min()))/(float(vals.max())-float(vals.min()))
@@ -1084,9 +1103,8 @@ def render_individual():
                 'red':(254,242,242,220,38,38)
             }
             a,b,c,d,e,f=palettes[hue]
-            t=.10+.28*q
-            rr=int(a+(d-a)*t); gg=int(b+(e-b)*t); bb=int(c+(f-c)*t)
-            return f'rgb({rr},{gg},{bb})'
+            # Fondo oscuro: el color se intensifica con el valor y el texto (claro) siempre contrasta.
+            return f'rgba({d},{e},{f},{.16+.5*q:.2f})'
 
         role_short={'POR':'POR','DEF':'DEF','MED':'MED','DEL':'DEL'}
 
@@ -3153,6 +3171,17 @@ def render_team_360():
                 st.info("Sin clasificación cargada.")
             else:
                 st.plotly_chart(t360.fig_position(_pos_rows, int(clasif_t.groupby("jornada").equipo.nunique().max())), width="stretch", theme=None, config=ui_theme.PLOTLY_CONFIG, key="eq_pos")
+
+        # Vista 3D de la liga (misma figura que Resumen liga), accesible desde el análisis del equipo.
+        st.markdown(t360.section("Vista 3D · Primer Toque frente a la liga",
+                                 "Goles a favor, goles en contra y puntos por partido de cada equipo con los resultados oficiales. Arrastra para girar; pasa el ratón para ver cada equipo."),
+                    unsafe_allow_html=True)
+        _t3 = lc.standings(partidos_t)
+        _cl_last = clasif_t[pd.to_numeric(clasif_t["jornada"], errors="coerce") == pd.to_numeric(clasif_t["jornada"], errors="coerce").max()]
+        _t3 = _t3.drop(columns="pos").merge(_cl_last[["equipo", "posicion"]].rename(columns={"posicion": "pos"}), on="equipo", how="left")
+        with st.container(border=True):
+            st.plotly_chart(pt_viz.fig_league_3d(_t3, t360.club_short, TEAM), width="stretch", theme=None,
+                            config={**ui_theme.PLOTLY_CONFIG, "scrollZoom": False}, key="eq_league_3d")
 
         st.markdown(t360.section("Cuándo marcamos y cuándo sufrimos", "Goles por tramos de 15 minutos en todos los partidos oficiales. Naranja = marcados · azul = encajados."), unsafe_allow_html=True)
         with st.container(border=True):

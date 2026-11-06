@@ -506,6 +506,11 @@ def render_team(logo=None):
     _points_charts(part, teams, sel)
     clas = pd.read_csv(DIR / "liga" / "clasificacion_liga.csv")
     st.plotly_chart(t360.fig_standings(clas, sel), width="stretch", theme=None, config=PLOTLY_CONFIG, key="cad_lg_standings")
+    st.markdown("<div class='q-title'>Vista 3D · Primer Toque frente a la liga</div><div class='q-sub'>Goles a favor, goles en contra y "
+                f"puntos por partido de {MM}' de cada equipo. Arrastra para girar; pasa el ratón para ver cada equipo.</div>", unsafe_allow_html=True)
+    t3 = lc.standings(part, teams)
+    st.plotly_chart(pt_viz.fig_league_3d(t3, short, TEAM, sel if sel != TEAM else None), width="stretch", theme=None,
+                    config={**PLOTLY_CONFIG, "scrollZoom": False}, key="cad_eq_league_3d")
     ts = lc.team_matches(part, sel)
     fig = go.Figure()
     fig.add_bar(x=[f"J{j}" for j in ts.jornada], y=ts.gf, name="Goles a favor", marker_color=PT if sel == TEAM else RIVAL,
