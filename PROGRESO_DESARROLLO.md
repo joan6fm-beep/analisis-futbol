@@ -33,6 +33,14 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
   - Resumen de liga y Rivales del Cadete A = los del Juvenil A parametrizados por liga (`LEAGUES` en app.py:
     datos, 80', tramos de 10', sin vídeos/PDF). Comprobado que las 17 vistas del Juvenil A quedan idénticas.
   - Escudos compartidos en `crests.py` (16 del Juvenil A + 12 FFCV del Cadete A).
+- **Rediseño visual v16** (noviembre 2026, Juvenil A y Cadete A):
+  - `pt_viz.py`: tarjetas de jugador (podio + ranking), duelo entre equipos, radar, carrera de puntos, mapa ataque/defensa,
+    vista 3D de la liga y goles decisivos (victoria / último empate; solo partidos con orden de goles completo).
+  - `ui_theme.py`: plantilla Plotly por defecto `primer_toque` y estilos de tarjetas/pestañas/gráficos (móvil incluido).
+  - Juvenil A · Temporada: «Quién marca / Quién decide / Quién sostiene». Cadete A · Equipo: mismas tarjetas en Minutos y
+    Goleadores, porteros en tarjetas (tabla completa en desplegable), comparador con duelo + radar, escudos en clasificación.
+  - Resumen de liga (ambos): carrera de puntos, ataque frente a defensa y vista 3D; goleadores, eficacia y porteros en
+    tarjetas (tablas completas en desplegables). Sin fotos individuales en los datos: avatar con iniciales y dorsal.
 
 ## Pendiente / datos a revisar
 - Cadete A: J7 Celtic Elche–Roda (10/11) y J9 Kelme–Intangco (suspendido); asistencias no registradas en actas;

@@ -17,6 +17,7 @@ import base64
 
 import crests
 import league_core as lc
+import pt_viz
 from teams import match_minutes
 from ui_theme import MUTED, NEG, PLOTLY_CONFIG, POS, PT, RIVAL, TOKENS, plotly_layout
 
@@ -190,7 +191,7 @@ def _standings_html(tab, highlight=TEAM):
     for r in tab.itertuples():
         cls = " class='me'" if r.equipo == highlight else ""
         dg = f"+{r.dg}" if r.dg > 0 else str(r.dg)
-        body.append(f"<tr{cls}><td>{r.pos}</td><td class='l'>{escape(r.equipo)}</td><td>{r.pj}</td><td>{r.pg}</td><td>{r.pe}</td>"
+        body.append(f"<tr{cls}><td>{r.pos}</td><td class='l'>{crest(r.equipo, 20)}{escape(r.equipo)}</td><td>{r.pj}</td><td>{r.pg}</td><td>{r.pe}</td>"
                     f"<td>{r.pp}</td><td>{r.gf}</td><td>{r.gc}</td><td>{dg}</td><td class='pts'>{r.pts}</td></tr>")
     return f"<div class='cad-wrap'><table class='cad-table'>{head}{''.join(body)}</table></div>"
 
@@ -368,18 +369,34 @@ def render_comparator(team_a, logo=None):
     # Primer Toque siempre naranja; los rivales en azul (y azul claro si se comparan dos rivales).
     ca = PT if a == TEAM else RIVAL
     cb = PT if b == TEAM else ("#A9C0E3" if a != TEAM else RIVAL)
-    rows = "".join(f"<tr><td class='l'>{k}</td><td style='color:{ca};font-weight:800'>{_fmt(ma[k]) if k != 'Posición' else f'{ma[k]}º'}</td>"
-                   f"<td style='color:{cb};font-weight:800'>{_fmt(mb[k]) if k != 'Posición' else f'{mb[k]}º'}</td></tr>" for k in ma)
     lg = logo or (lambda t, n: "")
-    st.markdown(f"<div class='cad-wrap'><table class='cad-table'><tr><th class='l'>Indicador</th><th>{lg(a, 22)}{escape(short(a))}</th>"
-                f"<th>{lg(b, 22)}{escape(short(b))}</th></tr>{rows}</table></div>",
-                unsafe_allow_html=True)
+    better = {"Posición": False, f"Goles encajados por {MM}'": False}
+    fmtv = lambda k, v: f"{v}º" if k == "Posición" else _fmt(v)
+    c_duel, c_radar = st.columns([1, 1], gap="medium")
+    c_duel.markdown(pt_viz.duel_html([(k, float(ma[k]), float(mb[k]), fmtv(k, ma[k]), fmtv(k, mb[k]), better.get(k, True)) for k in ma],
+                                 short(a), short(b), ca, cb, lg(a, 22), lg(b, 22)), unsafe_allow_html=True)
+    ax = ["Pts/partido", "GF/partido", "Solidez (menos GC)", "Pts casa", "Pts fuera"]
+    def _vals(r):
+        return [r.pts / r.pj, r.gf / r.pj, None, r.pts_casa / max(r.pj_casa, 1), r.pts_fuera / max(r.pj_fuera, 1)]
+    played_tab = tab[tab.pj > 0]
+    gcmax = float((played_tab.gc / played_tab.pj).max()) or 1
+    series = []
+    for t, r, col in ((a, ra, ca), (b, rb, cb)):
+        v = _vals(r); gcp = r.gc / r.pj
+        v[2] = gcmax - gcp  # solidez: distancia al equipo que más encaja de la liga
+        texts = [_fmt(v[0]), _fmt(v[1]), f"{_fmt(gcp)} GC/p", _fmt(v[3]), _fmt(v[4])]
+        series.append((short(t), v, col, texts))
+    mx = [3, max(float((played_tab.gf / played_tab.pj).max()), .01), max(gcmax - float((played_tab.gc / played_tab.pj).min()), .01), 3, 3]
+    fig = pt_viz.fig_radar(ax, series, height=360, max_vals=mx)
+    c_radar.plotly_chart(fig, width="stretch", theme=None, config=PLOTLY_CONFIG, key="cad_cmp_radar")
+    c_radar.markdown("<div class='cad-note'>Radar: cada eje sobre el máximo posible o el mejor de la liga. Solidez = cuánto menos encaja que el equipo "
+                "más goleado. Pasa el ratón para ver el valor real.</div>", unsafe_allow_html=True)
     evo = lc.position_evolution(part, teams)
     fig = go.Figure()
     for t, col in ((a, ca), (b, cb)):
         e = evo[evo.equipo == t]
         fig.add_scatter(x=[f"J{j}" for j in e.jornada], y=e.pts, mode="lines+markers", name=short(t), line=dict(color=col, width=2), marker=dict(size=8),
-                        hovertemplate=f"{short(t)} · J%{{x}}: %{{y}} pts<extra></extra>")
+                        hovertemplate=f"{short(t)} · %{{x}}: %{{y}} pts<extra></extra>")
     _plot(fig, "cad_cmp_evo", title="Puntos acumulados por jornada")
     c3, c4 = st.columns(2)
     for col, t, color in ((c3, a, ca), (c4, b, cb)):
@@ -554,18 +571,29 @@ def render_team(logo=None):
         pa = lc.participation(mins, TEAM, MM, pj)
         st.markdown(f"<div class='q-title'>Participación de la plantilla</div><div class='q-sub'>% sobre {MM}' × {pj} partidos. "
                     f"Un partido completo = {MM}'; 40' = 50 %.</div>", unsafe_allow_html=True)
-        st.markdown(_ranking([(f"{int(r.dorsal) if pd.notna(r.dorsal) else '—'} · {r.jugador}", r.minutos,
-                               f"{int(r.titular)} tit. · {int(r.suplente)} supl. · {r.pct:.0f} %") for r in pa.itertuples()],
-                             PT, value_fmt=lambda v: f"{int(v)}′", max_v=MM * pj), unsafe_allow_html=True)
+        st.markdown("<div class='pv-panel-title'><span>🧱</span>Quién sostiene</div>" + pt_viz.player_cards_html(
+            [dict(name=r.jugador, value=int(r.minutos), tag=f"#{int(r.dorsal)}" if pd.notna(r.dorsal) else "",
+                  sub=f"{int(r.titular)} tit. · {int(r.suplente)} supl. · {r.pct:.0f} %") for r in pa.itertuples()],
+            accent=RIVAL, unit="min", limit=len(pa)), unsafe_allow_html=True)
         mt = mins[mins.equipo == TEAM].pivot_table(index="jugador", columns="jornada", values="minutos", aggfunc="sum").loc[pa.jugador]
         fig = go.Figure(go.Heatmap(z=mt.values, x=[f"J{c}" for c in mt.columns], y=mt.index, colorscale=[[0, TOKENS["surface-2"]], [1, PT]],
                                    zmin=0, zmax=MM, hovertemplate="%{y} · %{x}: %{z}′<extra></extra>", colorbar=dict(title="min")))
         _plot(fig, "cad_st_heat", h=120 + 22 * len(mt), title="Minutos por jornada", yaxis=dict(autorange="reversed"))
     with t[3]:
         sc = lc.scorers(ev, mins, TEAM)
-        st.markdown("<div class='q-title'>Goleadores del Cadete A</div>" + _ranking(
-            [(r.jugador, r.goles, f"{r.minutos_gol} · {r.pct_equipo:.0f} % de los goles · "
-                                  f"{_fmt(r.goles_partido)} por partido jugado") for r in sc.itertuples()], PT), unsafe_allow_html=True)
+        dec, dec_skip = pt_viz.decisive_goals(part, ev, TEAM, lambda e: lc.goal_side(e, TEAM))
+        g1, g2 = st.columns(2, gap="medium")
+        g1.markdown("<div class='pv-panel-title'><span>⚽</span>Quién marca</div><div class='pv-panel-sub'>Goles de las actas (sin propia puerta).</div>"
+                    + pt_viz.player_cards_html([dict(name=r.jugador, value=int(r.goles),
+                                                     sub=f"{r.minutos_gol} · {r.pct_equipo:.0f} % de los goles · {_fmt(r.goles_partido)} por partido jugado"
+                                                     + (f" · {int(r.penaltis)} de penalti" if r.penaltis else ""))
+                                                for r in sc.itertuples()], unit="goles", limit=len(sc)), unsafe_allow_html=True)
+        g2.markdown("<div class='pv-panel-title'><span>🎯</span>Quién decide</div><div class='pv-panel-sub'>Goles que dieron puntos: el de la victoria "
+                    "(deja la ventaja definitiva) y el último empate en partidos igualados.</div>"
+                    + pt_viz.player_cards_html(pt_viz.decisive_items(dec), accent=POS, unit="decisivos", limit=len(dec),
+                                               empty="Ningún gol decisivo con el orden de goles completo."), unsafe_allow_html=True)
+        if dec_skip:
+            g2.caption(f"{dec_skip} partido(s) sin el orden completo de goles en el acta no se analizan aquí.")
         g = ev[(ev.equipo == TEAM) & ev.tipo.isin(lc.GOAL_TYPES_FOR)].groupby("jornada").size().reindex(tm.jornada, fill_value=0).cumsum()
         fig = go.Figure(go.Scatter(x=[f"J{j}" for j in g.index], y=g.values, mode="lines+markers", line=dict(color=PT, width=2),
                                    marker=dict(size=8), hovertemplate="%{x}: %{y} goles acumulados<extra></extra>"))
@@ -573,7 +601,13 @@ def render_team(logo=None):
         st.markdown("<div class='cad-note'>Asistencias: las actas no las registran. No se muestran para no inventar datos.</div>", unsafe_allow_html=True)
     with t[4]:
         g, w = lc.goalkeepers(al, mins, ev, part, TEAM, MM)
-        st.dataframe(g.rename(columns={"jugador": "Portero", "partidos": "PJ", "titular": "Titular", "minutos": "Minutos",
+        st.markdown(f"<div class='pv-panel-title'><span>🧤</span>Porteros</div><div class='pv-panel-sub'>Ordenados por minutos jugados · valor = goles encajados por {MM}' en el campo.</div>" + pt_viz.player_cards_html(
+            [dict(name=r.jugador, value=round(float(r.encajados_por_partido_reglamentario), 2) if pd.notna(r.encajados_por_partido_reglamentario) else None,
+                  sub=f"{int(r.minutos)}′ · {int(r.partidos)} PJ · {int(r.encajados)} GC · {int(r.porterias_cero)} a cero")
+             for r in g.sort_values("minutos", ascending=False).itertuples()], accent=POS, unit=f"GC/{MM}'", value_fmt=lambda v: _fmt(v), limit=len(g), lower_is_better=True),
+            unsafe_allow_html=True)
+        with st.expander("Tabla completa de porteros"):
+            st.dataframe(g.rename(columns={"jugador": "Portero", "partidos": "PJ", "titular": "Titular", "minutos": "Minutos",
                                        "encajados": "Goles encajados", "porterias_cero": "Porterías a cero",
                                        "encajados_por_partido_reglamentario": f"GC por {MM}'", "pct_minutos": "% minutos"}),
                      hide_index=True, width="stretch",

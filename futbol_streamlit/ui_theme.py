@@ -153,6 +153,68 @@ html, body, .stApp, [class*="css"], .stMarkdown, button, input, select, textarea
   .stApp .mobile-rival-chip.active {background:var(--pt)!important;color:#1A0E02!important;border-color:var(--pt)!important}
   .stApp .mobile-install-note {background:var(--surface)!important;border:1px solid var(--line);box-shadow:none!important}
 }
+/* ---------- Acabado premium (rediseño v16) ---------- */
+.stApp [data-testid="stPlotlyChart"] {background:linear-gradient(180deg,rgba(24,32,46,.55),rgba(17,23,34,.35));border:1px solid var(--line-soft);border-radius:16px;padding:6px 4px;overflow:hidden}
+.stApp [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stPlotlyChart"] {background:transparent;border:0;padding:0}
+.stApp .t360-kpi,.stApp .league-kpi,.stApp .cad-kpi {transition:transform .18s ease,border-color .18s ease}
+.stApp .t360-kpi:hover,.stApp .league-kpi:hover,.stApp .cad-kpi:hover {transform:translateY(-2px);border-color:rgba(245,135,31,.45)!important}
+.stApp [data-testid="stTabs"] [role="tablist"] {gap:6px;border-bottom:1px solid var(--line-soft)}
+.stApp [data-testid="stTabs"] button[role="tab"] {border-radius:10px 10px 0 0;padding:6px 12px}
+.stApp [data-testid="stTabs"] button[role="tab"]:hover {background:var(--surface)}
+.stApp [data-testid="stTabs"] button[role="tab"][aria-selected="false"] p {color:var(--text)!important;opacity:1!important;font-weight:650}
+.stApp .league-section-title {display:flex;align-items:center;gap:10px}
+.stApp .league-section-title:before {content:"";width:4px;height:18px;border-radius:4px;background:var(--pt);display:inline-block;flex:none}
+
+/* Tarjetas de jugador: podio + ranking */
+.pv-podium {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:6px 0 10px}
+.pv-card {position:relative;background:radial-gradient(120% 90% at 50% 0%,rgba(245,135,31,.10),transparent 60%),linear-gradient(170deg,#172235,#111722);
+  border:1px solid var(--line);border-radius:16px;padding:16px 10px 12px;text-align:center;min-width:0;transition:transform .18s ease,border-color .18s ease}
+.pv-card:hover {transform:translateY(-3px);border-color:var(--acc,var(--pt))}
+.pv-card.pv-gold {box-shadow:inset 0 2px 0 var(--acc,var(--pt))}
+.pv-rank {position:absolute;top:8px;left:10px;font-size:.7rem;font-weight:900;color:var(--muted)}
+.pv-gold .pv-rank {color:#F2C14E}.pv-silver .pv-rank {color:#C8D1DE}.pv-bronze .pv-rank {color:#D79A6B}
+.pv-avatar {position:relative;width:54px;height:54px;margin:0 auto 8px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:1.05rem;
+  color:#1A0E02;background:linear-gradient(135deg,var(--acc,var(--pt)),#FFC37E);box-shadow:0 0 0 3px rgba(255,255,255,.06),0 6px 18px rgba(0,0,0,.35)}
+.pv-silver .pv-avatar,.pv-bronze .pv-avatar {width:46px;height:46px;font-size:.92rem;filter:saturate(.75)}
+.pv-avatar em {position:absolute;right:-8px;bottom:-4px;font-style:normal;font-size:.6rem;font-weight:900;background:var(--surface-3);color:var(--ink);
+  border:1px solid var(--line);border-radius:999px;padding:1px 6px;white-space:nowrap}
+.pv-name {color:var(--ink);font-weight:800;font-size:.84rem;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.4em;overflow-wrap:anywhere}
+.pv-name img {width:16px!important;height:16px!important;margin-right:4px!important;vertical-align:-3px}
+.pv-value {color:var(--ink);font-weight:900;font-size:1.7rem;letter-spacing:-.03em;margin-top:4px;font-variant-numeric:tabular-nums}
+.pv-value small {font-size:.7rem;color:var(--muted);font-weight:700;margin-left:4px;letter-spacing:0}
+.pv-sub {color:var(--muted);font-size:.7rem;line-height:1.3;margin-top:2px;min-height:1.8em}
+.pv-list {display:grid;gap:6px}
+.pv-row {display:grid;grid-template-columns:22px 30px minmax(0,1fr);gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line-soft);border-radius:12px;padding:8px 12px}
+.pv-n {color:var(--muted);font-weight:900;font-size:.76rem;text-align:right}
+.pv-mini {width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--surface-3);color:var(--ink);font-weight:800;font-size:.7rem}
+.pv-head {display:flex;justify-content:space-between;gap:8px;align-items:baseline;min-width:0}
+.pv-head b {color:var(--ink);font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.pv-head b img {width:15px!important;height:15px!important;margin-right:4px!important;vertical-align:-3px}
+.pv-head strong {color:var(--ink);font-weight:900;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pv-head strong small {color:var(--muted);font-weight:600;font-size:.68rem}
+.pv-track {height:5px;background:var(--surface-2);border-radius:5px;overflow:hidden;margin:5px 0 3px}
+.pv-track i {display:block;height:100%;border-radius:5px}
+.pv-rsub {font-size:.68rem;color:var(--muted)}
+.pv-empty {color:var(--muted);font-size:.8rem;padding:14px;border:1px dashed var(--line);border-radius:12px;text-align:center}
+.pv-panel-title {display:flex;align-items:center;gap:8px;color:var(--ink);font-weight:900;font-size:1rem;letter-spacing:-.01em;margin-top:6px}
+.pv-panel-sub {color:var(--muted);font-size:.74rem;margin:2px 0 8px}
+/* Duelo entre equipos */
+.pv-duel {background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:10px}
+.pv-duel-head {display:flex;justify-content:space-between;gap:10px;font-weight:900;font-size:.9rem;margin-bottom:8px}
+.pv-duel-head img {width:22px!important;height:22px!important;margin:0 6px!important;vertical-align:-6px}
+.pv-duel-row {display:grid;grid-template-columns:64px minmax(0,1fr) 64px;gap:10px;align-items:center;padding:6px 0;border-top:1px solid var(--line-soft)}
+.pv-duel-row b {font-variant-numeric:tabular-nums;font-size:.95rem;opacity:.7}
+.pv-duel-row b.w {opacity:1;font-weight:900}
+.pv-duel-row b:last-child {text-align:right}
+.pv-duel-mid span {display:block;text-align:center;font-size:.72rem;color:var(--muted);font-weight:700;margin-bottom:4px}
+.pv-duel-bar {display:flex;height:7px;border-radius:7px;overflow:hidden;background:var(--surface-2);gap:2px}
+.pv-duel-bar i {display:block;height:100%}
+@media (max-width:768px){
+  .pv-podium {gap:6px}.pv-card {padding:12px 6px 10px}.pv-value {font-size:1.3rem}.pv-avatar {width:44px;height:44px;font-size:.9rem}
+  .pv-silver .pv-avatar,.pv-bronze .pv-avatar {width:38px;height:38px}.pv-name {font-size:.74rem}.pv-sub {font-size:.64rem}
+  .stApp [data-testid="stPlotlyChart"] {padding:2px 0;border-radius:12px}
+  .pv-duel-row {grid-template-columns:52px minmax(0,1fr) 52px}
+}
 """.replace("__ROOT__", ROOT_CSS)
 
 
@@ -177,3 +239,24 @@ def plotly_layout(**overrides):
 
 
 PLOTLY_CONFIG = {"displayModeBar": False, "responsive": True}
+
+
+def _register_template():
+    """Plantilla Plotly por defecto: paleta corporativa, barras redondeadas y hover legible en todos los gráficos."""
+    import plotly.graph_objects as go
+    import plotly.io as pio
+    t = go.layout.Template(pio.templates["plotly_dark"])
+    t.layout.update(
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        colorway=[PT, RIVAL, POS, TOKENS["warn"], "#9B87F5", NEG, "#4FC3D9", "#E879B9"],
+        font=dict(family=FONT, color=TOKENS["text"]), barcornerradius=5,
+        hoverlabel=dict(bgcolor=TOKENS["surface-3"], bordercolor=TOKENS["line"], font=dict(family=FONT, color=TOKENS["ink"])),
+        title=dict(font=dict(size=14, color=TOKENS["ink"]), x=0, xanchor="left"),
+        xaxis=dict(gridcolor=TOKENS["line-soft"], zerolinecolor=TOKENS["line"], linecolor=TOKENS["line"]),
+        yaxis=dict(gridcolor=TOKENS["line-soft"], zerolinecolor=TOKENS["line"], linecolor=TOKENS["line"]),
+    )
+    pio.templates["primer_toque"] = t
+    pio.templates.default = "primer_toque"
+
+
+_register_template()

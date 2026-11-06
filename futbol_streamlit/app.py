@@ -28,6 +28,8 @@ import team360_advanced as t360adv
 import infantil_d as infd
 import cadete_a as cad
 import crests
+import pt_viz
+import league_core as lc
 
 
 def _reload_local_modules(*modules):
@@ -47,7 +49,7 @@ def _reload_local_modules(*modules):
 
 
 # Orden de dependencia: ui_theme <- team360_charts / player_charts <- team360_advanced.
-pdf_export_v63, ui_theme, t360, player_charts, t360adv, infd, cad, crests = _reload_local_modules(pdf_export_v63, ui_theme, t360, player_charts, t360adv, infd, cad, crests)
+pdf_export_v63, ui_theme, t360, player_charts, t360adv, infd, cad, crests, pt_viz, lc = _reload_local_modules(pdf_export_v63, ui_theme, t360, player_charts, t360adv, infd, cad, crests, pt_viz, lc)
 build_rival_pdf_diseno = pdf_export_v63.generate
 
 
@@ -2191,6 +2193,33 @@ def render_league_summary():
         unsafe_allow_html=True,
     )
 
+    # ---------------- Evolución y comparación de equipos ----------------
+    st.markdown("<div class='section-title league-section-title'>Evolución y comparación de equipos</div>"
+                "<div class='goal-time-note'>Primer Toque siempre en naranja; el equipo elegido, en azul. Pasa el ratón para ver cada dato.</div>",
+                unsafe_allow_html=True)
+    _lg_teams = [str(t) for t in tab.equipo]
+    _lg_ref = "Primer Toque C.F. 'A'"
+    _lg_others = [t for t in _lg_teams if t != _lg_ref]
+    _lg_sel = st.selectbox("Equipo a destacar", ["—"] + _lg_others, index=0, key=f"lg_evo_sel_{LG['key']}", format_func=t360.club_short)
+    _lg_sel = None if _lg_sel == "—" else _lg_sel
+    _lg_evo = lc.position_evolution(pp, _lg_teams)
+    _lg_tab = lc.standings(pp, _lg_teams)
+    _lg_tab = _lg_tab.drop(columns="pos").merge(tab[["equipo", "posicion"]].rename(columns={"posicion": "pos"}), on="equipo", how="left")
+    _v1, _v2, _v3 = st.tabs(["📈 Carrera de puntos", "🎯 Ataque frente a defensa", "🧊 Vista 3D"])
+    with _v1:
+        st.plotly_chart(pt_viz.fig_points_race(_lg_evo, t360.club_short, _lg_ref, _lg_sel), width="stretch", theme=None,
+                        config=ui_theme.PLOTLY_CONFIG, key=f"lg_race_{LG['key']}")
+    with _v2:
+        st.plotly_chart(pt_viz.fig_attack_defense(_lg_tab, t360.club_short, _lg_ref, _lg_sel), width="stretch", theme=None,
+                        config=ui_theme.PLOTLY_CONFIG, key=f"lg_ad_{LG['key']}")
+        st.markdown("<div class='goal-time-note'>Tamaño del punto = puntos por partido. Líneas punteadas = media de la liga. "
+                    "Arriba a la derecha, los equipos que más marcan y menos encajan. Etiquetados: Primer Toque, el elegido, los tres mejores y los dos últimos; el resto, al pasar el ratón.</div>", unsafe_allow_html=True)
+    with _v3:
+        st.plotly_chart(pt_viz.fig_league_3d(_lg_tab, t360.club_short, _lg_ref, _lg_sel), width="stretch", theme=None,
+                        config={**ui_theme.PLOTLY_CONFIG, "scrollZoom": False}, key=f"lg_3d_{LG['key']}")
+        st.markdown("<div class='goal-time-note'>Arrastra para girar. Ejes: goles a favor, goles en contra y puntos por partido. "
+                    "Calculado con los resultados cargados hasta la jornada elegida.</div>", unsafe_allow_html=True)
+
     # ---------------- Goles por minutos ----------------
     st.markdown("<div class='section-title league-section-title'>Goles por minutos</div>", unsafe_allow_html=True)
     total_gf_events = sum(x["gf"] for x in timing.values())
@@ -2275,22 +2304,31 @@ def render_league_summary():
     with rank_col1:
         st.markdown("<div class='league-subrank-title ranking-pair-title'>⚽ Goleadores</div>", unsafe_allow_html=True)
         if scorer_rows:
-            st.markdown(
-                "<div class='goal-time-note'>Ranking por goles marcados. Desliza dentro de la tabla para ver el resto.</div>"
-                "<div class='ranking-scroll'><table class='heat league-table premium-table performance-table'>"
-                "<thead><tr><th class='rank-pos'>Pos.</th><th class='team-col rank-player'>Jugador</th><th class='team-col rank-team'>Equipo</th><th class='rank-goals'>Goles</th></tr></thead>"
-                "<tbody>" + "".join(scorer_rows) + "</tbody></table></div>", unsafe_allow_html=True)
+            st.markdown(pt_viz.player_cards_html([dict(name=str(r.jugador), value=int(r.goles), badge=_team_logo_tag(str(r.equipo), 16),
+                                                       sub=t360.club_short(str(r.equipo))) for r in goals.itertuples()], unit="goles", limit=8),
+                        unsafe_allow_html=True)
+            with st.expander(f"Ranking completo de goleadores ({len(scorer_rows)})"):
+                st.markdown(
+                    "<div class='goal-time-note'>Ranking por goles marcados. Desliza dentro de la tabla para ver el resto.</div>"
+                    "<div class='ranking-scroll'><table class='heat league-table premium-table performance-table'>"
+                    "<thead><tr><th class='rank-pos'>Pos.</th><th class='team-col rank-player'>Jugador</th><th class='team-col rank-team'>Equipo</th><th class='rank-goals'>Goles</th></tr></thead>"
+                    "<tbody>" + "".join(scorer_rows) + "</tbody></table></div>", unsafe_allow_html=True)
         else:
             st.info("No hay goles individuales cargados para este filtro.")
 
     with rank_col2:
         st.markdown("<div class='league-subrank-title ranking-pair-title'>⏱️ Eficacia goleadora</div>", unsafe_allow_html=True)
         if efficiency_rows:
-            st.markdown(
-                "<div class='goal-time-note'>Menos Min/Gol = mayor eficacia. Desliza dentro de la tabla para ver el resto.</div>"
-                "<div class='ranking-scroll'><table class='heat league-table premium-table performance-table'>"
-                "<thead><tr><th class='rank-pos'>Pos.</th><th class='team-col rank-player'>Jugador</th><th class='team-col rank-team'>Equipo</th><th class='rank-goals'>G</th><th class='rank-min'>Min</th><th class='rank-rate'>Min/Gol</th></tr></thead>"
-                "<tbody>" + "".join(efficiency_rows) + "</tbody></table></div>", unsafe_allow_html=True)
+            st.markdown(pt_viz.player_cards_html([dict(name=str(r.jugador), value=round(float(r.min_gol), 1), badge=_team_logo_tag(str(r.equipo), 16),
+                                                       sub=f"{t360.club_short(str(r.equipo))} · {int(r.goles)} G en {int(round(float(r.minutos)))}′")
+                                                  for r in eff.itertuples()], unit="min/gol", limit=8, accent=ui_theme.POS,
+                                                 value_fmt=lambda v: f"{v:.1f}", lower_is_better=True), unsafe_allow_html=True)
+            with st.expander(f"Ranking completo de eficacia ({len(efficiency_rows)})"):
+                st.markdown(
+                    "<div class='goal-time-note'>Menos Min/Gol = mayor eficacia. Desliza dentro de la tabla para ver el resto.</div>"
+                    "<div class='ranking-scroll'><table class='heat league-table premium-table performance-table'>"
+                    "<thead><tr><th class='rank-pos'>Pos.</th><th class='team-col rank-player'>Jugador</th><th class='team-col rank-team'>Equipo</th><th class='rank-goals'>G</th><th class='rank-min'>Min</th><th class='rank-rate'>Min/Gol</th></tr></thead>"
+                    "<tbody>" + "".join(efficiency_rows) + "</tbody></table></div>", unsafe_allow_html=True)
         else:
             st.info("No hay goleadores con minutos registrados para este filtro.")
 
@@ -2298,9 +2336,17 @@ def render_league_summary():
     _kt, _kpend = t360adv.keeper_stats(min_scope, ali_scope, ev, match_minutes=LG["mm"])
     st.markdown("<div class='league-subrank-title'>🧤 Porteros · goles encajados por minutos jugados</div>", unsafe_allow_html=True)
     if not _kt.empty:
-        st.markdown(f"<div class='goal-time-note'>GC/{LG['mm']} más bajo = mejor registro. PJ = partidos con minutos · Tit. = titularidades · "
-                    "0 = partidos completos sin encajar. Desliza dentro de la tabla para ver todos.</div>"
-                    + t360adv.keeper_table_html(_kt, _kpend, logo=_team_logo_tag, clean=clean_name, match_minutes=LG["mm"]), unsafe_allow_html=True)
+        _kq = _kt[_kt.minutos >= 2 * LG["mm"]]
+        st.markdown(f"<div class='goal-time-note'>Tarjetas: porteros con al menos {2 * LG['mm']} minutos (dos partidos completos), "
+                    f"ordenados por GC/{LG['mm']}. La tabla completa incluye a todos.</div>"
+                    + pt_viz.player_cards_html([dict(name=str(r.jugador), value=round(float(r.gc90), 2), badge=_team_logo_tag(str(r.equipo), 16),
+                                                     sub=f"{t360.club_short(str(r.equipo))} · {int(r.minutos)}′ · {int(r.gc)} GC · {int(r.cero)} a cero")
+                                                for r in _kq.itertuples()], unit=f"GC/{LG['mm']}", limit=8, accent=ui_theme.POS,
+                                               value_fmt=lambda v: f"{v:.2f}", lower_is_better=True), unsafe_allow_html=True)
+        with st.expander(f"Tabla completa de porteros ({len(_kt)})"):
+            st.markdown(f"<div class='goal-time-note'>GC/{LG['mm']} más bajo = mejor registro. PJ = partidos con minutos · Tit. = titularidades · "
+                        "0 = partidos completos sin encajar. Desliza dentro de la tabla para ver todos.</div>"
+                        + t360adv.keeper_table_html(_kt, _kpend, logo=_team_logo_tag, clean=clean_name, match_minutes=LG["mm"]), unsafe_allow_html=True)
         _pn = t360adv.pending_note(_kpend, clean_name)
         if _pn:
             st.caption(_pn)
@@ -3135,25 +3181,33 @@ def render_team_360():
         scorers = scorers.merge(minagg[["jugador", "minutos"]], on="jugador", how="left").fillna({"minutos":0})
         scorers = scorers.sort_values(["goles", "minutos"], ascending=[False, True])
 
-        st.markdown("<div class='t360-section'><div class='t360-title'>Los protagonistas</div><div class='t360-sub'>Dos lecturas distintas: quién transforma las ocasiones en goles y quién acumula continuidad competitiva. No son puntuaciones de calidad.</div></div>", unsafe_allow_html=True)
-        def _leader_cards(frame, value_key, suffix, sub_key=None, limit=7):
-            if frame.empty:
-                return "<div class='v83-empty'>Todavía no hay registros disponibles.</div>"
-            data=frame.head(limit)
-            maxv=max(1.,float(pd.to_numeric(data[value_key],errors='coerce').max()))
-            cards=[]
-            for i,(_,r) in enumerate(data.iterrows(),1):
-                val=float(r[value_key]); pct=100*val/maxv
-                sub=(f" · {int(r[sub_key])} titularidades" if sub_key and sub_key in r else "")
-                cards.append(f"<div class='v83-leader'><span class='v83-rank'>{i:02}</span><div class='v83-leader-body'><div class='v83-leader-head'><b>{_safe_html(str(r['jugador']))}</b><strong>{int(val)} <small>{suffix}</small></strong></div><div class='v83-track'><i style='width:{pct:.1f}%'></i></div><span class='v83-leader-sub'>{sub.lstrip(' ·')}</span></div></div>")
-            return ''.join(cards)
-        leader_a, leader_b = st.columns(2, gap="medium")
-        with leader_a:
-            st.markdown("<div class='v83-panel-title'>⚽ Finalizadores <span>goles registrados</span></div>",unsafe_allow_html=True)
-            st.markdown("<div class='v83-panel'>"+_leader_cards(scorers,"goles","goles")+"</div>",unsafe_allow_html=True)
-        with leader_b:
-            st.markdown("<div class='v83-panel-title'>⏱️ Columna vertebral <span>minutos jugados</span></div>",unsafe_allow_html=True)
-            st.markdown("<div class='v83-panel'>"+_leader_cards(minagg.sort_values("minutos",ascending=False),"minutos","min", "titularidades")+"</div>",unsafe_allow_html=True)
+        st.markdown("<div class='t360-section'><div class='t360-title'>Los protagonistas</div><div class='t360-sub'>Tres lecturas distintas: quién marca, quién decide los resultados y quién sostiene al equipo con sus minutos. No son puntuaciones de calidad.</div></div>", unsafe_allow_html=True)
+        _dors = (minpt.dropna(subset=["dorsal"]).groupby("jugador").dorsal.agg(lambda s: s.mode().iloc[0]) if "dorsal" in minpt else pd.Series(dtype=object))
+        _tag = lambda j: (f"#{int(float(_dors[j]))}" if j in _dors.index and str(_dors[j]).replace('.', '', 1).isdigit() else "")
+        _pj = minpt[minpt.minutos > 0].groupby("jugador").jornada.nunique()
+        _marca = [dict(name=r.jugador, value=int(r.goles), tag=_tag(r.jugador),
+                       sub=(f"1 gol cada {r.minutos / r.goles:.0f}′" if r.minutos else "") + (f" · {int(_pj.get(r.jugador, 0))} PJ" if r.jugador in _pj.index else ""))
+                  for r in scorers.itertuples()]
+        _side = lambda e: ("favor" if e["equipo"] == TEAM and e["tipo"] in ("gol", "penalti_gol") else
+                           ("contra" if e["equipo"] == TEAM and e["tipo"] in ("gol_contra", "penalti_contra_gol") else None))
+        _dec, _dec_skip = pt_viz.decisive_goals(partidos_t, eventos_t[eventos_t["equipo"] == TEAM], TEAM, _side)
+        _decide = [dict(i, tag=_tag(i["name"])) for i in pt_viz.decisive_items(_dec)]
+        _sost = [dict(name=r.jugador, value=int(r.minutos), tag=_tag(r.jugador),
+                      sub=f"{int(r.titularidades)} titularidades · {int(r.partidos)} partidos")
+                 for r in minagg.sort_values("minutos", ascending=False).itertuples()]
+        _p1, _p2, _p3 = st.columns(3, gap="medium")
+        with _p1:
+            st.markdown("<div class='pv-panel-title'><span>⚽</span>Quién marca</div><div class='pv-panel-sub'>Goles registrados en actas.</div>"
+                        + pt_viz.player_cards_html(_marca, unit="goles", limit=7), unsafe_allow_html=True)
+        with _p2:
+            st.markdown("<div class='pv-panel-title'><span>🎯</span>Quién decide</div><div class='pv-panel-sub'>Goles que dieron puntos: el de la victoria (deja la ventaja definitiva) y el último empate en partidos igualados.</div>"
+                        + pt_viz.player_cards_html(_decide, unit="decisivos", limit=7, accent=ui_theme.POS,
+                                                   empty="Ningún gol decisivo con el orden de goles completo."), unsafe_allow_html=True)
+            if _dec_skip:
+                st.caption(f"{_dec_skip} partido(s) sin el orden completo de goles en el acta no se analizan aquí.")
+        with _p3:
+            st.markdown("<div class='pv-panel-title'><span>🧱</span>Quién sostiene</div><div class='pv-panel-sub'>Minutos jugados y titularidades.</div>"
+                        + pt_viz.player_cards_html(_sost, unit="min", limit=7, accent=ui_theme.RIVAL), unsafe_allow_html=True)
 
         if not veo.empty:
             _share_all = T.share_table(veo, [m[0] for m in T.METRICS])
