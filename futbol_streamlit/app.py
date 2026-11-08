@@ -30,6 +30,7 @@ import cadete_a as cad
 import crests
 import pt_viz
 import league_core as lc
+import scouting as scout
 
 
 def _reload_local_modules(*modules):
@@ -3584,6 +3585,7 @@ with st.sidebar:
         "minutos": "Minutos",
         "resultados": "Resultados",
         "estadisticas": "Estadísticas",
+        "scouting": "Scouting",
     }
     modulo = _view_to_mod.get(_view, "Resumen liga" if _area == "juvenil" else "Inicio")
     if _area == "cadete" and modulo == "Estadísticas":
@@ -3600,6 +3602,7 @@ with st.sidebar:
       "Individual":"<svg viewBox='0 0 24 24'><circle cx='12' cy='8' r='3.5'/><path d='M5 21c.3-5 2.8-8 7-8s6.7 3 7 8'/></svg>",
       "Minutos":"<svg viewBox='0 0 24 24'><circle cx='12' cy='13' r='8'/><path d='M12 9v4l3 2M9 2h6'/></svg>",
       "Estadísticas":"<svg viewBox='0 0 24 24'><path d='M4 19V9M10 19V5M16 19v-6M22 19H2'/><circle cx='16' cy='9' r='2'/></svg>",
+      "Scouting":"<svg viewBox='0 0 24 24'><circle cx='10.5' cy='10.5' r='6.5'/><path d='m15.5 15.5 5 5'/><path d='M10.5 7.5v6M7.5 10.5h6'/></svg>",
       "Resultados":"<svg viewBox='0 0 24 24'><path d='M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z'/><path d='M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4'/></svg>",
     }
     _nav_area = _area if _area in ("infantil", "cadete") else "juvenil"
@@ -3618,11 +3621,11 @@ with st.sidebar:
             ".goal-time-grid,.goal-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}"
             "</style>", unsafe_allow_html=True)
     if _nav_area == "cadete":
-        _nav_info=[('Inicio','inicio'),('Resumen liga','liga'),('Rivales','rivales'),('Equipo','equipo'),('Calendario','calendario'),('Muro','muro')]
+        _nav_info=[('Inicio','inicio'),('Resumen liga','liga'),('Rivales','rivales'),('Equipo','equipo'),('Scouting','scouting'),('Calendario','calendario'),('Muro','muro')]
     elif _nav_area == "infantil":
-        _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Resultados','resultados'),('Minutos','minutos'),('Seguimiento','seguimiento')]
+        _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Resultados','resultados'),('Minutos','minutos'),('Seguimiento','seguimiento'),('Scouting','scouting')]
     else:
-        _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Resumen liga','liga'),('Rivales','rivales'),('Equipo','equipo'),('Seguimiento','seguimiento'),('Individual','individual'),('Jugadores','jugadores')]
+        _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Resumen liga','liga'),('Rivales','rivales'),('Equipo','equipo'),('Scouting','scouting'),('Seguimiento','seguimiento'),('Individual','individual'),('Jugadores','jugadores')]
     _nh=["<a class='switch-team' href='?' target='_self'><span>⌂</span><span><b>Inicio / Cambiar equipo</b><small>Volver a la selección de equipos</small></span></a>",
          "<div class='side-nav-v3'>"]
     for _nm,_slug in _nav_info:
@@ -3713,16 +3716,17 @@ _mobile_nav = [
     ("Resumen liga", "liga", "▦", "Liga"),
     ("Rivales", "rivales", "◈", "Rivales"),
     ("Equipo", "equipo", "◉", "Equipo"),
+    ("Scouting", "scouting", "⌕", "Scout"),
     ("Seguimiento", "seguimiento", "▤", "Seguim."),
     ("Individual", "individual", "◎", "Individual"),
     ("Jugadores", "jugadores", "♟", "Jugadores"),
 ]
 if _nav_area == "cadete":
     _mobile_nav = [("Inicio", "inicio", "⌂", "Inicio"), ("Resumen liga", "liga", "▦", "Liga"), ("Rivales", "rivales", "◈", "Rivales"),
-                   ("Equipo", "equipo", "◷", "Equipo"), ("Calendario", "calendario", "▣", "Calendario"), ("Muro", "muro", "✦", "Muro")]
+                   ("Equipo", "equipo", "◷", "Equipo"), ("Scouting", "scouting", "⌕", "Scout"), ("Calendario", "calendario", "▣", "Calendario"), ("Muro", "muro", "✦", "Muro")]
 elif _nav_area == "infantil":
     _mobile_nav = [("Inicio", "inicio", "⌂", "Inicio"), ("Muro", "muro", "✦", "Muro"), ("Calendario", "calendario", "▣", "Calendario"),
-                   ("Resultados", "resultados", "🏆", "Result."), ("Minutos", "minutos", "◷", "Minutos"), ("Seguimiento", "seguimiento", "▤", "Seguim.")]
+                   ("Resultados", "resultados", "🏆", "Result."), ("Minutos", "minutos", "◷", "Minutos"), ("Seguimiento", "seguimiento", "▤", "Seguim."), ("Scouting", "scouting", "⌕", "Scout")]
 _mobile_nav_html = ["<nav class='mobile-bottom-nav' aria-label='Navegación móvil'>",
                     "<a class='switch' href='?' target='_self'><span class='mn-icon'>⇄</span><span>Equipos</span></a>"]
 for _mod_name, _view_slug, _icon, _label in _mobile_nav:
@@ -3761,6 +3765,9 @@ if modulo == "Rivales" and seleccionado and _nav_area in LEAGUES:
         _chips.append("</div>")
         st.markdown("".join(_chips), unsafe_allow_html=True)
 
+if modulo == "Scouting":
+    scout.render()  # SCOUTING FFCV (Segona Infantil Castelló), común a los tres equipos
+    st.stop()
 if _area == "cadete":
     ACTIVE_STORE = TEAM_STORES["cadete"]
     if modulo == "Muro":

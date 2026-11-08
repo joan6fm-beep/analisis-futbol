@@ -373,9 +373,9 @@ def test_navegacion():
     css = " ".join(m.value for m in at.markdown)
     check("[data-testid=\"stSidebar\"]" in css and ".mobile-bottom-nav" in css and "display:none!important" in css,
           "Portada sin menús de equipo visibles (barra lateral y menú móvil ocultos; no hay redirección)")
-    juv = ["inicio", "muro", "calendario", "liga", "rivales", "equipo", "seguimiento", "individual", "jugadores"]
-    inf = ["inicio", "muro", "calendario", "resultados", "minutos", "seguimiento"]
-    cad = ["inicio", "liga", "rivales", "equipo", "calendario", "muro"]
+    juv = ["inicio", "muro", "calendario", "liga", "rivales", "equipo", "scouting", "seguimiento", "individual", "jugadores"]
+    inf = ["inicio", "muro", "calendario", "resultados", "minutos", "seguimiento", "scouting"]
+    cad = ["inicio", "liga", "rivales", "equipo", "scouting", "calendario", "muro"]
     for area, view, expected in (("juvenil", "liga", juv), ("infantil", "inicio", inf), ("cadete", "inicio", cad)):
         a = run({"area": area, "view": view})
         hh = html_of(a)

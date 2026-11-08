@@ -39,6 +39,8 @@ def casos():
     cad = pd.read_csv(APP.parent / "data" / "cadete_a" / "equipos.csv")["equipo"].tolist()
     for t in cad:
         yield f"Cadete A · ficha de {t}", {"area": "cadete", "view": "rivales", "team": t}
+    for area in ("infantil", "cadete", "juvenil"):
+        yield f"Scouting FFCV · {area}", {"area": area, "view": "scouting"}
     for v in VISTAS_JUVENIL:
         yield f"Juvenil A · {v}", {"area": "juvenil", "view": v}
     for t in equipos:
@@ -73,7 +75,10 @@ def main():
     sys.path.insert(0, str(Path(__file__).parent))
     import test_integridad
     print("\n== Integridad de módulos y renderizado ==")
-    return 1 if (test_integridad.main() or fallos) else 0
+    integ = test_integridad.main()
+    import test_scouting
+    print("\n== Scouting FFCV ==")
+    return 1 if (integ or test_scouting.main() or fallos) else 0
 
 
 if __name__ == "__main__":

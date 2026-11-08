@@ -42,7 +42,17 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
   - Resumen de liga (ambos): carrera de puntos, ataque frente a defensa y vista 3D; goleadores, eficacia y porteros en
     tarjetas (tablas completas en desplegables). Sin fotos individuales en los datos: avatar con iniciales y dorsal.
 
+- **SCOUTING FFCV** (noviembre 2026, Segona Infantil Castelló 2026/27; en los menús de los tres equipos):
+  - La FFCV publica **6 grupos** (no 7) para esta competición: 83 equipos transcritos de la publicación oficial del blog
+    (03/10/2026) con `tools/importar_scouting_ffcv.py --estructura`. Datos en `data/scouting/` (temporadas, competiciones,
+    grupos, equipos, jugadores, plantillas, estadísticas, jornadas; ids estables, sin duplicados).
+  - Estadísticas de jugador: la FFCV solo las sirve por `/competiciones/api/`, prohibida en su robots.txt → no se descargan
+    automáticamente. Importación de la página del equipo guardada (HTML) o CSV/XLSX desde la pestaña «Datos FFCV» o el script.
+    «Actualizar FFCV» reprocesa copias locales y comprueba si cambió la publicación oficial de grupos. N/D = sin dato.
+  - Menores: sin fotos ni fechas de nacimiento completas; año solo si la fuente lo publica.
+
 ## Pendiente / datos a revisar
+- Scouting: importar las páginas FFCV de los 83 equipos (0 importados). Validar el lector con una página real guardada.
 - Cadete A: J7 Celtic Elche–Roda (10/11) y J9 Kelme–Intangco (suspendido); asistencias no registradas en actas;
   dos «C. Garcia» en Alboraya (tarjetas y cambios sin atribuir); fechas/horas no visibles en algunas actas.
 - J8 Juvenil A: gol de A. Urbina (Inter SJ, 38') con icono distinto en el acta (¿penalti?), registrado como gol;
