@@ -85,11 +85,14 @@ def _img_b64(path):
 
 
 def badge(nombre, size=34):
-    k = _club_key(nombre)
-    p = _ESCUDOS.get(k) if k else None
+    p = sd.crest_path(nombre)
+    if p is None:
+        k = _club_key(nombre)
+        p = _ESCUDOS.get(k) if k else None
     if p is not None and p.exists():
+        mime = {"jpg": "jpeg", "jpeg": "jpeg", "webp": "webp"}.get(p.suffix.lower().lstrip("."), "png")
         return (f"<span class='sc-badge' style='width:{size}px;height:{size}px;background:transparent;border:0'>"
-                f"<img src='data:image/png;base64,{_img_b64(str(p))}' alt=''></span>")
+                f"<img src='data:image/{mime};base64,{_img_b64(str(p))}' alt=''></span>")
     txt = escape(initials(sd.nombre_visible(nombre).replace("«", "").replace("»", "")))
     return f"<span class='sc-badge' style='width:{size}px;height:{size}px;font-size:{size * .36:.0f}px'>{txt}</span>"
 
@@ -116,7 +119,7 @@ def _opciones_jugador(df):
 
 
 # ---------------------------------------------------------------- vistas
-def render(logo=None):
+def render(modulo="Equipos"):
     st.markdown(CSS, unsafe_allow_html=True)
     if sd.load("equipos").empty:
         st.error("No hay estructura de competición. Ejecuta `python tools/importar_scouting_ffcv.py --estructura`.")
@@ -136,15 +139,14 @@ def render(logo=None):
         f"<span class='sc-chip'>Datos de <b>{n_imp}</b>/{len(est)} equipos</span>"
         f"<span class='sc-chip'>Última actualización: <b>{escape(ult.replace('T', ' ')[:16]) if ult else 'pendiente'}</b></span>"
         "</div></div>", unsafe_allow_html=True)
-    tabs = st.tabs(["Equipos y jugadores", "Comparador", "Ranking", "Datos FFCV"])
-    with tabs[0]:
-        _vista_equipos(df, est)
-    with tabs[1]:
+    if modulo == "Comparador":
         _vista_comparador(df)
-    with tabs[2]:
+    elif modulo == "Ranking":
         _vista_ranking(df, est)
-    with tabs[3]:
+    elif modulo == "Datos FFCV":
         _vista_datos(est)
+    else:
+        _vista_equipos(df, est)
 
 
 def _vista_equipos(df, est):
@@ -187,13 +189,15 @@ def _vista_equipos(df, est):
     else:
         if sel.empty:
             st.markdown(f"<div class='sc-note'>{badge(eqg.loc[eqg.equipo_id == eid, 'nombre'].iloc[0], 26)} "
-                        f"<b>{escape(e_vis)}</b>: pendiente de importar. Abre su página en "
+                        f"<b>{escape(e_vis)}</b>: pendiente de importar (ni ficha de temporada ni acta). Abre su página en "
                         f"<a href='{sd.FFCV_COMPETICIONES}' target='_blank'>FFCV · Competiciones</a>, guárdala "
                         "(Ctrl+S, «solo HTML») y súbela en «Datos FFCV».</div>", unsafe_allow_html=True)
             return
+        st.markdown("**Totales de temporada** (ficha pública FFCV)")
         ev = _tabla(sel, key=f"sc_tab_{eid}")
         if ev is not None and j_nom == "—":
             j_nom = ev
+        _bloque_acta(eid)
     if j_nom and j_nom != "—":
         fila = sel[sel.nombre == j_nom].iloc[0]
         _ficha(fila)
@@ -248,6 +252,7 @@ def _ficha(r):
     c3.plotly_chart(_donut(r.pct_sin_sancion, "Partidos sin sanción", POS), config=PLOTLY_CONFIG, key=f"d3_{r.jugador_id}")
     st.caption("Titularidad = titularidades / convocatorias · Participación = jugados / convocatorias · "
                "Partidos sin sanción: solo con datos por jornada verificables.")
+    _acta_jugador(r)
     jor = sd.load("jornadas")
     jor = jor[(jor.jugador_id == r.jugador_id) & (jor.equipo_id == r.equipo_id)]
     if jor.empty:
@@ -261,6 +266,50 @@ def _ficha(r):
     fig.update_layout(**plotly_layout(height=300, title="Evolución por jornadas"))
     fig.update_xaxes(title="Jornada", dtick=1)
     st.plotly_chart(fig, config=PLOTLY_CONFIG, key=f"evo_{r.jugador_id}")
+
+
+def _nombre_eq(eid):
+    eq = sd.load("equipos").set_index("equipo_id").nombre
+    return sd.nombre_visible(eq.get(eid, eid))
+
+
+def _bloque_acta(eid):
+    p, filas = sd.ultima_acta(eid)
+    if p is None:
+        st.markdown("<div class='sc-note'>Último partido con acta: pendiente de incorporar.</div>", unsafe_allow_html=True)
+        return
+    st.markdown(f"**Último partido con acta · J{p.jornada} · {escape(p.fecha)}** — "
+                f"{escape(_nombre_eq(p.local_id))} {p.goles_local or '?'}-{p.goles_visitante or '?'} "
+                f"{escape(_nombre_eq(p.visitante_id))}")
+    st.caption("Datos de un único partido: no son los acumulados de la temporada.")
+    j = sd.load("jugadores").set_index("jugador_id").nombre
+    t = filas.assign(Jugador=filas.jugador_id.map(j))
+    t = t[["dorsal", "Jugador", "rol", "demarcacion", "participa", "minutos", "goles", "amarillas", "dobles_amarillas", "rojas"]]
+    t = t.replace("", ND).rename(columns={"dorsal": "Dorsal", "rol": "Titular/Suplente", "demarcacion": "Demarcación",
+                                         "participa": "Jugó", "minutos": "Minutos", "goles": "Goles", "amarillas": "Amarillas",
+                                         "dobles_amarillas": "Dobles amarillas", "rojas": "Rojas"})
+    t["_o"] = pd.to_numeric(t.Dorsal, errors="coerce")
+    t = t.sort_values(["Titular/Suplente", "_o"], ascending=[False, True]).drop(columns="_o")
+    st.dataframe(t, hide_index=True, width="stretch")
+
+
+def _acta_jugador(r):
+    aj = sd.load("actas_jugadores")
+    aj = aj[(aj.jugador_id == r.jugador_id) & (aj.equipo_id == r.equipo_id)]
+    if aj.empty:
+        return
+    pa = sd.load("partidos").set_index("partido_id")
+    h = ["<div class='sc-note'><b>Partidos con acta</b> (datos por partido, no acumulados):<br>"]
+    for a in aj.itertuples():
+        p = pa.loc[a.partido_id]
+        riv = p.visitante_id if p.local_id == r.equipo_id else p.local_id
+        extra = [a.rol, f"{a.minutos}'" if a.minutos else f"minutos {ND}"]
+        extra += [f"{a.goles} gol(es)"] if a.goles not in ("", "0") else []
+        extra += [f"{a.amarillas} amarilla(s)"] if a.amarillas not in ("", "0") else []
+        extra += ["roja"] if a.rojas not in ("", "0") else []
+        h.append(f"J{p.jornada} vs {escape(_nombre_eq(riv))} · dorsal {escape(a.dorsal)} · {escape(' · '.join(extra))}<br>")
+    h.append("</div>")
+    st.markdown("".join(h), unsafe_allow_html=True)
 
 
 def _vista_comparador(df):
@@ -387,6 +436,36 @@ def _vista_datos(est):
             st.info(msg)
             for d in r["detalles"]:
                 st.caption(d)
+    c3, c4 = st.columns(2)
+    with c3:
+        st.markdown("**Importar actas transcritas**")
+        st.caption("Archivo .txt con el formato de las actas del Cadete A (cabecera «PARTIDO G<n> J<n> | fecha | local | "
+                   "visitante | resultado»). Añade los jugadores del partido sin mezclarlos con los totales de temporada.")
+        fa = st.file_uploader("Actas (.txt)", type=["txt"], key="sc_act_f")
+        if fa is not None and st.button("Importar actas", key="sc_act_btn"):
+            r = sd.importar_actas_texto(fa.getvalue().decode("utf-8", errors="replace"), fa.name)
+            dst = sd.FUENTE / "actas"
+            dst.mkdir(parents=True, exist_ok=True)
+            (dst / fa.name).write_bytes(fa.getvalue())
+            (st.success if r["partidos"] else st.error)(f"{r['partidos']} actas · {r['jugadores']} jugadores")
+            for a in r["avisos"][:20]:
+                st.caption(f"Aviso: {a}")
+    with c4:
+        st.markdown("**Escudo oficial de un club**")
+        st.caption("Imagen del escudo (PNG/JPG/WEBP) guardada desde la FFCV o la web oficial del club. "
+                   "Se aplica a todos los equipos del club.")
+        clubes = sorted({sd.club_slug(n): sd.nombre_visible(" ".join(n.split()[:-1]) if sd.club_slug(n) != sd.slug(n) else n)
+                         for n in est.nombre}.items(), key=lambda x: x[1])
+        ck = st.selectbox("Club", [c for c, _ in clubes], format_func=dict(clubes).get, key="sc_esc_c")
+        fe = st.file_uploader("Escudo", type=["png", "jpg", "jpeg", "webp"], key="sc_esc_f")
+        if fe is not None and st.button("Guardar escudo", key="sc_esc_btn"):
+            sd.ESCUDOS.mkdir(parents=True, exist_ok=True)
+            for old in sd.ESCUDOS.glob(f"{ck}.*"):
+                old.unlink()
+            ext = fe.name.rsplit(".", 1)[-1].lower()
+            (sd.ESCUDOS / f"{ck}.{'jpg' if ext == 'jpeg' else ext}").write_bytes(fe.getvalue())
+            st.success("Escudo guardado.")
+        st.caption(f"Clubes con escudo propio: {sum(1 for c, _ in clubes if any(sd.ESCUDOS.glob(c + '.*')))} de {len(clubes)}")
     st.markdown("**Estado por equipo**")
     t = est.assign(Equipo=est.nombre.map(sd.nombre_visible),
                    Grupo=est.grupo_id.str.extract(r"g(\d+)$")[0].astype(int))[["Grupo", "Equipo", "estado", "jugadores", "cod_ffcv"]]

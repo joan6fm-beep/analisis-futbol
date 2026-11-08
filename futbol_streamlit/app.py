@@ -1865,7 +1865,7 @@ HOME_CSS = """
 .pt-home-eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--pt)}
 .pt-home-title{font-size:2.6rem;font-weight:900;letter-spacing:-.035em;line-height:1.02;color:var(--ink);margin:6px 0 6px}
 .pt-home-sub{font-size:.95rem;color:var(--muted)}
-.pt-home-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.pt-home-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 .pt-home-card{display:block;text-decoration:none!important;color:inherit!important;border-radius:22px;overflow:hidden;background:var(--surface);border:1px solid var(--line);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
 .pt-home-card:hover{transform:translateY(-4px);border-color:rgba(245,135,31,.6);box-shadow:0 22px 50px rgba(0,0,0,.45)}
 .pt-home-media{position:relative;aspect-ratio:1290/832;overflow:hidden;background:#0D131C}
@@ -1889,6 +1889,7 @@ def render_home():
         ("Juvenil A", BASE/"juvenil_a_portada.jpeg", "juvenil", "Entrar al análisis del Juvenil A", "Análisis de rendimiento", ""),
         ("Infantil D", BASE/"infantil_d_portada.jpeg", "infantil", "Entrar al espacio del Infantil D", "Espacio del equipo", " secondary"),
         ("Cadete A", BASE/"cadete_a_portada.jpeg", "cadete", "Entrar al análisis del Cadete A", "Análisis de liga", ""),
+        ("SCOUTING", BASE/"primer_toque_logo.png", "scouting", "Departamento de scouting FFCV", "Scouting FFCV", " secondary"),
     ]
     html_cards = []
     for title, img, area, subtitle, tag, variant in cards:
@@ -1907,7 +1908,7 @@ def render_home():
         HOME_CSS + "<div class='pt-home'><div class='pt-home-hero'>"
         + (f"<div class='pt-home-crest'><img src='{logo}' alt='Primer Toque C.F.'></div>" if logo else "")
         + "<div><div class='pt-home-eyebrow'>Primer Toque C.F. · Temporada 2026/2027</div>"
-        "<div class='pt-home-title'>Selecciona tu equipo</div>"
+        "<div class='pt-home-title'>Selecciona tu equipo o departamento</div>"
         "<div class='pt-home-sub'>Pulsa sobre una fotografía para entrar.</div></div></div>"
         "<div class='pt-home-grid'>" + "".join(html_cards) + "</div></div>"
     )
@@ -3549,7 +3550,7 @@ with st.sidebar:
             <div class='brand-kicker'>Análisis de rendimiento</div>
             <div class='brand-main'>PRIMER TOQUE C.F.</div>
             <div class='brand-sub'>Temporada <b>2026/2027</b></div>
-            <div class='brand-chip'>{ {'infantil': 'INFANTIL D', 'cadete': 'CADETE A'}.get(_area_pre, 'JUVENIL A') }</div>
+            <div class='brand-chip'>{ {'infantil': 'INFANTIL D', 'cadete': 'CADETE A', 'scouting': 'SCOUTING FFCV'}.get(_area_pre, 'JUVENIL A') }</div>
         </div>
         </div>""",
         unsafe_allow_html=True,
@@ -3585,9 +3586,11 @@ with st.sidebar:
         "minutos": "Minutos",
         "resultados": "Resultados",
         "estadisticas": "Estadísticas",
-        "scouting": "Scouting",
     }
-    modulo = _view_to_mod.get(_view, "Resumen liga" if _area == "juvenil" else "Inicio")
+    if _area == "scouting" or _view == "scouting":  # departamento independiente (enlaces antiguos ?view=scouting)
+        _area = "scouting"
+        _view_to_mod = {"equipos": "Equipos", "comparador": "Comparador", "ranking": "Ranking", "datos": "Datos FFCV"}
+    modulo = _view_to_mod.get(_view, {"juvenil": "Resumen liga", "scouting": "Equipos"}.get(_area, "Inicio"))
     if _area == "cadete" and modulo == "Estadísticas":
         modulo = "Equipo"  # las estadísticas del Cadete A están ahora en Equipo (se conservan los enlaces antiguos)
     _icons = {
@@ -3602,10 +3605,13 @@ with st.sidebar:
       "Individual":"<svg viewBox='0 0 24 24'><circle cx='12' cy='8' r='3.5'/><path d='M5 21c.3-5 2.8-8 7-8s6.7 3 7 8'/></svg>",
       "Minutos":"<svg viewBox='0 0 24 24'><circle cx='12' cy='13' r='8'/><path d='M12 9v4l3 2M9 2h6'/></svg>",
       "Estadísticas":"<svg viewBox='0 0 24 24'><path d='M4 19V9M10 19V5M16 19v-6M22 19H2'/><circle cx='16' cy='9' r='2'/></svg>",
-      "Scouting":"<svg viewBox='0 0 24 24'><circle cx='10.5' cy='10.5' r='6.5'/><path d='m15.5 15.5 5 5'/><path d='M10.5 7.5v6M7.5 10.5h6'/></svg>",
+      "Equipos":"<svg viewBox='0 0 24 24'><circle cx='10.5' cy='10.5' r='6.5'/><path d='m15.5 15.5 5 5'/></svg>",
+      "Comparador":"<svg viewBox='0 0 24 24'><path d='M4 7h13l-3-3M20 17H7l3 3'/></svg>",
+      "Ranking":"<svg viewBox='0 0 24 24'><path d='M4 20V12M10 20V6M16 20v-9M22 20H2'/></svg>",
+      "Datos FFCV":"<svg viewBox='0 0 24 24'><path d='M12 3v12m0 0-4-4m4 4 4-4'/><path d='M4 17v3h16v-3'/></svg>",
       "Resultados":"<svg viewBox='0 0 24 24'><path d='M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z'/><path d='M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4'/></svg>",
     }
-    _nav_area = _area if _area in ("infantil", "cadete") else "juvenil"
+    _nav_area = _area if _area in ("infantil", "cadete", "scouting") else "juvenil"
     LG = LEAGUES.get(_nav_area, LEAGUES["juvenil"])
     if len(LG["bins"]) != 6:
         # Las rejillas de tramos del Juvenil A están maquetadas para 6 tramos de 15'.
@@ -3620,12 +3626,14 @@ with st.sidebar:
             f"@media (max-width:640px){{.goaltype-grid{{grid-template-columns:74px repeat({_nb},minmax(24px,1fr)) 20px!important}}"
             ".goal-time-grid,.goal-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}"
             "</style>", unsafe_allow_html=True)
-    if _nav_area == "cadete":
-        _nav_info=[('Inicio','inicio'),('Resumen liga','liga'),('Rivales','rivales'),('Equipo','equipo'),('Scouting','scouting'),('Calendario','calendario'),('Muro','muro')]
+    if _nav_area == "scouting":
+        _nav_info=[('Equipos','equipos'),('Comparador','comparador'),('Ranking','ranking'),('Datos FFCV','datos')]
+    elif _nav_area == "cadete":
+        _nav_info=[('Inicio','inicio'),('Resumen liga','liga'),('Rivales','rivales'),('Equipo','equipo'),('Calendario','calendario'),('Muro','muro')]
     elif _nav_area == "infantil":
-        _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Resultados','resultados'),('Minutos','minutos'),('Seguimiento','seguimiento'),('Scouting','scouting')]
+        _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Resultados','resultados'),('Minutos','minutos'),('Seguimiento','seguimiento')]
     else:
-        _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Resumen liga','liga'),('Rivales','rivales'),('Equipo','equipo'),('Scouting','scouting'),('Seguimiento','seguimiento'),('Individual','individual'),('Jugadores','jugadores')]
+        _nav_info=[('Inicio','inicio'),('Muro','muro'),('Calendario','calendario'),('Resumen liga','liga'),('Rivales','rivales'),('Equipo','equipo'),('Seguimiento','seguimiento'),('Individual','individual'),('Jugadores','jugadores')]
     _nh=["<a class='switch-team' href='?' target='_self'><span>⌂</span><span><b>Inicio / Cambiar equipo</b><small>Volver a la selección de equipos</small></span></a>",
          "<div class='side-nav-v3'>"]
     for _nm,_slug in _nav_info:
@@ -3702,7 +3710,7 @@ elif modulo == "Rivales":
 if not _landing:
     st.markdown(
     "<div class='topbar'><div class='title'><a class='tb-home' href='?' target='_self'>⌂ Inicio / Cambiar equipo</a>"
-    f"<span class='tb-crumb'>{ {'infantil': 'Infantil D', 'cadete': 'Cadete A'}.get(_area, 'Juvenil A') }</span><span class='tb-sep'>/</span>"
+    f"<span class='tb-crumb'>{ {'infantil': 'Infantil D', 'cadete': 'Cadete A', 'scouting': 'Scouting FFCV'}.get(_area, 'Juvenil A') }</span><span class='tb-sep'>/</span>"
     f"<span class='tb-current'>{_safe_html(seleccionado if modulo == 'Rivales' and seleccionado else modulo)}</span></div>"
     "<div class='nav'><span class='tb-chip'>Temporada 2026/2027</span><span class='tb-ver'>V15.12.84</span></div></div>",
     unsafe_allow_html=True,
@@ -3716,17 +3724,19 @@ _mobile_nav = [
     ("Resumen liga", "liga", "▦", "Liga"),
     ("Rivales", "rivales", "◈", "Rivales"),
     ("Equipo", "equipo", "◉", "Equipo"),
-    ("Scouting", "scouting", "⌕", "Scout"),
     ("Seguimiento", "seguimiento", "▤", "Seguim."),
     ("Individual", "individual", "◎", "Individual"),
     ("Jugadores", "jugadores", "♟", "Jugadores"),
 ]
 if _nav_area == "cadete":
     _mobile_nav = [("Inicio", "inicio", "⌂", "Inicio"), ("Resumen liga", "liga", "▦", "Liga"), ("Rivales", "rivales", "◈", "Rivales"),
-                   ("Equipo", "equipo", "◷", "Equipo"), ("Scouting", "scouting", "⌕", "Scout"), ("Calendario", "calendario", "▣", "Calendario"), ("Muro", "muro", "✦", "Muro")]
+                   ("Equipo", "equipo", "◷", "Equipo"), ("Calendario", "calendario", "▣", "Calendario"), ("Muro", "muro", "✦", "Muro")]
 elif _nav_area == "infantil":
     _mobile_nav = [("Inicio", "inicio", "⌂", "Inicio"), ("Muro", "muro", "✦", "Muro"), ("Calendario", "calendario", "▣", "Calendario"),
-                   ("Resultados", "resultados", "🏆", "Result."), ("Minutos", "minutos", "◷", "Minutos"), ("Seguimiento", "seguimiento", "▤", "Seguim."), ("Scouting", "scouting", "⌕", "Scout")]
+                   ("Resultados", "resultados", "🏆", "Result."), ("Minutos", "minutos", "◷", "Minutos"), ("Seguimiento", "seguimiento", "▤", "Seguim.")]
+elif _nav_area == "scouting":
+    _mobile_nav = [("Equipos", "equipos", "◉", "Equipos"), ("Comparador", "comparador", "⇄", "Compar."),
+                   ("Ranking", "ranking", "▦", "Ranking"), ("Datos FFCV", "datos", "▤", "Datos")]
 _mobile_nav_html = ["<nav class='mobile-bottom-nav' aria-label='Navegación móvil'>",
                     "<a class='switch' href='?' target='_self'><span class='mn-icon'>⇄</span><span>Equipos</span></a>"]
 for _mod_name, _view_slug, _icon, _label in _mobile_nav:
@@ -3765,8 +3775,8 @@ if modulo == "Rivales" and seleccionado and _nav_area in LEAGUES:
         _chips.append("</div>")
         st.markdown("".join(_chips), unsafe_allow_html=True)
 
-if modulo == "Scouting":
-    scout.render()  # SCOUTING FFCV (Segona Infantil Castelló), común a los tres equipos
+if _area == "scouting":
+    scout.render(modulo)  # SCOUTING FFCV: departamento independiente de los equipos
     st.stop()
 if _area == "cadete":
     ACTIVE_STORE = TEAM_STORES["cadete"]

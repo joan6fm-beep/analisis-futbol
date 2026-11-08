@@ -39,8 +39,8 @@ def casos():
     cad = pd.read_csv(APP.parent / "data" / "cadete_a" / "equipos.csv")["equipo"].tolist()
     for t in cad:
         yield f"Cadete A · ficha de {t}", {"area": "cadete", "view": "rivales", "team": t}
-    for area in ("infantil", "cadete", "juvenil"):
-        yield f"Scouting FFCV · {area}", {"area": area, "view": "scouting"}
+    for v in ["equipos", "comparador", "ranking", "datos"]:
+        yield f"Scouting FFCV · {v}", {"area": "scouting", "view": v}
     for v in VISTAS_JUVENIL:
         yield f"Juvenil A · {v}", {"area": "juvenil", "view": v}
     for t in equipos:

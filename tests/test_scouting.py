@@ -64,8 +64,28 @@ def main():
         check("15/03/2013" not in txt and "2013-03-15" not in txt, "No se guarda la fecha de nacimiento completa")
         r2 = sd.actualizar_desde_fuente()
         check(r2["nuevos"] == 0 and r2["sin_cambios"] == 2, "«Actualizar FFCV» no reprocesa archivos sin cambios")
+        g2 = sd.load("equipos").query("grupo_id.str.endswith('g2')", engine="python").nombre.tolist()
+        acta = "\n".join([
+            f"PARTIDO G2 J3 | 01/11/2026 | {g2[0]} | {g2[1]} | 2-1",
+            "L POR 1 Hugo Prueba Uno", "L DEF 4 Iker Prueba Dos | 12", "L SUP 12 Leo Prueba Tres",
+            "L SUP 14 Mario Prueba Cuatro", "V POR 1 Nico Prueba Cinco",
+            "EV L 30 cambio L. Prueba > I. Prueba", "EV L 40 gol 12", "EV V 50 amarilla N. Prueba",
+            "CAMBIOS_COMPLETOS"])
+        ra = sd.importar_actas_texto(acta)
+        sd.importar_actas_texto(acta)
+        aj = sd.load("actas_jugadores")
+        check(ra["partidos"] == 1 and len(aj) == 5 and not ra["avisos"], "Acta: 5 jugadores, sin avisos ni duplicados")
+        loc =aj[aj.equipo_id.str.endswith(sd.slug(g2[0]))].set_index("dorsal")
+        check(loc.loc["12", "minutos"] == "40" and loc.loc["12", "goles"] == "1" and loc.loc["4", "minutos"] == "30",
+              "Acta: minutos verificables (cambio) y goles")
+        check(loc.loc["14", "participa"] == "no" and loc.loc["14", "minutos"] == "0", "Acta: suplente sin entrar = no jugó")
+        df2 = sd.tabla_jugadores()
+        hugo = df2[df2.nombre == "Hugo Prueba Uno"].iloc[0]
+        check(sd.pd.isna(hugo.jugados) and sd.pd.isna(hugo.convocatorias), "Acta no se confunde con totales de temporada (N/D)")
+        p, filas = sd.ultima_acta(aj.equipo_id.iloc[0])
+        check(p is not None and p.jornada == "3", "Último partido con acta")
         sd.borrar_importacion_equipo(eid)
-        check(len(sd.tabla_jugadores()) == 1, "Borrar la importación de un equipo")
+        check(not (sd.tabla_jugadores().equipo_id == eid).any(), "Borrar la importación de un equipo")
     finally:
         sd.DIR, sd.FUENTE = orig_dir, orig_fuente
         shutil.rmtree(tmp, ignore_errors=True)

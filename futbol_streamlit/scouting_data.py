@@ -52,10 +52,16 @@ TABLAS = {
     "plantillas": ["jugador_id", "equipo_id", "dorsal", "posicion"],
     "estadisticas": ["jugador_id", "equipo_id", *STATS, "columnas_fuente", "archivo", "fecha_extraccion"],
     "jornadas": ["jugador_id", "equipo_id", "jornada", *STATS, "archivo"],
+    # Actas: datos de UN partido (no son acumulados de temporada).
+    "partidos": ["partido_id", "grupo_id", "jornada", "fecha", "local_id", "visitante_id", "goles_local",
+                 "goles_visitante", "duracion", "fuente"],
+    "actas_jugadores": ["partido_id", "equipo_id", "jugador_id", "dorsal", "rol", "demarcacion", "participa",
+                        "min_entrada", "min_salida", "minutos", "goles", "amarillas", "dobles_amarillas", "rojas"],
 }
 CLAVES = {"temporadas": ["temporada_id"], "competiciones": ["competicion_id"], "grupos": ["grupo_id"],
           "equipos": ["equipo_id"], "jugadores": ["jugador_id"], "plantillas": ["jugador_id", "equipo_id"],
-          "estadisticas": ["jugador_id", "equipo_id"], "jornadas": ["jugador_id", "equipo_id", "jornada"]}
+          "estadisticas": ["jugador_id", "equipo_id"], "jornadas": ["jugador_id", "equipo_id", "jornada"],
+          "partidos": ["partido_id"], "actas_jugadores": ["partido_id", "equipo_id", "jugador_id"]}
 
 
 # ---------------------------------------------------------------- utilidades
@@ -382,6 +388,18 @@ def actualizar_desde_fuente() -> dict:
                 sin_cambios += 1
                 continue
             try:
+                if f.parent.name == "actas":
+                    ra = importar_actas_texto(data.decode("utf-8", errors="replace"), f.name)
+                    ok = ra["partidos"] > 0
+                    nuevos += ok
+                    errores += not ok
+                    detalles.append(f"{clave}: {ra['partidos']} actas, {ra['jugadores']} jugadores"
+                                    + (f" · avisos: {'; '.join(ra['avisos'][:5])}" if ra["avisos"] else ""))
+                    mm = meta()
+                    mm.setdefault("archivos", {})[clave] = {"sha256": hashlib.sha256(data).hexdigest(),
+                                                            "importado": datetime.now().isoformat(timespec="seconds")}
+                    save_meta(mm)
+                    continue
                 r = importar(f.parent.name, f.name, data, guardar_copia=False)
                 nuevos += r["ok"]
                 errores += not r["ok"]
@@ -416,7 +434,7 @@ def comprobar_publicacion_grupos(timeout: int = 10) -> dict:
 
 def borrar_importacion_equipo(equipo_id: str) -> None:
     """Elimina los datos importados de un equipo (para corregir una importación equivocada)."""
-    for t in ("plantillas", "estadisticas", "jornadas"):
+    for t in ("plantillas", "estadisticas", "jornadas", "actas_jugadores"):
         df = load(t)
         save(t, df[df.equipo_id != equipo_id])
     vivos = set(load("plantillas").jugador_id)
@@ -426,6 +444,155 @@ def borrar_importacion_equipo(equipo_id: str) -> None:
     m = meta()
     m["archivos"] = {k: v for k, v in m.get("archivos", {}).items() if not k.startswith(equipo_id + "/")}
     save_meta(m)
+
+
+# ---------------------------------------------------------------- escudos
+ESCUDOS = DIR / "escudos"
+
+
+def club_slug(nombre: str) -> str:
+    """Club sin la letra del equipo: 'CD BENICÀSIM C' -> 'cd-benicasim'."""
+    toks = str(nombre).split()
+    if len(toks) > 1 and re.fullmatch(r"[B-H]", toks[-1]):
+        toks = toks[:-1]
+    return slug(" ".join(toks))
+
+
+def crest_path(nombre: str):
+    """Escudo del club en data/scouting/escudos/<club>.(png|jpg|webp), si se ha aportado."""
+    for ext in ("png", "jpg", "jpeg", "webp"):
+        p = ESCUDOS / f"{club_slug(nombre)}.{ext}"
+        if p.exists():
+            return p
+    return None
+
+
+# ---------------------------------------------------------------- actas (transcripción)
+_ROLES_TIT = {"POR", "DEF", "MED", "DEL", "TIT"}
+_EV = {"gol", "penalti", "propia", "amarilla", "segunda_amarilla", "roja", "cambio"}
+_DEMARC = {"POR": "Portero", "SUPPOR": "Portero", "DEF": "Defensa", "MED": "Centrocampista", "DEL": "Delantero"}
+
+
+def _resolver(abrev: str, dorsales: dict) -> str | None:
+    """'A. Castellanos' o '9' -> nombre completo único de la alineación del mismo equipo, o None."""
+    a = abrev.strip()
+    if a.isdigit():
+        return next((n for n, d in dorsales.items() if d == a), None)
+    na = norm(a).replace(".", " ").split()
+    cands = [n for n in dorsales if all(any(t.startswith(x) for t in norm(n).split()) for x in na)]
+    return cands[0] if len(cands) == 1 else None
+
+
+def importar_actas_texto(texto: str, archivo: str = "actas.txt") -> dict:
+    """Importa actas transcritas (formato del Cadete A, ampliado con el grupo):
+      PARTIDO G<n> J<n> | dd/mm/aaaa | local | visitante | gl-gv [| duración]
+      L|V POR|DEF|MED|DEL|TIT|SUP|SUPPOR <dorsal> <nombre completo> [| edad]
+      EV L|V <min> gol|penalti|propia|amarilla|segunda_amarilla|roja <jugador>
+      EV L|V <min> cambio <entra> > <sale>
+      CAMBIOS_COMPLETOS   (el acta muestra todos los cambios: suplentes sin entrada = no jugaron;
+                           solo entonces se calculan minutos)
+    Datos de UN partido: no se suman a los totales de temporada."""
+    eqs = load("equipos")
+    by_name = {norm(n): (i, g) for i, n, g in zip(eqs.equipo_id, eqs.nombre, eqs.grupo_id)}
+    partidos, filas, jugadores, plant, avisos = [], [], [], [], []
+    hoy = date.today().isoformat()
+    for b in re.split(r"(?m)^(?=PARTIDO )", texto):
+        lineas = [x.strip() for x in b.splitlines() if x.strip() and not x.strip().startswith("#")]
+        if not lineas or not lineas[0].startswith("PARTIDO"):
+            continue
+        cab = [c.strip() for c in lineas[0][len("PARTIDO"):].split("|")]
+        m = re.match(r"G(\d+)\s+J(\d+)", cab[0])
+        if not m or len(cab) < 5:
+            avisos.append(f"Cabecera no válida: {lineas[0]}")
+            continue
+        loc, vis = by_name.get(norm(cab[2])), by_name.get(norm(cab[3]))
+        if not loc or not vis:
+            avisos.append(f"Equipo no reconocido: {lineas[0]}")
+            continue
+        gl, gv = (cab[4].split("-") + [""])[:2]
+        dur = int(cab[5]) if len(cab) > 5 and cab[5].isdigit() else 70
+        pid = f"{loc[1]}-j{m.group(2)}-" + hashlib.sha1(f"{loc[0]}|{vis[0]}".encode()).hexdigest()[:8]
+        partidos.append({"partido_id": pid, "grupo_id": loc[1], "jornada": m.group(2), "fecha": cab[1],
+                         "local_id": loc[0], "visitante_id": vis[0], "goles_local": gl.strip(),
+                         "goles_visitante": gv.strip(), "duracion": dur, "fuente": archivo})
+        lado = {"L": loc[0], "V": vis[0]}
+        al, dors = {}, {"L": {}, "V": {}}
+        completos = "CAMBIOS_COMPLETOS" in lineas
+        for x in lineas[1:]:
+            mm = re.match(r"([LV])\s+(POR|DEF|MED|DEL|TIT|SUPPOR|SUP)\s+(\d+)\s+([^|]+?)\s*(?:\|\s*(\d+))?$", x)
+            if not mm:
+                continue
+            lv, rol, dorsal, nombre, edad = mm.groups()
+            nombre = re.sub(r"\s+", " ", nombre).strip()
+            eid = lado[lv]
+            jid = f"{eid}--{slug(nombre)}"
+            dors[lv][nombre] = dorsal
+            tit = rol in _ROLES_TIT
+            al[(lv, nombre)] = {"partido_id": pid, "equipo_id": eid, "jugador_id": jid, "dorsal": dorsal,
+                                "rol": "titular" if tit else "suplente", "demarcacion": _DEMARC.get(rol, ""),
+                                "min_entrada": "0" if tit else "", "min_salida": "",
+                                "goles": 0, "amarillas": 0, "dobles_amarillas": 0, "rojas": 0}
+            jugadores.append({"jugador_id": jid, "nombre": nombre, "cod_ffcv": "", "anio_nacimiento": "",
+                              "anio_verificado": "no", "edad": edad or "", "edad_fecha_ref": hoy if edad else ""})
+            plant.append({"jugador_id": jid, "equipo_id": eid, "dorsal": dorsal, "posicion": _DEMARC.get(rol, "")})
+        for x in lineas[1:]:
+            ev = re.match(r"EV\s+([LV])\s+(\d+)\s+(\w+)\s+(.+)$", x)
+            if not ev:
+                continue
+            lv, minuto, tipo, resto = ev.groups()
+            if tipo not in _EV:
+                avisos.append(f"{pid}: evento desconocido «{tipo}»")
+                continue
+            if tipo == "cambio":
+                ent, _, sal = resto.partition(">")
+                ne, ns = _resolver(ent, dors[lv]), _resolver(sal, dors[lv])
+                if ne:
+                    al[(lv, ne)]["min_entrada"] = minuto
+                if ns:
+                    al[(lv, ns)]["min_salida"] = minuto
+                if not ne or not ns:
+                    avisos.append(f"{pid}: cambio sin resolver «{resto}»")
+                continue
+            n = _resolver(resto, dors[lv])
+            if not n:
+                avisos.append(f"{pid}: jugador sin resolver «{resto}»")
+                continue
+            campo = {"gol": "goles", "penalti": "goles", "amarilla": "amarillas",
+                     "segunda_amarilla": "dobles_amarillas", "roja": "rojas"}.get(tipo)
+            if campo:
+                al[(lv, n)][campo] += 1
+            if tipo in ("segunda_amarilla", "roja") and not al[(lv, n)]["min_salida"]:
+                al[(lv, n)]["min_salida"] = minuto
+        for f in al.values():
+            if f["min_entrada"] != "":
+                f["participa"] = "si"
+                f["minutos"] = ((int(f["min_salida"]) if f["min_salida"] else dur) - int(f["min_entrada"])) if completos else ""
+            else:
+                f["participa"] = "no" if completos else ""
+                f["minutos"] = 0 if completos else ""
+            filas.append(f)
+    upsert("partidos", partidos)
+    j_old = load("jugadores").set_index("jugador_id")
+    upsert("jugadores", [j for j in {j["jugador_id"]: j for j in jugadores}.values() if j["jugador_id"] not in j_old.index])
+    pl_old = load("plantillas")
+    ya = set(zip(pl_old.jugador_id, pl_old.equipo_id))  # no pisar dorsal/posición de una ficha ya importada
+    upsert("plantillas", [p for k, p in {(p["jugador_id"], p["equipo_id"]): p for p in plant}.items() if k not in ya])
+    upsert("actas_jugadores", filas)
+    if partidos:
+        m = meta()
+        m["ultima_actualizacion"] = datetime.now().isoformat(timespec="seconds")
+        save_meta(m)
+    return {"partidos": len(partidos), "jugadores": len({f["jugador_id"] for f in filas}), "avisos": avisos}
+
+
+def ultima_acta(equipo_id: str):
+    """(partido, filas del equipo) del último partido con acta importada, o (None, vacío)."""
+    pa, aj = load("partidos"), load("actas_jugadores")
+    pa = pa[(pa.local_id == equipo_id) | (pa.visitante_id == equipo_id)]
+    if pa.empty:
+        return None, aj.iloc[0:0]
+    p = pa.assign(_j=pd.to_numeric(pa.jornada, errors="coerce")).sort_values("_j").iloc[-1]
+    return p, aj[(aj.partido_id == p.partido_id) & (aj.equipo_id == equipo_id)]
 
 
 # ---------------------------------------------------------------- consultas

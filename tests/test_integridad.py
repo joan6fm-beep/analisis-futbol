@@ -373,9 +373,9 @@ def test_navegacion():
     css = " ".join(m.value for m in at.markdown)
     check("[data-testid=\"stSidebar\"]" in css and ".mobile-bottom-nav" in css and "display:none!important" in css,
           "Portada sin menús de equipo visibles (barra lateral y menú móvil ocultos; no hay redirección)")
-    juv = ["inicio", "muro", "calendario", "liga", "rivales", "equipo", "scouting", "seguimiento", "individual", "jugadores"]
-    inf = ["inicio", "muro", "calendario", "resultados", "minutos", "seguimiento", "scouting"]
-    cad = ["inicio", "liga", "rivales", "equipo", "scouting", "calendario", "muro"]
+    juv = ["inicio", "muro", "calendario", "liga", "rivales", "equipo", "seguimiento", "individual", "jugadores"]
+    inf = ["inicio", "muro", "calendario", "resultados", "minutos", "seguimiento"]
+    cad = ["inicio", "liga", "rivales", "equipo", "calendario", "muro"]
     for area, view, expected in (("juvenil", "liga", juv), ("infantil", "inicio", inf), ("cadete", "inicio", cad)):
         a = run({"area": area, "view": view})
         hh = html_of(a)
@@ -446,8 +446,9 @@ def test_cadete_a():
           and TEAMS["infantil"]["match_minutes"] == 70, "Duración por equipo: Cadete A 80', Juvenil A 90', Infantil D 70'")
     at = run({})
     home = " ".join(str(x.proto) for x in at.get("html"))
-    check(len(re.findall(r"img class=[^ ]*photo", home)) == 3 and "object-fit:contain" in home and "OneDrive" not in home,
-          "Portada: tres fotografías completas (object-fit: contain) incrustadas desde el repositorio")
+    check(len(re.findall(r"img class=[^ ]*photo", home)) == 4 and "?area=scouting" in home
+          and "object-fit:contain" in home and "OneDrive" not in home,
+          "Portada: tres equipos + SCOUTING (object-fit: contain) incrustados desde el repositorio")
     check((APP_DIR / "cadete_a_portada.jpeg").exists(), "Foto del Cadete A en los recursos estáticos del proyecto")
     bad = []
     for r in part.itertuples():
