@@ -8,7 +8,7 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
 ## Hecho
 - Sistema de diseño oscuro (`ui_theme.py`), Plotly, portada con fotos completas.
 - Equipo 360: tres niveles (resumen del partido, áreas, análisis avanzado) + temporada; datos Veo J2/J3/J5/J7.
-- Rivales y Resumen de liga con J8 completa (8 de 8 partidos; los 4 del 1/11 desde vídeo FFCV);
+- Rivales y Resumen de liga con J9 completa (8 de 8 partidos, 7-8/11, vídeo FFCV del 09/11); J8 completa;
   porteros con atribución de goles por minutos.
 - **Infantil D** (bloque completo, noviembre 2026):
   - Navegación propia: Inicio · Muro · Calendario · Resultados · Minutos · Seguimiento.
@@ -58,6 +58,10 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
   está prohibida a programas en su robots.txt. Validar el lector con una página real guardada.
 - Cadete A: J7 Celtic Elche–Roda (10/11) y J9 Kelme–Intangco (suspendido); asistencias no registradas en actas;
   dos «C. Garcia» en Alboraya (tarjetas y cambios sin atribuir); fechas/horas no visibles en algunas actas.
+- J9 Juvenil A: gol del 90' de Primer Toque anotado en el acta a «M. Gonzalez» (icono distinto); el usuario confirma que es de Pedro.
+  Goles con icono distinto (¿penalti?) registrados como gol: S. Del Olmo (Canet 48'), O. Rubio (Paterna 24').
+  Doble amarilla de A. Roselló (Patacona) con minuto 999 en el acta: registrada en el 90'. Tarjetas a técnicos no registradas.
+  Estadísticas Veo de J9 (Primer Toque): pendientes de que el usuario las aporte.
 - J8 Juvenil A: gol de A. Urbina (Inter SJ, 38') con icono distinto en el acta (¿penalti?), registrado como gol;
   tarjetas a técnicos (V. Felipe, R. Hervas) no registradas.
 - J7 Juvenil A: ocasiones 14 frente a 13; zonas de pase 8/82/10 frente a 41/48/11.
