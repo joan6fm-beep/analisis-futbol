@@ -4872,6 +4872,6 @@ elif ambito == "Total" and jornada_sel == "Total":
     st.markdown("<div class='match-links-grid'>" + "".join(_cards) + "</div>", unsafe_allow_html=True)
 
 if LG["key"] == "juvenil":
-    st.caption("Datos de liga hasta J8 (31/10/2026) · estadísticas Veo de J2, J3, J5 y J7.")
+    st.caption("Datos de liga hasta J9 (08/11/2026) · estadísticas Veo de J2, J3, J5 y J7.")
 else:
     st.caption(f"Datos de las actas FFCV del {LG['team_label']} · partidos de {LG['mm']}' · fuente: data/cadete_a/fuente/actas.txt.")

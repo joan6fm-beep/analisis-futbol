@@ -298,6 +298,16 @@ def test_datos_liga():
     sc = ev[ev.tipo.isin(["gol", "penalti_gol"])].groupby(["equipo", "jugador"]).size()
     check(sc.get(("C.D. Acero 'A'", "Aaron Madrid Garcia"), 0) >= 2 and sc.get((A.TEAM, "Ian"), 0) >= 1
           and sc.get(("Villarreal C.F. 'C'", "Gabriel Duarte Santacruz"), 0) >= 3, "Goleadores de J8 incorporados al ranking")
+    # J9 (vídeo FFCV 09/11/2026): completa, sin duplicados, goles = resultado, 11 titulares, clasificación
+    m9 = mn[mn.jornada == 9]
+    check(not (_dup.jornada == 9).any() and not [b for b in bad if b.startswith("J9")], "J9: un registro por jugador y goles = resultado")
+    check(len(m9) and (m9.groupby("equipo").titular.sum() == 11).all() and m9.minutos.between(0, 90).all()
+          and len(al[al.jornada == 9]) == 176, "J9: 11 titulares por equipo y minutos entre 0 y 90")
+    p9, e9, miss9 = A.jornada_status(part, 9)
+    check(p9 == 8 and e9 == 8 and not miss9 and len(cl[cl.jornada == 9]) == 16, f"J9 completa: {p9}/{e9} partidos y clasificación de 16")
+    g9 = ev[(ev.jornada == 9) & (ev.equipo == A.TEAM) & (ev.tipo == "gol")]
+    check(sorted(g9.jugador) == ["Mois", "Pedro"] and int(g9[g9.jugador == "Pedro"].minuto.iloc[0]) == 90,
+          f"J9: goles del Primer Toque = Mois 20' y Pedro 90' ({g9.jugador.tolist()})")
     # Nada perdido: todas las filas de la versión base siguen presentes
     root = APP_DIR.parent
     lost = []

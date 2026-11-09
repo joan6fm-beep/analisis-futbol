@@ -668,3 +668,114 @@ jornada,equipo,minuto,tipo,jugador,detalle
 8,Bétera C.F. 'A',22,amarilla,Hugo Alabau Rodrigo,J8 · amarilla · FFCV
 8,Bétera C.F. 'A',40,amarilla,Hugo Jose Morte Garcia,J8 · amarilla · FFCV
 8,Bétera C.F. 'A',87,amarilla,Daniel Ram Levi,J8 · amarilla · FFCV
+9,C.D.F. Canet 'A',42,roja,Marcos Vicente Garcia,J9 · roja directa · FFCV
+9,C.D.F. Canet 'A',48,gol,Silver Del Olmo Romero,"J9 · gol ante C.F. At. Burriana - Salesianos 'A' · FFCV · icono distinto en el acta (¿penalti?), registrado como gol"
+9,C.F. At. Burriana - Salesianos 'A',48,gol_contra,Silver Del Olmo Romero,J9 · gol encajado ante C.D.F. Canet 'A' · FFCV
+9,C.D.F. Canet 'A',79,amarilla,Liberos,J9 · amarilla · FFCV
+9,C.F. At. Burriana - Salesianos 'A',5,gol,Pablo Cabrera Gilabert,J9 · gol ante C.D.F. Canet 'A' · FFCV
+9,C.D.F. Canet 'A',5,gol_contra,Pablo Cabrera Gilabert,J9 · gol encajado ante C.F. At. Burriana - Salesianos 'A' · FFCV
+9,C.F. At. Burriana - Salesianos 'A',12,gol,Matteo Morra Climent,J9 · gol ante C.D.F. Canet 'A' · FFCV
+9,C.D.F. Canet 'A',12,gol_contra,Matteo Morra Climent,J9 · gol encajado ante C.F. At. Burriana - Salesianos 'A' · FFCV
+9,C.F. At. Burriana - Salesianos 'A',19,gol,Mario Casino Esteve,J9 · gol ante C.D.F. Canet 'A' · FFCV
+9,C.D.F. Canet 'A',19,gol_contra,Mario Casino Esteve,J9 · gol encajado ante C.F. At. Burriana - Salesianos 'A' · FFCV
+9,C.F. At. Burriana - Salesianos 'A',36,amarilla,Albert Viñes Cerezo,J9 · amarilla · FFCV
+9,C.F. At. Burriana - Salesianos 'A',43,gol,Jorge Agustina Llopis,J9 · gol ante C.D.F. Canet 'A' · FFCV
+9,C.D.F. Canet 'A',43,gol_contra,Jorge Agustina Llopis,J9 · gol encajado ante C.F. At. Burriana - Salesianos 'A' · FFCV
+9,C.F. At. Burriana - Salesianos 'A',56,gol,Mario Casino Esteve,J9 · gol ante C.D.F. Canet 'A' · FFCV
+9,C.D.F. Canet 'A',56,gol_contra,Mario Casino Esteve,J9 · gol encajado ante C.F. At. Burriana - Salesianos 'A' · FFCV
+9,C.F. At. Burriana - Salesianos 'A',59,gol,Marcos Espada Sanchez,J9 · gol ante C.D.F. Canet 'A' · FFCV
+9,C.D.F. Canet 'A',59,gol_contra,Marcos Espada Sanchez,J9 · gol encajado ante C.F. At. Burriana - Salesianos 'A' · FFCV
+9,C.F. At. Burriana - Salesianos 'A',66,gol,Pablo Cabrera Gilabert,J9 · gol ante C.D.F. Canet 'A' · FFCV
+9,C.D.F. Canet 'A',66,gol_contra,Pablo Cabrera Gilabert,J9 · gol encajado ante C.F. At. Burriana - Salesianos 'A' · FFCV
+9,C.F. At. Burriana - Salesianos 'A',75,gol,David Rubert Morano,J9 · gol ante C.D.F. Canet 'A' · FFCV
+9,C.D.F. Canet 'A',75,gol_contra,David Rubert Morano,J9 · gol encajado ante C.F. At. Burriana - Salesianos 'A' · FFCV
+9,Primer Toque C.F. 'A',20,gol,Mois,J9 · gol ante Col. Salgui E.D.E. 'A' · FFCV
+9,Col. Salgui E.D.E. 'A',20,gol_contra,Mois,J9 · gol encajado ante Primer Toque C.F. 'A' · FFCV
+9,Primer Toque C.F. 'A',48,amarilla,Mois,J9 · amarilla · FFCV
+9,Primer Toque C.F. 'A',90,gol,Pedro,J9 · gol ante Col. Salgui E.D.E. 'A' · FFCV · el acta FFCV lo anota a M. Gonzalez (icono distinto); goleador confirmado por el club: Pedro
+9,Col. Salgui E.D.E. 'A',90,gol_contra,Pedro,J9 · gol encajado ante Primer Toque C.F. 'A' · FFCV
+9,Col. Salgui E.D.E. 'A',10,gol,Fabio Aurelio Ruggieri Perez,J9 · gol ante Primer Toque C.F. 'A' · FFCV
+9,Primer Toque C.F. 'A',10,gol_contra,Fabio Aurelio Ruggieri Perez,J9 · gol encajado ante Col. Salgui E.D.E. 'A' · FFCV
+9,Col. Salgui E.D.E. 'A',40,amarilla,Alex Aleksander Jurczykowski,J9 · amarilla · FFCV
+9,Col. Salgui E.D.E. 'A',67,gol,Hugo Perez Palacios,J9 · gol ante Primer Toque C.F. 'A' · FFCV
+9,Primer Toque C.F. 'A',67,gol_contra,Hugo Perez Palacios,J9 · gol encajado ante Col. Salgui E.D.E. 'A' · FFCV
+9,Ath. Massamagrell C.F. 'A',36,amarilla,Daniel Palanca Feito,J9 · amarilla · FFCV
+9,Ath. Massamagrell C.F. 'A',48,amarilla,Julian Hugo Oyarzun,J9 · amarilla · FFCV
+9,Ath. Massamagrell C.F. 'A',86,amarilla,Guillem Uso Alcover,J9 · amarilla · FFCV
+9,Ath. Massamagrell C.F. 'A',89,amarilla,David Barranco Peris,J9 · amarilla · FFCV
+9,Villarreal C.F. 'C',40,amarilla,Pablo Tortajada Balaguer,J9 · amarilla · FFCV
+9,Villarreal C.F. 'C',75,amarilla,Gabriel Duarte Santacruz,J9 · amarilla · FFCV
+9,Villarreal C.F. 'C',90,gol,Yago Lapuente Martin,J9 · gol ante Ath. Massamagrell C.F. 'A' · FFCV
+9,Ath. Massamagrell C.F. 'A',90,gol_contra,Yago Lapuente Martin,J9 · gol encajado ante Villarreal C.F. 'C' · FFCV
+9,C.F. Torre Levante 'A',27,amarilla,Izan Llorens Balaguer,J9 · amarilla · FFCV
+9,C.F. Torre Levante 'A',29,amarilla,Yasser Benllatreche,J9 · amarilla · FFCV
+9,C.F. Torre Levante 'A',52,amarilla,Alberto Villalba Uceda,J9 · amarilla · FFCV
+9,C.F. Torre Levante 'A',55,amarilla,Jorge López Meléndez,J9 · amarilla · FFCV
+9,C.F. Torre Levante 'A',61,gol,Neizan Mené Contreras,J9 · gol ante Paterna C.F. 'A' · FFCV
+9,Paterna C.F. 'A',61,gol_contra,Neizan Mené Contreras,J9 · gol encajado ante C.F. Torre Levante 'A' · FFCV
+9,C.F. Torre Levante 'A',85,doble_amarilla,Izan Llorens Balaguer,J9 · segunda amarilla / expulsión · FFCV
+9,Paterna C.F. 'A',17,amarilla,Jaime Muñoz Giron,J9 · amarilla · FFCV
+9,Paterna C.F. 'A',24,amarilla,Oscar Rubio Montoro,J9 · amarilla · FFCV
+9,Paterna C.F. 'A',24,gol,Oscar Rubio Montoro,"J9 · gol ante C.F. Torre Levante 'A' · FFCV · icono distinto en el acta (¿penalti?), registrado como gol"
+9,C.F. Torre Levante 'A',24,gol_contra,Oscar Rubio Montoro,J9 · gol encajado ante Paterna C.F. 'A' · FFCV
+9,Paterna C.F. 'A',77,amarilla,Jose Leroi Fernandez Guillem,J9 · amarilla · FFCV
+9,Paterna C.F. 'A',82,doble_amarilla,Jose Leroi Fernandez Guillem,J9 · segunda amarilla / expulsión · FFCV
+9,Paterna C.F. 'A',90,gol,Alvaro Josep Nacher Vaño,J9 · gol ante C.F. Torre Levante 'A' · FFCV
+9,C.F. Torre Levante 'A',90,gol_contra,Alvaro Josep Nacher Vaño,J9 · gol encajado ante Paterna C.F. 'A' · FFCV
+9,C.F. Cracks 'A',36,gol,Daniel Saez Barber,J9 · gol ante Patacona C.F. 'B' · FFCV
+9,Patacona C.F. 'B',36,gol_contra,Daniel Saez Barber,J9 · gol encajado ante C.F. Cracks 'A' · FFCV
+9,C.F. Cracks 'A',44,amarilla,Dario Ruiz Garcia,J9 · amarilla · FFCV
+9,C.F. Cracks 'A',53,gol,Alvaro Selva De Les,J9 · gol ante Patacona C.F. 'B' · FFCV
+9,Patacona C.F. 'B',53,gol_contra,Alvaro Selva De Les,J9 · gol encajado ante C.F. Cracks 'A' · FFCV
+9,C.F. Cracks 'A',58,amarilla,Alvaro Selva De Les,J9 · amarilla · FFCV
+9,Patacona C.F. 'B',32,amarilla,Mario Garcia Fernando,J9 · amarilla · FFCV
+9,Patacona C.F. 'B',35,amarilla,Angel Rosello Soler,J9 · amarilla · FFCV
+9,Patacona C.F. 'B',80,gol,Dennys Garcia Lopez,J9 · gol ante C.F. Cracks 'A' · FFCV
+9,C.F. Cracks 'A',80,gol_contra,Dennys Garcia Lopez,J9 · gol encajado ante Patacona C.F. 'B' · FFCV
+9,Patacona C.F. 'B',81,amarilla,Alejandro Palmer Hernando,J9 · amarilla · FFCV
+9,Patacona C.F. 'B',90,doble_amarilla,Angel Rosello Soler,J9 · segunda amarilla / expulsión · FFCV · anotada en el acta con minuto 999 (tras el final del partido)
+9,Bétera C.F. 'A',11,gol,Santiago Gonzalez Asensi,J9 · gol ante C.F. Inter San José Valencia 'B' · FFCV
+9,C.F. Inter San José Valencia 'B',11,gol_contra,Santiago Gonzalez Asensi,J9 · gol encajado ante Bétera C.F. 'A' · FFCV
+9,Bétera C.F. 'A',33,amarilla,Santiago Gonzalez Asensi,J9 · amarilla · FFCV
+9,Bétera C.F. 'A',56,amarilla,Hugo Armiñana Santamaria,J9 · amarilla · FFCV
+9,Bétera C.F. 'A',59,gol,Alberto Guil Sierra,J9 · gol ante C.F. Inter San José Valencia 'B' · FFCV
+9,C.F. Inter San José Valencia 'B',59,gol_contra,Alberto Guil Sierra,J9 · gol encajado ante Bétera C.F. 'A' · FFCV
+9,Bétera C.F. 'A',77,amarilla,Alberto Guil Sierra,J9 · amarilla · FFCV
+9,Bétera C.F. 'A',89,amarilla,Hugo Alabau Rodrigo,J9 · amarilla · FFCV
+9,C.F. Inter San José Valencia 'B',3,amarilla,Aitor Cano Gutierrez,J9 · amarilla · FFCV
+9,C.F. Inter San José Valencia 'B',27,gol,Erik Da Silva Canobbio,J9 · gol ante Bétera C.F. 'A' · FFCV
+9,Bétera C.F. 'A',27,gol_contra,Erik Da Silva Canobbio,J9 · gol encajado ante C.F. Inter San José Valencia 'B' · FFCV
+9,C.F. Inter San José Valencia 'B',32,amarilla,Leo Lozano Sendra,J9 · amarilla · FFCV
+9,C.F. Inter San José Valencia 'B',56,doble_amarilla,Leo Lozano Sendra,J9 · segunda amarilla / expulsión · FFCV
+9,C.F. Inter San José Valencia 'B',58,amarilla,Jose Gustavo Ndong Nguema,J9 · amarilla · FFCV
+9,C.F. Inter San José Valencia 'B',88,amarilla,Alberto Serrano Sanz,J9 · amarilla · FFCV
+9,C.F. Inter San José Valencia 'B',90,gol,Alejandro Urbina Rubio,J9 · gol ante Bétera C.F. 'A' · FFCV
+9,Bétera C.F. 'A',90,gol_contra,Alejandro Urbina Rubio,J9 · gol encajado ante C.F. Inter San José Valencia 'B' · FFCV
+9,C.F. Inter San José Valencia 'B',90,amarilla,Enzo Soldado Millan,J9 · amarilla · FFCV
+9,C.F. Inter San José Valencia 'B',90,amarilla,Erik Da Silva Canobbio,J9 · amarilla · FFCV
+9,Alboraya U.D. 'B',21,amarilla,Iker Descalzo Calomarde,J9 · amarilla · FFCV
+9,Alboraya U.D. 'B',28,amarilla,Pablo Aguilar Año,J9 · amarilla · FFCV
+9,Alboraya U.D. 'B',43,amarilla,Javier Soriano Perez,J9 · amarilla · FFCV
+9,Alboraya U.D. 'B',53,gol,Pablo Aguilar Año,J9 · gol ante C.D. Acero 'A' · FFCV
+9,C.D. Acero 'A',53,gol_contra,Pablo Aguilar Año,J9 · gol encajado ante Alboraya U.D. 'B' · FFCV
+9,Alboraya U.D. 'B',55,amarilla,Luis Carlos Montilla Perez,J9 · amarilla · FFCV
+9,Alboraya U.D. 'B',67,gol,Daniel Perez Rodrigo,J9 · gol ante C.D. Acero 'A' · FFCV
+9,C.D. Acero 'A',67,gol_contra,Daniel Perez Rodrigo,J9 · gol encajado ante Alboraya U.D. 'B' · FFCV
+9,C.D. Acero 'A',14,gol,Aaron Madrid Garcia,J9 · gol ante Alboraya U.D. 'B' · FFCV
+9,Alboraya U.D. 'B',14,gol_contra,Aaron Madrid Garcia,J9 · gol encajado ante C.D. Acero 'A' · FFCV
+9,C.D. Acero 'A',22,amarilla,Jorge Lopez Vila,J9 · amarilla · FFCV
+9,C.D. Acero 'A',44,amarilla,Aaron Madrid Garcia,J9 · amarilla · FFCV
+9,C.D. Acero 'A',62,gol,Jorge Lopez Vila,J9 · gol ante Alboraya U.D. 'B' · FFCV
+9,Alboraya U.D. 'B',62,gol_contra,Jorge Lopez Vila,J9 · gol encajado ante C.D. Acero 'A' · FFCV
+9,C.D. Acero 'A',90,amarilla,Carlos Bracho Trujillo,J9 · amarilla · FFCV
+9,Manises C.F. 'A',16,amarilla,Hugo Albiach Serrano,J9 · amarilla · FFCV
+9,Manises C.F. 'A',67,gol,Hugo Albiach Serrano,J9 · gol ante C.F. Històrics de València 'A' · FFCV
+9,C.F. Històrics de València 'A',67,gol_contra,Hugo Albiach Serrano,J9 · gol encajado ante Manises C.F. 'A' · FFCV
+9,C.F. Històrics de València 'A',17,roja,RAFAEL EDUARDO CAÑAR MONTAÑO,J9 · roja directa · FFCV · en el banquillo (no llegó a jugar)
+9,C.F. Històrics de València 'A',26,amarilla,RAMOS MARC DE FEZ,J9 · amarilla · FFCV
+9,C.F. Històrics de València 'A',49,gol,JOEL BALAGUER DELGADO,J9 · gol ante Manises C.F. 'A' · FFCV
+9,Manises C.F. 'A',49,gol_contra,JOEL BALAGUER DELGADO,J9 · gol encajado ante C.F. Històrics de València 'A' · FFCV
+9,C.F. Històrics de València 'A',68,gol,MARCOS GIMENEZ AMARO,J9 · gol ante Manises C.F. 'A' · FFCV
+9,Manises C.F. 'A',68,gol_contra,MARCOS GIMENEZ AMARO,J9 · gol encajado ante C.F. Històrics de València 'A' · FFCV
+9,C.F. Històrics de València 'A',79,gol,DANIEL NIETO VALERO,J9 · gol ante Manises C.F. 'A' · FFCV
+9,Manises C.F. 'A',79,gol_contra,DANIEL NIETO VALERO,J9 · gol encajado ante C.F. Històrics de València 'A' · FFCV
