@@ -193,7 +193,9 @@ MATCH_LINKS = {
     ("Paterna C.F. 'A'", 7): 'https://app.veo.co/matches/20261025-cf-inter-san-jose-contra-paterna-cf-v0cfb018/',
     ("Manises C.F. 'A'", 7): 'https://youtu.be/ve45BBt228k?is=K4limKGAP0Ufw9Lf',
     ("C.D. Acero 'A'", 7): 'https://youtu.be/ve45BBt228k?is=K4limKGAP0Ufw9Lf',
-    # J8 (Històrics – Primer Toque: enlace Hudl pendiente)
+    # J8 (Històrics – Primer Toque: descarga temporal de Hudl, activa el 17/11/2026; puede caducar)
+    ("C.F. Històrics de València 'A'", 8): 'https://www.hudl.com/notifications-tracking/tracker/BulkDownloadReady-6ae70429256b8a5cca9148e2-a4cad8a1-410b-41ad-8fe1-f670573eed9f-31946963/email/landing?forward=https%3a%2f%2fvtemp-euw1.hudl.com%2f537691%2f948842%2f4d2%2f6ae5dde56671d1e09e49f4d2%2f6ae5dde56671d1e09e49f4d2.mp4%3fv%3d541C17FCFFFFFFFF',
+    ("Primer Toque C.F. 'A'", 8): 'https://www.hudl.com/notifications-tracking/tracker/BulkDownloadReady-6ae70429256b8a5cca9148e2-a4cad8a1-410b-41ad-8fe1-f670573eed9f-31946963/email/landing?forward=https%3a%2f%2fvtemp-euw1.hudl.com%2f537691%2f948842%2f4d2%2f6ae5dde56671d1e09e49f4d2%2f6ae5dde56671d1e09e49f4d2.mp4%3fv%3d541C17FCFFFFFFFF',
     ("C.D. Acero 'A'", 8): 'https://app.veo.co/matches/20261031-cd-acero-juv-a-vs-canet-v9ba80e6/',
     ("C.D.F. Canet 'A'", 8): 'https://app.veo.co/matches/20261031-cd-acero-juv-a-vs-canet-v9ba80e6/',
     ("Paterna C.F. 'A'", 8): 'https://app.veo.co/matches/20261031-juvenil-a-cracks-v348c59e/',
@@ -205,6 +207,8 @@ MATCH_LINKS = {
     ("Alboraya U.D. 'B'", 8): 'https://youtu.be/gG62K2524Ek',
     ("Bétera C.F. 'A'", 8): 'https://youtu.be/gG62K2524Ek',
     # J9
+    ("Primer Toque C.F. 'A'", 9): 'https://app.veo.co/matches/20261107-untitled-recording-2026-11-07_16-11-30-v323feeb/',
+    ("Col. Salgui E.D.E. 'A'", 9): 'https://app.veo.co/matches/20261107-untitled-recording-2026-11-07_16-11-30-v323feeb/',
     ("Bétera C.F. 'A'", 9): 'https://app.veo.co/matches/20261108-betera-club-de-futbol-vs-san-jose-vaaa2f9f/',
     ("C.F. Inter San José Valencia 'B'", 9): 'https://app.veo.co/matches/20261108-betera-club-de-futbol-vs-san-jose-vaaa2f9f/',
     ("C.D.F. Canet 'A'", 9): 'https://live.veo.co/web-app/matches/20261107-partido-cdf-canet-v42a33f6/',
@@ -222,6 +226,17 @@ MATCH_LINKS = {
     # J10
     ("Villarreal C.F. 'C'", 10): 'https://youtu.be/gwLebsnbFLE',
     ("Primer Toque C.F. 'A'", 10): 'https://youtu.be/gwLebsnbFLE',
+    ("Col. Salgui E.D.E. 'A'", 10): 'https://app.veo.co/matches/b0bfa29e-9165-45b7-8dec-f2c5483548e0/#t=10:43',
+    ("Manises C.F. 'A'", 10): 'https://app.veo.co/matches/b0bfa29e-9165-45b7-8dec-f2c5483548e0/#t=10:43',
+    ("C.F. At. Burriana - Salesianos 'A'", 10): 'https://app.veo.co/matches/20261115-juvenil-a-contra-alboraya-vdac9679/',
+    ("Alboraya U.D. 'B'", 10): 'https://app.veo.co/matches/20261115-juvenil-a-contra-alboraya-vdac9679/',
+    ("C.F. Inter San José Valencia 'B'", 10): 'https://app.veo.co/matches/20261114-jb-vs-crack-v9295054',
+    ("C.F. Cracks 'A'", 10): 'https://app.veo.co/matches/20261114-jb-vs-crack-v9295054',
+    ("C.F. Històrics de València 'A'", 10): 'https://youtu.be/eE3hG44uoyk',
+    ("C.D.F. Canet 'A'", 10): 'https://youtu.be/eE3hG44uoyk',
+    ("C.D. Acero 'A'", 10): 'https://app.veo.co/matches/9591ec54-16bc-40af-979e-4d32553babec',
+    ("Bétera C.F. 'A'", 10): 'https://app.veo.co/matches/9591ec54-16bc-40af-979e-4d32553babec',
+    # J10 sin vídeo todavía: Patacona – Torre Levante, Paterna – Massamagrell
 }
 
 # Un encuentro se grabó en dos partes. El enlace principal es la parte 1.
