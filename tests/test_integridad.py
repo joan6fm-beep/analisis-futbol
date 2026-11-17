@@ -342,10 +342,12 @@ def test_datos_liga():
             o = o[~rec]
         elif f == "eventos_rivales":
             # Penaltis de Paterna verificados en el acta (vídeo FFCV 17/11/2026, corrección pedida por el usuario):
-            # J1 O. Rubio 29' y 45' y J3 H. Perez 35'. Solo cambian tipo y detalle; el evento (jornada, equipo, minuto, jugador) se conserva.
+            # J1 O. Rubio 29' y 45', J3 H. Perez 35' y J7 O. Rubio 47' y A. Jimenez 82'.
+            # Solo cambian tipo y detalle; el evento (jornada, equipo, minuto, jugador) se conserva.
             k = ["jornada", "equipo", "minuto", "jugador"]
-            pen = o.jornada.isin(["1", "3"]) & o.minuto.isin(["29", "45", "35"]) & o.jugador.isin(
-                ["Paterna C.F. 'A'", "Oscar Rubio Montoro", "Hugo Perez Palacios", "Hugo Perez"])
+            pen = (o.jornada.isin(["1", "3"]) & o.minuto.isin(["29", "45", "35"]) & o.jugador.isin(
+                ["Paterna C.F. 'A'", "Oscar Rubio Montoro", "Hugo Perez Palacios", "Hugo Perez"])) | (
+                (o.jornada == "7") & o.minuto.isin(["47", "82"]) & o.jugador.isin(["Oscar Rubio Montoro", "Adrian Jimenez Arranz"]))
             miss = len(o[pen][k].merge(n[k].drop_duplicates(), how="left", indicator=True).query("_merge == 'left_only'"))
             o = o[~pen]
         else:

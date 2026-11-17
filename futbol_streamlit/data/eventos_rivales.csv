@@ -531,9 +531,9 @@ jornada,equipo,minuto,tipo,jugador,detalle
 7,C.F. Inter San José Valencia 'B',23,gol_contra,Samuel Ebitu Igwe Erhabor,J7 · gol encajado ante Paterna C.F. 'A' · FFCV
 7,C.F. Inter San José Valencia 'B',26,gol_contra,Samuel Ebitu Igwe Erhabor,J7 · gol encajado ante Paterna C.F. 'A' · FFCV
 7,C.F. Inter San José Valencia 'B',46,amarilla,Victor Gonzalez Climent,J7 · amarilla · FFCV
-7,C.F. Inter San José Valencia 'B',47,gol_contra,Oscar Rubio Montoro,J7 · gol encajado ante Paterna C.F. 'A' · FFCV
+7,C.F. Inter San José Valencia 'B',47,penalti_contra_gol,Oscar Rubio Montoro,J7 · gol de penalti encajado ante Paterna C.F. 'A' · FFCV
 7,C.F. Inter San José Valencia 'B',70,amarilla,Leo Lozano Sendra,J7 · amarilla · FFCV
-7,C.F. Inter San José Valencia 'B',82,gol_contra,Adrian Jimenez Arranz,J7 · gol encajado ante Paterna C.F. 'A' · FFCV
+7,C.F. Inter San José Valencia 'B',82,penalti_contra_gol,Adrian Jimenez Arranz,J7 · gol de penalti encajado ante Paterna C.F. 'A' · FFCV
 7,C.F. Torre Levante 'A',82,amarilla,Yasser Benllatreche,J7 · amarilla · FFCV
 7,C.F. Torre Levante 'A',87,gol_contra,Jorge Blanco Martinez,J7 · gol encajado ante Col. Salgui E.D.E. 'A' · FFCV
 7,Col. Salgui E.D.E. 'A',87,gol,Jorge Blanco Martinez,J7 · gol ante C.F. Torre Levante 'A' · FFCV
@@ -550,9 +550,9 @@ jornada,equipo,minuto,tipo,jugador,detalle
 7,Paterna C.F. 'A',23,gol,Samuel Ebitu Igwe Erhabor,J7 · gol ante C.F. Inter San José Valencia 'B' · FFCV
 7,Paterna C.F. 'A',26,gol,Samuel Ebitu Igwe Erhabor,J7 · gol ante C.F. Inter San José Valencia 'B' · FFCV
 7,Paterna C.F. 'A',32,amarilla,Adrian Jimenez Arranz,J7 · amarilla · FFCV
-7,Paterna C.F. 'A',47,gol,Oscar Rubio Montoro,J7 · gol ante C.F. Inter San José Valencia 'B' · FFCV
+7,Paterna C.F. 'A',47,penalti_gol,Oscar Rubio Montoro,J7 · gol de penalti ante C.F. Inter San José Valencia 'B' · FFCV
 7,Paterna C.F. 'A',77,amarilla,Angel Pinieri Clari,J7 · amarilla · FFCV
-7,Paterna C.F. 'A',82,gol,Adrian Jimenez Arranz,J7 · gol ante C.F. Inter San José Valencia 'B' · FFCV
+7,Paterna C.F. 'A',82,penalti_gol,Adrian Jimenez Arranz,J7 · gol de penalti ante C.F. Inter San José Valencia 'B' · FFCV
 7,Primer Toque C.F. 'A',40,gol_contra,Jorge Agustina Llopis,J7 · gol encajado ante C.F. At. Burriana - Salesianos 'A' · FFCV
 7,Primer Toque C.F. 'A',43,gol_contra,Guillem Gimenez Llopis,J7 · gol encajado ante C.F. At. Burriana - Salesianos 'A' · FFCV
 7,Primer Toque C.F. 'A',64,gol,Núñez,J7 · gol ante C.F. At. Burriana - Salesianos 'A' · FFCV

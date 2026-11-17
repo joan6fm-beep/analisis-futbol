@@ -4528,18 +4528,35 @@ with d4:
     )
 
     # Penaltis: icono de balón con portería en FFCV. Se guarda jornada, minuto, lanzador y resultado.
-    pen = ev_scope[ev_scope.tipo.isin(["penalti_gol", "penalti_fallado"])].sort_values(["jornada", "minuto"]) if not ev_scope.empty else pd.DataFrame()
-    if not pen.empty:
+    # A favor (verde) y en contra (rojo), con rival, lanzador, resultado, portero y vídeo de la jornada.
+    pen = lc.penalty_rows(seleccionado, partidos, eventos, alineaciones, minutos, jornadas=scope_js)
+    if pen:
         pen_items = []
-        for _, pr in pen.iterrows():
-            result = "Gol" if pr.tipo == "penalti_gol" else "Fallado"
-            icon = "✅" if pr.tipo == "penalti_gol" else "❌"
-            dorsal = dorsal_map.get(pr.jugador)
-            label = name_with_number(pr.jugador, dorsal) if dorsal else str(pr.jugador)
-            pen_items.append(f"<div class='mini-item'><span>{icon} J{int(pr.jornada)} · {int(pr.minuto)}' · {_safe_html(label)}</span><b>{result}</b></div>")
-        pen_html = "".join(pen_items)
+        for pr in pen:
+            favor = pr["lado"] == "A favor"
+            colr = "#16a34a" if favor else "#dc2626"
+            icon = ("✅" if pr["resultado"] == "Gol" else "❌")
+            shooter = pr["lanzador"]
+            if favor and dorsal_map.get(shooter):
+                shooter = name_with_number(shooter, dorsal_map.get(shooter))
+            elif not favor and pr["equipo_lanzador"]:
+                shooter = f"{shooter} ({short_team_name(pr['equipo_lanzador'])})"
+            _u = match_link(seleccionado, pr["jornada"])
+            _btn = (f"<a class='video-link' href='{_safe_html(_u, quote=True)}' target='_blank' rel='noopener noreferrer'>▶ Ver partido</a>"
+                    if _u else "<span class='note'>Vídeo no disponible</span>")
+            _mi = f"{pr['minuto']}'" if pr["minuto"] is not None else ""
+            pen_items.append(
+                f"<div class='mini-item' style='flex-direction:column;align-items:flex-start;gap:4px'>"
+                f"<span style='color:{colr};text-decoration:underline;font-weight:900'>{pr['lado'].upper()} · J{pr['jornada']} · {_mi} · vs {_safe_html(short_team_name(pr['rival']) if pr['rival'] else '—')}</span>"
+                f"<span>{icon} Lanzador: {_safe_html(shooter)} · <b>{pr['resultado']}</b></span>"
+                f"<span>🧤 Portero: {_safe_html(pr['portero'])} · dirección: no consta</span>"
+                f"{_btn}</div>")
+        _nf = sum(p["lado"] == "A favor" for p in pen); _nc = len(pen) - _nf
+        _gf = sum(p["lado"] == "A favor" and p["resultado"] == "Gol" for p in pen); _gc = sum(p["lado"] == "En contra" and p["resultado"] == "Gol" for p in pen)
+        pen_html = (f"<div class='mini-item'><span style='color:#16a34a;text-decoration:underline;font-weight:900'>A favor: {_nf} ({_gf} gol)</span>"
+                    f"<span style='color:#dc2626;text-decoration:underline;font-weight:900'>En contra: {_nc} ({_gc} gol)</span></div>" + "".join(pen_items))
     else:
-        pen_html = "<div class='note'>Sin penaltis a favor registrados en este filtro</div>"
+        pen_html = "<div class='note'>Sin penaltis a favor ni en contra registrados en este filtro</div>"
     st.markdown(f"<div style='height:10px'></div><div class='card'><div class='section-title'>Penaltis</div><div class='mini-list'>{pen_html}</div></div>", unsafe_allow_html=True)
 
 # ---------------- Porteros del rival ----------------

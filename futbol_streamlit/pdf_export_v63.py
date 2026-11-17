@@ -349,13 +349,27 @@ def generate(team,partidos,minutos,eventos,clasificacion,alineaciones,plantillas
     page()
     # PAGE 4: penalties, evolution, clickable links.
     header(4);y=H-92;y=heading(y,'5. Penaltis')
-    pen=ev[ev.tipo.isin(['penalti_gol','penalti_fallado','penalti_contra_gol','penalti_contra_fallado'])].sort_values(['jornada','minuto'])
-    widths=[79,79,257,IW-415]; headers=['Jornada','Minuto','Lanzador','Resultado']
-    for i,row in enumerate([headers]+[(f'J{int(r.jornada)}',f"{int(r.minuto)}’",str(r.jugador),'Gol' if 'gol' in r.tipo else 'Fallado') for _,r in pen.iterrows()]):
+    import league_core as _lc
+    pen=_lc.penalty_rows(team,partidos,eventos,alineaciones,minutos)
+    widths=[46,40,64,98,140,52,IW-440]; headers=['Jornada','Minuto','Tipo','Rival','Lanzador','Resultado','Portero · vídeo']
+    pgreen,pred=HexColor('#16A34A'),HexColor('#DC2626')
+    for i,row in enumerate([headers]+pen):
         x=M;rh=24 if i else 21;rect(M,y-rh,IW,rh,navy if not i else (pale if i%2==0 else HexColor('#FFFFFF')))
-        for val,w in zip(row,widths):text(x+6,y-rh*.67,val,7.5 if i else 7,HexColor('#FFFFFF') if not i else navy,i==0,maxwidth=w-10);x+=w
+        if not i:
+            vals=headers
+        else:
+            vals=[f"J{row['jornada']}",f"{row['minuto']}’" if row['minuto'] is not None else '',row['lado'].upper(),_short_team(row['rival'] or ''),row['lanzador'],row['resultado'],row['portero']]
+        for k,(val,w) in enumerate(zip(vals,widths)):
+            colr=HexColor('#FFFFFF') if not i else ((pgreen if row['lado']=='A favor' else pred) if k==2 else navy)
+            text(x+5,y-rh*.67,val,7.5 if i else 7,colr,i==0 or k==2,maxwidth=w-8)
+            if i and k==2:
+                c.setStrokeColor(colr);c.setLineWidth(.8);c.line(x+5,y-rh*.67-1.6,x+5+pdfmetrics.stringWidth(val,BOLD,7.5),y-rh*.67-1.6)
+            x+=w
+        if i:
+            u=(match_links or {}).get((str(team),int(row['jornada']))) if show_videos else None
+            if u: c.linkURL(str(u),(M,y-rh,M+IW,y),relative=0,thickness=0)
         y-=rh
-    if pen.empty: text(M+8,y-16,'No se han registrado penaltis.',7,muted);y-=23
+    if not pen: text(M+8,y-16,'No se han registrado penaltis.',7,muted);y-=23
     y-=30;y=heading(y,'6. Evolución de la clasificación');y=sub(y,'Posición tras cada jornada · una posición menor es mejor')
     standings=stand[pd.to_numeric(stand.jornada,errors='coerce').notna()].sort_values('jornada').tail(8)
     values=[]

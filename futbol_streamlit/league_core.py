@@ -365,3 +365,58 @@ def discipline(eventos: pd.DataFrame, team: str | None = None) -> pd.DataFrame:
     c["ro"] = c["tipo"].isin({"roja", "doble_amarilla", "segunda_amarilla"}).astype(int)
     return (c.groupby(["equipo", "jugador"]).agg(amarillas=("am", "sum"), rojas=("ro", "sum")).reset_index()
             .sort_values(["rojas", "amarillas"], ascending=False))
+
+
+# --------------------------------------------------------------------------- penaltis
+
+PEN_FOR = {"penalti_gol": "Gol", "penalti_fallado": "Fallado"}
+PEN_AGAINST = {"penalti_contra_gol": "Gol", "penalti_contra_fallado": "Fallado"}
+
+
+def _keeper_at(team, jornada, minute, alineaciones, minutos):
+    """Portero titular del equipo si seguía en el campo en ese minuto (minutos del acta); si no, None."""
+    if alineaciones is None or alineaciones.empty:
+        return None
+    a = alineaciones[(alineaciones.equipo == team) & (pd.to_numeric(alineaciones.jornada, errors="coerce") == jornada)
+                     & (alineaciones.rol.astype(str) == "POR")]
+    if len(a) != 1:
+        return None
+    gk = a.jugador.iloc[0]
+    if minutos is not None and not minutos.empty:
+        m = minutos[(minutos.equipo == team) & (pd.to_numeric(minutos.jornada, errors="coerce") == jornada) & (minutos.jugador == gk)]
+        if len(m) and pd.to_numeric(m.minutos, errors="coerce").iloc[0] < minute:
+            return None
+    return gk
+
+
+def penalty_rows(team, partidos, eventos, alineaciones=None, minutos=None, jornadas=None):
+    """Penaltis del equipo, a favor y en contra, una fila por lanzamiento (sin duplicar goles).
+
+    A favor: eventos propios penalti_gol / penalti_fallado. En contra: penalti_contra_gol /
+    penalti_contra_fallado del equipo; el lanzador se toma del evento del rival en el mismo minuto.
+    """
+    ev = eventos.copy()
+    ev["jornada"] = pd.to_numeric(ev.jornada, errors="coerce")
+    ev["minuto"] = pd.to_numeric(ev.minuto, errors="coerce")
+    if jornadas is not None:
+        ev = ev[ev.jornada.isin(list(jornadas))]
+    out = []
+    for r in ev[(ev.equipo == team) & ev.tipo.isin(list(PEN_FOR) + list(PEN_AGAINST))].itertuples():
+        j, mi = int(r.jornada), int(r.minuto) if pd.notna(r.minuto) else None
+        p = partidos[(pd.to_numeric(partidos.jornada, errors="coerce") == j) & ((partidos.local == team) | (partidos.visitante == team))]
+        rival = None if p.empty else (p.visitante.iloc[0] if p.local.iloc[0] == team else p.local.iloc[0])
+        favor = r.tipo in PEN_FOR
+        shooter = str(r.jugador)
+        if not favor and rival is not None:
+            twin = ev[(ev.equipo == rival) & (ev.jornada == j) & (ev.minuto == r.minuto) & ev.tipo.isin(list(PEN_FOR))]
+            if len(twin):
+                shooter = str(twin.jugador.iloc[0])
+            elif shooter == rival:
+                shooter = "No consta"
+        keeper_team = rival if favor else team
+        keeper = _keeper_at(keeper_team, j, mi or 0, alineaciones, minutos) if keeper_team else None
+        out.append(dict(jornada=j, minuto=mi, lado="A favor" if favor else "En contra", rival=rival, lanzador=shooter,
+                        equipo_lanzador=team if favor else rival,
+                        resultado=(PEN_FOR if favor else PEN_AGAINST)[r.tipo], portero=keeper or "No consta",
+                        direccion_tiro="No consta", direccion_portero="No consta"))
+    return sorted(out, key=lambda d: (d["jornada"], d["minuto"] or 0))
