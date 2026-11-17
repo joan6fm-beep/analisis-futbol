@@ -193,6 +193,35 @@ MATCH_LINKS = {
     ("Paterna C.F. 'A'", 7): 'https://app.veo.co/matches/20261025-cf-inter-san-jose-contra-paterna-cf-v0cfb018/',
     ("Manises C.F. 'A'", 7): 'https://youtu.be/ve45BBt228k?is=K4limKGAP0Ufw9Lf',
     ("C.D. Acero 'A'", 7): 'https://youtu.be/ve45BBt228k?is=K4limKGAP0Ufw9Lf',
+    # J8 (Històrics – Primer Toque: enlace Hudl pendiente)
+    ("C.D. Acero 'A'", 8): 'https://app.veo.co/matches/20261031-cd-acero-juv-a-vs-canet-v9ba80e6/',
+    ("C.D.F. Canet 'A'", 8): 'https://app.veo.co/matches/20261031-cd-acero-juv-a-vs-canet-v9ba80e6/',
+    ("Paterna C.F. 'A'", 8): 'https://app.veo.co/matches/20261031-juvenil-a-cracks-v348c59e/',
+    ("C.F. Cracks 'A'", 8): 'https://app.veo.co/matches/20261031-juvenil-a-cracks-v348c59e/',
+    ("Patacona C.F. 'B'", 8): 'https://app.veo.co/matches/20261101-partido-patacona-cf-vs-san-jose-v9be7336/',
+    ("C.F. Inter San José Valencia 'B'", 8): 'https://app.veo.co/matches/20261101-partido-patacona-cf-vs-san-jose-v9be7336/',
+    ("C.F. At. Burriana - Salesianos 'A'", 8): 'https://app.veo.co/matches/20261101-juvenil-a-contra-manises-v0393556/',
+    ("Manises C.F. 'A'", 8): 'https://app.veo.co/matches/20261101-juvenil-a-contra-manises-v0393556/',
+    ("Alboraya U.D. 'B'", 8): 'https://youtu.be/gG62K2524Ek',
+    ("Bétera C.F. 'A'", 8): 'https://youtu.be/gG62K2524Ek',
+    # J9
+    ("Bétera C.F. 'A'", 9): 'https://app.veo.co/matches/20261108-betera-club-de-futbol-vs-san-jose-vaaa2f9f/',
+    ("C.F. Inter San José Valencia 'B'", 9): 'https://app.veo.co/matches/20261108-betera-club-de-futbol-vs-san-jose-vaaa2f9f/',
+    ("C.D.F. Canet 'A'", 9): 'https://live.veo.co/web-app/matches/20261107-partido-cdf-canet-v42a33f6/',
+    ("C.F. At. Burriana - Salesianos 'A'", 9): 'https://live.veo.co/web-app/matches/20261107-partido-cdf-canet-v42a33f6/',
+    ("C.F. Cracks 'A'", 9): 'https://app.veo.co/matches/20261107-juvenil-a-b-vs-patacona-b-v7e50072/',
+    ("Patacona C.F. 'B'", 9): 'https://app.veo.co/matches/20261107-juvenil-a-b-vs-patacona-b-v7e50072/',
+    ("Ath. Massamagrell C.F. 'A'", 9): 'https://youtu.be/nFFs0ZYzNNI',
+    ("Villarreal C.F. 'C'", 9): 'https://youtu.be/nFFs0ZYzNNI',
+    ("Manises C.F. 'A'", 9): 'https://youtu.be/6jjdZ3sj5A8',
+    ("C.F. Històrics de València 'A'", 9): 'https://youtu.be/6jjdZ3sj5A8',
+    ("C.F. Torre Levante 'A'", 9): 'https://app.veo.co/matches/20261107-ja-vs-paterna-cf-v781a4c3/',
+    ("Paterna C.F. 'A'", 9): 'https://app.veo.co/matches/20261107-ja-vs-paterna-cf-v781a4c3/',
+    ("Alboraya U.D. 'B'", 9): 'https://youtu.be/13c497xs3ik',
+    ("C.D. Acero 'A'", 9): 'https://youtu.be/13c497xs3ik',
+    # J10
+    ("Villarreal C.F. 'C'", 10): 'https://youtu.be/gwLebsnbFLE',
+    ("Primer Toque C.F. 'A'", 10): 'https://youtu.be/gwLebsnbFLE',
 }
 
 # Un encuentro se grabó en dos partes. El enlace principal es la parte 1.
