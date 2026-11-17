@@ -351,14 +351,14 @@ def generate(team,partidos,minutos,eventos,clasificacion,alineaciones,plantillas
     header(4);y=H-92;y=heading(y,'5. Penaltis')
     import league_core as _lc
     pen=_lc.penalty_rows(team,partidos,eventos,alineaciones,minutos)
-    widths=[46,40,64,98,140,52,IW-440]; headers=['Jornada','Minuto','Tipo','Rival','Lanzador','Resultado','Portero · vídeo']
+    widths=[40,34,58,80,105,46,IW-423,60]; headers=['Jornada','Minuto','Tipo','Rival','Lanzador','Resultado','Portero','Estirada']
     pgreen,pred=HexColor('#16A34A'),HexColor('#DC2626')
     for i,row in enumerate([headers]+pen):
         x=M;rh=24 if i else 21;rect(M,y-rh,IW,rh,navy if not i else (pale if i%2==0 else HexColor('#FFFFFF')))
         if not i:
             vals=headers
         else:
-            vals=[f"J{row['jornada']}",f"{row['minuto']}’" if row['minuto'] is not None else '',row['lado'].upper(),_short_team(row['rival'] or ''),row['lanzador'],row['resultado'],row['portero']]
+            vals=[f"J{row['jornada']}",f"{row['minuto']}’" if row['minuto'] is not None else '',row['lado'].upper(),_short_team(row['rival'] or ''),row['lanzador'],row['resultado'],row['portero'],row['direccion_portero']]
         for k,(val,w) in enumerate(zip(vals,widths)):
             colr=HexColor('#FFFFFF') if not i else ((pgreen if row['lado']=='A favor' else pred) if k==2 else navy)
             text(x+5,y-rh*.67,val,7.5 if i else 7,colr,i==0 or k==2,maxwidth=w-8)
@@ -370,6 +370,7 @@ def generate(team,partidos,minutos,eventos,clasificacion,alineaciones,plantillas
             if u: c.linkURL(str(u),(M,y-rh,M+IW,y),relative=0,thickness=0)
         y-=rh
     if not pen: text(M+8,y-16,'No se han registrado penaltis.',7,muted);y-=23
+    elif show_videos: text(M+8,y-12,'Cada fila enlaza al vídeo de su jornada · estirada: no consta en el acta salvo que se indique.',6.5,muted);y-=14
     y-=30;y=heading(y,'6. Evolución de la clasificación');y=sub(y,'Posición tras cada jornada · una posición menor es mejor')
     standings=stand[pd.to_numeric(stand.jornada,errors='coerce').notna()].sort_values('jornada').tail(8)
     values=[]
