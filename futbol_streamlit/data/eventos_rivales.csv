@@ -794,8 +794,7 @@ jornada,equipo,minuto,tipo,jugador,detalle
 10,Primer Toque C.F. 'A',75,gol_contra,Adrian Diaz Fuentes,J10 · gol encajado ante Villarreal C.F. 'C' · FFCV
 10,Villarreal C.F. 'C',90,gol,David Navarro Cruz,J10 · gol ante Primer Toque C.F. 'A' · FFCV
 10,Primer Toque C.F. 'A',90,gol_contra,David Navarro Cruz,J10 · gol encajado ante Villarreal C.F. 'C' · FFCV
-10,Primer Toque C.F. 'A',90,amarilla,Mois,J10 · amarilla · FFCV · anotada en el acta con minuto 999 (tras el final del partido)
-10,Primer Toque C.F. 'A',90,doble_amarilla,Mois,J10 · segunda amarilla / expulsión · FFCV · anotada en el acta con minuto 999 (tras el final del partido)
+10,Primer Toque C.F. 'A',90,roja,Mois,J10 · roja · FFCV · anotada en el acta con minuto 999 (tras el final del partido)
 10,Primer Toque C.F. 'A',90,amarilla,Irakli,J10 · amarilla · FFCV · anotada en el acta con minuto 999 (tras el final del partido)
 10,C.F. Inter San José Valencia 'B',12,gol,Lucas Campos Lopez,J10 · gol ante C.F. Cracks 'A' · FFCV
 10,C.F. Cracks 'A',12,gol_contra,Lucas Campos Lopez,J10 · gol encajado ante C.F. Inter San José Valencia 'B' · FFCV
@@ -820,9 +819,9 @@ jornada,equipo,minuto,tipo,jugador,detalle
 10,Patacona C.F. 'B',79,amarilla,Julio Casero Girona,J10 · amarilla · FFCV
 10,Patacona C.F. 'B',80,amarilla,Carlos Maier Perez,J10 · amarilla · FFCV
 10,C.F. Torre Levante 'A',88,amarilla,Víctor Montijano Gadea,J10 · amarilla · FFCV
-10,Patacona C.F. 'B',90,gol,Mario Garcia Fernando,"J10 · gol ante C.F. Torre Levante 'A' · FFCV · icono distinto en el acta (¿penalti?), registrado como gol"
+10,Patacona C.F. 'B',90,penalti_gol,Mario Garcia Fernando,J10 · gol de penalti ante C.F. Torre Levante 'A' · FFCV
 10,Patacona C.F. 'B',90,gol,Dennys Garcia Lopez,J10 · gol ante C.F. Torre Levante 'A' · FFCV
-10,C.F. Torre Levante 'A',90,gol_contra,Mario Garcia Fernando,J10 · gol encajado ante Patacona C.F. 'B' · FFCV
+10,C.F. Torre Levante 'A',90,gol_contra,Mario Garcia Fernando,J10 · gol de penalti encajado ante Patacona C.F. 'B' · FFCV
 10,C.F. Torre Levante 'A',90,gol_contra,Dennys Garcia Lopez,J10 · gol encajado ante Patacona C.F. 'B' · FFCV
 10,C.F. Torre Levante 'A',90,amarilla,Gaspar Vasseur Gómez,J10 · amarilla · FFCV
 10,C.F. Històrics de València 'A',14,gol,DIEGO JOSE MOYA SALCEDO,J10 · gol ante C.D.F. Canet 'A' · FFCV

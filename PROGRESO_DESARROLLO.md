@@ -58,10 +58,10 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
   está prohibida a programas en su robots.txt. Validar el lector con una página real guardada.
 - Cadete A: J7 Celtic Elche–Roda (10/11) y J9 Kelme–Intangco (suspendido); asistencias no registradas en actas;
   dos «C. Garcia» en Alboraya (tarjetas y cambios sin atribuir); fechas/horas no visibles en algunas actas.
-- J10 Juvenil A: Villarreal C 3–1 Primer Toque (gol de Núñez 15'). Dorsal 28 del Primer Toque en el acta = «Jhonny Eliecer
-  Mejia Contreras», registrado como «Jhonny» (antes el 28 era «Pau»): confirmar con el usuario si es el mismo jugador.
-  Gol de M. Garcia (Patacona 90') con icono distinto (¿penalti?) registrado como gol. Minuto 999 en el acta: roja de L. Cubells
-  (Salgui), doble amarilla de Mois y amarilla de Irakli (Primer Toque), registradas en el 90'. Tarjetas a técnicos no registradas.
+- J10 Juvenil A: Villarreal C 3–1 Primer Toque (gol de Núñez 15'). Dorsal 28 del Primer Toque en J10 = «Eli» (indicado por
+  el usuario); «Pau» conserva también el 28 en jornadas anteriores. Si Pau vuelve a jugar, revisar su dorsal.
+  Gol de M. Garcia (Patacona 90') de penalti (confirmado por el usuario). Minuto 999 en el acta: roja de L. Cubells (Salgui),
+  roja de Mois y amarilla de Irakli (Primer Toque), registradas en el 90'. Tarjetas a técnicos: no se registran (decisión del usuario).
   Estadísticas individuales y Veo de J10 (Primer Toque): pendientes de que el usuario las aporte.
 - J9 Juvenil A: gol del 90' de Primer Toque anotado en el acta a «M. Gonzalez» (icono distinto); el usuario confirma que es de Pedro.
   Goles con icono distinto (¿penalti?) registrados como gol: S. Del Olmo (Canet 48'), O. Rubio (Paterna 24').
