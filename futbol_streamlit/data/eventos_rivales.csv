@@ -857,3 +857,29 @@ jornada,equipo,minuto,tipo,jugador,detalle
 10,C.F. At. Burriana - Salesianos 'A',76,gol_contra,He Xie,J10 · gol encajado ante Alboraya U.D. 'B' · FFCV
 10,C.F. At. Burriana - Salesianos 'A',85,amarilla,Jordi Gonzalez Lopez,J10 · amarilla · FFCV
 10,C.F. At. Burriana - Salesianos 'A',90,roja,Miguel Galera Sanz,J10 · roja · FFCV · expulsión
+6,Alboraya U.D. 'B',62,amarilla,Oliver Martinez Boldus,J6 · amarilla · FFCV
+6,Manises C.F. 'A',76,gol,Hugo Pastor Femenia,J6 · gol ante Alboraya U.D. 'B' · FFCV
+6,Alboraya U.D. 'B',76,gol_contra,Hugo Pastor Femenia,J6 · gol encajado ante Manises C.F. 'A' · FFCV
+6,Manises C.F. 'A',82,amarilla,David Ruiz Sanchez,J6 · amarilla · FFCV
+6,Alboraya U.D. 'B',90,amarilla,Hugo Turegano Perales,J6 · amarilla · FFCV
+6,Patacona C.F. 'B',27,amarilla,Rayan Bououd Mazouz,J6 · amarilla · FFCV
+6,Paterna C.F. 'A',40,amarilla,Oscar Rubio Montoro,J6 · amarilla · FFCV
+6,Patacona C.F. 'B',58,gol,Jose Maria Matias Gorbe,J6 · gol ante Paterna C.F. 'A' · FFCV
+6,Paterna C.F. 'A',58,gol_contra,Jose Maria Matias Gorbe,J6 · gol encajado ante Patacona C.F. 'B' · FFCV
+6,Paterna C.F. 'A',85,gol,Adrian Navarro Ortega,J6 · gol ante Patacona C.F. 'B' · FFCV
+6,Patacona C.F. 'B',85,gol_contra,Adrian Navarro Ortega,J6 · gol encajado ante Paterna C.F. 'A' · FFCV
+6,Patacona C.F. 'B',90,gol,Mario Garcia Fernando,J6 · gol ante Paterna C.F. 'A' · FFCV
+6,Paterna C.F. 'A',90,gol_contra,Mario Garcia Fernando,J6 · gol encajado ante Patacona C.F. 'B' · FFCV
+6,Patacona C.F. 'B',90,amarilla,Antonio Gallur Valencia,J6 · amarilla · FFCV
+6,C.F. Torre Levante 'A',7,gol,Mansur Lucha-A Belda,J6 · gol ante C.F. Històrics de València 'A' · FFCV
+6,C.F. Històrics de València 'A',7,gol_contra,Mansur Lucha-A Belda,J6 · gol encajado ante C.F. Torre Levante 'A' · FFCV
+6,C.F. Torre Levante 'A',37,amarilla,Andreu Gallardo Salavert,J6 · amarilla · FFCV
+6,C.F. Torre Levante 'A',51,amarilla,Neizan Mené Contreras,J6 · amarilla · FFCV
+6,C.F. Històrics de València 'A',53,gol,RAMOS MARC DE FEZ,J6 · gol ante C.F. Torre Levante 'A' · FFCV
+6,C.F. Torre Levante 'A',53,gol_contra,RAMOS MARC DE FEZ,J6 · gol encajado ante C.F. Històrics de València 'A' · FFCV
+6,C.F. Històrics de València 'A',67,amarilla,LEV TIBEIKIN,J6 · amarilla · FFCV
+6,C.F. Històrics de València 'A',74,amarilla,MARCOS GIMENEZ AMARO,J6 · amarilla · FFCV
+6,C.F. Històrics de València 'A',90,gol,LEV TIBEIKIN,J6 · gol ante C.F. Torre Levante 'A' · FFCV
+6,C.F. Torre Levante 'A',90,gol_contra,LEV TIBEIKIN,J6 · gol encajado ante C.F. Històrics de València 'A' · FFCV
+6,C.F. Històrics de València 'A',90,amarilla,ION CARRASCO CALVILLO,J6 · amarilla · FFCV
+6,C.F. Torre Levante 'A',90,amarilla,Mansur Lucha-A Belda,J6 · amarilla · FFCV

@@ -58,10 +58,10 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
   está prohibida a programas en su robots.txt. Validar el lector con una página real guardada.
 - Cadete A: J7 Celtic Elche–Roda (10/11) y J9 Kelme–Intangco (suspendido); asistencias no registradas en actas;
   dos «C. Garcia» en Alboraya (tarjetas y cambios sin atribuir); fechas/horas no visibles en algunas actas.
-- J6 Juvenil A: solo 4 de 8 partidos cargados. Sin resultado (aplazados o no aportados): los de Alboraya B, Massamagrell,
-  Burriana, Històrics, Torre Levante, Manises, Patacona B y Paterna (por eso tienen 1 PJ menos hasta J10). Emparejamientos sin
-  confirmar. Revisión 17/11: clasificaciones J1–J10 = resultados (J1–J4 guardadas sin puntos, la app los calcula); J6 guardada
-  ordena Paterna 13.º y Salgui 14.º (5 pts) frente al cálculo por DG: se conserva la guardada.
+- J6 Juvenil A: aplazados cargados (vídeo FFCV 17/11): Alboraya B 0–1 Manises (4/11), Paterna 1–2 Patacona B (11/11),
+  Històrics 2–1 Torre Levante (11/11). Pendiente Burriana–Massamagrell (18/11, 20:00): ambos con 1 PJ menos.
+  Clasificaciones J6–J10 recalculadas con los resultados (J6–J7 sustituyen a las de la versión base; prueba ajustada con permiso).
+  Tarjeta «J. A» (Manises, 48') sin jugador identificable: no registrada.
 - J10 Juvenil A: Villarreal C 3–1 Primer Toque (gol de Núñez 15'). Dorsal 28 del Primer Toque en J10 = «Eli» (indicado por
   el usuario); «Pau» conserva también el 28 en jornadas anteriores. Si Pau vuelve a jugar, revisar su dorsal.
   Gol de M. Garcia (Patacona 90') de penalti (confirmado por el usuario). Minuto 999 en el acta: roja de L. Cubells (Salgui),

@@ -308,6 +308,11 @@ def test_datos_liga():
     g9 = ev[(ev.jornada == 9) & (ev.equipo == A.TEAM) & (ev.tipo == "gol")]
     check(sorted(g9.jugador) == ["Mois", "Pedro"] and int(g9[g9.jugador == "Pedro"].minuto.iloc[0]) == 90,
           f"J9: goles del Primer Toque = Mois 20' y Pedro 90' ({g9.jugador.tolist()})")
+    # J6 aplazados (vídeo FFCV 17/11/2026): 7 de 8 jugados; Burriana–Massamagrell pendiente (18/11)
+    p6, e6, miss6 = A.jornada_status(part, 6)
+    check(p6 == 7 and sorted(miss6) == ["Ath. Massamagrell C.F. 'A'", "C.F. At. Burriana - Salesianos 'A'"]
+          and not (_dup.jornada == 6).any() and not [b for b in bad if b.startswith("J6")],
+          f"J6: 7/8 partidos (pendiente Burriana–Massamagrell) y goles = resultado ({p6}, {miss6})")
     # J10 (vídeo FFCV 17/11/2026): completa, sin duplicados, goles = resultado, 11 titulares, clasificación
     m10 = mn[mn.jornada == 10]
     check(not (_dup.jornada == 10).any() and not [b for b in bad if b.startswith("J10")], "J10: un registro por jugador y goles = resultado")
@@ -329,7 +334,15 @@ def test_datos_liga():
             continue
         o = pd.read_csv(io.BytesIO(old)).astype(str); n = pd.read_csv(D / f"{f}.csv").astype(str)
         o = o[[c for c in o.columns if c in n.columns]]
-        miss = len(o.merge(n[o.columns].drop_duplicates(), how="left", indicator=True).query("_merge == 'left_only'"))
+        if f == "clasificacion_liga":
+            # J6–J7 recalculadas al incorporar los aplazados de J6 (autorizado por el usuario, 17/11/2026):
+            # cada equipo sigue en su jornada y fecha; sus valores los valida «Clasificación coincide con los resultados».
+            rec = o.jornada.isin(["6", "7"]); k = ["jornada", "fecha", "equipo"]
+            miss = len(o[rec][k].merge(n[k].drop_duplicates(), how="left", indicator=True).query("_merge == 'left_only'"))
+            o = o[~rec]
+        else:
+            miss = 0
+        miss += len(o.merge(n[o.columns].drop_duplicates(), how="left", indicator=True).query("_merge == 'left_only'"))
         if miss:
             lost.append(f"{f}: {miss}")
     check(not lost, "No se ha perdido ninguna fila de la versión base v15.12.84" + (f": {lost}" if lost else ""))
