@@ -308,6 +308,17 @@ def test_datos_liga():
     g9 = ev[(ev.jornada == 9) & (ev.equipo == A.TEAM) & (ev.tipo == "gol")]
     check(sorted(g9.jugador) == ["Mois", "Pedro"] and int(g9[g9.jugador == "Pedro"].minuto.iloc[0]) == 90,
           f"J9: goles del Primer Toque = Mois 20' y Pedro 90' ({g9.jugador.tolist()})")
+    # J10 (vídeo FFCV 17/11/2026): completa, sin duplicados, goles = resultado, 11 titulares, clasificación
+    m10 = mn[mn.jornada == 10]
+    check(not (_dup.jornada == 10).any() and not [b for b in bad if b.startswith("J10")], "J10: un registro por jugador y goles = resultado")
+    check(len(m10) and (m10.groupby("equipo").titular.sum() == 11).all() and m10.minutos.between(0, 90).all()
+          and len(al[al.jornada == 10]) == 176, "J10: 11 titulares por equipo y minutos entre 0 y 90")
+    p10, e10, miss10 = A.jornada_status(part, 10)
+    check(p10 == 8 and e10 == 8 and not miss10 and len(cl[cl.jornada == 10]) == 16, f"J10 completa: {p10}/{e10} partidos y clasificación de 16")
+    g10 = ev[(ev.jornada == 10) & (ev.equipo == A.TEAM) & (ev.tipo == "gol")]
+    gc10 = ev[(ev.jornada == 10) & (ev.equipo == A.TEAM) & (ev.tipo == "gol_contra")]
+    check(g10.jugador.tolist() == ["Núñez"] and int(g10.minuto.iloc[0]) == 15 and len(gc10) == 3,
+          f"J10: Villarreal C 3–1 Primer Toque, gol de Núñez 15' ({g10.jugador.tolist()}, {len(gc10)} encajados)")
     # Nada perdido: todas las filas de la versión base siguen presentes
     root = APP_DIR.parent
     lost = []

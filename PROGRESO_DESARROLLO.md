@@ -8,7 +8,7 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
 ## Hecho
 - Sistema de diseño oscuro (`ui_theme.py`), Plotly, portada con fotos completas.
 - Equipo 360: tres niveles (resumen del partido, áreas, análisis avanzado) + temporada; datos Veo J2/J3/J5/J7.
-- Rivales y Resumen de liga con J9 completa (8 de 8 partidos, 7-8/11, vídeo FFCV del 09/11); J8 completa;
+- Rivales y Resumen de liga con J10 completa (8 de 8 partidos, 14-15/11, vídeo FFCV del 17/11); J8 y J9 completas;
   porteros con atribución de goles por minutos.
 - **Infantil D** (bloque completo, noviembre 2026):
   - Navegación propia: Inicio · Muro · Calendario · Resultados · Minutos · Seguimiento.
@@ -58,6 +58,11 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
   está prohibida a programas en su robots.txt. Validar el lector con una página real guardada.
 - Cadete A: J7 Celtic Elche–Roda (10/11) y J9 Kelme–Intangco (suspendido); asistencias no registradas en actas;
   dos «C. Garcia» en Alboraya (tarjetas y cambios sin atribuir); fechas/horas no visibles en algunas actas.
+- J10 Juvenil A: Villarreal C 3–1 Primer Toque (gol de Núñez 15'). Dorsal 28 del Primer Toque en el acta = «Jhonny Eliecer
+  Mejia Contreras», registrado como «Jhonny» (antes el 28 era «Pau»): confirmar con el usuario si es el mismo jugador.
+  Gol de M. Garcia (Patacona 90') con icono distinto (¿penalti?) registrado como gol. Minuto 999 en el acta: roja de L. Cubells
+  (Salgui), doble amarilla de Mois y amarilla de Irakli (Primer Toque), registradas en el 90'. Tarjetas a técnicos no registradas.
+  Estadísticas individuales y Veo de J10 (Primer Toque): pendientes de que el usuario las aporte.
 - J9 Juvenil A: gol del 90' de Primer Toque anotado en el acta a «M. Gonzalez» (icono distinto); el usuario confirma que es de Pedro.
   Goles con icono distinto (¿penalti?) registrados como gol: S. Del Olmo (Canet 48'), O. Rubio (Paterna 24').
   Doble amarilla de A. Roselló (Patacona) con minuto 999 en el acta: registrada en el 90'. Tarjetas a técnicos no registradas.
