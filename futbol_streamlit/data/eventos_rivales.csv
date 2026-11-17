@@ -716,8 +716,8 @@ jornada,equipo,minuto,tipo,jugador,detalle
 9,C.F. Torre Levante 'A',85,doble_amarilla,Izan Llorens Balaguer,J9 · segunda amarilla / expulsión · FFCV
 9,Paterna C.F. 'A',17,amarilla,Jaime Muñoz Giron,J9 · amarilla · FFCV
 9,Paterna C.F. 'A',24,amarilla,Oscar Rubio Montoro,J9 · amarilla · FFCV
-9,Paterna C.F. 'A',24,gol,Oscar Rubio Montoro,"J9 · gol ante C.F. Torre Levante 'A' · FFCV · icono distinto en el acta (¿penalti?), registrado como gol"
-9,C.F. Torre Levante 'A',24,gol_contra,Oscar Rubio Montoro,J9 · gol encajado ante Paterna C.F. 'A' · FFCV
+9,Paterna C.F. 'A',24,penalti_gol,Oscar Rubio Montoro,J9 · gol de penalti ante C.F. Torre Levante 'A' · FFCV (icono de penalti en el acta)
+9,C.F. Torre Levante 'A',24,gol_contra,Oscar Rubio Montoro,J9 · gol de penalti encajado ante Paterna C.F. 'A' · FFCV
 9,Paterna C.F. 'A',77,amarilla,Jose Leroi Fernandez Guillem,J9 · amarilla · FFCV
 9,Paterna C.F. 'A',82,doble_amarilla,Jose Leroi Fernandez Guillem,J9 · segunda amarilla / expulsión · FFCV
 9,Paterna C.F. 'A',90,gol,Alvaro Josep Nacher Vaño,J9 · gol ante C.F. Torre Levante 'A' · FFCV
