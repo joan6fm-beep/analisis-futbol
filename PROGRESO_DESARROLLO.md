@@ -58,8 +58,8 @@ Antes de publicar: `python futbol_streamlit/validar_datos.py` y `python tests/sm
   está prohibida a programas en su robots.txt. Validar el lector con una página real guardada.
 - Cadete A: J7 Celtic Elche–Roda (10/11) y J9 Kelme–Intangco (suspendido); asistencias no registradas en actas;
   dos «C. Garcia» en Alboraya (tarjetas y cambios sin atribuir); fechas/horas no visibles en algunas actas.
-- Paterna (Juvenil A): el usuario indica 4 penaltis en la temporada. Verificado en acta: J9 O. Rubio 24' (gol de penalti a favor).
-  Los otros 3 no se pueden comprobar (actas J1–J5, J7, J8 no disponibles en DatoBO; J6, J10 y J9 sin más iconos de penalti): pendientes.
+- Paterna (Juvenil A): 4 penaltis verificados en actas (vídeo FFCV 17/11): J1 O. Rubio 29' y 45' (a favor, gol), J3 H. Perez 35'
+  (Salgui, en contra, gol) y J9 O. Rubio 24' (a favor, gol). Goles encajados de penalti con tipo penalti_contra_gol.
 - J6 Juvenil A: aplazados cargados (vídeo FFCV 17/11): Alboraya B 0–1 Manises (4/11), Paterna 1–2 Patacona B (11/11),
   Històrics 2–1 Torre Levante (11/11). Pendiente Burriana–Massamagrell (18/11, 20:00): ambos con 1 PJ menos.
   Clasificaciones J6–J10 recalculadas con los resultados (J6–J7 sustituyen a las de la versión base; prueba ajustada con permiso).

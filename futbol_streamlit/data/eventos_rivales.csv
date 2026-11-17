@@ -21,9 +21,9 @@ jornada,equipo,minuto,tipo,jugador,detalle
 1,C.D.F. Canet 'A',49,gol_contra,Daniel Saez Barber,Gol encajado ante Cracks
 1,C.D.F. Canet 'A',60,amarilla,Adriel Torrijo Mor,
 1,C.D.F. Canet 'A',62,amarilla,Pau Bernet Sanchez,
-1,C.F. At. Burriana - Salesianos 'A',29,gol_contra,Paterna C.F. 'A',Gol encajado
+1,C.F. At. Burriana - Salesianos 'A',29,penalti_contra_gol,Paterna C.F. 'A',Gol de penalti encajado (O. Rubio)
 1,C.F. At. Burriana - Salesianos 'A',43,amarilla,Jorge Agustina Llopis,
-1,C.F. At. Burriana - Salesianos 'A',45,gol_contra,Paterna C.F. 'A',Gol encajado
+1,C.F. At. Burriana - Salesianos 'A',45,penalti_contra_gol,Paterna C.F. 'A',Gol de penalti encajado (O. Rubio)
 1,C.F. At. Burriana - Salesianos 'A',67,amarilla,Marcos Espada Sanchez,
 1,C.F. At. Burriana - Salesianos 'A',67,amarilla,Eduardo Aurelian Ciutacu,
 1,C.F. At. Burriana - Salesianos 'A',71,gol_contra,Paterna C.F. 'A',Gol encajado
@@ -60,8 +60,8 @@ jornada,equipo,minuto,tipo,jugador,detalle
 1,Patacona C.F. 'B',53,roja,Daniel Cano Navarro,Roja directa
 1,Patacona C.F. 'B',83,gol,Rayan Bououd Mazouz,
 1,Patacona C.F. 'B',90,gol_contra,Ibrahim Zahidi Harfouch,Gol encajado ante Acero
-1,Paterna C.F. 'A',29,gol,Oscar Rubio Montoro,
-1,Paterna C.F. 'A',45,gol,Oscar Rubio Montoro,
+1,Paterna C.F. 'A',29,penalti_gol,Oscar Rubio Montoro,Gol de penalti ante C.F. At. Burriana - Salesianos 'A' · FFCV
+1,Paterna C.F. 'A',45,penalti_gol,Oscar Rubio Montoro,Gol de penalti ante C.F. At. Burriana - Salesianos 'A' · FFCV
 1,Paterna C.F. 'A',71,gol,Byron Beycker Ruiz Reinoso,
 1,Paterna C.F. 'A',86,amarilla,Samuel Ebitu Igwe Erhabor,
 1,Primer Toque C.F. 'A',27,gol_contra,Ath. Massamagrell C.F. 'A',Gol encajado
@@ -226,7 +226,7 @@ jornada,equipo,minuto,tipo,jugador,detalle
 3,C.F. Torre Levante 'A',90,gol_contra,Daniel Perez Rodrigo,Gol encajado ante Alboraya
 3,Col. Salgui E.D.E. 'A',21,amarilla,Andrés Miró Andrés,
 3,Col. Salgui E.D.E. 'A',26,gol_contra,Oscar Rubio Montoro,Gol encajado ante Paterna
-3,Col. Salgui E.D.E. 'A',35,gol,Hugo Perez Palacios,
+3,Col. Salgui E.D.E. 'A',35,penalti_gol,Hugo Perez Palacios,Gol de penalti ante Paterna C.F. 'A' · FFCV
 3,Col. Salgui E.D.E. 'A',40,amarilla,Saul Valera Montesinos,
 3,Manises C.F. 'A',11,gol_contra,Juan Sebastian Caicedo Viveros,Gol encajado ante Primer Toque
 3,Manises C.F. 'A',19,gol,Hugo Albiach Serrano,
@@ -237,7 +237,7 @@ jornada,equipo,minuto,tipo,jugador,detalle
 3,Patacona C.F. 'B',72,amarilla,Lucas Ferrandis Paredes,
 3,Patacona C.F. 'B',86,gol_contra,Ezekiel Chigozie Edwin Festus,Gol encajado ante Històrics
 3,Paterna C.F. 'A',26,gol,Oscar Rubio Montoro,
-3,Paterna C.F. 'A',35,gol_contra,Hugo Perez,Gol encajado ante Salgui
+3,Paterna C.F. 'A',35,penalti_contra_gol,Hugo Perez,Gol de penalti encajado ante Salgui
 3,Primer Toque C.F. 'A',11,gol,Sebas,
 3,Primer Toque C.F. 'A',19,gol_contra,Manises C.F. 'A',Gol encajado
 3,Primer Toque C.F. 'A',20,amarilla,Ian,
@@ -717,7 +717,7 @@ jornada,equipo,minuto,tipo,jugador,detalle
 9,Paterna C.F. 'A',17,amarilla,Jaime Muñoz Giron,J9 · amarilla · FFCV
 9,Paterna C.F. 'A',24,amarilla,Oscar Rubio Montoro,J9 · amarilla · FFCV
 9,Paterna C.F. 'A',24,penalti_gol,Oscar Rubio Montoro,J9 · gol de penalti ante C.F. Torre Levante 'A' · FFCV (icono de penalti en el acta)
-9,C.F. Torre Levante 'A',24,gol_contra,Oscar Rubio Montoro,J9 · gol de penalti encajado ante Paterna C.F. 'A' · FFCV
+9,C.F. Torre Levante 'A',24,penalti_contra_gol,Oscar Rubio Montoro,J9 · gol de penalti encajado ante Paterna C.F. 'A' · FFCV
 9,Paterna C.F. 'A',77,amarilla,Jose Leroi Fernandez Guillem,J9 · amarilla · FFCV
 9,Paterna C.F. 'A',82,doble_amarilla,Jose Leroi Fernandez Guillem,J9 · segunda amarilla / expulsión · FFCV
 9,Paterna C.F. 'A',90,gol,Alvaro Josep Nacher Vaño,J9 · gol ante C.F. Torre Levante 'A' · FFCV
@@ -821,7 +821,7 @@ jornada,equipo,minuto,tipo,jugador,detalle
 10,C.F. Torre Levante 'A',88,amarilla,Víctor Montijano Gadea,J10 · amarilla · FFCV
 10,Patacona C.F. 'B',90,penalti_gol,Mario Garcia Fernando,J10 · gol de penalti ante C.F. Torre Levante 'A' · FFCV
 10,Patacona C.F. 'B',90,gol,Dennys Garcia Lopez,J10 · gol ante C.F. Torre Levante 'A' · FFCV
-10,C.F. Torre Levante 'A',90,gol_contra,Mario Garcia Fernando,J10 · gol de penalti encajado ante Patacona C.F. 'B' · FFCV
+10,C.F. Torre Levante 'A',90,penalti_contra_gol,Mario Garcia Fernando,J10 · gol de penalti encajado ante Patacona C.F. 'B' · FFCV
 10,C.F. Torre Levante 'A',90,gol_contra,Dennys Garcia Lopez,J10 · gol encajado ante Patacona C.F. 'B' · FFCV
 10,C.F. Torre Levante 'A',90,amarilla,Gaspar Vasseur Gómez,J10 · amarilla · FFCV
 10,C.F. Històrics de València 'A',14,gol,DIEGO JOSE MOYA SALCEDO,J10 · gol ante C.D.F. Canet 'A' · FFCV
